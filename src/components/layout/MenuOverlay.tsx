@@ -109,7 +109,7 @@ export default function MenuOverlay({
               >
                 <p className="mb-4 text-md font-[400] text-center uppercase tracking-[10px] text-gray-500">Welcome</p>
                 <p className="mb-6 text-4xl text-center font-light tracking-tight leading-15 lg:text-4xl">
-                  <span className="text-[#1DB67E] text-5xl font-normal">Let's Transform</span> 
+                  <span className="text-[#1DB67E] text-5xl font-normal">Let&apos;s Transform</span> 
                   <br />
                   Ambition Into 
                   <br />
