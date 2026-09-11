@@ -14,7 +14,7 @@ export default function Header({ onMenuOpen }: HeaderProps) {
         <Link href="/" className="text-2xl font-semibold tracking-wider">
           <Image
             src="/img/elements/white-logo.webp"
-            alt="BeRiser Logo"
+            alt="Relvo Logo"
             width={200}
             height={41}
             className="h-auto w-full max-w-[200px]"
