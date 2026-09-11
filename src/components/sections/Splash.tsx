@@ -21,11 +21,11 @@ export default function Splash() {
                         className="w-full max-w-[300px] h-auto px-5"
                         priority
                     />
-                    <h1 className="text-slate-200 text-[109px] font-black tracking-normal leading-[115px] text-center">
+                    <h1 className="text-white text-[109px] font-black tracking-normal leading-[115px] text-center">
                         crafted for the rise <br />
                         to web universe
                     </h1>
-                    <p className="mt-8 mb-12 text-[20px] font-medium leading-[32px] text-center text-slate-400">
+                    <p className="mt-8 mb-12 text-[20px] font-[500] leading-[32px] text-center text-gray-100">
                         It's never just about building a Website, App, or Custom Software. <br />
                         it's about creating trust, meaningful connections, and digital <br/>
                         experiences that inspire confidence.
