@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import MenuOverlay from "./MenuOverlay";
@@ -11,16 +11,55 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Detect scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Lock page scroll when menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   return (
     <>
-      <Header onMenuOpen={() => setMenuOpen(true)} />
-      <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      <Header
+        isScrolled={isScrolled}
+        isMenuOpen={menuOpen}
+        onMenuOpen={() => setMenuOpen(true)}
+        onMenuClose={() => setMenuOpen(false)}
+      />
+
+      <MenuOverlay
+        isOpen={menuOpen}
+        isScrolled={isScrolled}
+        onClose={() => setMenuOpen(false)}
+      />
+
       <main>
         <div className="mx-auto max-w-full">
           {children}
         </div>
       </main>
+
       <Footer />
     </>
   );

@@ -23,9 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${mont.variable} ${denton.variable}`}>
       <body className="text-white bg-[#10273A]">
-        <div className="relative inset-0 z-10 bg-[#061018]/90 backdrop-blur-[100px]">
-          <MainLayout>{children}</MainLayout>
-        </div>
+        <MainLayout>{children}</MainLayout>
         <BgBackdrop />
       </body>
     </html>
