@@ -55,8 +55,10 @@ export default function MainLayout({
       />
 
       <main>
-        <div className="mx-auto max-w-full">
+        <div className="relative flex min-h-screen w-full flex-col backdrop-blur-[300px] bg-[#061018]/80 overflow-x-hidden">
+        <div className="mx-auto max-w-full w-full">
           {children}
+        </div>
         </div>
       </main>
 

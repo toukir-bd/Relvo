@@ -4,10 +4,17 @@ import Image from "next/image";
 
 export default function Splash() {
   return (
-    <>
-        <div className="flex flex-col items-center justify-center relative min-h-screen z-1">
-            <div className="absolute inset-0 pointer-events-none w-full min-h-screen z-0 opacity-30">
-                <video autoPlay loop muted playsInline preload="metadata" className="initial visible block pointer-events-none h-full object-cover w-full" src="/videos/hero.mp4">
+    <> 
+        <div className="flex flex-col items-center justify-center relative min-h-screen z-10 bg-backdrop-blur-sm">
+            <div className="absolute inset-0 pointer-events-none w-full min-h-screen z-0 opacity-10">
+                <video 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    preload="metadata" 
+                    className="initial visible block pointer-events-none h-full object-cover w-full" 
+                    src="/videos/hero.mp4">
                 </video>
             </div>
             <div className="absolute inset-0 flex flex-col items-center justify-center">

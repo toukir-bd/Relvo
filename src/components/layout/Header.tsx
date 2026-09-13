@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 
@@ -18,7 +17,8 @@ export default function Header({
 }: HeaderProps) {
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-[200] transition-all duration-500 ${isScrolled
+      className={`fixed inset-x-0 top-0 z-100 transition-all duration-500 
+        ${isScrolled
           ? "h-[60px] bg-[#061018]/90 backdrop-blur-md"
           : isMenuOpen
             ? "h-[120px] bg-[#061018]/90 backdrop-blur-md"
@@ -31,9 +31,9 @@ export default function Header({
           <Image
             src="/img/elements/logo-wh.svg"
             alt="Relvo Logo"
-            width={150}
+            width={151}
             height={37}
-            className={`h-auto transition-all duration-500 ${isScrolled ? "w-[110px]" : "w-[150px]"
+            className={`h-auto transition-all duration-500
               }`}
             priority
           />
