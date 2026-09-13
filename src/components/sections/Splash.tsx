@@ -6,7 +6,7 @@ export default function Splash() {
   return (
     <>
         <div className="flex flex-col items-center justify-center relative min-h-screen z-1">
-            <div className="absolute inset-0 pointer-events-none w-full min-h-screen z-0">
+            <div className="absolute inset-0 pointer-events-none w-full min-h-screen z-0 opacity-30">
                 <video autoPlay loop muted playsInline preload="metadata" className="initial visible block pointer-events-none h-full object-cover w-full" src="/videos/hero.mp4">
                 </video>
             </div>
@@ -14,14 +14,14 @@ export default function Splash() {
                 {/* <div className="absolute inset-0 bg-[#061018]/70 z-1"></div> */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#061018]/20 to-[#061018]/0 z-1 flex flex-col items-center justify-center">
                     <Image
-                        src="/img/logo-animation.svg"
+                        src="/img/elements/logo-animo.svg"
                         alt="BeRiser Logo"
-                        width={300}
-                        height={300}
-                        className="w-full max-w-[300px] h-auto px-5"
+                        width={138}
+                        height={138}
+                        className="w-full max-w-[238px] h-auto px-5"
                         priority
                     />
-                    <h1 className="text-white text-[109px] font-black tracking-normal leading-[115px] text-center">
+                    <h1 className="mt-10 text-white text-[109px] font-black tracking-normal leading-[115px] text-center">
                         crafted for the rise <br />
                         to web universe
                     </h1>

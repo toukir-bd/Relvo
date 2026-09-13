@@ -6,8 +6,8 @@ import MainLayout from "../components/layout/MainLayout";
 import BgBackdrop from "@/components/props/BgBackdrop";
 
 export const metadata: Metadata = {
-  title: "BeRiser",
-  description: "BeRiser",
+  title: "Relvo - Crafting Digital Experiences",
+  description: "Relvo - Crafting Digital Experiences",
   icons: {
     icon: "/img/elements/favicon.webp",
     shortcut: "/img/elements/favicon.webp",
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${mont.variable} ${denton.variable}`}>
-      <body className="text-white bg-[#061018]">
+      <body className="text-white bg-[#10273A]">
         <div className="relative inset-0 z-10 bg-[#061018]/90 backdrop-blur-[100px]">
           <MainLayout>{children}</MainLayout>
         </div>
