@@ -55,9 +55,9 @@ export default function MenuOverlay({
               <Image
                 src="/img/elements/logo-wh.svg"
                 alt="Relvo Logo"
-                width={181}
-                height={46}
-                className="h-auto w-full max-w-[181px]"
+                width={197}
+                height={50}
+                className="h-auto w-full max-w-[197px]"
                 priority
               />
             </Link>
