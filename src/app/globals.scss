@@ -13,12 +13,14 @@ body {
 
 h1,
 h2,
-h3{
+h3,
+div{
   font-family: var(--font-heading), sans-serif;
 }
 
 h4,
 h5,
-h6{
+h6,
+p{
   font-family: var(--font-primary), serif;
 }
