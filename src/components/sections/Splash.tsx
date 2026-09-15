@@ -6,7 +6,7 @@ export default function Splash() {
   return (
     <> 
         <div className="flex flex-col items-center justify-center relative min-h-screen z-10 bg-backdrop-blur-sm">
-            <div className="absolute inset-0 pointer-events-none w-full min-h-screen z-0 opacity-10">
+            <div className="absolute inset-0 pointer-events-none w-full min-h-screen z-0 opacity-20">
                 <video 
                     autoPlay 
                     loop 
@@ -33,8 +33,8 @@ export default function Splash() {
                         to web universe
                     </h1>
                     <p className="mt-8 mb-12 text-[20px] font-[500] leading-[32px] text-center text-gray-100">
-                        It's never just about building a Website, App, or Custom Software. <br />
-                        it's about creating trust, meaningful connections, and digital <br/>
+                        It&apos;s never just about building a Website, App, or Custom Software. <br />
+                        it&apos;s about creating trust, meaningful connections, and digital <br/>
                         experiences that inspire confidence.
                     </p>
                 </div>

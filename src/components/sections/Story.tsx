@@ -79,7 +79,7 @@ export default function Story() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[300vh] w-full bg-[#061018]"
+      className="relative min-h-[300vh]"
     >
       <div className="sticky top-0 flex min-h-screen w-full items-center justify-center px-[30px]">
         <div className="w-full max-w-[800px] my-[200px]">

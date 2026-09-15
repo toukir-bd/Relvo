@@ -47,21 +47,18 @@ export default function MainLayout({
         onMenuOpen={() => setMenuOpen(true)}
         onMenuClose={() => setMenuOpen(false)}
       />
-
       <MenuOverlay
         isOpen={menuOpen}
         isScrolled={isScrolled}
         onClose={() => setMenuOpen(false)}
       />
-
       <main>
-        <div className="relative flex min-h-screen w-full flex-col backdrop-blur-[300px] bg-[#061018]/80 overflow-x-hidden">
-        <div className="mx-auto max-w-full w-full">
-          {children}
-        </div>
+        <div className="relative flex min-h-screen w-full flex-col backdrop-blur-[300px] bg-[#00150D]/80 overflow-x-hidden">
+          <div className="mx-auto max-w-full w-full">
+            {children}
+          </div>
         </div>
       </main>
-
       <Footer />
     </>
   );

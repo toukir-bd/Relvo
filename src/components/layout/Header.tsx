@@ -17,11 +17,11 @@ export default function Header({
 }: HeaderProps) {
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-100 transition-all duration-500 
+      className={`fixed inset-x-0 top-0 z-100 transition-all
         ${isScrolled
-          ? "h-[60px] bg-[#061018]/90 backdrop-blur-md"
+          ? "h-[70px] bg-transparent"
           : isMenuOpen
-            ? "h-[120px] bg-[#061018]/90 backdrop-blur-md"
+            ? "h-[120px] bg-[#00150D]/95 backdrop-blur-md"
             : "h-[120px] bg-transparent"
         }`}
     >
@@ -31,10 +31,9 @@ export default function Header({
           <Image
             src="/img/elements/logo-wh.svg"
             alt="Relvo Logo"
-            width={151}
-            height={37}
-            className={`h-auto transition-all duration-500
-              }`}
+            width={181}
+            height={45}
+            className={`h-auto transition-all duration-500`}
             priority
           />
         </Link>
@@ -42,7 +41,7 @@ export default function Header({
         <button
           onClick={isMenuOpen ? onMenuClose : onMenuOpen}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className={`group flex cursor-pointer items-center justify-center rounded-full border-2 border-gray-700 transition-all duration-500 ${isScrolled ? "h-11 w-11" : "h-14 w-14"
+          className={`group flex cursor-pointer items-center justify-center rounded-full border-2 border-gray-700 transition-all duration-500 ${isScrolled ? "h-[50px] w-[50px]" : "h-[60px] w-[60px]"
             }`}
         >
           {isMenuOpen ? (
