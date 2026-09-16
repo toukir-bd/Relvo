@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-
 interface HeaderProps {
   isScrolled: boolean;
   isMenuOpen: boolean;
@@ -19,33 +18,38 @@ export default function Header({
     <header
       className={`fixed inset-x-0 top-0 z-100 transition-all
         ${isScrolled
-          ? "h-[70px] bg-transparent"
+          ? "h-[70px] bg-[#0D332D]/95"
           : isMenuOpen
-            ? "h-[120px] bg-[#00150D]/95 backdrop-blur-md"
-            : "h-[120px] bg-transparent"
+            ? "h-[120px] bg-[#0D332D]/95 backdrop-blur-md"
+            : "h-[120px] transparent"
         }`}
     >
       <div className="mx-auto flex h-full max-w-full items-center justify-between px-8 lg:px-16">
-
         <Link href="/" className="flex items-center">
           <Image
-            src="/img/elements/logo-wh.svg"
+            src="/img/elements/logo.webp"
             alt="Relvo Logo"
-            width={181}
-            height={45}
-            className={`h-auto transition-all duration-500`}
+            width={189}
+            height={52}
+            className={`transition-all duration-500`}
             priority
           />
         </Link>
-
         <button
           onClick={isMenuOpen ? onMenuClose : onMenuOpen}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className={`group flex cursor-pointer items-center justify-center rounded-full border-2 border-gray-700 transition-all duration-500 ${isScrolled ? "h-[50px] w-[50px]" : "h-[60px] w-[60px]"
-            }`}
+          className={`group flex cursor-pointer items-center justify-center rounded-full border-2 border-white/10 hover:border-[#BBFF00]/50 transition-all duration-500
+            ${isScrolled
+              ? "h-[50px] w-[50px]"
+              : "h-[60px] w-[60px]"
+            }
+            ${isMenuOpen
+              ? "border-red-200 hover:border-red-400"
+              : "border-white/10 hover:border-[#BBFF00]/50"
+            }
+          `}
         >
           {isMenuOpen ? (
-            /* X */
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="28"
@@ -54,22 +58,20 @@ export default function Header({
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
-              className="text-white transition-colors group-hover:text-[#FF8D28]"
+              className="text-white transition-colors group-hover:text-red-400"
             >
               <path d="M6 6l12 12" />
               <path d="M18 6L6 18" />
             </svg>
           ) : (
-            /* Hamburger */
             <span className="flex flex-col space-y-[3px]">
-              <span className="h-[2px] w-[22px] bg-white transition-all duration-300 group-hover:w-[28px] group-hover:bg-[#FF8D28]" />
-              <span className="h-[2px] w-[18px] bg-white transition-all duration-300 group-hover:w-[28px] group-hover:bg-[#FF8D28]" />
-              <span className="h-[2px] w-[28px] bg-white transition-all duration-300 group-hover:bg-[#FF8D28]" />
-              <span className="h-[2px] w-[24px] bg-white transition-all duration-300 group-hover:w-[28px] group-hover:bg-[#FF8D28]" />
+              <span className="h-[2px] w-[20px] transition-all duration-300 group-hover:w-[26px] bg-[#BBFF00]" />
+              <span className="h-[2px] w-[16px] transition-all duration-300 group-hover:w-[26px] bg-[#BBFF00]" />
+              <span className="h-[2px] w-[26px] transition-all duration-300 bg-[#BBFF00]" />
+              <span className="h-[2px] w-[22px] transition-all duration-300 group-hover:w-[26px] bg-[#BBFF00]" />
             </span>
           )}
         </button>
-
       </div>
     </header>
   );

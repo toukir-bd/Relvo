@@ -2,108 +2,202 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const text = `
-We believe every brand has the potential to rise above the ordinary. It's more than building a website, app, or software.
+const slides = [
+  {
+    number: "01",
+    text: "We believe every brand has the potential to rise above the ordinary.",
+  },
+  {
+    number: "02",
+    text: "It's more than building a website, app, or software.",
+  },
+  {
+    number: "03",
+    text: "It's about creating trust, meaningful connections, and digital experiences that leave a lasting impression.",
+  },
+  {
+    number: "04",
+    text: "Through thoughtful design and modern development, we help businesses become memorable, build credibility, and grow with confidence.",
+  },
+  {
+    number: "05",
+    text: "Every successful partnership begins with trust. We earn it through creativity, transparency, and results.",
+  },
+  {
+    number: "06",
+    text: "Let's build trust — and together, build a brand that rises above the rest.",
+  },
+];
 
-It's about creating trust, meaningful connections, and digital experiences that leave a lasting impression.
-
-Through thoughtful design and modern development, we help businesses become memorable, build credibility, and grow with confidence.
-
-Every successful partnership begins with trust. We earn it through creativity, transparency, and results. Let's build trust—and together, build a brand that rises above the rest.
-`;
+const clamp = (value: number) => Math.max(0, Math.min(1, value));
 
 export default function Story() {
-  const words = text.trim().split(/\s+/);
-
   const sectionRef = useRef<HTMLElement>(null);
 
-  const [activeWords, setActiveWords] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let frame = 0;
+
+    const updateStory = () => {
       const section = sectionRef.current;
 
-      if (!section) return;
+      if (!section) {
+        frame = 0;
+        return;
+      }
 
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
 
-      const sectionHeight = section.offsetHeight;
-      const scrollDistance = sectionHeight - viewportHeight;
-
-      const scrolled = -rect.top;
-
       /*
-       * Wait until the text reaches the middle
-       * of the viewport before starting.
+       * Available scroll distance while the inner content is sticky.
        */
-      const startPoint = viewportHeight * 0.2;
+      const totalScroll = section.offsetHeight - viewportHeight;
 
-      /*
-       * Distance available for the word animation
-       * after the start point.
-       */
-      const animationDistance = scrollDistance - startPoint;
+      if (totalScroll <= 0) {
+        frame = 0;
+        return;
+      }
 
-      /*
-       * Progress starts at 0 when the start point
-       * is reached.
-       */
-      const progress =
-  (scrolled - startPoint) /
-  (scrollDistance - startPoint);
+      const scrolledInsideStory = clamp(-rect.top / totalScroll);
 
-      const clampedProgress = Math.max(
-        0,
-        Math.min(1, progress)
+      setScrollProgress(scrolledInsideStory);
+
+      const nextSlide = Math.min(
+        slides.length - 1,
+        Math.floor(scrolledInsideStory * slides.length),
       );
 
-      const wordCount = Math.floor(
-        clampedProgress * words.length
-      );
+      setActiveSlide(nextSlide);
+      frame = 0;
+    };
 
-      setActiveWords(wordCount);
+    const handleScroll = () => {
+      if (!frame) {
+        frame = requestAnimationFrame(updateStory);
+      }
     };
 
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
 
-    handleScroll();
+    window.addEventListener("resize", handleScroll);
+
+    updateStory();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+
+      if (frame) cancelAnimationFrame(frame);
     };
-  }, [words.length]);
+  }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[300vh]"
+      className="relative w-full bg-[#0D332D]"
+      /*
+       * One initial viewport + one scroll phase for every slide.
+       */
+      style={{
+        height: `${(slides.length + 1) * 100}dvh`,
+      }}
     >
-      <div className="sticky top-0 flex min-h-screen w-full items-center justify-center px-[30px]">
-        <div className="w-full max-w-[800px] my-[200px]">
+      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
+        <div className="flex h-full w-full items-center justify-center px-6 lg:px-[60px]">
+          <div className="relative w-full max-w-[1400px]">
+            <div className="mb-8">
+              <p className="text-[18px] font-medium leading-[1.4] text-white">
+                The story of Relvo Creative begins with ambition.
+              </p>
+            </div>
 
-          {/* Small heading */}
-          <div className="mb-10 text-xl font-medium text-white">
-            The story of Relvo Creative begins with ambition.
+            <div className="relative h-[500px] w-full overflow-hidden">
+              {slides.map((slide, index) => {
+                const isActive = index === activeSlide;
+                const isPrevious = index < activeSlide;
+
+                /*
+                 * 0 → 1 progress only for this specific slide.
+                 */
+                const slideProgress = clamp(
+                  scrollProgress * slides.length - index,
+                );
+
+                const words = slide.text.split(" ");
+
+                return (
+                  <div
+                    key={slide.number}
+                    className={[
+                      "absolute inset-0 flex items-center",
+                      "transition-all duration-700",
+                      "ease-[cubic-bezier(0.16,1,0.3,1)]",
+
+                      isActive
+                        ? "translate-y-0 opacity-100"
+                        : isPrevious
+                          ? "-translate-y-[100px] opacity-0"
+                          : "translate-y-[100px] opacity-0",
+                    ].join(" ")}
+                  >
+                    <div className="w-full">
+                      <div className="mb-8">
+                        <span className="text-[14px] font-medium tracking-[0.2em] text-[#FF8D28]">
+                          {slide.number}
+                        </span>
+                      </div>
+
+                      <p className="max-w-[1150px] text-[clamp(42px,6vw,90px)] font-light leading-[1.08] tracking-[-0.04em]">
+                        {words.map((word, wordIndex) => {
+                          /*
+                           * Each word receives its own reveal progress.
+                           */
+                          const wordProgress = clamp(
+                            slideProgress * words.length - wordIndex + 0.35,
+                          );
+
+                          const wordOpacity =
+                            0.16 + wordProgress * 0.84;
+
+                          return (
+                            <span
+                              key={`${word}-${wordIndex}`}
+                              className="transition-colors duration-100 ease-out"
+                              style={{
+                                color: `rgba(255, 255, 255, ${wordOpacity})`,
+                              }}
+                            >
+                              {word}{" "}
+                            </span>
+                          );
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-8 flex items-center gap-2">
+              {slides.map((slide, index) => (
+                <div
+                  key={slide.number}
+                  className={[
+                    "h-[2px] transition-all duration-500",
+
+                    index === activeSlide
+                      ? "w-16 bg-white"
+                      : "w-5 bg-white/20",
+                  ].join(" ")}
+                />
+              ))}
+            </div>
           </div>
-
-          {/* Animated text */}
-          <div className="text-start text-[70px] font-[300] leading-[100px] tracking-wider">
-            {words.map((word, index) => (
-              <span
-                key={`${word}-${index}`}
-                className={`inline transition-colors duration-300 ${index < activeWords
-                    ? "text-white"
-                    : "text-[#292929]"
-                  }`}
-              >
-                {word}{" "}
-              </span>
-            ))}
-          </div>
-
         </div>
       </div>
     </section>

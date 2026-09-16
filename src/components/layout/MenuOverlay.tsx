@@ -51,7 +51,7 @@ export default function MenuOverlay({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
           className={`fixed inset-x-0 bottom-0 z-100 ${isScrolled ? "top-[70px]" : "top-[120px]"
-            } overflow-y-auto bg-[#00150D]/95 text-white`}
+            } overflow-y-auto bg-[#0D332D]/95 text-white`}
         >
           <div className="mx-auto flex h-full max-w-[1600px] flex-col lg:flex-row">
 
@@ -72,7 +72,7 @@ export default function MenuOverlay({
                     onClick={onClose}
                     className="group mb-12 flex items-center justify-between"
                   >
-                    <h1 className="text-3xl font-black tracking-wide transition duration-300 group-hover:translate-x-3 group-hover:text-[#FF8D28] lg:text-6xl">
+                    <h1 className="text-3xl font-black tracking-wide transition duration-300 group-hover:translate-x-3 group-hover:text-[#BBFF00] lg:text-6xl">
                       {item.title}
                     </h1>
 
@@ -89,7 +89,7 @@ export default function MenuOverlay({
                         />
 
                         <path
-                          fill="#FF8D28"
+                          fill="#BBFF00"
                           d="M754.8 480H160a32 32 0 1 0 0 64h594.8L521.3 777.3a32 32 0 0 0 45.4 45.4l288-288a32 32 0 0 0 0-45.4l-288-288a32 32 0 1 0-45.4 45.4z"
                         />
                       </svg>
@@ -139,7 +139,7 @@ export default function MenuOverlay({
                 <Link
                   href="/get-start"
                   onClick={onClose}
-                  className="mt-8 inline-block rounded-full bg-[#FF8D28] px-8 py-4 text-lg font-semibold text-white transition hover:bg-[#1DB67E]"
+                  className="mt-8 inline-block rounded-full bg-[#BBFF00] px-8 py-4 text-lg font-semibold text-white transition hover:bg-[#1DB67E]"
                 >
                   Get Started
                 </Link>
