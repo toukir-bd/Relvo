@@ -99,7 +99,7 @@ export default function Story() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[#0D332D]"
+      className="relative w-full bg-[#061B1B]"
       /*
        * One initial viewport + one scroll phase for every slide.
        */

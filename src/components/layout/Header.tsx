@@ -18,9 +18,9 @@ export default function Header({
     <header
       className={`fixed inset-x-0 top-0 z-100 transition-all
         ${isScrolled
-          ? "h-[70px] bg-[#0D332D]/95"
+          ? "h-[70px] bg-[#061B1B]/70 backdrop-blur-md"
           : isMenuOpen
-            ? "h-[120px] bg-[#0D332D]/95 backdrop-blur-md"
+            ? "h-[120px] bg-[#061B1B]/85 backdrop-blur-md"
             : "h-[120px] transparent"
         }`}
     >
@@ -38,10 +38,10 @@ export default function Header({
         <button
           onClick={isMenuOpen ? onMenuClose : onMenuOpen}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className={`group flex cursor-pointer items-center justify-center rounded-full border-2 border-white/10 hover:border-[#BBFF00]/50 transition-all duration-500
+          className={`group flex cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-[#BBFF00]/50 transition-all duration-500
             ${isScrolled
               ? "h-[50px] w-[50px]"
-              : "h-[60px] w-[60px]"
+              : "h-[56px] w-[56px]"
             }
             ${isMenuOpen
               ? "border-red-200 hover:border-red-400"

@@ -16,10 +16,10 @@ export default function Home() {
       <Splash/>
       <Story/>
       <MarqueeText/>
-      <Focus/>
       <Packages/>
-      <Manage/>
+      <Focus/>
       <Services/>
+      <Manage/>
       <Clients/>
       <Started/>
     </>

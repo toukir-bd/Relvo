@@ -23,7 +23,7 @@ export default function Splash() {
 
   return (
     <section
-      className={`relative min-h-screen bg-[#0D332D] overflow-hidden transition-all duration-700 ${isScrolled
+      className={`relative min-h-screen bg-[#061B1B] overflow-hidden transition-all duration-700 ${isScrolled
         ? "rounded-none border-0"
         : "rounded-[20px] border-[5px] border-white overflow-hidden"
         }`}
@@ -42,9 +42,9 @@ export default function Splash() {
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-[#061018]/20 to-[#061018]/0">
           <h1 className="mt-10 text-center text-[109px] font-black leading-[115px] tracking-normal text-white">
-            crafted for the rise
+            Crafted For The Shape
             <br />
-            to web universe
+            of Brand Future
           </h1>
           <p className="mb-12 mt-8 text-center text-[20px] font-medium leading-[32px] text-gray-100">
             It&apos;s never just about building a Website, App, or Custom

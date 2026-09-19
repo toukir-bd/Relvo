@@ -51,7 +51,7 @@ export default function MenuOverlay({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
           className={`fixed inset-x-0 bottom-0 z-100 ${isScrolled ? "top-[70px]" : "top-[120px]"
-            } overflow-y-auto bg-[#0D332D]/95 text-white`}
+            } overflow-y-auto bg-[#061B1B]/95 text-white`}
         >
           <div className="mx-auto flex h-full max-w-[1600px] flex-col lg:flex-row">
 

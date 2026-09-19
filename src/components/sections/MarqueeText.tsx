@@ -50,7 +50,7 @@ export default function MarqueeText({
   const repeatedText = `${text} ${text} ${text} ${text}`;
 
   return (
-    <section className="overflow-hidden bg-[#BBFF00] py-12 text-[#0D332D] md:py-20">
+    <section className="overflow-hidden bg-[#BBFF00] py-12 text-[#061B1B] md:py-20">
       <div ref={motionRef} className="will-change-transform">
         <div className="marquee-track flex w-max whitespace-nowrap">
           <h4 className="inline-block pe-3 text-8xl font-thin tracking-tight leading-5">{repeatedText}</h4>
