@@ -22,33 +22,24 @@ export default function Splash() {
   }, []);
 
   return (
-    <section
-      className={`relative min-h-screen bg-[#061B1B] overflow-hidden transition-all duration-700 ${isScrolled
+    <section className={`relative min-h-screen bg-[#061B1B] overflow-hidden transition-all duration-700 
+      ${isScrolled
         ? "rounded-none border-0"
-        : "rounded-[20px] border-[5px] border-white overflow-hidden"
-        }`}
+        : "rounded-[24px] border-[3px] border-white overflow-hidden"
+      }`}
     >
       <div className="absolute inset-0 z-0 min-h-screen w-full opacity-25">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="h-full w-full object-cover"
-          src="/videos/hero.mp4"
-        />
+        <video autoPlay loop muted playsInline preload="metadata" className="h-full w-full object-cover" src="/videos/hero.mp4" />
       </div>
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-[#061018]/20 to-[#061018]/0">
-          <h1 className="mt-10 text-center text-[109px] font-black leading-[115px] tracking-normal text-white">
+          <h1 className="text-center text-[97px] font-[800] leading-[105px] -tracking-[.85px] text-white">
             Crafted For The Shape
             <br />
             of Brand Future
           </h1>
-          <p className="mb-12 mt-8 text-center text-[20px] font-medium leading-[32px] text-gray-100">
-            It&apos;s never just about building a Website, App, or Custom
-            Software.
+          <p className="mb-20 mt-8 text-center text-[20px] font-medium leading-[32px] text-gray-100">
+            It&apos;s never just about building a Website, App, or Custom Software.
             <br />
             it&apos;s about creating trust, meaningful connections, and digital
             <br />

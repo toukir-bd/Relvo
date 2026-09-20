@@ -7,7 +7,7 @@ import Manage from '../components/sections/Manage'
 import Services from '../components/sections/Services'
 import Clients from '../components/sections/Clients'
 import Started from '../components/sections/Started'
-import MarqueeText from '@/components/sections/MarqueeText'
+import Marquee from '@/components/sections/Marquee'
 
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <Splash/>
       <Story/>
-      <MarqueeText/>
+      <Marquee/>
       <Packages/>
       <Focus/>
       <Services/>
