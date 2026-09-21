@@ -34,15 +34,11 @@ export default function Splash() {
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-[#061018]/20 to-[#061018]/0">
           <h1 className="text-center text-[97px] font-[800] leading-[105px] -tracking-[.85px] text-white">
-            Crafted For The Shape
-            <br />
-            of Brand Future
+            Crafted For The Shape<br/> of Brand Future
           </h1>
           <p className="mb-20 mt-8 text-center text-[20px] font-medium leading-[32px] text-gray-100">
-            It&apos;s never just about building a Website, App, or Custom Software.
-            <br />
-            it&apos;s about creating trust, meaningful connections, and digital
-            <br />
+            It&apos;s never just about building a Website, App, or Custom Software.<br />
+            it&apos;s about creating trust, meaningful connections, and digital<br />
             experiences that inspire confidence.
           </p>
         </div>

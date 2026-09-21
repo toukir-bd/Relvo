@@ -5,8 +5,8 @@ import MainLayout from "../components/layout/MainLayout";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 
 export const metadata: Metadata = {
-  title: "Relvo - Crafting Digital Experiences",
-  description: "Relvo - Crafting Digital Experiences",
+  title: "Relvo - Refined Experiences, Led by Vision & Originality",
+  description: "Relvo - Refined Experiences, Led by Vision & Originality",
   icons: {
     icon: [
       {
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${mont.variable} ${denton.variable}`}>
-      <body className="bg-white text-white">
+      <body className="bg-white text-white" cz-shortcut-listen="true">
         <SmoothScroll>
           <MainLayout>{children}</MainLayout>
         </SmoothScroll>
