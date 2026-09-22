@@ -18,9 +18,9 @@ export default function Header({
     <header
       className={`fixed inset-x-0 top-0 z-100 transition-all
         ${isScrolled
-          ? "h-[70px] bg-[#061B1B]/70 backdrop-blur-md"
+          ? "h-[70px] bg-[#051313]/70 backdrop-blur-md"
           : isMenuOpen
-            ? "h-[120px] bg-[#061B1B]/85 backdrop-blur-md"
+            ? "h-[120px] bg-[#051313]/85 backdrop-blur-md"
             : "h-[120px] transparent"
         }`}
     >

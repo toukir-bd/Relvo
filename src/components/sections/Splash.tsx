@@ -22,7 +22,7 @@ export default function Splash() {
   }, []);
 
   return (
-    <section className={`relative min-h-screen bg-[#061B1B] overflow-hidden transition-all duration-700 
+    <section className={`relative min-h-screen bg-[#051313] overflow-hidden transition-all duration-700 
       ${isScrolled
         ? "rounded-none border-0"
         : "rounded-[24px] border-[3px] border-white overflow-hidden"
@@ -31,16 +31,22 @@ export default function Splash() {
       <div className="absolute inset-0 z-0 min-h-screen w-full opacity-25">
         <video autoPlay loop muted playsInline preload="metadata" className="h-full w-full object-cover" src="/videos/hero.mp4" />
       </div>
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-[#061018]/20 to-[#061018]/0">
-          <h1 className="text-center text-[97px] font-[800] leading-[105px] -tracking-[.85px] text-white">
-            Crafted For The Shape<br/> of Brand Future
-          </h1>
-          <p className="mb-20 mt-8 text-center text-[20px] font-medium leading-[32px] text-gray-100">
-            It&apos;s never just about building a Website, App, or Custom Software.<br />
-            it&apos;s about creating trust, meaningful connections, and digital<br />
-            experiences that inspire confidence.
-          </p>
+      <div className="px-[100px] absolute inset-0 z-10 flex flex-col items-center justify-center w-full">
+        <h4 className="text-2xl mb-5 font-[300]">
+          <span className="text-[#BBFF00]">R</span>efined  
+          <span className="text-[#BBFF00] pl-2">E</span>xperiences,  
+          <span className="text-[#BBFF00] pl-2">L</span>ed by 
+          <span className="text-[#BBFF00] pl-2">V</span>ision &  
+          <span className="text-[#BBFF00] pl-2">O</span>riginality 
+        </h4>
+        <h1 className="text-center text-[97px] font-[800] leading-[105px] -tracking-[1px] text-white">
+          crafting for the shape<br/> of your vision
+        </h1>
+        <button className="btn-relvo py-5 px-10 bg-[#BBFF00] text-[#051313] cursor-pointer rounded-[13px]">Keypress</button>
+        <div className="px-[100px] flex items-end justify-between w-full">
+          <p>We turn complex challenges into user-centric digital experiences, crafting websites, mobile apps, digital products, 
+            and AI-powered solutions to make an impact and built to grow.</p>
+          <div className="w-[400px] h-[250px] bg-[#051313]/40 max-w-full rounded-[30px]"></div>
         </div>
       </div>
     </section>

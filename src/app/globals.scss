@@ -2,6 +2,7 @@
 // @import "tailwindcss";
 @use "tailwindcss";
 @use "scss/marquee";
+@use "scss/buttons";
 
 :root {
   --font-primary: var(--font-mont);
