@@ -1,28 +1,6 @@
 
 // @import "tailwindcss";
 @use "tailwindcss";
+@use "scss/font";
 @use "scss/marquee";
 @use "scss/buttons";
-
-:root {
-  --font-primary: var(--font-mont);
-  --font-heading: var(--font-denton);
-}
-
-body {
-  font-family: var(--font-primary), sans-serif;
-}
-
-h1,
-h2,
-h3,
-div{
-  font-family: var(--font-heading), sans-serif;
-}
-
-h4,
-h5,
-h6,
-p{
-  font-family: var(--font-primary), serif;
-}

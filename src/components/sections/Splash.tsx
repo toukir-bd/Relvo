@@ -1,53 +1,80 @@
 "use client";
+import { ScanFace, WandSparkles, CodeXml, Rocket } from "lucide-react";
+import ScrollToDiscover from "../props/ScrollToDiscover";
+const roles = [
+  {
+    label: "User Centric",
+    icon: ScanFace,
+    active: false,
+  },
+  {
+    label: "Creative Navigate",
+    icon: WandSparkles,
+    active: false,
+  },
+  {
+    label: "Innovative Driven",
+    icon: CodeXml,
+    active: false,
+  },
+  {
+    label: "Scalable Built",
+    icon: Rocket,
+    active: true,
+  },
+];
 
-import { useEffect, useState } from "react";
 
 export default function Splash() {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
-    <section className={`relative min-h-screen bg-[#051313] overflow-hidden transition-all duration-700 
-      ${isScrolled
-        ? "rounded-none border-0"
-        : "rounded-[24px] border-[3px] border-white overflow-hidden"
-      }`}
-    >
-      <div className="absolute inset-0 z-0 min-h-screen w-full opacity-25">
+    <section className="relative min-h-screen bg-[#051313] overflow-hidden transition-all duration-700">
+      <div className="absolute inset-0 z-0 min-h-screen w-full opacity-30">
         <video autoPlay loop muted playsInline preload="metadata" className="h-full w-full object-cover" src="/videos/hero.mp4" />
       </div>
       <div className="px-[100px] absolute inset-0 z-10 flex flex-col items-center justify-center w-full">
-        <h4 className="text-2xl mb-5 font-[300]">
+        <h4 className="mb-5 text-2xl font-[300]">
           <span className="text-[#BBFF00]">R</span>efined  
           <span className="text-[#BBFF00] pl-2">E</span>xperiences,  
           <span className="text-[#BBFF00] pl-2">L</span>ed by 
           <span className="text-[#BBFF00] pl-2">V</span>ision &  
           <span className="text-[#BBFF00] pl-2">O</span>riginality 
         </h4>
-        <h1 className="text-center text-[97px] font-[800] leading-[105px] -tracking-[1px] text-white">
+        <h1 className="mb-10 text-center text-[105px] font-[800] leading-[105px] -tracking-[1px] text-white">
           crafting for the shape<br/> of your vision
         </h1>
-        <button className="btn-relvo py-5 px-10 bg-[#BBFF00] text-[#051313] cursor-pointer rounded-[13px]">Keypress</button>
-        <div className="px-[100px] flex items-end justify-between w-full">
-          <p>We turn complex challenges into user-centric digital experiences, crafting websites, mobile apps, digital products, 
-            and AI-powered solutions to make an impact and built to grow.</p>
-          <div className="w-[400px] h-[250px] bg-[#051313]/40 max-w-full rounded-[30px]"></div>
+        <div className="mb-15 mx-auto max-w-full w-auto rounded-[20px] border border-[#deef54]/20 bg-black/15 p-2">
+          <div className="grid grid-cols-4 gap-2">
+            {roles.map(({ label, icon: Icon, active }) => (
+              <div
+                key={label}
+                className={[
+                  "flex aspect-[1.8/1] flex-col items-center justify-center rounded-[15px] p-3",
+                  "transition-all duration-300",
+                  active
+                    ? "bg-[#BBFF00] text-[#051313] shadow-[0_8px_20px_rgba(124,67,238,0.25)]"
+                    : "bg-white/10 text-white hover:bg-[#d2d2d2]",
+                ].join(" ")}
+              >
+                <Icon strokeWidth={.5} 
+                  className={[
+                    "mb-3 h-16 w-16 sm:h-16 sm:w-16",
+                    active ? "text-[#051313]" : "text-[#BBFF00]",
+                  ].join(" ")}
+                />
+                <h4 className="text-sm font-normal sm:text-base">
+                  {label}
+                </h4>
+              </div>
+            ))}
+          </div>
         </div>
+        {/* <button className="btn-relvo py-5 px-10 bg-[#BBFF00] text-[#051313] cursor-pointer rounded-[13px]">Keypress</button> */}
+      </div>
+      <div className="mb-15 px-[65px] absolute inset-0 z-10 flex items-end justify-between w-full">
+        
+        <ScrollToDiscover/>
+
+        <button className="btn-relvo py-5 px-10 bg-[#BBFF00] text-[#051313] cursor-pointer rounded-[13px]">Keypress</button> 
       </div>
     </section>
   );

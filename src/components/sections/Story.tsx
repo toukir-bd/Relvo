@@ -8,23 +8,31 @@ const slides = [
     text: "We believe every brand has the potential to rise above the ordinary.",
   },
   {
+    number: "01",
+    text: "RELVO is a creative design & development agency that turns your vision & complex ideas into user-centric experiences aesthetically.",
+  },
+  {
     number: "02",
-    text: "It's more than building a website, app, or software.",
+    text: "We turn complex challenges into user centric digital refined experiences, crafting user friendly digital products, websites, mobile apps, and AI-powered solutions aesthetically.",
   },
   {
     number: "03",
-    text: "It's about creating trust, meaningful connections, and digital experiences that leave a lasting impression.",
+    text: "It's more than building a website, app, or software.",
   },
   {
     number: "04",
-    text: "Through thoughtful design and modern development, we help businesses become memorable, build credibility, and grow with confidence.",
+    text: "It's about creating trust, meaningful connections, and digital experiences that leave a lasting impression.",
   },
   {
     number: "05",
-    text: "Every successful partnership begins with trust. We earn it through creativity, transparency, and results.",
+    text: "Through thoughtful design and modern development, we help businesses become memorable, build credibility, and grow with confidence.",
   },
   {
     number: "06",
+    text: "Every successful partnership begins with trust. We earn it through creativity, transparency, and results.",
+  },
+  {
+    number: "07",
     text: "Let's build trust — and together, build a brand that rises above the rest.",
   },
 ];
@@ -77,7 +85,7 @@ export default function Story() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#051313]" style={{ height: `${(slides.length + 1) * 100}dvh` }} >
+    <section ref={sectionRef} className="relative w-full bg-[#051313]" style={{ height: `${(slides.length + 1) * 100}dvh` }} id="discover-us">
       <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
         <div className="flex h-full w-full items-center justify-center px-6 lg:px-[60px]">
           <div className="relative w-full max-w-[1000px]">
