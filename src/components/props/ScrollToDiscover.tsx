@@ -18,7 +18,7 @@ export default function ScrollToDiscover() {
             <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-[#BBFF00]/35 group-hover:bg-black/35 group-hover:text-[#BBFF00]">
                 <ArrowDown className="scroll-arrow absolute h-4 w-4" />
             </span>
-            <span className="text-[16px] font-thin tracking-wide">Scroll to Discover Us</span>
+            <span className="text-[16px] font-thin tracking-wide">Scroll to Discover</span>
         </button>
     );
 }
