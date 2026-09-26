@@ -5,31 +5,19 @@ import { useEffect, useRef, useState } from "react";
 const slides = [
   {
     number: "01",
-    text: "We believe every brand has the potential to rise above the ordinary.",
+    text: "We design distinctive brands and visual identities that help businesses stand out and stay memorable.",
   },
   {
     number: "02",
-    text: "RELVO is a creative design & development agency that works with your vision & complex ideas.",
+    text: "We design and develop modern websites that are beautiful, intuitive, and built to perform.",
   },
   {
     number: "03",
-    text: "crafting user friendly digital products, websites, mobile apps, and AI-powered solutions aesthetically.",
+    text: "We create user-focused mobile apps, dashboards, and digital products that make complex experiences simple.",
   },
   {
     number: "04",
-    text: "It's more than building a website, app, or software.",
-  },
-  {
-    number: "05",
-    text: "Through thoughtful design and modern development, we help businesses become memorable, build credibility, and grow with confidence.",
-  },
-  {
-    number: "06",
-    text: "Every successful partnership begins with trust. We earn it through creativity, transparency, and results.",
-  },
-  {
-    number: "07",
-    text: "Let's build trust — and together, build a brand that rises above the rest.",
+    text: "We combine thoughtful UX/UI design with modern development to turn ideas into scalable digital solutions.",
   },
 ];
 
