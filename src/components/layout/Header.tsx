@@ -18,9 +18,9 @@ export default function Header({
     <header
       className={`fixed inset-x-0 top-0 z-100 transition-all
         ${isScrolled
-          ? "h-[70px] bg-[#051313]/70 backdrop-blur-md"
+          ? "h-[70px] bg-secondary/70 backdrop-blur-md"
           : isMenuOpen
-            ? "h-[120px] bg-[#051313]/85 backdrop-blur-md"
+            ? "h-[120px] bg-secondary/85 backdrop-blur-md"
             : "h-[120px] transparent"
         }`}
     >
@@ -38,14 +38,14 @@ export default function Header({
         <button
           onClick={isMenuOpen ? onMenuClose : onMenuOpen}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className={`group flex cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-[#BBFF00]/50 transition-all duration-500
+          className={`group flex cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-primary/50 transition-all duration-500
             ${isScrolled
               ? "h-[50px] w-[50px]"
               : "h-[56px] w-[56px]"
             }
             ${isMenuOpen
               ? "border-red-200 hover:border-red-400"
-              : "border-white/10 hover:border-[#BBFF00]/50"
+              : "border-white/10 hover:border-primary/50"
             }
           `}
         >
@@ -65,10 +65,10 @@ export default function Header({
             </svg>
           ) : (
             <span className="flex flex-col space-y-[3px]">
-              <span className="h-[2px] w-[20px] transition-all duration-300 group-hover:w-[26px] bg-[#BBFF00]" />
-              <span className="h-[2px] w-[16px] transition-all duration-300 group-hover:w-[26px] bg-[#BBFF00]" />
-              <span className="h-[2px] w-[26px] transition-all duration-300 bg-[#BBFF00]" />
-              <span className="h-[2px] w-[22px] transition-all duration-300 group-hover:w-[26px] bg-[#BBFF00]" />
+              <span className="h-[2px] w-[20px] transition-all duration-300 group-hover:w-[26px] bg-primary" />
+              <span className="h-[2px] w-[16px] transition-all duration-300 group-hover:w-[26px] bg-primary" />
+              <span className="h-[2px] w-[26px] transition-all duration-300 bg-primary" />
+              <span className="h-[2px] w-[22px] transition-all duration-300 group-hover:w-[26px] bg-primary" />
             </span>
           )}
         </button>

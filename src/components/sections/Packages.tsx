@@ -227,7 +227,7 @@ export default function HorizontalStory() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#051313]" style={{ height: sectionHeight }}>
+    <section ref={sectionRef} className="relative w-full bg-secondary" style={{ height: sectionHeight }}>
       <div ref={viewportRef} className="sticky py-[100px] top-0 flex w-full flex-col justify-center overflow-hidden">
         <div className="mb-[70px] px-[4.5vw]">
           <h2 className="max-w-[700px] font-[var(--font-denton)] text-[clamp(52px,6vw,100px)] font-medium leading-[0.9] tracking-[-0.045em] text-white">

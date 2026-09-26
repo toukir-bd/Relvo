@@ -8,20 +8,16 @@ const slides = [
     text: "We believe every brand has the potential to rise above the ordinary.",
   },
   {
-    number: "01",
-    text: "RELVO is a creative design & development agency that turns your vision & complex ideas into user-centric experiences aesthetically.",
-  },
-  {
     number: "02",
-    text: "We turn complex challenges into user centric digital refined experiences, crafting user friendly digital products, websites, mobile apps, and AI-powered solutions aesthetically.",
+    text: "RELVO is a creative design & development agency that works with your vision & complex ideas.",
   },
   {
     number: "03",
-    text: "It's more than building a website, app, or software.",
+    text: "crafting user friendly digital products, websites, mobile apps, and AI-powered solutions aesthetically.",
   },
   {
     number: "04",
-    text: "It's about creating trust, meaningful connections, and digital experiences that leave a lasting impression.",
+    text: "It's more than building a website, app, or software.",
   },
   {
     number: "05",
@@ -85,14 +81,22 @@ export default function Story() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#051313]" style={{ height: `${(slides.length + 1) * 100}dvh` }} id="discover-us">
+    <section ref={sectionRef} className="relative w-full bg-secondary" style={{ height: `${(slides.length + 1) * 100}dvh` }} id="discover-us">
       <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
         <div className="flex h-full w-full items-center justify-center px-6 lg:px-[60px]">
           <div className="relative w-full max-w-[1000px]">
-            <div className="mb-8">
-              <p className="text-[18px] font-medium leading-[1.4] text-white">
-                The story of Relvo Creative begins with ambition.
+            <div className="mb-10">
+              <p className="text-[27px] text-center font-[300] leading-[1.4] tracking-normal text-primary">
+                RELVO is built to create best presence that performs
               </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span key={activeSlide} className="animate-number-fade text-[22px] font-semibold leading-none text-primary">
+                {String(activeSlide + 1).padStart(2, "0")}
+              </span>
+              <span className="text-[14px] font-light leading-none text-primary/30">
+                /{String(slides.length).padStart(2, "0")}
+              </span>
             </div>
             <div className="relative h-[500px] w-full overflow-hidden">
               {slides.map((slide, index) => {
@@ -103,8 +107,7 @@ export default function Story() {
                 );
                 const words = slide.text.split(" ");
                 return (
-                  <div
-                    key={slide.number}
+                  <div key={slide.number}
                     className={[
                       "absolute inset-0 flex items-center",
                       "transition-all duration-700",
@@ -117,37 +120,28 @@ export default function Story() {
                     ].join(" ")}
                   >
                     <div className="w-full">
-                      <div className="mb-8">
-                        <span className="text-[14px] font-medium tracking-[0.2em] text-[#FF8D28]">
-                          {slide.number}
-                        </span>
-                      </div>
-                      <p className="max-w-[1150px] text-[clamp(42px,6vw,90px)] font-light leading-[1.08] tracking-[-0.04em]">
+                      <h3 className="max-w-[1150px] text-6xl text-start font-[400] leading-[1.5] tracking-tight text-white">
                         {words.map((word, wordIndex) => {
                           const wordProgress = clamp(
                             slideProgress * words.length - wordIndex + 0.35,
                           );
-                          const wordOpacity =
-                            0.16 + wordProgress * 0.84;
+                          const wordOpacity = 0.16 + wordProgress * 0.84;
                           return (
                             <span
                               key={`${word}-${wordIndex}`}
                               className="transition-colors duration-100 ease-out"
-                              style={{
-                                color: `rgba(255, 255, 255, ${wordOpacity})`,
-                              }}
-                            >
+                              style={{ color: `rgba(255, 255, 255, ${wordOpacity})` }}>
                               {word}{" "}
                             </span>
                           );
                         })}
-                      </p>
+                      </h3>
                     </div>
                   </div>
                 );
               })}
             </div>
-            <div className="mt-8 flex items-center gap-2">
+            <div className="mt-8 flex items-center justify-center gap-2">
               {slides.map((slide, index) => (
                 <div
                   key={slide.number}

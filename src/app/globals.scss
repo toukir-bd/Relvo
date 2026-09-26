@@ -4,3 +4,17 @@
 @use "scss/font";
 @use "scss/marquee";
 @use "scss/buttons";
+
+@theme{
+  --color-primary: #BBFF00;
+  --color-secondary: #051313;
+}
+
+@layer utilities {
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+}
