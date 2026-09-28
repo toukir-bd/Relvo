@@ -5,15 +5,15 @@ import { useEffect, useRef, useState } from "react";
 const slides = [
   {
     number: "01",
-    text: "We design distinctive brands and visual identities that help businesses stand out and stay memorable.",
+    text: "We design distinctive visual identities that help businesses stand out and stay memorable.",
   },
   {
     number: "02",
-    text: "We design and develop modern websites that are beautiful, intuitive, and built to perform.",
+    text: "Develop modern products that are aesthetic, intuitive, and built to action perform.",
   },
   {
     number: "03",
-    text: "We create user-focused mobile apps, dashboards, and digital products that make complex experiences simple.",
+    text: "Creating user-centric Mobile Apps, Websites, Dashboards, and Products that make complex problems simple.",
   },
   {
     number: "04",
@@ -27,6 +27,26 @@ export default function Story() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  const goToSlide = (index: number) => {
+    const section = sectionRef.current;
+
+    if (!section) return;
+
+    const totalScroll = section.offsetHeight - window.innerHeight;
+    const progress = index / slides.length;
+
+    const targetY =
+      section.getBoundingClientRect().top +
+      window.scrollY +
+      totalScroll * progress;
+
+    window.scrollTo({
+      top: targetY,
+      behavior: "smooth",
+    });
+  };
+
   useEffect(() => {
     let frame = 0;
     const updateStory = () => {
@@ -78,11 +98,11 @@ export default function Story() {
                 RELVO is built to create best presence that performs
               </p>
             </div>
-            <div className="flex items-center gap-2">
-              <span key={activeSlide} className="animate-number-fade text-[22px] font-semibold leading-none text-primary">
+            <div className="flex items-end gap-2">
+              <span key={activeSlide} className="animate-number-fade text-[30px] font-semibold leading-none text-primary">
                 {String(activeSlide + 1).padStart(2, "0")}
               </span>
-              <span className="text-[14px] font-light leading-none text-primary/30">
+              <span className="text-[20px] font-light leading-none text-primary/30">
                 /{String(slides.length).padStart(2, "0")}
               </span>
             </div>
@@ -131,11 +151,16 @@ export default function Story() {
             </div>
             <div className="mt-8 flex items-center justify-center gap-2">
               {slides.map((slide, index) => (
-                <div
+                <button
                   key={slide.number}
-                  className={["h-[2px] transition-all duration-500", index === activeSlide
+                  type="button"
+                  aria-label={`Go to slide ${slide.number}`}
+                  onClick={() => goToSlide(index)}
+                  className={[
+                    "h-[4px] cursor-pointer transition-all duration-500",
+                    index === activeSlide
                       ? "w-16 bg-white"
-                      : "w-5 bg-white/20",
+                      : "w-5 bg-white/20 hover:bg-white/50",
                   ].join(" ")}
                 />
               ))}

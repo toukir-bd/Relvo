@@ -59,7 +59,7 @@ export default function Splash() {
                 <div className={["mb-3 w-24 h-24 flex items-center justify-center rounded-full", active ? "bg-secondary/10" : "bg-secondary/30"].join(" ")}>
                   <Icon strokeWidth={.65} className={["h-12 w-12", active ? "text-secondary" : "text-primary",].join(" ")}/>
                 </div>
-                <h4 className="font-[200] text-[17px] capitalize tracking-wider text-center">
+                <h4 className="font-[200] text-[17px] capitalize tracking-wide text-center">
                   {label}
                 </h4>
               </div>
@@ -80,7 +80,7 @@ export default function Splash() {
           <Link href="/" type="button" 
               className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary bg-secondary/50 p-1.5 ps-7 rounded-full">
               <span className="text-[16px] font-thin tracking-wide">Talk to an Expert</span>
-              <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/30 transition group-hover:border-primary/35 group-hover:bg-black/35 group-hover:text-primary">
+              <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 group-hover:bg-black/35 group-hover:text-primary">
                   <FaWhatsapp className="h-6.5 w-6.5 text-[#27D367]"/>
               </span>
           </Link>
