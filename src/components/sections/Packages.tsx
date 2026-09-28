@@ -8,31 +8,41 @@ const cards = [
     category: "01 / BRAND STRATEGY",
     title: "Build brands\nthat rise.",
     image: "/img/projects/project-01.webp",
+    gradient:
+      "bg-[radial-gradient(ellipse_90%_65%_at_50%_100%,#ff0099_0%,#8b0b50_36%,transparent_72%),linear-gradient(180deg,#030303_0%,#100008_100%)]",
   },
   {
     category: "02 / DIGITAL DESIGN",
     title: "Design experiences\npeople remember.",
     image: "/img/projects/project-02.webp",
+    gradient:
+      "bg-[radial-gradient(ellipse_90%_65%_at_50%_100%,#b236ff_0%,#551187_38%,transparent_72%),linear-gradient(180deg,#030303_0%,#0c0414_100%)]",
   },
   {
     category: "03 / DEVELOPMENT",
     title: "Turn ideas\ninto digital reality.",
     image: "/img/projects/project-03.webp",
+    gradient:
+      "bg-[radial-gradient(ellipse_100%_65%_at_55%_100%,#00db78_0%,#0064d8_34%,transparent_72%),linear-gradient(180deg,#030303_0%,#00101c_100%)]",
   },
   {
     category: "04 / DIGITAL PRODUCTS",
     title: "Create products\nbuilt to grow.",
     image: "/img/projects/project-04.webp",
+    gradient:
+      "bg-[radial-gradient(ellipse_90%_65%_at_50%_100%,#ff5a1f_0%,#9c160b_38%,transparent_72%),linear-gradient(180deg,#030303_0%,#160400_100%)]",
   },
   {
     category: "05 / EXPERIENCE",
     title: "Make every\ninteraction matter.",
     image: "/img/projects/project-05.webp",
+    gradient:
+      "bg-[radial-gradient(ellipse_90%_65%_at_50%_100%,#3e65ff_0%,#43209a_38%,transparent_72%),linear-gradient(180deg,#030303_0%,#050315_100%)]",
   },
 ];
 
 const buttonClass =
-  "mt-[30px] flex w-fit items-center gap-5 border border-white/30 px-[20px] py-[12px] text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:border-white";
+  "mt-[30px] flex w-fit items-center gap-5 border border-white/30 px-[20px] py-[12px] text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-black";
 
 export default function HorizontalStory() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -40,14 +50,8 @@ export default function HorizontalStory() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const [sectionHeight, setSectionHeight] = useState("100vh");
-
   const distanceRef = useRef(0);
 
-  /*
-   * ---------------------------------------------------------
-   * Calculate horizontal distance
-   * ---------------------------------------------------------
-   */
   useEffect(() => {
     const calculateDimensions = () => {
       const viewport = viewportRef.current;
@@ -55,56 +59,28 @@ export default function HorizontalStory() {
 
       if (!viewport || !track) return;
 
-      const horizontalDistance =
-        track.scrollWidth - viewport.clientWidth;
-
+      const horizontalDistance = track.scrollWidth - viewport.clientWidth;
       const distance = Math.max(0, horizontalDistance);
 
       distanceRef.current = distance;
-
-      /*
-       * Vertical distance required to complete
-       * the horizontal slider.
-       */
-      setSectionHeight(
-        `${window.innerHeight + distance}px`
-      );
+      setSectionHeight(`${window.innerHeight + distance}px`);
     };
 
     calculateDimensions();
 
-    const observer = new ResizeObserver(() => {
-      calculateDimensions();
-    });
+    const observer = new ResizeObserver(calculateDimensions);
 
-    if (viewportRef.current) {
-      observer.observe(viewportRef.current);
-    }
+    if (viewportRef.current) observer.observe(viewportRef.current);
+    if (trackRef.current) observer.observe(trackRef.current);
 
-    if (trackRef.current) {
-      observer.observe(trackRef.current);
-    }
-
-    window.addEventListener(
-      "resize",
-      calculateDimensions
-    );
+    window.addEventListener("resize", calculateDimensions);
 
     return () => {
       observer.disconnect();
-
-      window.removeEventListener(
-        "resize",
-        calculateDimensions
-      );
+      window.removeEventListener("resize", calculateDimensions);
     };
   }, []);
 
-  /*
-   * ---------------------------------------------------------
-   * Vertical scroll → horizontal slider
-   * ---------------------------------------------------------
-   */
   useEffect(() => {
     let frame = 0;
 
@@ -117,178 +93,106 @@ export default function HorizontalStory() {
         return;
       }
 
-      const horizontalDistance =
-        distanceRef.current;
+      const horizontalDistance = distanceRef.current;
 
       if (horizontalDistance <= 0) {
         frame = 0;
         return;
       }
 
-      const rect =
-        section.getBoundingClientRect();
+      const rect = section.getBoundingClientRect();
 
-      /*
-       * Before the section reaches top:
-       * horizontal position stays at 0.
-       */
       if (rect.top > 0) {
-        track.style.transform =
-          "translate3d(0px, 0px, 0px)";
-
+        track.style.transform = "translate3d(0, 0, 0)";
         frame = 0;
         return;
       }
 
-      /*
-       * How far the page has travelled
-       * through this section.
-       */
-      const scrolled = Math.max(
-        0,
-        -rect.top
-      );
-
-      /*
-       * Total vertical distance available.
-       */
-      const verticalDistance =
-        section.offsetHeight -
-        window.innerHeight;
+      const verticalDistance = section.offsetHeight - window.innerHeight;
 
       if (verticalDistance <= 0) {
         frame = 0;
         return;
       }
 
-      /*
-       * 0 → 1
-       */
       const progress = Math.min(
         1,
-        Math.max(
-          0,
-          scrolled / verticalDistance
-        )
+        Math.max(0, -rect.top / verticalDistance),
       );
 
-      /*
-       * Convert vertical progress
-       * to horizontal movement.
-       */
-      const translateX =
-        horizontalDistance * progress;
-
-      track.style.transform =
-        `translate3d(${-translateX}px, 0, 0)`;
+      track.style.transform = `translate3d(${
+        -horizontalDistance * progress
+      }px, 0, 0)`;
 
       frame = 0;
     };
 
     const handleScroll = () => {
-      if (frame) return;
-
-      frame =
-        requestAnimationFrame(
-          updateSlider
-        );
+      if (!frame) frame = requestAnimationFrame(updateSlider);
     };
 
-    window.addEventListener(
-      "scroll",
-      handleScroll,
-      {
-        passive: true,
-      }
-    );
-
-    window.addEventListener(
-      "resize",
-      handleScroll
-    );
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     updateSlider();
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
 
-      window.removeEventListener(
-        "resize",
-        handleScroll
-      );
-
-      if (frame) {
-        cancelAnimationFrame(frame);
-      }
+      if (frame) cancelAnimationFrame(frame);
     };
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-secondary" style={{ height: sectionHeight }}>
-      <div ref={viewportRef} className="sticky py-[100px] top-0 flex w-full flex-col justify-center overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative w-full bg-secondary"
+      style={{ height: sectionHeight }}
+    >
+      <div
+        ref={viewportRef}
+        className="sticky top-0 flex w-full flex-col justify-center overflow-hidden py-[100px]"
+      >
         <div className="mb-[70px] px-[4.5vw]">
           <h2 className="max-w-[700px] font-[var(--font-denton)] text-[clamp(52px,6vw,100px)] font-medium leading-[0.9] tracking-[-0.045em] text-white">
-            upgrade your life.<br/> bit by bit.
+            upgrade your life.
+            <br /> bit by bit.
           </h2>
         </div>
-
-        {/* =================================================
-            HORIZONTAL TRACK
-            ================================================= */}
 
         <div className="w-full overflow-visible">
           <div
             ref={trackRef}
-            className="flex w-max gap-[16px] pl-[4.5vw] pr-[4.5vw] will-change-transform"
+            className="flex w-max gap-4 pl-[4.5vw] pr-[4.5vw] will-change-transform"
           >
             {cards.map((card) => (
               <article
                 key={card.category}
-                className="relative h-[620px] w-[32vw] min-w-[420px] max-w-[540px] shrink-0 overflow-hidden border border-white/20 bg-black"
+                className={`relative h-[620px] w-[32vw] min-w-[720px] max-w-[540px] shrink-0 overflow-hidden border border-white/20 ${card.gradient}`}
               >
-                <div className="relative z-10 flex h-full flex-col p-[32px]">
+                {/* Dark overlay keeps the heading readable */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent" />
 
-                  {/* Category */}
+                <div className="relative z-10 flex h-full flex-col p-8">
+                  <span className="text-[13px] font-medium uppercase tracking-[0.14em] text-white/70">
+                    {card.category}
+                  </span>
 
-                  <div className="flex items-center gap-4">
-                    <span className="text-[13px] font-medium uppercase tracking-[0.14em] text-white/70">
-                      {card.category}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-
-                  <h3 className="mt-[36px] max-w-[400px] whitespace-pre-line text-[clamp(30px,3vw,52px)] font-medium leading-[0.95] tracking-[-0.035em] text-white">
+                  <h3 className="mt-9 max-w-[400px] whitespace-pre-line text-[clamp(30px,3vw,52px)] font-medium leading-[0.95] tracking-[-0.035em] text-white">
                     {card.title}
                   </h3>
 
-                  {/* Button */}
-
-                  <button
-                    type="button"
-                    className={buttonClass}
-                  >
-                    Know more
-
-                    <span className="text-[16px]">
-                      →
-                    </span>
+                  <button type="button" className={buttonClass}>
+                    Know more <span className="text-base">→</span>
                   </button>
-
-                  {/* Image */}
 
                   <div className="absolute inset-x-0 bottom-0 h-[62%]">
                     <Image
                       src={card.image}
-                      alt={card.title.replace(
-                        "\n",
-                        " "
-                      )}
+                      alt={card.title.replace("\n", " ")}
                       fill
-                      sizes="540px"
+                      sizes="740px"
                       className="object-cover object-center"
                     />
                   </div>

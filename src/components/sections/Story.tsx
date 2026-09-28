@@ -9,7 +9,7 @@ const slides = [
   },
   {
     number: "02",
-    text: "Develop modern products that are aesthetic, intuitive, and built to action perform.",
+    text: "Developing modern products that are aesthetic, intuitive, and built to action perform.",
   },
   {
     number: "03",
