@@ -46,25 +46,13 @@ export default function Splash() {
           crafting for the shape<br/> of your vision
         </h1> */}
         <h1 className="relative mb-5 pb-3 overflow-hidden text-center text-[107px] font-[800] leading-[105px] -tracking-[1px] text-white">
-          {/* Base white text */}
           <div className="relative z-10 invisible">
-            crafting for the shape
-            <br />
-            of your vision
+            crafting for the shape<br/>of your vision
           </div>
-
-          {/* Animated neon colors — visible only inside characters */}
-          <div
-            aria-hidden="true"
-            className="hero-text-neon pointer-events-none absolute inset-0 z-20"
-          >
-            crafting for the shape
-            <br />
-            of your vision
+          <div aria-hidden="true" className="hero-text-neon pointer-events-none absolute inset-0 z-20">
+            crafting for the shape<br/>of your vision
           </div>
         </h1>
-
-
         <div className="mb-15 mx-auto max-w-full w-auto rounded-[24px] bg-secondary/70 p-2">
           <div className="grid grid-cols-4 gap-2">
             {roles.map(({ label, icon: Icon, active }) => (

@@ -88,14 +88,20 @@ export default function Story() {
 
   return (
     <section ref={sectionRef} className="relative w-full bg-secondary" style={{ height: `${(slides.length + 1) * 100}dvh` }} id="discover-us">
-      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
+      <div className="sticky py-35 top-0 h-auto w-full overflow-hidden">
         <div className="flex h-full w-full items-center justify-center px-6 lg:px-[60px]">
           <div className="relative w-full max-w-[1000px]">
-            <div className="mb-10">
-              <p className="text-[32px] text-center font-[500] leading-[1.4] tracking-normal text-primary">
+            {/* <p className="mb-10 text-[32px] text-center font-[300] leading-[1.4] tracking-normal text-primary">
+              Relvo is built to create best presence that performs
+            </p> */}
+            <p className="relative overflow-hidden mb-10 text-[33px] text-center font-[300] tracking-normal text-primary">
+              <span className="relative z-10 invisible">
                 Relvo is built to create best presence that performs
-              </p>
-            </div>
+              </span>
+              <span aria-hidden="true" className="hero-text-neon pointer-events-none absolute inset-0 z-20">
+                Relvo is built to create best presence that performs
+              </span>
+            </p>
             <div className="flex items-center justify-between">
               <div className="flex items-end gap-2">
                 <span key={activeSlide} className="animate-number-fade text-[30px] font-semibold leading-none text-primary">
@@ -132,7 +138,7 @@ export default function Story() {
                     ].join(" ")}
                   >
                     <div className="w-full">
-                      <h3 className="max-w-[1150px] text-[64px] text-start font-[200] leading-[1.5] tracking-normal text-white">
+                      <h3 className="max-w-[1150px] text-[62px] text-start font-[500] leading-[1.5] tracking-tight text-white">
                         {words.map((word, wordIndex) => {
                           const wordProgress = clamp(
                             slideProgress * words.length - wordIndex + 0.35,

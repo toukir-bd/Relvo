@@ -195,7 +195,7 @@ export default function HorizontalStory() {
     <section ref={sectionRef} className="relative w-full bg-secondary" style={{ height: sectionHeight }}>
       <div ref={viewportRef} className="sticky top-0 flex w-full flex-col justify-center overflow-hidden py-[100px]">
         <div className="mb-[70px] px-[4.5vw]">
-          <h2 className="text-[96px] font-[800] leading-[0.9] tracking-tight text-white">
+          <h2 className="text-[94px] font-[700] leading-[0.9] tracking-tight text-white">
             our best cases prove it
           </h2>
         </div>
@@ -209,20 +209,20 @@ export default function HorizontalStory() {
                   <span className="text-[13px] font-medium uppercase tracking-[0.14em] text-white/70">
                     {card.category}
                   </span>
-                  <h3 className="mt-9 max-w-[400px] whitespace-pre-line text-[clamp(30px,3vw,52px)] font-medium leading-[0.95] tracking-[-0.035em] text-white">
+                  <h3 className="mt-9 max-w-[500px] text-[58px] font-[700] leading-[0.95] tracking-tight text-white">
                     {card.title}
                   </h3>
-                  <button type="button" className={buttonClass}>
+                  <button type="button" className="cursor-pointer {buttonClass}">
                     Know more <span className="text-base">→</span>
                   </button>
-                  <div className="absolute inset-x-0 bottom-0 h-[62%]">
-                    <Image
+                  <div className="absolute inset-x-0 -z-1 bottom-0 h-[62%]">
+                    {/* <Image
                       src={card.image}
-                      alt={card.title.replace("\n", " ")}
+                      alt="package"
                       fill
                       sizes="740px"
                       className="object-cover object-center"
-                    />
+                    /> */}
                   </div>
                 </div>
               </article>
