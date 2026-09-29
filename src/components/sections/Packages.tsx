@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+const HOLD_SCROLL = .5; // 1 viewport before and after horizontal movement
+
 const cards = [
   {
     category: "01 / BRAND STRATEGY",
@@ -59,11 +61,24 @@ export default function HorizontalStory() {
 
       if (!viewport || !track) return;
 
-      const horizontalDistance = track.scrollWidth - viewport.clientWidth;
-      const distance = Math.max(0, horizontalDistance);
+      const horizontalDistance = Math.max(
+        0,
+        track.scrollWidth - viewport.clientWidth,
+      );
 
-      distanceRef.current = distance;
-      setSectionHeight(`${window.innerHeight + distance}px`);
+      const holdDistance = window.innerHeight * HOLD_SCROLL;
+
+      /*
+       * Initial hold + horizontal travel + final hold.
+       */
+      const totalVerticalScroll =
+        horizontalDistance + holdDistance * 2;
+
+      distanceRef.current = horizontalDistance;
+
+      setSectionHeight(
+        `${window.innerHeight + totalVerticalScroll}px`,
+      );
     };
 
     calculateDimensions();
@@ -96,42 +111,74 @@ export default function HorizontalStory() {
       const horizontalDistance = distanceRef.current;
 
       if (horizontalDistance <= 0) {
+        track.style.transform = "translate3d(0, 0, 0)";
         frame = 0;
         return;
       }
 
       const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
 
+      /*
+       * Before this section reaches the viewport top,
+       * always keep the first card visible.
+       */
       if (rect.top > 0) {
         track.style.transform = "translate3d(0, 0, 0)";
         frame = 0;
         return;
       }
 
-      const verticalDistance = section.offsetHeight - window.innerHeight;
+      const verticalDistance =
+        section.offsetHeight - viewportHeight;
 
       if (verticalDistance <= 0) {
         frame = 0;
         return;
       }
 
-      const progress = Math.min(
-        1,
-        Math.max(0, -rect.top / verticalDistance),
+      const holdDistance = viewportHeight * HOLD_SCROLL;
+
+      const scrolledInsideSection = Math.min(
+        verticalDistance,
+        Math.max(0, -rect.top),
       );
 
-      track.style.transform = `translate3d(${
-        -horizontalDistance * progress
-      }px, 0, 0)`;
+      /*
+       * Removes the first and last hold areas
+       * from the horizontal movement calculation.
+       */
+      const movementDistance = Math.max(
+        1,
+        verticalDistance - holdDistance * 2,
+      );
+
+      const progress = Math.min(
+        1,
+        Math.max(
+          0,
+          (scrolledInsideSection - holdDistance) /
+            movementDistance,
+        ),
+      );
+
+      const translateX = horizontalDistance * progress;
+
+      track.style.transform = `translate3d(${-translateX}px, 0, 0)`;
 
       frame = 0;
     };
 
     const handleScroll = () => {
-      if (!frame) frame = requestAnimationFrame(updateSlider);
+      if (!frame) {
+        frame = requestAnimationFrame(updateSlider);
+      }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
     window.addEventListener("resize", handleScroll);
 
     updateSlider();
@@ -145,48 +192,29 @@ export default function HorizontalStory() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full bg-secondary"
-      style={{ height: sectionHeight }}
-    >
-      <div
-        ref={viewportRef}
-        className="sticky top-0 flex w-full flex-col justify-center overflow-hidden py-[100px]"
-      >
+    <section ref={sectionRef} className="relative w-full bg-secondary" style={{ height: sectionHeight }}>
+      <div ref={viewportRef} className="sticky top-0 flex w-full flex-col justify-center overflow-hidden py-[100px]">
         <div className="mb-[70px] px-[4.5vw]">
-          <h2 className="max-w-[700px] font-[var(--font-denton)] text-[clamp(52px,6vw,100px)] font-medium leading-[0.9] tracking-[-0.045em] text-white">
-            upgrade your life.
-            <br /> bit by bit.
+          <h2 className="text-[96px] font-[800] leading-[0.9] tracking-tight text-white">
+            our best cases prove it
           </h2>
         </div>
 
         <div className="w-full overflow-visible">
-          <div
-            ref={trackRef}
-            className="flex w-max gap-4 pl-[4.5vw] pr-[4.5vw] will-change-transform"
-          >
+          <div ref={trackRef} className="flex w-max gap-12 pl-[4.5vw] pr-[4.5vw] will-change-transform">
             {cards.map((card) => (
-              <article
-                key={card.category}
-                className={`relative h-[620px] w-[32vw] min-w-[720px] max-w-[540px] shrink-0 overflow-hidden border border-white/20 ${card.gradient}`}
-              >
-                {/* Dark overlay keeps the heading readable */}
+              <article key={card.category} className={`relative h-[620px] w-[32vw] min-w-[720px] shrink-0 overflow-hidden border border-white/10 rounded-[0px] ${card.gradient}`}>
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent" />
-
                 <div className="relative z-10 flex h-full flex-col p-8">
                   <span className="text-[13px] font-medium uppercase tracking-[0.14em] text-white/70">
                     {card.category}
                   </span>
-
                   <h3 className="mt-9 max-w-[400px] whitespace-pre-line text-[clamp(30px,3vw,52px)] font-medium leading-[0.95] tracking-[-0.035em] text-white">
                     {card.title}
                   </h3>
-
                   <button type="button" className={buttonClass}>
                     Know more <span className="text-base">→</span>
                   </button>
-
                   <div className="absolute inset-x-0 bottom-0 h-[62%]">
                     <Image
                       src={card.image}

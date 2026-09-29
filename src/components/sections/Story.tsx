@@ -1,24 +1,22 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 const slides = [
   {
     number: "01",
-    text: "We design distinctive visual identities that help businesses stand out and stay memorable.",
+    text: "We design distinctive visual identities that help businesses stand out and stay memorable to perform.",
   },
   {
     number: "02",
-    text: "Developing modern products that are aesthetic, intuitive, and built to action perform.",
+    text: "A clear design - a must for any brand. Because it matters - 87% of users may leave, lacking usability.",
   },
   {
     number: "03",
-    text: "Creating user-centric Mobile Apps, Websites, Dashboards, and Products that make complex problems simple.",
-  },
-  {
-    number: "04",
-    text: "We combine thoughtful UX/UI design with modern development to turn ideas into scalable digital solutions.",
-  },
+    text: "We create a clear and logical structure that aligns your vision and business purpose with user needs.",
+  }
 ];
 
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
@@ -94,19 +92,25 @@ export default function Story() {
         <div className="flex h-full w-full items-center justify-center px-6 lg:px-[60px]">
           <div className="relative w-full max-w-[1000px]">
             <div className="mb-10">
-              <p className="text-[27px] text-center font-[300] leading-[1.4] tracking-normal text-primary">
-                RELVO is built to create best presence that performs
+              <p className="text-[32px] text-center font-[500] leading-[1.4] tracking-normal text-primary">
+                Relvo is built to create best presence that performs
               </p>
             </div>
-            <div className="flex items-end gap-2">
-              <span key={activeSlide} className="animate-number-fade text-[30px] font-semibold leading-none text-primary">
-                {String(activeSlide + 1).padStart(2, "0")}
-              </span>
-              <span className="text-[20px] font-light leading-none text-primary/30">
-                /{String(slides.length).padStart(2, "0")}
-              </span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-end gap-2">
+                <span key={activeSlide} className="animate-number-fade text-[30px] font-semibold leading-none text-primary">
+                  {String(activeSlide + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[20px] font-light leading-none text-primary/30">
+                  /{String(slides.length).padStart(2, "0")}
+                </span>
+              </div>
+              <Link href="/about" className="group flex h-18 w-18 cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-primary/50 
+                transition-all duration-500 backdrop-blur-[100px] bg-primary/10">
+                  <ArrowUpRight strokeWidth={1} className="h-12 w-12 transition-transform duration-300 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
             </div>
-            <div className="relative h-[500px] w-full overflow-hidden">
+            <div className="relative h-[450px] w-full overflow-hidden">
               {slides.map((slide, index) => {
                 const isActive = index === activeSlide;
                 const isPrevious = index < activeSlide;
@@ -117,7 +121,7 @@ export default function Story() {
                 return (
                   <div key={slide.number}
                     className={[
-                      "absolute inset-0 flex items-center",
+                      "absolute inset-0 flex items-start mt-12",
                       "transition-all duration-700",
                       "ease-[cubic-bezier(0.16,1,0.3,1)]",
                       isActive
@@ -128,7 +132,7 @@ export default function Story() {
                     ].join(" ")}
                   >
                     <div className="w-full">
-                      <h3 className="max-w-[1150px] text-6xl text-start font-[400] leading-[1.5] tracking-tight text-white">
+                      <h3 className="max-w-[1150px] text-[64px] text-start font-[200] leading-[1.5] tracking-normal text-white">
                         {words.map((word, wordIndex) => {
                           const wordProgress = clamp(
                             slideProgress * words.length - wordIndex + 0.35,

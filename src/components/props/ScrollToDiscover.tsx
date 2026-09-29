@@ -15,7 +15,7 @@ export default function ScrollToDiscover() {
                     <path className='stroke-secondary' id="wheel" d="M123.359,79.775l0,72.843" fill="#051313" stroke="#051313" strokeWidth="30px"/>
                 </svg>
             </span>
-            <span className="text-[16px] font-thin tracking-wide">Scroll to Discover</span>
+            <span className="text-[18px] font-normal tracking-wide">Scroll to Discover</span>
         </button>
     );
 }

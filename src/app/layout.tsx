@@ -1,6 +1,6 @@
 import "./globals.scss";
 import type { Metadata } from "next";
-import { mont, denton } from "./fonts/fonts";
+import { urbanist, denton } from "./fonts/fonts";
 import MainLayout from "../components/layout/MainLayout";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 
@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${mont.variable} ${denton.variable}`}>
+    <html lang="en" className={`${urbanist.variable} ${denton.variable}`}>
       <body className="bg-white text-white" cz-shortcut-listen="true">
         <SmoothScroll>
           <MainLayout>{children}</MainLayout>
