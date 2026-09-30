@@ -43,8 +43,6 @@ const cards = [
   },
 ];
 
-const buttonClass =
-  "mt-[30px] flex w-fit items-center gap-5 border border-white/30 px-[20px] py-[12px] text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-black";
 
 export default function HorizontalStory() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -58,38 +56,24 @@ export default function HorizontalStory() {
     const calculateDimensions = () => {
       const viewport = viewportRef.current;
       const track = trackRef.current;
-
       if (!viewport || !track) return;
-
       const horizontalDistance = Math.max(
         0,
         track.scrollWidth - viewport.clientWidth,
       );
-
       const holdDistance = window.innerHeight * HOLD_SCROLL;
-
-      /*
-       * Initial hold + horizontal travel + final hold.
-       */
-      const totalVerticalScroll =
-        horizontalDistance + holdDistance * 2;
-
+      const totalVerticalScroll = horizontalDistance + holdDistance * 2;
       distanceRef.current = horizontalDistance;
-
       setSectionHeight(
         `${window.innerHeight + totalVerticalScroll}px`,
       );
     };
 
     calculateDimensions();
-
     const observer = new ResizeObserver(calculateDimensions);
-
     if (viewportRef.current) observer.observe(viewportRef.current);
     if (trackRef.current) observer.observe(trackRef.current);
-
     window.addEventListener("resize", calculateDimensions);
-
     return () => {
       observer.disconnect();
       window.removeEventListener("resize", calculateDimensions);
@@ -98,61 +82,40 @@ export default function HorizontalStory() {
 
   useEffect(() => {
     let frame = 0;
-
     const updateSlider = () => {
       const section = sectionRef.current;
       const track = trackRef.current;
-
       if (!section || !track) {
         frame = 0;
         return;
       }
-
       const horizontalDistance = distanceRef.current;
-
       if (horizontalDistance <= 0) {
         track.style.transform = "translate3d(0, 0, 0)";
         frame = 0;
         return;
       }
-
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
-
-      /*
-       * Before this section reaches the viewport top,
-       * always keep the first card visible.
-       */
       if (rect.top > 0) {
         track.style.transform = "translate3d(0, 0, 0)";
         frame = 0;
         return;
       }
-
-      const verticalDistance =
-        section.offsetHeight - viewportHeight;
-
+      const verticalDistance = section.offsetHeight - viewportHeight;
       if (verticalDistance <= 0) {
         frame = 0;
         return;
       }
-
       const holdDistance = viewportHeight * HOLD_SCROLL;
-
       const scrolledInsideSection = Math.min(
         verticalDistance,
         Math.max(0, -rect.top),
       );
-
-      /*
-       * Removes the first and last hold areas
-       * from the horizontal movement calculation.
-       */
       const movementDistance = Math.max(
         1,
         verticalDistance - holdDistance * 2,
       );
-
       const progress = Math.min(
         1,
         Math.max(
@@ -161,32 +124,23 @@ export default function HorizontalStory() {
             movementDistance,
         ),
       );
-
       const translateX = horizontalDistance * progress;
-
       track.style.transform = `translate3d(${-translateX}px, 0, 0)`;
-
       frame = 0;
     };
-
     const handleScroll = () => {
       if (!frame) {
         frame = requestAnimationFrame(updateSlider);
       }
     };
-
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
-
     window.addEventListener("resize", handleScroll);
-
     updateSlider();
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
-
       if (frame) cancelAnimationFrame(frame);
     };
   }, []);
@@ -199,7 +153,6 @@ export default function HorizontalStory() {
             our best cases prove it
           </h2>
         </div>
-
         <div className="w-full overflow-visible">
           <div ref={trackRef} className="flex w-max gap-12 pl-[4.5vw] pr-[4.5vw] will-change-transform">
             {cards.map((card) => (
@@ -212,7 +165,8 @@ export default function HorizontalStory() {
                   <h3 className="mt-9 max-w-[500px] text-[58px] font-[700] leading-[0.95] tracking-tight text-white">
                     {card.title}
                   </h3>
-                  <button type="button" className="cursor-pointer {buttonClass}">
+                  <button type="button" className="mt-[30px] flex w-fit items-center gap-5 border border-white/30 px-[20px] py-[12px] text-[11px] font-medium uppercase 
+                  tracking-[0.2em] text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-black">
                     Know more <span className="text-base">→</span>
                   </button>
                   <div className="absolute inset-x-0 -z-1 bottom-0 h-[62%]">

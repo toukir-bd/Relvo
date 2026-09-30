@@ -111,7 +111,7 @@ export default function Story() {
                   /{String(slides.length).padStart(2, "0")}
                 </span>
               </div>
-              <Link href="/about" className="group flex h-18 w-18 cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-primary/50 
+              <Link href="/about" className="group flex h-[72px] w-[72px] cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-primary/50 
                 transition-all duration-500 backdrop-blur-[100px] bg-primary/10">
                   <ArrowUpRight strokeWidth={1} className="h-12 w-12 transition-transform duration-300 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1" />
               </Link>
