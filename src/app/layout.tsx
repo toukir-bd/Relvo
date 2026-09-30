@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { urbanist, denton } from "./fonts/fonts";
 import MainLayout from "../components/layout/MainLayout";
 import SmoothScroll from "@/components/providers/SmoothScroll";
+import CursorTrail from "@/components/props/CursorTrail";
+import DoorLoader from "@/components/props/DoorLoader";
 
 export const metadata: Metadata = {
   title: "Relvo - Refined Experiences, Led by Vision & Originality",
@@ -31,6 +33,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${urbanist.variable} ${denton.variable}`}>
       <body className="bg-white text-white" cz-shortcut-listen="true">
+        <DoorLoader/>
+        <CursorTrail/>
         <SmoothScroll>
           <MainLayout>{children}</MainLayout>
         </SmoothScroll>

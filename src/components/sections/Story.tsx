@@ -111,10 +111,22 @@ export default function Story() {
                   /{String(slides.length).padStart(2, "0")}
                 </span>
               </div>
-              <Link href="/about" className="group flex h-[72px] w-[72px] cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-primary/50 
-                transition-all duration-500 backdrop-blur-[100px] bg-primary/10">
-                  <ArrowUpRight strokeWidth={1} className="h-12 w-12 transition-transform duration-300 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </Link>
+              <div className="flex items-center justify-center gap-2">
+                {slides.map((slide, index) => (
+                  <button
+                    key={slide.number}
+                    type="button"
+                    aria-label={`Go to slide ${slide.number}`}
+                    onClick={() => goToSlide(index)}
+                    className={[
+                      "h-[3px] cursor-pointer transition-all duration-500",
+                      index === activeSlide
+                        ? "w-18 bg-white"
+                        : "w-6 bg-white/20 hover:bg-white/50",
+                    ].join(" ")}
+                  />
+                ))}
+              </div>
             </div>
             <div className="relative h-[450px] w-full overflow-hidden">
               {slides.map((slide, index) => {
@@ -138,7 +150,7 @@ export default function Story() {
                     ].join(" ")}
                   >
                     <div className="w-full">
-                      <h3 className="max-w-[1150px] text-[62px] text-start font-[500] leading-[1.5] tracking-tight text-white">
+                      <h3 className="max-w-[1150px] text-[64px] text-start font-[500] leading-[1.5] -tracking-[1.5px] text-white">
                         {words.map((word, wordIndex) => {
                           const wordProgress = clamp(
                             slideProgress * words.length - wordIndex + 0.35,
@@ -159,22 +171,17 @@ export default function Story() {
                 );
               })}
             </div>
-            <div className="mt-8 flex items-center justify-center gap-2">
-              {slides.map((slide, index) => (
-                <button
-                  key={slide.number}
-                  type="button"
-                  aria-label={`Go to slide ${slide.number}`}
-                  onClick={() => goToSlide(index)}
-                  className={[
-                    "h-[4px] cursor-pointer transition-all duration-500",
-                    index === activeSlide
-                      ? "w-16 bg-white"
-                      : "w-5 bg-white/20 hover:bg-white/50",
-                  ].join(" ")}
-                />
-              ))}
-            </div>
+
+              
+              <Link href="/about">
+                <label className="">Know More About Us</label>
+                <div className="group flex h-[72px] w-[72px] cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-primary/50 
+                  transition-all duration-500 backdrop-blur-[100px] bg-primary/10">
+                  <ArrowUpRight strokeWidth={1} className="h-12 w-12 transition-transform duration-300 group-hover:text-primary group-hover:translate-x-1 
+                  group-hover:-translate-y-1" />
+                </div>
+              </Link>
+
           </div>
         </div>
       </div>

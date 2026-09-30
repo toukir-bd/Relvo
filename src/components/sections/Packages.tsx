@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+// import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const HOLD_SCROLL = .5; // 1 viewport before and after horizontal movement
