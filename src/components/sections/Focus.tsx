@@ -105,6 +105,7 @@ export default function Focus({ lenis }: SplashProps) {
               src="/videos/main-video.mp4"
               muted
               playsInline
+              loop
               preload="auto"
               aria-label="Main video"
             />
