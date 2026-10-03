@@ -15,8 +15,8 @@ export default function Home() {
       <Splash/>
       <Story/>
       <Packages/>
-      <Marquee/>
       <Focus/>
+      <Marquee/>
       <Services/>
       <Manage/>
       <Clients/>
