@@ -8,6 +8,7 @@ import Services from '@/components/sections/Services'
 import Clients from '@/components/sections/Clients'
 import Started from '@/components/sections/Started'
 import Marquee from '@/components/sections/Marquee'
+import Steps from '@/components/sections/Steps'
 
 export default function Home() {
   return (
@@ -15,11 +16,12 @@ export default function Home() {
       <Splash/>
       <Story/>
       <Packages/>
-      <Marquee/>
       <Focus/>
+      <Marquee/>
+      <Steps/>
+      <Clients/>
       <Services/>
       <Manage/>
-      <Clients/>
       <Started/>
     </>
   );

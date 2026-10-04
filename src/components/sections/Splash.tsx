@@ -30,7 +30,7 @@ const roles = [
 
 export default function Splash() {
   return (
-    <section className="relative min-h-screen bg-secondary overflow-hidden transition-all duration-700">
+    <section className="relative min-h-screen overflow-hidden transition-all duration-700">
       <div className="absolute inset-0 z-0 min-h-screen w-full opacity-30">
         <video autoPlay loop muted playsInline preload="metadata" className="h-full w-full object-cover" src="/videos/hero.mp4" />
       </div>

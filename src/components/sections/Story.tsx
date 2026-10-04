@@ -87,7 +87,7 @@ export default function Story() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-secondary" style={{ height: `${(slides.length + 1) * 100}dvh` }} id="discover-us">
+    <section ref={sectionRef} className="relative w-full" style={{ height: `${(slides.length + 1) * 100}dvh` }} id="discover-us">
       <div className="sticky py-35 top-0 h-auto w-full overflow-hidden">
         <div className="flex h-full w-full items-center justify-center px-6 lg:px-[60px]">
           <div className="relative w-full max-w-[1000px]">
