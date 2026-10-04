@@ -94,7 +94,7 @@ export default function Story() {
             {/* <p className="mb-10 text-[32px] text-center font-[300] leading-[1.4] tracking-normal text-primary">
               Relvo is built to create best presence that performs
             </p> */}
-            <p className="relative overflow-hidden mb-10 text-[33px] text-center font-[300] tracking-normal text-primary">
+            <p className="relative uppercase overflow-hidden mb-10 text-[25px] text-center font-[600] tracking-normal text-primary">
               <span className="relative z-10 invisible">
                 Relvo is built to create best presence that performs
               </span>
@@ -150,7 +150,7 @@ export default function Story() {
                     ].join(" ")}
                   >
                     <div className="w-full">
-                      <h3 className="max-w-[1150px] text-[64px] text-start font-[500] leading-[1.5] -tracking-[1.5px] text-white">
+                      <h3 className="max-w-[1150px] text-[64px] text-center font-[400] leading-[1.5] -tracking-[1px] text-white">
                         {words.map((word, wordIndex) => {
                           const wordProgress = clamp(
                             slideProgress * words.length - wordIndex + 0.35,
@@ -171,17 +171,14 @@ export default function Story() {
                 );
               })}
             </div>
-
-              
-              <Link href="/about">
-                <label className="">Know More About Us</label>
-                <div className="group flex h-[72px] w-[72px] cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-primary/50 
-                  transition-all duration-500 backdrop-blur-[100px] bg-primary/10">
-                  <ArrowUpRight strokeWidth={1} className="h-12 w-12 transition-transform duration-300 group-hover:text-primary group-hover:translate-x-1 
-                  group-hover:-translate-y-1" />
-                </div>
+            <div className="flex items-center justify-center">
+              <Link href="/about" className="btn-relvo">
+                Know More About Us
+                <span className="iconArea">
+                  <ArrowUpRight strokeWidth={1} className="btnIcon"/>
+                </span>
               </Link>
-
+            </div>
           </div>
         </div>
       </div>

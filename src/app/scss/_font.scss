@@ -31,3 +31,8 @@ button, span, label{
 .head, title, .card-title, .card-head{
   font-family: var(--font-heading), serif;
 }
+
+a{
+  font-family: var(--font-primary), serif;
+  @apply inline-flex;
+}
