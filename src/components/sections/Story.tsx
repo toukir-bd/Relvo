@@ -102,7 +102,7 @@ export default function Story() {
                 Relvo is built to create best presence that performs
               </span>
             </p>
-            <div className="flex items-center justify-between">
+            <div className="flex items-end justify-center gap-3">
               <div className="flex items-end gap-2">
                 <span key={activeSlide} className="animate-number-fade text-[30px] font-semibold leading-none text-primary">
                   {String(activeSlide + 1).padStart(2, "0")}
