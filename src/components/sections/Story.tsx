@@ -94,7 +94,7 @@ export default function Story() {
             {/* <p className="mb-10 text-[32px] text-center font-[300] leading-[1.4] tracking-normal text-primary">
               Relvo is built to create best presence that performs
             </p> */}
-            <p className="relative uppercase overflow-hidden mb-10 text-[25px] text-center font-[600] tracking-normal text-primary">
+            <p className="mt-5 relative uppercase overflow-hidden mb-10 text-[25px] text-center font-[600] tracking-normal text-primary">
               <span className="relative z-10 invisible">
                 Relvo is built to create best presence that performs
               </span>
@@ -102,33 +102,15 @@ export default function Story() {
                 Relvo is built to create best presence that performs
               </span>
             </p>
-            <div className="flex items-end justify-center gap-3">
-              <div className="flex items-end gap-2">
-                <span key={activeSlide} className="animate-number-fade text-[30px] font-semibold leading-none text-primary">
-                  {String(activeSlide + 1).padStart(2, "0")}
-                </span>
-                <span className="text-[20px] font-light leading-none text-primary/30">
-                  /{String(slides.length).padStart(2, "0")}
-                </span>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                {slides.map((slide, index) => (
-                  <button
-                    key={slide.number}
-                    type="button"
-                    aria-label={`Go to slide ${slide.number}`}
-                    onClick={() => goToSlide(index)}
-                    className={[
-                      "h-[3px] cursor-pointer transition-all duration-500",
-                      index === activeSlide
-                        ? "w-18 bg-white"
-                        : "w-6 bg-white/20 hover:bg-white/50",
-                    ].join(" ")}
-                  />
-                ))}
-              </div>
+            <div className="mb-5 flex items-end justify-center gap-2">
+              <span key={activeSlide} className="animate-number-fade text-[30px] font-semibold leading-none text-primary">
+                {String(activeSlide + 1).padStart(2, "0")}
+              </span>
+              <span className="text-[20px] font-light leading-none text-primary/30">
+                /{String(slides.length).padStart(2, "0")}
+              </span>
             </div>
-            <div className="relative h-[450px] w-full overflow-hidden">
+            <div className="relative h-[320px] w-full overflow-hidden">
               {slides.map((slide, index) => {
                 const isActive = index === activeSlide;
                 const isPrevious = index < activeSlide;
@@ -139,7 +121,7 @@ export default function Story() {
                 return (
                   <div key={slide.number}
                     className={[
-                      "absolute inset-0 flex items-start mt-12",
+                      "absolute inset-0 flex items-start",
                       "transition-all duration-700",
                       "ease-[cubic-bezier(0.16,1,0.3,1)]",
                       isActive
@@ -167,15 +149,32 @@ export default function Story() {
                         })}
                       </h3>
                     </div>
+
                   </div>
                 );
               })}
+            </div>
+            <div className="mb-20 flex items-center justify-center gap-2">
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.number}
+                  type="button"
+                  aria-label={`Go to slide ${slide.number}`}
+                  onClick={() => goToSlide(index)}
+                  className={[
+                    "h-[3px] cursor-pointer transition-all duration-500",
+                    index === activeSlide
+                      ? "w-18 bg-white"
+                      : "w-6 bg-white/20 hover:bg-white/50",
+                  ].join(" ")}
+                />
+              ))}
             </div>
             <div className="flex items-center justify-center">
               <Link href="/about" className="btn-relvo">
                 Know More About Us
                 <span className="iconArea">
-                  <ArrowUpRight strokeWidth={1} className="btnIcon"/>
+                  <ArrowUpRight strokeWidth={1} className="btnIcon" />
                 </span>
               </Link>
             </div>
