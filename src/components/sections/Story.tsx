@@ -19,32 +19,27 @@ const slides = [
   }
 ];
 
+
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 
 export default function Story() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
-
   const goToSlide = (index: number) => {
     const section = sectionRef.current;
-
     if (!section) return;
-
     const totalScroll = section.offsetHeight - window.innerHeight;
     const progress = index / slides.length;
-
     const targetY =
       section.getBoundingClientRect().top +
       window.scrollY +
       totalScroll * progress;
-
-    window.scrollTo({
-      top: targetY,
-      behavior: "smooth",
-    });
-  };
-
+      window.scrollTo({
+        top: targetY,
+        behavior: "smooth",
+      });
+    };
   useEffect(() => {
     let frame = 0;
     const updateStory = () => {
