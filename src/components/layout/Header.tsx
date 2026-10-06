@@ -29,8 +29,8 @@ export default function Header({
           <Image
             src="/img/elements/logo.webp"
             alt="Relvo Logo"
-            width={189}
-            height={52}
+            width={160}
+            height={45}
             className={`transition-all duration-500`}
             priority
           />
