@@ -3,24 +3,20 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
-import Clients from "@/components/sections/Clients";
 import RelvoVisual from "@/components/props/RelvoVisual";
 
 const slides = [
   {
     number: "01",
     text: "We design distinctive visual identities that help businesses stand out and stay memorable to perform.",
-    accent: "#BBFF00",
   },
   {
     number: "02",
     text: "A clear design is a must for every brand. Because it matters, users may leave when usability is missing.",
-    accent: "#78D9FF",
   },
   {
     number: "03",
     text: "We create a clear and logical structure that aligns your vision and business purpose with user needs.",
-    accent: "#D6A4FF",
   },
 ];
 
@@ -100,9 +96,6 @@ export default function Story() {
     };
   }, []);
 
-  const currentAccent = slides[activeSlide].accent;
-  const visualFloat = Math.sin(scrollProgress * Math.PI * slides.length) * -12;
-
   return (
     <section
       ref={sectionRef}
@@ -112,170 +105,123 @@ export default function Story() {
         height: `${(slides.length + 1) * 100}dvh`,
       }}
     >
-      <div className="sticky top-0 flex min-h-screen w-full items-center overflow-hidden py-24 lg:py-28">
-        <div className="w-full px-6 lg:px-[60px]">
-          <div className="relative mx-auto w-full max-w-[1600px]">
-            <div className="grid items-center gap-10 lg:grid-cols-3 lg:gap-16">
-              {/* Left visual */}
-              <div
-                className="relative transition-transform duration-500 ease-out"
-                style={{
-                  transform: `translateY(${visualFloat}px)`,
-                }}
-              >
-                <div
-                  aria-hidden="true"
-                  className="absolute left-1/2 top-1/2 h-[330px] w-[330px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[110px] transition-colors duration-700"
-                  style={{
-                    backgroundColor: `${currentAccent}22`,
-                  }}
-                />
+      <div className="sticky top-0 flex min-h-screen w-full items-center overflow-hidden">
+        {/* Full Story section box */}
+        <div className="relative mx-auto flex min-h-screen w-full flex-col overflow-hidden rounded-[30px] bg-secondary/90">
+          {/* Background grid for whole Story */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px),
+                linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)
+              `,
+              backgroundSize: "42px 42px",
+            }}
+          />
+          {/* Background glow for whole Story */}
+          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[850px] -translate-x-1/2 rounded-full bg-primary/15 blur-[140px]"/>
+          <RelvoVisual activeSlide={activeSlide} />
+          <div className="relative min-h-[680px] overflow-hidden rounded-[28px]">
+            {/* Full section graphical background */}
 
-                <RelvoVisual activeSlide={activeSlide} />
+            {/* Story content above the graphical card */}
+            <div className="relative z-20 flex min-h-[680px] flex-col justify-between px-6 py-10 sm:px-10 lg:px-16 lg:py-14">
+              {/* Top heading line */}
+              <p className="relative overflow-hidden text-center text-[13px] font-medium uppercase tracking-[0.28em] text-primary sm:text-[16px] lg:text-[20px]">
+                <span className="invisible">
+                  Relvo is built to create a presence that performs
+                </span>
+
+                <span
+                  aria-hidden="true"
+                  className="hero-text-neon pointer-events-none absolute inset-0"
+                >
+                  Relvo is built to create a presence that performs
+                </span>
+              </p>
+
+              {/* Full-width text slider */}
+              <div className="relative mx-auto flex min-h-[310px] w-full max-w-[1450px] items-center overflow-hidden">
+                {slides.map((slide, index) => {
+                  const isActive = index === activeSlide;
+                  const isPrevious = index < activeSlide;
+
+                  const slideProgress = clamp(
+                    scrollProgress * slides.length - index,
+                  );
+
+                  const words = slide.text.split(" ");
+
+                  return (
+                    <div
+                      key={slide.number}
+                      className={[
+                        "absolute inset-0 flex items-center justify-center",
+                        "transition-all duration-700",
+                        "ease-[cubic-bezier(0.16,1,0.3,1)]",
+                        isActive
+                          ? "translate-y-0 opacity-100"
+                          : isPrevious
+                            ? "-translate-y-[100px] opacity-0"
+                            : "translate-y-[100px] opacity-0",
+                      ].join(" ")}
+                    >
+                      <h2 className="w-full text-center text-[42px] font-light leading-[1.12] tracking-[-0.055em] text-white sm:text-[60px] lg:text-[82px] xl:text-[98px]">
+                        {words.map((word, wordIndex) => {
+                          const wordProgress = clamp(
+                            slideProgress * words.length - wordIndex + 0.55,
+                          );
+
+                          return (
+                            <span
+                              key={`${slide.number}-${wordIndex}`}
+                              className="inline-block transition-[opacity,transform] duration-100"
+                              style={{
+                                opacity: 0.15 + wordProgress * 0.85,
+                                transform: `translateY(${(1 - wordProgress) * 16}px)`,
+                              }}
+                            >
+                              {word}&nbsp;
+                            </span>
+                          );
+                        })}
+                      </h2>
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* Right content */}
-              <div className="relative lg:col-span-2">
-                <p className="relative mb-10 overflow-hidden text-center text-[13px] font-medium uppercase tracking-[0.28em] text-primary sm:text-[16px] lg:text-[20px]">
-                  <span className="invisible">
-                    Relvo is built to create a presence that performs
-                  </span>
-
-                  <span
-                    aria-hidden="true"
-                    className="hero-text-neon pointer-events-none absolute inset-0"
-                  >
-                    Relvo is built to create a presence that performs
-                  </span>
-                </p>
-
-                {/* Slide number */}
+              {/* Number and navigation */}
+              <div>
                 <div className="mb-5 flex items-end justify-center gap-2">
                   <span
                     key={activeSlide}
-                    className="animate-number-fade text-[34px] font-black leading-none sm:text-[42px]"
-                    style={{ color: currentAccent }}
+                    className="animate-number-fade text-[34px] font-black leading-none text-primary"
                   >
                     {String(activeSlide + 1).padStart(2, "0")}
                   </span>
 
-                  <span className="pb-1 text-[15px] font-medium leading-none text-white/25 sm:text-[17px]">
+                  <span className="pb-1 text-[15px] text-white/30">
                     /{String(slides.length).padStart(2, "0")}
                   </span>
                 </div>
-
-                {/* Text slides */}
-                <div className="relative h-[285px] overflow-hidden sm:h-[260px] lg:h-[320px]">
-                  {slides.map((slide, slideIndex) => {
-                    const isActive = slideIndex === activeSlide;
-                    const isPrevious = slideIndex < activeSlide;
-
-                    const currentSlideProgress = clamp(
-                      scrollProgress * slides.length - slideIndex,
-                    );
-
-                    const words = slide.text.split(" ");
-
-                    return (
-                      <div
-                        key={slide.number}
-                        className={[
-                          "absolute inset-0 flex items-start justify-center",
-                          "transition-all duration-700",
-                          "ease-[cubic-bezier(0.16,1,0.3,1)]",
-                          isActive
-                            ? "translate-y-0 opacity-100"
-                            : isPrevious
-                              ? "-translate-y-[120px] opacity-0"
-                              : "translate-y-[120px] opacity-0",
-                        ].join(" ")}
-                      >
-                        <h2 className="max-w-[1050px] text-center text-[38px] font-light leading-[1.16] tracking-[-0.04em] text-white sm:text-[52px] lg:text-[66px]">
-                          {words.map((word, wordIndex) => {
-                            const wordProgress = clamp(
-                              currentSlideProgress * words.length -
-                                wordIndex +
-                                0.55,
-                            );
-
-                            const opacity = 0.14 + wordProgress * 0.86;
-                            const translateY = (1 - wordProgress) * 14;
-
-                            return (
-                              <span
-                                key={`${slide.number}-${wordIndex}`}
-                                className="inline-block transition-[color,transform] duration-100 ease-out"
-                                style={{
-                                  color: `rgba(255, 255, 255, ${opacity})`,
-                                  transform: `translateY(${translateY}px)`,
-                                }}
-                              >
-                                {word}&nbsp;
-                              </span>
-                            );
-                          })}
-                        </h2>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Progress navigation */}
-                <div className="mb-12 flex items-center justify-center gap-2">
-                  {slides.map((slide, index) => {
-                    const isActive = index === activeSlide;
-                    const progress = clamp(
-                      scrollProgress * slides.length - index,
-                    );
-
-                    return (
-                      <button
-                        key={slide.number}
-                        type="button"
-                        aria-label={`Go to slide ${slide.number}`}
-                        onClick={() => goToSlide(index)}
-                        className="group relative h-[4px] w-10 cursor-pointer overflow-hidden rounded-full bg-white/15 sm:w-16"
-                      >
-                        <span
-                          className="absolute inset-y-0 left-0 rounded-full transition-[width,background-color] duration-150"
-                          style={{
-                            width: isActive ? `${Math.max(10, progress * 100)}%` : "0%",
-                            backgroundColor: currentAccent,
-                          }}
-                        />
-                      </button>
-                    );
-                  })}
+                <div className="flex justify-center gap-2">
+                  {slides.map((slide, index) => (
+                    <button
+                      key={slide.number}
+                      type="button"
+                      onClick={() => goToSlide(index)}
+                      aria-label={`Go to slide ${slide.number}`}
+                      className={[
+                        "h-[3px] cursor-pointer rounded-full transition-all duration-500",
+                        index === activeSlide
+                          ? "w-16 bg-primary"
+                          : "w-5 bg-white/20 hover:bg-primary/60",
+                      ].join(" ")}
+                    />
+                  ))}
                 </div>
               </div>
-            </div>
-
-            {/* Clients */}
-            <div className="mt-6">
-              <p className="relative mb-5 overflow-hidden bg-black/20 py-3 text-center text-[12px] font-medium uppercase tracking-[0.25em] text-primary sm:text-[15px] lg:text-[18px]">
-                <span className="invisible">Top partners that we worked with</span>
-
-                <span
-                  aria-hidden="true"
-                  className="hero-text-neon pointer-events-none absolute inset-0 flex items-center justify-center"
-                >
-                  Top partners that we worked with
-                </span>
-              </p>
-
-              <Clients />
-            </div>
-
-            <div className="mt-10 flex items-center justify-center">
-              <Link href="/about" className="btn-relvo">
-                <span className="btnText">
-                  Meet <b>Relvo</b>
-                </span>
-
-                <span className="iconArea">
-                  <ArrowUpRight strokeWidth={1.4} className="btnIcon" />
-                </span>
-              </Link>
             </div>
           </div>
         </div>
