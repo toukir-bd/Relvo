@@ -1,7 +1,5 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
-import type { CSSProperties } from "react";
 
 const clients = [
   "indya.ai",
@@ -12,12 +10,7 @@ const clients = [
   "DIAMONDRENSU",
 ];
 
-type MarqueeStyle = CSSProperties & {
-  "--marquee-distance": string;
-  "--marquee-duration": string;
-};
-
-export default function ClientMarquee() {
+export default function Clients() {
   const viewportRef = useRef<HTMLDivElement>(null);
   const groupRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState<{
@@ -48,25 +41,10 @@ export default function ClientMarquee() {
     return () => observer.disconnect();
   }, []);
 
-  const style: MarqueeStyle | undefined = dimensions
-    ? {
-        "--marquee-distance": `${dimensions.groupWidth}px`,
-        "--marquee-duration": `${dimensions.groupWidth / 45}s`,
-      }
-    : undefined;
-
   return (
-    <section
-      aria-label="Selected clients"
-      className="overflow-hidden py-10"
-    >
+    <section aria-label="Selected clients" className="overflow-hidden py-10 bg-black/25 rounded-4xl border border-primary/15">
       <div ref={viewportRef} className="overflow-hidden">
-        <div
-          className={`flex w-max ${
-            dimensions ? "marquee-track" : ""
-          }`}
-          style={style}
-        >
+        <div className={`flex w-max ${ dimensions ? "marquee-track" : ""}`}>
           {Array.from(
             { length: dimensions?.copies ?? 1 },
             (_, copyIndex) => (
@@ -89,25 +67,6 @@ export default function ClientMarquee() {
           )}
         </div>
       </div>
-
-      <style jsx>{`
-        .marquee-track {
-          animation: marquee var(--marquee-duration) linear infinite;
-          will-change: transform;
-        }
-
-        @keyframes marquee {
-          to {
-            transform: translate3d(calc(-1 * var(--marquee-distance)), 0, 0);
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .marquee-track {
-            animation: none;
-          }
-        }
-      `}</style>
     </section>
   );
 }

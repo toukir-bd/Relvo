@@ -20,3 +20,21 @@
   }
 }
 
+
+
+// .marquee-track {
+//   animation: marquee var(--marquee-duration) linear infinite;
+//   will-change: transform;
+// }
+
+// @keyframes marquee {
+//   to {
+//     transform: translate3d(calc(-1 * var(--marquee-distance)), 0, 0);
+//   }
+// }
+
+// @media (prefers-reduced-motion: reduce) {
+//   .marquee-track {
+//     animation: none;
+//   }
+// }

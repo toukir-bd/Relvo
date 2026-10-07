@@ -1,0 +1,54 @@
+@keyframes relvo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes relvo-text {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+    letter-spacing: 0.6em;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    letter-spacing: 0.35em;
+  }
+}
+
+@keyframes relvo-label {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes relvo-word {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@theme {
+  --animate-relvo-spin: relvo-spin 18s linear infinite;
+  --animate-relvo-text: relvo-text 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-relvo-label: relvo-label 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-relvo-word: relvo-word 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
