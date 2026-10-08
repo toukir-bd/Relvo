@@ -1,32 +1,27 @@
 /* Position based on your current Story component */
 
 .relvo-card {
-  @apply pointer-events-none absolute left-1/2 top-[72px] z-10
-    h-[310px] w-[min(640px,calc(100%-40px))]
-    -translate-x-1/2 overflow-hidden rounded-[22px]
-    border border-primary/20 bg-secondary/70;
-
+  @apply pointer-events-none absolute left-1/2 top-0 z-10 h-[300px] w-[min(600px,calc(100%-40px))] -translate-x-1/2 overflow-hidden rounded-t-[22px] 
+  border border-primary/20 bg-secondary/70;
   /* Full card fade: top bright → bottom subtle */
   mask-image: linear-gradient(
     to bottom,
     rgb(0 0 0 / 100%) 0%,
     rgb(0 0 0 / 90%) 34%,
     rgb(0 0 0 / 48%) 68%,
-    rgb(0 0 0 / 8%) 100%
+    rgb(0 0 0 / 0%) 100%
   );
-
   -webkit-mask-image: linear-gradient(
     to bottom,
     rgb(0 0 0 / 100%) 0%,
     rgb(0 0 0 / 90%) 34%,
     rgb(0 0 0 / 48%) 68%,
-    rgb(0 0 0 / 8%) 100%
+    rgb(0 0 0 / 0%) 100%
   );
 }
 
 .relvo-card__scene {
-  @apply absolute inset-0 translate-x-16 opacity-0
-    transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)];
+  @apply absolute inset-0 translate-x-16 opacity-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)];
 }
 
 .relvo-card__scene.is-active {
@@ -38,7 +33,7 @@
 }
 
 .relvo-card__inner {
-  @apply absolute inset-0 overflow-hidden p-5 sm:p-6;
+  @apply absolute inset-0 overflow-hidden p-10 sm:p-6;
 }
 
 .relvo-card__top {
@@ -50,28 +45,24 @@
 }
 
 /* Slide 01 — Visual system */
-
 .relvo-card__identity {
   @apply relative mx-auto mt-5 flex h-[155px] w-[155px] items-center justify-center;
 }
 
 .relvo-card__identity-layer-one {
-  @apply absolute h-full w-full rotate-12 rounded-[38px]
-    border border-primary/20 bg-primary/10;
+  @apply absolute h-full w-full rotate-12 rounded-[38px] border border-primary/20 bg-primary/10;
 }
 
 .relvo-card__identity-layer-two {
-  @apply absolute h-[128px] w-[128px] -rotate-12 rounded-[30px]
-    border border-white/15 bg-white/5;
+  @apply absolute h-[128px] w-[128px] -rotate-12 rounded-[30px] border border-white/15 bg-white/5;
 }
 
 .relvo-card__identity-logo {
-  @apply absolute flex h-[96px] w-[96px] rotate-45 items-center justify-center
-    rounded-[22px] bg-primary shadow-[0_0_45px_rgba(187,255,0,.4)];
+  @apply absolute flex h-[96px] w-[96px] rotate-45 items-center justify-center rounded-[22px] bg-primary shadow-[0_0_45px_rgba(187,255,0,.4)];
 }
 
 .relvo-card__logo-image {
-  @apply h-[62px] w-[62px] -rotate-45 object-contain;
+  @apply h-[52px] w-[52px] -rotate-45 object-contain;
 }
 
 .relvo-card__swatches {
@@ -83,10 +74,8 @@
 }
 
 /* Slide 02 — UI / UX */
-
 .relvo-card__browser {
-  @apply relative mt-5 rounded-[16px] border border-white/10
-    bg-black/20 p-4 shadow-[0_20px_50px_rgba(0,0,0,.3)];
+  @apply relative mt-5 rounded-[16px] border border-white/10 bg-black/20 p-4 shadow-[0_20px_50px_rgba(0,0,0,.3)];
 }
 
 .relvo-card__browser-dots {
@@ -112,31 +101,21 @@
     @apply h-[72px] rounded-xl;
   }
 }
-
 .relvo-card__cursor {
-  @apply absolute bottom-6 right-6 flex h-14 w-14 items-center justify-center
-    rounded-full border border-primary/50 bg-primary/15
-    shadow-[0_0_35px_rgba(187,255,0,.22)];
+  @apply absolute bottom-6 right-6 flex h-14 w-14 items-center justify-center rounded-full border border-primary/50 bg-primary/15 shadow-[0_0_35px_rgba(187,255,0,.22)];
 }
 
 /* Slide 03 — Product system */
-
 .relvo-card__nodes {
   @apply relative mx-auto mt-6 h-[205px] w-full max-w-[430px];
 }
-
 .relvo-card__system-svg {
   @apply pointer-events-none absolute inset-0 h-full w-full text-primary;
 }
-
 .relvo-card__node {
-  @apply absolute z-10 flex h-12 w-12 items-center justify-center rounded-full
-    border border-primary/25 bg-primary/10 text-primary;
+  @apply absolute z-10 flex h-12 w-12 items-center justify-center rounded-full border border-primary/25 bg-primary/10 text-primary;
 }
-
 .relvo-card__node-core {
-  @apply absolute left-1/2 top-1/2 z-20 flex h-20 w-20
-    -translate-x-1/2 -translate-y-1/2 items-center justify-center
-    rounded-[22px] border border-primary/50 bg-primary/20 text-primary
-    shadow-[0_0_45px_rgba(187,255,0,.28)];
+  @apply absolute left-1/2 top-1/2 z-20 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[22px] border border-primary/50 bg-primary/20 
+    text-primary shadow-[0_0_45px_rgba(187,255,0,.28)];
 }
