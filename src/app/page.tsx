@@ -8,19 +8,19 @@ import Services from '@/components/sections/Services'
 import Clients from '@/components/sections/Clients'
 import Started from '@/components/sections/Started'
 import Marquee from '@/components/sections/Marquee'
-import Steps from '@/components/sections/Steps'
+import Cases from '@/components/sections/Cases'
 
 export default function Home() {
   return (
     <>
       <Splash/>
       <Story/>
-      <Packages/>
+      <Cases/>
       <Focus/>
+      <Packages/>
       <Marquee/>
-      <Steps/>
-      <Clients/>
       <Services/>
+      <Clients/>
       <Manage/>
       <Started/>
     </>

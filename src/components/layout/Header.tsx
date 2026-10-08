@@ -24,7 +24,7 @@ export default function Header({
             : "h-[120px] transparent"
         }`}
     >
-      <div className="mx-auto flex h-full max-w-full items-center justify-between px-8 lg:px-16">
+      <div className="mx-auto flex h-full max-w-full items-center justify-between px-8 lg:px-14">
         <Link href="/" className="flex items-center">
           <Image
             src="/img/elements/logo.webp"
@@ -35,10 +35,9 @@ export default function Header({
             priority
           />
         </Link>
-        <button
-          onClick={isMenuOpen ? onMenuClose : onMenuOpen}
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className={`group flex cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-primary/50 transition-all duration-500
+        <button onClick={isMenuOpen ? onMenuClose : onMenuOpen} aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className={`group flex cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-primary/50 transition-all 
+            duration-500
             ${isScrolled
               ? "h-[50px] w-[50px]"
               : "h-[56px] w-[56px]"

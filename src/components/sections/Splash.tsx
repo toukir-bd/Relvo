@@ -42,9 +42,6 @@ export default function Splash() {
           <span className="text-primary pl-2">V</span>ision &  
           <span className="text-primary pl-2">O</span>riginality 
         </h4>
-        {/* <h1 className="mb-10 text-center text-[107px] font-[800] leading-[105px] -tracking-[1px] text-white">
-          crafting for the shape<br/> of your vision
-        </h1> */}
         <h1 className="relative mb-5 pb-3 overflow-hidden text-center text-[107px] font-[800] leading-[105px] -tracking-[1px] text-white">
           <div className="relative z-10 invisible">
             crafting for the shape<br/>of your vision
@@ -78,19 +75,21 @@ export default function Splash() {
       <div className="mb-10 px-10 absolute inset-0 z-10 flex items-end justify-between w-full">
         <ScrollToDiscover/>
         <div className="flex flex-col justify-end items-end gap-2 fixed bottom-10 right-10">
-          <Link href="/" type="button" 
-              className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary bg-secondary/50 p-1.5 ps-7 rounded-full">
-              <span className="text-[18px] font-normal tracking-wide">Book a Meeting</span>
-              <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 group-hover:bg-black/35 group-hover:text-primary">
-                <CalendarDays className="h-5 w-5 text-primary"/>
-              </span>
+          <Link href="/" type="button" className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary 
+            bg-secondary/50 p-1.5 ps-7 rounded-full">
+            <span className="text-[18px] font-normal tracking-wide">Book a Meeting</span>
+            <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 
+              group-hover:bg-black/35 group-hover:text-primary">
+              <CalendarDays className="h-5 w-5 text-primary"/>
+            </span>
           </Link>
-          <Link href="/" type="button" 
-              className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary bg-secondary/50 p-1.5 ps-7 rounded-full">
-              <span className="text-[18px] font-normal tracking-wide">Talk to an Expert</span>
-              <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 group-hover:bg-black/35 group-hover:text-primary">
-                  <FaWhatsapp className="h-6.5 w-6.5 text-[#27D367]"/>
-              </span>
+          <Link href="/" type="button" className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary 
+            bg-secondary/50 p-1.5 ps-7 rounded-full">
+            <span className="text-[18px] font-normal tracking-wide">Talk to an Expert</span>
+            <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 
+              group-hover:bg-black/35 group-hover:text-primary">
+              <FaWhatsapp className="h-6.5 w-6.5 text-[#27D367]"/>
+            </span>
           </Link>
         </div>
       </div>

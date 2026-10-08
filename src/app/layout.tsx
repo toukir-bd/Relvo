@@ -7,8 +7,8 @@ import CursorTrail from "@/components/props/CursorTrail";
 import DoorLoader from "@/components/props/DoorLoader";
 
 export const metadata: Metadata = {
-  title: "Relvo - Refined Experiences, Led by Vision & Originality",
-  description: "Relvo - Refined Experiences, Led by Vision & Originality",
+  title: "Relvo - Design. Development. Digital Experiences.",
+  description: "RELVO is a design-led digital agency creating websites, mobile apps, digital products, and AI-powered solutions through thoughtful design and modern technology.",
   icons: {
     icon: [
       {
@@ -22,6 +22,57 @@ export const metadata: Metadata = {
         type: "image/webp",
       },
     ],
+  },
+  keywords: [
+    "RELVO",
+    "Relvo Agency",
+    "Web Design Agency",
+    "Web Development Agency",
+    "UI UX Design",
+    "Website Design",
+    "Website Development",
+    "Custom Website Development",
+    "Mobile App Development",
+    "Digital Product Design",
+    "SaaS Development",
+    "E-commerce Development",
+    "Custom Web Application",
+    "AI Solutions",
+    "Custom Software Development",
+  ],
+  authors: [
+    {
+      name: "RELVO",
+    },
+  ],
+  creator: "RELVO",
+  publisher: "RELVO",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    type: "website",
+    title: "RELVO — Design. Development. Digital Experiences.",
+    description:
+      "A design-led digital agency creating websites, apps, digital products, and AI-powered solutions.",
+    siteName: "RELVO",
+    url: "https://yourdomain.com",
+    images: [
+      {
+        url: "https://yourdomain.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "RELVO — Design. Development. Digital Experiences.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "RELVO — Design. Development. Digital Experiences.",
+    description:
+      "A design-led digital agency creating websites, apps, digital products, and AI-powered solutions.",
+    images: ["https://yourdomain.com/og-image.jpg"],
   },
 };
 
