@@ -112,7 +112,7 @@ export default function ZoomablePreview({
         onClick={() => setIsOpen(true)}
         aria-label={`View ${title} fullscreen`}
         className={`flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full bg-secondary/40 text-white 
-        backdrop-blur-sm transition hover:bg-secondary hover:text-primary sm:h-16 sm:w-16 ${triggerClassName}`}
+        backdrop-blur-sm transition hover:bg-secondary/60 hover:text-primary sm:h-16 sm:w-16 ${triggerClassName}`}
       >
         <Expand className="h-3 w-3 sm:h-4 sm:w-4" />
       </button>
