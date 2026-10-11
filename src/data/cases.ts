@@ -11,12 +11,10 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "discovery-research",
     title: "Discovery & Research",
-    description:
-      "We learn about your goals, audience, and the problem you need to solve.",
+    description: "We learn about your goals, audience, and the problem you need to solve.",
     badge: "RESEARCH",
     tags: ["Strategy", "+02"],
-    image:
-      "https://cdn.dribbble.com/userupload/18432047/file/61209f0165bce5592e77557279b1fa71.png",
+    image: "https://cdn.dribbble.com/userupload/18432047/file/61209f0165bce5592e77557279b1fa71.png",
   },
   {
     slug: "wireframing-prototyping",

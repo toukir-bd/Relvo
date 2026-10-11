@@ -2,264 +2,238 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { caseStudies } from "@/data/cases";
+import ZoomablePreview from "@/components/props/ZoomablePreview";
 
 const featuredCases = caseStudies.slice(-4);
-const clamp = (value: number) => Math.max(0, Math.min(1, value));
+
+const previewSlides = [
+  ...featuredCases.map((item) => ({
+    type: "case" as const,
+    item,
+  })),
+  { type: "cta" as const },
+];
+
+const MOVE_VH = 0.85;
+const HOLD_VH = 0.35;
+const STEP_VH = MOVE_VH + HOLD_VH;
+const END_HOLD_VH = 0.8;
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(Math.max(value, min), max);
 
 export default function Cases() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const transitionScrollVh = Math.max(0, previewSlides.length - 1) * STEP_VH;
+  const totalScrollVh = transitionScrollVh + END_HOLD_VH;
 
   useEffect(() => {
-    if (featuredCases.length === 0) return;
-
     let frameId = 0;
-
-    const updateProgress = () => {
-      const section = sectionRef.current;
-
-      if (!section) {
+    const updateScrollProgress = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(() => {
         frameId = 0;
-        return;
-      }
-
-      const scrollDistance = section.offsetHeight - window.innerHeight;
-
-      if (scrollDistance <= 0) {
-        frameId = 0;
-        return;
-      }
-
-      setScrollProgress(
-        clamp(-section.getBoundingClientRect().top / scrollDistance),
-      );
-
-      frameId = 0;
+        const section = sectionRef.current;
+        if (!section) return;
+        const maxScroll = Math.max(
+          0,
+          section.offsetHeight - window.innerHeight
+        );
+        const travelled = clamp(
+          -section.getBoundingClientRect().top,
+          0,
+          maxScroll
+        );
+        // Map the section's full scroll distance onto the animation timeline.
+        const progress = maxScroll > 0 ? travelled / maxScroll : 0;
+        setScrollProgress(progress);
+      });
     };
-
-    const handleScroll = () => {
-      if (!frameId) {
-        frameId = window.requestAnimationFrame(updateProgress);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-    frameId = window.requestAnimationFrame(updateProgress);
-
+    updateScrollProgress();
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    window.addEventListener("resize", updateScrollProgress);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-
+      window.removeEventListener("scroll", updateScrollProgress);
+      window.removeEventListener("resize", updateScrollProgress);
       if (frameId) window.cancelAnimationFrame(frameId);
     };
-  }, []);
+  }, [totalScrollVh]);
 
   if (featuredCases.length === 0) return null;
-
-  // One case advances per viewport of scroll; the final case holds at the end.
-  const slidePosition = Math.min(
-    scrollProgress * featuredCases.length,
-    featuredCases.length - 1,
+  const timelineProgress = scrollProgress * totalScrollVh;
+  const completedSteps = Math.floor(timelineProgress / STEP_VH);
+  const phaseInStep = timelineProgress - completedSteps * STEP_VH;
+  const slidePosition = clamp(
+    completedSteps + clamp((phaseInStep - HOLD_VH) / MOVE_VH, 0, 1),
+    0,
+    previewSlides.length - 1
   );
-  const activeIndex = Math.min(
-    Math.round(slidePosition),
-    featuredCases.length - 1,
+  const displayedIndex = clamp(
+    Math.floor(slidePosition + 0.5),
+    0,
+    previewSlides.length - 1
   );
-
   return (
     <section
       ref={sectionRef}
-      aria-label="Featured case studies"
-      className="relative w-full"
-      style={{ height: `${(featuredCases.length + 1) * 100}dvh` }}
+      aria-label="Selected projects"
+      className="relative bg-secondary"
+      style={{
+        height: `calc(100svh + ${totalScrollVh * 100}svh)`,
+      }}
     >
-      <div className="sticky top-0 h-dvh overflow-hidden bg-[#06140F] text-white">
-        {/* Subtle brand grid and glow */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgb(187 255 0 / 5%) 1px, transparent 1px),
-              linear-gradient(90deg, rgb(187 255 0 / 5%) 1px, transparent 1px)
-            `,
-            backgroundSize: "48px 48px",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -left-40 top-1/3 h-[420px] w-[420px] rounded-full bg-primary/10 blur-[140px]"
-        />
-
-        <div className="relative mx-auto flex h-full max-w-[1800px] flex-col px-4 pb-4 pt-5 sm:px-6 sm:pb-6 sm:pt-7 lg:px-10 lg:pb-8 lg:pt-9">
-          {/* Section header */}
-          <header className="mb-4 flex shrink-0 items-end justify-between gap-4 sm:mb-6 lg:mb-8">
-            <div>
-              <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.25em] text-primary sm:text-xs">
-                Relvo / Selected work
-              </p>
-              <h2 className="text-3xl font-medium leading-none tracking-[-0.05em] sm:text-4xl lg:text-5xl">
-                Best projects<span className="text-primary">.</span>
+      <div className="sticky top-30 min-h-screen">
+        <div className="cases-inner mx-auto max-w-[1600px] w-full h-full flex flex-col gap-5 items-center justify-center">
+          <header className="w-full cases-header mb-1 flex items-center justify-center gap-3 sm:mb-2">
+            <span className="relative overflow-hidden text-center text-[87px] font-[600] leading-[90px] -tracking-[1px] text-white">
+              <h2 className="invisible">
+                best cases prove it
               </h2>
-            </div>
-
-            <Link
-              href="/projects"
-              className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-primary/35 bg-primary/10 py-2 pl-4 pr-2 text-xs font-medium text-white transition-colors hover:bg-primary hover:text-secondary sm:gap-4 sm:py-2.5 sm:pl-5 sm:pr-2.5 sm:text-sm"
-            >
-              <span className="hidden sm:inline">Explore all projects</span>
-              <span className="sm:hidden">View all</span>
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-secondary transition-transform duration-300 group-hover:rotate-45 sm:h-9 sm:w-9">
-                <ArrowUpRight className="h-4 w-4" />
-              </span>
-            </Link>
+              <h2 aria-hidden="true" className="hero-text-neon pointer-events-none absolute inset-0">
+                best cases prove it
+              </h2>
+            </span>
           </header>
+          <div className="w-full cases-content grid min-h-0 flex-1 content-center gap-4 lg:grid-cols-[1fr_0.75fr] lg:items-center lg:gap-12">
+            <div className="pointer-events-none absolute top-0 left-0 h-64 w-64 rounded-full bg-primary/10 blur-[80px] sm:h-96 sm:w-96 sm:blur-[90px]" />
+            <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 rounded-full bg-primary/10 blur-[80px] sm:h-96 sm:w-96 sm:blur-[90px]" />
+            <div className="cases-preview relative h-[clamp(12rem,37svh,23rem)] lg:h-[clamp(24rem,62svh,41rem)]">
+              {previewSlides.map((slide, index) => {
+                const item = slide.type === "case" ? slide.item : null;
+                const enterProgress =
+                  index === 0 ? 1 : clamp(slidePosition - (index - 1), 0, 1);
 
-          {/* Preview and changing case details */}
-          <div className="grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)_auto] gap-3 sm:gap-5 lg:grid-cols-[1.6fr_0.8fr] lg:grid-rows-1 lg:gap-7">
-            {/* Large, scroll-driven preview */}
-            <div className="relative min-h-0 overflow-hidden rounded-[22px] border border-white/10 bg-[#0B1E17] sm:rounded-[30px]">
-              {featuredCases.map((item, index) => {
-                const offset = index - slidePosition;
-                const distance = Math.abs(offset);
-                const opacity = clamp(1 - distance * 1.05);
-                const isActive = index === activeIndex;
+                const translateY =
+                  index === 0 ? "0%" : `${(1 - enterProgress) * 112}%`;
 
+                const opacity =
+                  index === 0 ? 1 : enterProgress;
                 return (
                   <article
-                    key={item.slug}
-                    aria-hidden={!isActive}
-                    className="absolute inset-0 will-change-transform"
+                    key={item?.slug ?? "all-cases-cta"}
+                    aria-hidden={index !== displayedIndex}
+                    className="absolute inset-0 rounded-[30px] bg-secondary sm:rounded-[42px]"
                     style={{
-                      transform: `translate3d(0, ${offset * 100}%, 0)`,
+                      zIndex: index + 1,
                       opacity,
-                      zIndex: featuredCases.length - Math.round(distance * 10),
+                      transform: `translate3d(0, ${translateY}, 0)`,
+                      willChange: "transform, opacity",
                     }}
                   >
-                    <Image
-                      src={item.image}
-                      alt={`${item.title} project preview`}
-                      fill
-                      priority={index === 0}
-                      sizes="(max-width: 1023px) 100vw, 65vw"
-                      className="object-cover"
-                      style={{
-                        transform: `scale(${1 + Math.min(distance * 0.04, 0.04)})`,
-                      }}
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/25" />
-
-                    {/* Preview badges */}
-                    <div className="absolute inset-x-4 top-4 flex items-start justify-between gap-3 sm:inset-x-7 sm:top-7">
-                      <span className="rounded-full border border-white/15 bg-black/35 px-3 py-2 text-[9px] font-medium tracking-[0.18em] text-white backdrop-blur-md sm:px-4 sm:text-[10px]">
-                        {item.badge}
-                      </span>
-
-                      <div className="flex gap-2">
+                    {item ? (
+                      <>
+                        <div className="absolute inset-0 overflow-hidden rounded-[inherit]">
+                          <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            sizes="(max-width: 1023px) 100vw, 65vw"
+                            priority={index === 0}
+                            className="object-cover"
+                          />
+                        </div>
+                        <div className="relative flex h-full flex-col justify-between p-2 sm:p-3 md:p-4">
+                          <div className="flex items-start justify-between">
+                            <span className="rounded-full bg-black/35 px-3 py-2 text-[12px] font-semibold tracking-[0.16em] text-white backdrop-blur-sm sm:px-5 sm:text-[14px] sm:tracking-[0.1em]">
+                              {item.badge}
+                            </span>
+                            <ZoomablePreview
+                              src={item.image}
+                              alt={item.title}
+                              title={item.title}
+                              description={item.description}
+                              badge={item.badge}
+                              tags={item.tags}
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-[0.12] [background-image:linear-gradient(rgba(255,255,255,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.25)_1px,transparent_1px)] [background-size:38px_38px]" />
+                        <div className="relative flex h-full flex-col items-center justify-center gap-10 p-4 sm:p-8 md:p-10">
+                          <span className="w-fit rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-[9px] font-semibold tracking-[0.16em] text-primary sm:text-xs sm:tracking-[0.2em]">
+                            MORE TO EXPLORE
+                          </span>
+                          <div className="max-w-2xl mx-auto w-full">
+                            <p className="mb-2 text-[10px] uppercase tracking-[0.16em] text-center text-primary/80 sm:mb-3 sm:text-sm sm:tracking-[0.2em]">
+                              Thats just the beginning
+                            </p>
+                            <h3 className="text-[clamp(1.7rem,6vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-center text-white">
+                              More ideas. More work. <span className="text-primary">More Relvo.</span>
+                            </h3>
+                            <p className="mt-3 text-center text-xs leading-relaxed text-white/60 sm:mt-4 sm:text-base">
+                              Explore the full collection of projects and see
+                              what we can create together.
+                            </p>
+                          </div>
+                          <Link href="/cases" className="btn-relvo">
+                            <span className="btnText">Best projects</span>
+                            <span className="iconArea">
+                              <ArrowUpRight strokeWidth={1.5}/>
+                            </span>
+                          </Link>
+                        </div>
+                      </>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+            <div className="cases-details relative min-h-[clamp(6.5rem,16svh,9rem)] lg:min-h-[18rem]">
+              {previewSlides.map((slide, index) => {
+                const isCta = slide.type === "cta";
+                const item = slide.type === "case" ? slide.item : null;
+                const distance = Math.abs(slidePosition - index);
+                const opacity = clamp(1 - distance, 0, 1);
+                const yOffset = clamp((index - slidePosition) * 18, -18, 18);
+                return (
+                  <div
+                    key={item?.slug ?? "all-cases-details"}
+                    aria-hidden={index !== displayedIndex}
+                    className="absolute inset-0 flex flex-col justify-center"
+                    style={{
+                      opacity,
+                      transform: `translate3d(0, ${yOffset}px, 0)`,
+                      pointerEvents: index === displayedIndex ? "auto" : "none",
+                    }}
+                  >
+                    <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.2em] text-primary sm:mb-3 sm:text-xs sm:tracking-[0.24em]">
+                      {isCta ? "The full collection" : item?.badge}
+                    </p>
+                    <h3 className="text-xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl">
+                      {isCta ? "There’s more to explore." : item?.title}
+                    </h3>
+                    <p className="mt-2 line-clamp-3 max-w-xl text-xs leading-relaxed text-white/60 sm:mt-4 sm:text-base">
+                      {isCta
+                        ? "Visit the cases page to see more of our selected work."
+                        : item?.description}
+                    </p>
+                    {item && (
+                      <div className="mt-3 flex flex-wrap gap-2 sm:mt-5">
                         {item.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="rounded-full border border-white/10 bg-black/30 px-3 py-2 text-[10px] text-white/90 backdrop-blur-md sm:px-4 sm:text-xs"
+                            className="rounded-full border border-white/10 px-3 py-1.5 text-[10px] text-white/60 sm:text-xs"
                           >
                             {tag}
                           </span>
                         ))}
                       </div>
-                    </div>
-
-                    {/* Project name over preview */}
-                    <div className="absolute inset-x-5 bottom-5 sm:inset-x-8 sm:bottom-8 lg:inset-x-10 lg:bottom-10">
-                      <p className="mb-2 text-[10px] uppercase tracking-[0.22em] text-white/60 sm:text-xs">
-                        Case / {String(index + 1).padStart(2, "0")}
-                      </p>
-                      <h3 className="max-w-3xl text-3xl font-medium leading-tight tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">
-                        {item.title}
-                      </h3>
-                    </div>
-                  </article>
+                    )}
+                  </div>
                 );
               })}
-
-              {/* Small scroll position marker */}
-              <div className="absolute bottom-5 right-5 z-20 flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-3 py-2 text-xs text-white/80 backdrop-blur-md sm:bottom-8 sm:right-8">
-                <span className="font-semibold text-primary">
-                  {String(activeIndex + 1).padStart(2, "0")}
-                </span>
-                <span className="text-white/35">/</span>
-                <span>{String(featuredCases.length).padStart(2, "0")}</span>
-              </div>
             </div>
-
-            {/* Case title and description fade with scroll */}
-            <aside className="relative min-h-[170px] overflow-hidden rounded-[22px] border border-white/10 bg-white/[0.03] p-5 sm:min-h-[190px] sm:rounded-[30px] sm:p-8 lg:flex lg:min-h-0 lg:flex-col lg:justify-between lg:p-10">
-              <div className="flex items-center justify-between">
-                <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-primary sm:text-xs">
-                  Project details
-                </p>
-                <span className="h-px flex-1 bg-white/10 ml-4" />
-              </div>
-
-              <div className="relative min-h-[100px] flex-1 lg:flex lg:items-center">
-                {featuredCases.map((item, index) => {
-                  const offset = index - slidePosition;
-                  const distance = Math.abs(offset);
-                  const opacity = clamp(1 - distance * 1.5);
-                  const isActive = index === activeIndex;
-
-                  return (
-                    <div
-                      key={item.slug}
-                      aria-hidden={!isActive}
-                      className="absolute inset-0 flex flex-col justify-center"
-                      style={{
-                        opacity,
-                        transform: `translate3d(0, ${offset * 22}px, 0)`,
-                        zIndex: featuredCases.length - Math.round(distance * 10),
-                      }}
-                    >
-                      <p className="mb-3 text-xs tracking-[0.16em] text-white/40">
-                        STEP {String(index + 1).padStart(2, "0")}
-                      </p>
-
-                      <h3 className="text-2xl font-medium leading-tight tracking-[-0.04em] sm:text-3xl lg:text-4xl">
-                        {item.title}
-                      </h3>
-
-                      <p className="mt-3 max-w-md text-sm leading-relaxed text-white/55 sm:text-base">
-                        {item.description}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Progress indicator */}
-              <div
-                className="flex items-center gap-2"
-                aria-label={`Case ${activeIndex + 1} of ${featuredCases.length}`}
-              >
-                {featuredCases.map((item, index) => (
-                  <span
-                    key={item.slug}
-                    aria-hidden="true"
-                    className={[
-                      "h-1 rounded-full transition-[width,background-color] duration-300",
-                      index === activeIndex
-                        ? "w-10 bg-primary sm:w-14"
-                        : "w-4 bg-white/20",
-                    ].join(" ")}
-                  />
-                ))}
-              </div>
-            </aside>
           </div>
         </div>
       </div>
+      <style jsx>{`
+        
+      `}</style>
     </section>
   );
 }

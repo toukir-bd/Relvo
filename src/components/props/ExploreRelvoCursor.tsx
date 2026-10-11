@@ -59,11 +59,10 @@ export default function ExploreRelvoCursor({
         className={[
           "absolute left-1/2 top-1/2 z-[60]",
           "flex h-32 w-32 -translate-x-1/2 -translate-y-1/2",
-          "flex-col items-center justify-center gap-1 rounded-full",
-          "bg-primary text-sm font-semibold text-secondary",
-          "shadow-[0_0_50px_rgba(187,255,0,0.25)]",
+          "flex-col items-center justify-center rounded-full",
+          "bg-secondary/40 text-primary shadow-[0_0_50px_rgba(187,255,0,0.25)]",
           "transition-[opacity,transform,background-color] duration-300",
-          "hover:bg-white focus-visible:scale-100 focus-visible:opacity-100",
+          "focus-visible:scale-100 focus-visible:opacity-100",
           "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/40",
           isHovering
             ? "scale-100 opacity-100"
@@ -71,8 +70,8 @@ export default function ExploreRelvoCursor({
         ].join(" ")}
         style={{ left: "50%", top: "50%" }}
       >
-        <span>Explore Relvo</span>
-        <ArrowUpRight className="h-5 w-5" strokeWidth={1.7} />
+        <ArrowUpRight className="h-8 w-8" strokeWidth={1.2} />
+        <span className="text-[16px] font-semibold">Explore</span>
       </Link>
     </div>
   );

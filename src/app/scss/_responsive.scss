@@ -1,0 +1,45 @@
+
+//Home-Cases-Responsive
+@media (max-height: 520px) {
+    .cases-inner {
+        padding-top: max(env(safe-area-inset-top), 2rem);
+        padding-bottom: 0.5rem;
+    }
+
+    .cases-header {
+        margin-bottom: 0.5rem;
+    }
+
+    .cases-content {
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .cases-preview {
+        height: min(62svh, 20rem);
+    }
+
+    .cases-details {
+        min-height: 0;
+    }
+
+    .cases-main-title {
+        font-size: clamp(1.4rem, 4vw, 2.25rem);
+    }
+
+    footer {
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .cases-inner {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+    }
+
+    .cases-header {
+        gap: 0.5rem;
+    }
+}
