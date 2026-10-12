@@ -100,7 +100,7 @@ export default function Story() {
               }}
             />
             <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[850px] -translate-x-1/2 rounded-full bg-primary/15 blur-[140px]"/>
-            <RelvoVisual activeSlide={activeSlide} />
+            <RelvoVisual activeSlide={activeSlide}/>
             <p className="relative overflow-hidden text-center text-[14px] font-semibold uppercase tracking-[0.28em] text-primary sm:text-[16px] lg:text-[20px]">
               <span className="invisible">
                 Relvo is built to create a presence that performs

@@ -34,29 +34,29 @@ export default function Cases() {
   const lastIndex = previewSlides.length - 1;
 
   useEffect(() => {
-    let frameId = 0;
-    const updateScrollProgress = () => {
-      if (frameId) return;
-      frameId = window.requestAnimationFrame(() => {
-        frameId = 0;
-        const section = sectionRef.current;
-        if (!section) return;
-        const maxScroll = Math.max(
-          0,
-          section.offsetHeight - window.innerHeight
-        );
-        const travelled = clamp(
-          -section.getBoundingClientRect().top,
-          0,
-          maxScroll
-        );
-        setScrollProgress(
-          maxScroll > 0 ? travelled / maxScroll : 0
-        );
-      });
-    };
+  let frameId = 0;
+  const updateScrollProgress = () => {
+    if (frameId) return;
+    frameId = window.requestAnimationFrame(() => {
+      frameId = 0;
+      const section = sectionRef.current;
+      if (!section) return;
+      const maxScroll = Math.max(
+        0,
+        section.offsetHeight - window.innerHeight
+      );
+      const travelled = clamp(
+        -section.getBoundingClientRect().top,
+        0,
+        maxScroll
+      );
+      setScrollProgress(
+        maxScroll > 0 ? travelled / maxScroll : 0
+      );
+    });
+  };
 
-    updateScrollProgress();
+  updateScrollProgress();
     window.addEventListener("scroll", updateScrollProgress, {
       passive: true,
     });
@@ -97,21 +97,19 @@ export default function Cases() {
 
   return (
     <section ref={sectionRef} aria-label="Selected projects" className="relative bg-secondary" style={{height:`calc(100svh + ${totalScrollVh * 100}svh)`}}>
-      <div className="sticky cases-inner mx-auto flex flex-col min-h-screen w-full max-w-[1600px] items-center justify-center top-0 pt-34">
-        <header className="cases-header mb-1 flex w-full items-center justify-center gap-3 sm:mb-2">
-          <span className="relative overflow-hidden text-center text-[87px] font-[600] leading-[90px] -tracking-[1px] text-white">
-            <h2 className="invisible">
-              work that speaks for itself
-            </h2>
-            <h2 aria-hidden="true" className="hero-text-neon pointer-events-none absolute inset-0">
-              work that speaks for itself
-            </h2>
-          </span>
-        </header>
-        <div className="cases-content grid min-h-0 w-full flex-1 content-center gap-4 lg:grid-cols-[1.25fr_1fr] lg:items-center lg:gap-12">
+      <div className="top-0 sticky mx-auto flex flex-col gap-10 min-h-screen w-full max-w-[1600px] items-center justify-center">
+        <span className="mt-10 relative overflow-hidden text-center text-[87px] font-[600] leading-[90px] -tracking-[1px] text-white">
+          <h2 className="invisible">
+            work that speaks for itself
+          </h2>
+          <h2 aria-hidden="true" className="hero-text-neon pointer-events-none absolute inset-0">
+            work that speaks for itself
+          </h2>
+        </span>
+        <div className="cases-content grid min-h-0 w-full content-center gap-4 lg:grid-cols-[1.25fr_1fr] lg:items-center lg:gap-12">
           <div className="pointer-events-none absolute left-0 top-0 h-64 w-64 rounded-full bg-primary/10 blur-[80px] sm:h-96 sm:w-96 sm:blur-[90px]"/>
           <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 rounded-full bg-primary/10 blur-[80px] sm:h-96 sm:w-96 sm:blur-[90px]"/>
-          <div className="cases-preview relative h-[clamp(12rem,37svh,23rem)] lg:h-[clamp(24rem,62svh,41rem)]">
+          <div className="cases-preview relative h-[clamp(12rem,37svh,23rem)] lg:h-[clamp(30rem,70svh,50rem)]">
             {previewSlides.map((slide, index) => {
               const item = slide.type === "case" ? slide.item : null;
               const isCurrent = index === transitionIndex;
@@ -173,23 +171,19 @@ export default function Cases() {
                       <div className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-[0.12] [background-size:38px_38px]
                       [background-image:linear-gradient(rgba(255,255,255,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.25)_1px,transparent_1px)]"/>
                       <div className="relative flex h-full flex-col items-center justify-center gap-10 p-4 sm:p-8 md:p-10">
-                        <span className="w-fit rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-[9px] font-semibold tracking-[0.16em] 
-                          text-primary sm:text-xs sm:tracking-[0.2em]">
-                          MORE TO EXPLORE
-                        </span>
                         <div className="mx-auto w-full max-w-2xl">
                           <p className="mb-2 text-center text-[10px] uppercase tracking-[0.16em] text-primary/80 sm:mb-3 sm:text-sm sm:tracking-[0.2em]">
-                            That&apos;s just the beginning
+                            Every idea has a bigger possibility
                           </p>
-                          <h3 className="text-center text-[clamp(1.7rem,6vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-white">
-                            More ideas. More work.{" "}
-                            <span className="text-primary">
+                          <h3 className="text-center text-[4rem] font-semibold leading-[1.05] tracking-tight text-white">
+                            Your ideas. Our creativity.<br/>
+                            <span className="text-primary font-thin">
                               More Relvo.
                             </span>
                           </h3>
-                          <p className="mt-3 text-center text-xs leading-relaxed text-white/60 sm:mt-4 sm:text-base">
-                            Explore the full collection of projects
-                            and see what we can create together.
+                          <p className="mt-3 text-center text-xs leading-relaxed font-thin text-white sm:mt-4 sm:text-[20px]">
+                            Step into our world of crafted experiences, bold ideas, and<br/>
+                            digital possibilities waiting to take shape.
                           </p>
                         </div>
                         <Link href="/cases" className="btn-relvo">

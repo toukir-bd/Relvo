@@ -14,7 +14,7 @@ export default function RelvoVisual({ activeSlide }: RelvoVisualProps) {
     return "relvo-card__scene";
   };
   return (
-    <div className="relative z-10 h-[300px] w-auto">
+    <div className="mt-10 relative z-10 h-[300px] w-auto">
       <div className="relvo-card">
         <div className={sceneClass(0)}>
           <div className="relvo-card__inner">
