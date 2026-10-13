@@ -69,8 +69,8 @@ export default function DoorLoader() {
         <Image
             src="/img/elements/logo.webp"
             alt="Relvo"
-            width={220}
-            height={220}
+            width={240}
+            height={65}
             priority
             className="door-logo h-auto w-[clamp(130px,16vw,240px)]"
         />

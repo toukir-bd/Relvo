@@ -54,13 +54,12 @@ export default function Splash() {
           <div className="grid grid-cols-4 gap-2">
             {roles.map(({ label, icon: Icon, active }) => (
               <div key={label}  className={[
-                  "flex aspect-[1.8/1] flex-col items-center justify-center rounded-[18px] p-5",
+                  "flex flex-col items-center justify-center rounded-[18px] p-5",
                   "transition-all duration-300",
                   active
                     ? "bg-primary text-secondary shadow-[0_8px_20px_rgba(124,67,238,0.25)]"
                     : "bg-primary/10 text-white hover:bg-[#d2d2d2]",
-                ].join(" ")}
-              >
+                ].join(" ")}>
                 <div className={["mb-2 w-24 h-24 flex items-center justify-center rounded-full", active ? "bg-secondary/10" : "bg-secondary/30"].join(" ")}>
                   <Icon strokeWidth={.65} className={["h-12 w-12", active ? "text-secondary" : "text-primary",].join(" ")}/>
                 </div>
