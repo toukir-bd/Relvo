@@ -15,39 +15,26 @@ export default function Header({
   onMenuClose,
 }: HeaderProps) {
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-100 transition-all
-        ${isScrolled
-          ? "h-[70px] bg-secondary/70 backdrop-blur-md"
-          : isMenuOpen
-            ? "h-[120px] bg-secondary/85 backdrop-blur-md"
-            : "h-[120px] transparent"
-        }`}
-    >
-      <div className="mx-auto flex h-full max-w-full items-center justify-between px-8 lg:px-14">
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/img/elements/logo.webp"
-            alt="Relvo Logo"
-            width={160}
-            height={45}
-            className={`transition-all duration-500`}
-            priority
-          />
-        </Link>
-        <button onClick={isMenuOpen ? onMenuClose : onMenuOpen} aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className={`group flex cursor-pointer items-center justify-center rounded-full border border-white/30 hover:border-primary/50 transition-all 
-            duration-500
-            ${isScrolled
-              ? "h-[50px] w-[50px]"
-              : "h-[56px] w-[56px]"
-            }
-            ${isMenuOpen
-              ? "border-red-200 hover:border-red-400"
-              : "border-white/10 hover:border-primary/50"
-            }
-          `}
-        >
+    <header>
+      <Link href="/" className="absolute top-10 left-10 z-30 flex items-center w-auto">
+        <Image
+          src="/img/elements/logo.webp"
+          alt="Relvo Logo"
+          width={160}
+          height={45}
+          className={`transition-all duration-500`}
+          priority
+        />
+      </Link>
+      <button onClick={isMenuOpen ? onMenuClose : onMenuOpen} aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        className={`group cursor-pointer flex justify-center items-center h-[50px] w-[50px] gap-2 fixed top-10 right-10 z-100 rounded-full 
+          border border-white/30 hover:border-primary/50 transition-all duration-500"
+          ${isMenuOpen
+            ? "border-red-200 hover:border-red-400"
+            : "border-white/10 hover:border-primary/50"
+          }
+        `}
+      >
           {isMenuOpen ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +58,6 @@ export default function Header({
             </span>
           )}
         </button>
-      </div>
     </header>
   );
 }

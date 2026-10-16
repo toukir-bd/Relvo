@@ -49,7 +49,7 @@ export default function MenuOverlay({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
-          className={`fixed inset-x-0 bottom-0 z-100 ${isScrolled ? "top-[70px]" : "top-[120px]"} overflow-y-auto bg-secondary/95 text-white`}>
+          className="fixed inset-0 bottom-0 z-90 overflow-y-auto bg-secondary/95 text-white">
           <div className="mx-auto flex h-full max-w-[1600px] flex-col lg:flex-row">
             <div className="flex w-full flex-col justify-center border-b border-white/10 px-8 py-10 lg:w-1/2 lg:border-b-0 lg:border-r lg:px-16">
               {menus.map((item, index) => (

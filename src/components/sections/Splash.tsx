@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
 import { UserRound, Sparkles, Blocks, Orbit, CalendarDays } from "lucide-react";
 import ScrollToDiscover from "../props/ScrollToDiscover";
+import Header from "../layout/Header";
 
 const roles = [
   {
@@ -71,7 +72,7 @@ export default function Splash() {
           </div>
         </div>
       </div>
-      <div className="mb-10 px-10 absolute inset-0 z-10 flex items-end justify-between w-full">
+      <div className="px-10 absolute bottom-10 z-10 flex items-end justify-between w-full">
         <ScrollToDiscover/>
         <div className="flex flex-col justify-end items-end gap-2 fixed bottom-10 right-10">
           <Link href="/" type="button" className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary 

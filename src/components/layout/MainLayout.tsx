@@ -19,13 +19,10 @@ export default function MainLayout({
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
-
     handleScroll();
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -39,7 +36,6 @@ export default function MainLayout({
       lenis?.start();
       document.body.style.overflow = "";
     }
-
     return () => {
       lenis?.start();
       document.body.style.overflow = "";
@@ -48,23 +44,10 @@ export default function MainLayout({
 
   return (
     <>
-      <Header
-        isScrolled={isScrolled}
-        isMenuOpen={menuOpen}
-        onMenuOpen={() => setMenuOpen(true)}
-        onMenuClose={() => setMenuOpen(false)}
-      />
-      <MenuOverlay
-        isOpen={menuOpen}
-        isScrolled={isScrolled}
-        onClose={() => setMenuOpen(false)}
-      />
+      <Header isScrolled={isScrolled} isMenuOpen={menuOpen} onMenuOpen={() => setMenuOpen(true)} onMenuClose={() => setMenuOpen(false)}/>
+      <MenuOverlay isOpen={menuOpen} isScrolled={isScrolled} onClose={() => setMenuOpen(false)}/>
       <main>
-        <div className="relative flex min-h-screen w-full flex-col overflow-x-clip">
-          <div className="mx-auto w-full max-w-full">
-            {children}
-          </div>
-        </div>
+        {children}
       </main>
       <Footer />
     </>
