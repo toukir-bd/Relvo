@@ -79,23 +79,11 @@ export default function Story() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="discover-us"
-      className="relative w-full "
-      style={{
-        height: `${(slides.length + 1) * 100}dvh`,
-      }}
-    >
-      <div className="sticky top-0 flex min-h-screen w-full items-center justify-center overflow-hidden cursor-hidden">
-        <ExploreRelvoCursor className="relative mx-auto w-full">
-          <div className="relative mx-auto flex-col flex min-h-screen w-full justify-center overflow-hidden">
+    <section ref={sectionRef} id="discover-us" className="relative w-full" style={{ height: `${(slides.length + 1) * 100}dvh`, }}>
+      <div className="sticky top-0 min-h-screen w-full overflow-hidden">
+        <ExploreRelvoCursor className="relative mx-auto flex-col flex min-h-screen w-full justify-center overflow-hidden">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40"
-              style={{
-                backgroundImage: `
-                  linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px),
-                  linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)
-                `,
+              style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)`,
                 backgroundSize: "42px 42px",
               }}
             />
@@ -109,7 +97,7 @@ export default function Story() {
                 Relvo is built to create a presence that performs
               </span>
             </p>
-            <div className="my-7 relative flex items-center min-h-[300px] w-full max-w-[1300px] mx-auto overflow-hidden">
+            <div className="my-7 relative min-h-[300px] w-full max-w-[1300px] mx-auto overflow-hidden">
               {slides.map((slide, index) => {
                 const isActive = index === activeSlide;
                 const isPrevious = index < activeSlide;
@@ -118,13 +106,8 @@ export default function Story() {
                   scrollProgress * slides.length - index,
                 );
                 return (
-                  <div key={slide.number}
-                    className={[ "absolute inset-0 flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
-                      isActive
-                        ? "translate-y-0 opacity-100"
-                        : isPrevious
-                          ? "-translate-y-[100px] opacity-0"
-                          : "translate-y-[100px] opacity-0",
+                  <div key={slide.number} className={[ "absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                    isActive ? "translate-y-0 opacity-100" : isPrevious ? "-translate-y-[100px] opacity-0" : "translate-y-[100px] opacity-0",
                     ].join(" ")}
                   >
                     <h2 className="w-full text-center text-[37px] font-normal leading-[1.16] tracking-tight text-white sm:text-[55px] lg:text-[73px] xl:text-[75px]">
@@ -161,7 +144,6 @@ export default function Story() {
                 />
               ))}
             </div>
-          </div>
         </ExploreRelvoCursor>
       </div>
     </section>

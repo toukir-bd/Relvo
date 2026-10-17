@@ -2,21 +2,19 @@
 import Link from "next/link";
 import Image from "next/image";
 interface HeaderProps {
-  isScrolled: boolean;
   isMenuOpen: boolean;
   onMenuOpen: () => void;
   onMenuClose: () => void;
 }
 
 export default function Header({
-  isScrolled,
   isMenuOpen,
   onMenuOpen,
   onMenuClose,
 }: HeaderProps) {
   return (
     <header>
-      <Link href="/" className="absolute top-10 left-10 z-30 flex items-center w-auto">
+      <Link href="/" className="fixed top-9 left-10 z-30 flex items-center w-auto">
         <Image
           src="/img/elements/logo.webp"
           alt="Relvo Logo"
@@ -27,7 +25,7 @@ export default function Header({
         />
       </Link>
       <button onClick={isMenuOpen ? onMenuClose : onMenuOpen} aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        className={`group cursor-pointer flex justify-center items-center h-[50px] w-[50px] gap-2 fixed top-10 right-10 z-100 rounded-full 
+        className={`group cursor-pointer flex justify-center items-center h-[50px] w-[50px] gap-2 fixed top-9 right-10 z-100 rounded-full 
           border border-white/30 hover:border-primary/50 transition-all duration-500"
           ${isMenuOpen
             ? "border-red-200 hover:border-red-400"

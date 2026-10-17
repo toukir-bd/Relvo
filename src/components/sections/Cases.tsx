@@ -96,9 +96,9 @@ export default function Cases() {
   );
 
   return (
-    <section ref={sectionRef} aria-label="Selected projects" className="relative bg-secondary" style={{height:`calc(100svh + ${totalScrollVh * 100}svh)`}}>
-      <div className="top-0 sticky mx-auto flex flex-col gap-10 min-h-screen w-full max-w-[1600px] items-center justify-center">
-        <span className="mt-10 relative overflow-hidden text-center text-[87px] font-[600] leading-[90px] -tracking-[1px] text-white">
+    <section ref={sectionRef} aria-label="Selected projects" className="relative" style={{height:`calc(100svh + ${totalScrollVh * 100}svh)`}}>
+      <div className="top-0 sticky mx-auto flex flex-col gap-8 min-h-screen w-full max-w-[1600px] items-center justify-center">
+        <span className="relative overflow-hidden text-center text-[85px] font-[600] leading-[90px] -tracking-[1px] text-white">
           <h2 className="invisible">
             work that speaks for itself
           </h2>
@@ -126,7 +126,7 @@ export default function Cases() {
                 <article
                   key={item?.slug ?? "all-cases-cta"}
                   aria-hidden={index !== displayedIndex}
-                  className="absolute inset-0 rounded-[30px] bg-primary/3 sm:rounded-[42px]"
+                  className="absolute inset-0 bg-primary/3 rounded-[30px] sm:rounded-[42px]"
                   style={{
                     zIndex: index + 1,
                     opacity: isVisible ? opacity : 0,
@@ -138,8 +138,8 @@ export default function Cases() {
                   }}
                 >
                   {item ? (
-                    <>
-                      <div className="absolute inset-0 overflow-hidden rounded-[inherit]">
+                    <div>
+                      <div className="absolute inset-0 overflow-hidden rounded-[30px] sm:rounded-[42px]">
                         <Image
                           src={item.image}
                           alt={item.title}
@@ -151,8 +151,8 @@ export default function Cases() {
                       </div>
                       <div className="relative flex h-full flex-col justify-between p-2 sm:p-3 md:p-4">
                         <div className="flex items-start justify-between">
-                          <span className="ms-1 rounded-full bg-black/50 px-3 py-2 text-[12px] font-semibold tracking-[0.16em] text-white backdrop-blur-sm 
-                            sm:px-5 sm:text-[14px] sm:tracking-[0.1em]">
+                          <span className="ms-1 rounded-full bg-black/50 px-3 py-2 text-[12px] font-semibold tracking-[0.12em] text-white backdrop-blur-sm 
+                            sm:px-5 sm:text-[14px] sm:tracking-[0.08em] uppercase">
                             {item.badge}
                           </span>
                           <ZoomablePreview
@@ -164,37 +164,29 @@ export default function Cases() {
                           />
                         </div>
                       </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-[0.12] [background-size:38px_38px]
-                      [background-image:linear-gradient(rgba(255,255,255,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.25)_1px,transparent_1px)]"/>
-                      <div className="relative flex h-full flex-col items-center justify-center gap-10 p-4 sm:p-8 md:p-10">
-                        <div className="mx-auto w-full max-w-2xl">
-                          <p className="mb-2 text-center text-[10px] uppercase tracking-[0.16em] text-primary/80 sm:mb-3 sm:text-sm sm:tracking-[0.2em]">
-                            Every idea has a bigger possibility
-                          </p>
-                          <h3 className="text-center text-[4rem] font-semibold leading-[1.05] tracking-tight text-white">
-                            Your ideas. Our creativity.<br/>
-                            <span className="text-primary font-thin">
-                              More Relvo.
-                            </span>
-                          </h3>
-                          <p className="mt-3 text-center text-xs leading-relaxed font-thin text-white sm:mt-4 sm:text-[20px]">
-                            Step into our world of crafted experiences, bold ideas, and<br/>
-                            digital possibilities waiting to take shape.
-                          </p>
-                        </div>
-                        <Link href="/cases" className="btn-relvo">
-                          <span className="btnText">
-                            Best projects
-                          </span>
-                          <span className="iconArea">
-                            <ArrowUpRight strokeWidth={1.5} />
-                          </span>
-                        </Link>
-                      </div>
-                    </>
+                    </div>
+                    ) : (
+                    <div className="relative h-full flex flex-col items-center justify-center gap-8 p-4 sm:p-8 md:p-10 mx-auto max-w-full w-2xl">
+                      <div className="pointer-events-none h-full absolute inset-0 rounded-[30px] sm:rounded-[42px] opacity-[0.12] [background-size:38px_38px]
+                        [background-image:linear-gradient(rgba(255,255,255,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.25)_1px,transparent_1px)]"/>
+                      <p className="text-center text-[16px] sm:text-[17px] font-[500] tracking-[0.16em] sm:tracking-[0.14em] text-primary/80 uppercase">
+                        Every idea has a bigger possibility
+                      </p>
+                      <h3 className="text-center text-[4rem] font-semibold leading-[1.1] tracking-tight text-white">
+                        Your Ideas, Our Touch<br/>
+                        <span className="text-primary font-thin text-[3.5rem] sm:text-[6rem]">
+                          More Relvo
+                        </span>
+                      </h3>
+                      <Link href="/cases" className="btn-relvo">
+                        <span className="btnText">
+                          Explore Some Projects
+                        </span>
+                        <span className="iconArea">
+                          <ArrowUpRight strokeWidth={1.5} />
+                        </span>
+                      </Link>
+                    </div>
                   )}
                 </article>
               );

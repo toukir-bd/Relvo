@@ -41,11 +41,11 @@ export default function Splash() {
                   active ? "bg-primary text-secondary shadow-[0_8px_20px_rgba(124,67,238,0.25)] hover:bg-primary/90" : "bg-primary/10 hover:bg-primary/5",
                 ].join(" ")}
               >
-                <div className={["mb-2 flex h-24 w-24 items-center justify-center rounded-full",
+                <div className={["mb-2 flex h-24 w-24 items-center justify-center rounded-full transition-all",
                     active ? "bg-secondary/10" : "bg-secondary/30",
                   ].join(" ")}
                 >
-                  <Icon strokeWidth={0.65} className={["h-12 w-12 transition-colors duration-300",
+                  <Icon strokeWidth={0.65} className={["h-12 w-12 transition-colors duration-300 transition-all",
                       active ? "text-secondary" : "text-white group-hover:text-primary",
                     ].join(" ")}
                   />
