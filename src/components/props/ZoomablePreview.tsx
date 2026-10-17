@@ -11,7 +11,6 @@ type ZoomablePreviewProps = {
   title: string;
   description?: string;
   badge?: string;
-  tags?: string[];
   triggerClassName?: string;
 };
 
@@ -58,9 +57,7 @@ export default function ZoomablePreview({
               if (event.target === event.currentTarget) closePreview();
             }}
           >
-            <div role="dialog" aria-modal="true" aria-labelledby="zoomed-preview-title"
-              className="relative mx-auto h-full w-full max-w-[1800px]"
-            >
+            <div role="dialog" aria-modal="true" aria-labelledby="zoomed-preview-title" className="relative mx-auto h-full w-full max-w-[1800px]">
               <div className="absolute inset-0 rounded-2xl bg-secondary"/>
               <div className="absolute inset-0 overflow-hidden rounded-2xl">
                 <Image
@@ -73,20 +70,14 @@ export default function ZoomablePreview({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"/>
               </div>
-
               <div className="relative flex h-full flex-col justify-between p-2 sm:p-4">
                 <div className="flex items-start justify-end gap-4">
-                  <button
-                    ref={closeButtonRef}
-                    type="button"
-                    onClick={closePreview}
-                    aria-label="Close fullscreen preview"
+                  <button ref={closeButtonRef} type="button" onClick={closePreview} aria-label="Close fullscreen preview"
                     className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-black/50 text-white transition hover:border-red-200 hover:bg-black/40 hover:text-red-600"
                   >
                     <X className="h-7 w-7"/>
                   </button>
                 </div>
-
                 <div className="max-w-3xl">
                   <h2 id="zoomed-preview-title" className="text-3xl font-semibold text-white sm:text-5xl">
                     {title}

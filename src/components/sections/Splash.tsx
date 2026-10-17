@@ -3,29 +3,12 @@ import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
 import { UserRound, Sparkles, Blocks, Orbit, CalendarDays } from "lucide-react";
 import ScrollToDiscover from "../props/ScrollToDiscover";
-import Header from "../layout/Header";
 
 const roles = [
-  {
-    label: "User Centric",
-    icon: UserRound,
-    active: false,
-  },
-  {
-    label: "Creatively Driven",
-    icon: Sparkles,
-    active: false
-  },
-  {
-    label: "Innovative Led",
-    icon: Blocks,
-    active: false,
-  },
-  {
-    label: "Scalable Built",
-    icon: Orbit,
-    active: true,
-  },
+  { label: "User Centric", icon: UserRound, active: false, href: "/services#userCentric"},
+  { label: "Creatively Driven", icon: Sparkles, active: false, href: "/services#creativeDriven"},
+  { label: "Innovative Led", icon: Blocks, active: false, href: "/services#innovativeLed"},
+  { label: "Scalable Built", icon: Orbit, active: true, href: "/services#scalableBuilt"},
 ];
 
 
@@ -37,50 +20,56 @@ export default function Splash() {
       </div>
       <div className="px-[100px] absolute inset-0 z-10 flex flex-col items-center justify-center w-full">
         <h4 className="mb-5 text-[29px] font-[300] tracking-wide">
-          <span className="text-primary">R</span>efined  
-          <span className="text-primary pl-2">E</span>xperiences,  
-          <span className="text-primary pl-2">L</span>ed by 
-          <span className="text-primary pl-2">V</span>ision &  
-          <span className="text-primary pl-2">O</span>riginality 
+          <span className="text-primary">R</span>efined
+          <span className="text-primary pl-2">E</span>xperiences,
+          <span className="text-primary pl-2">L</span>ed by
+          <span className="text-primary pl-2">V</span>ision &
+          <span className="text-primary pl-2">O</span>riginality
         </h4>
         <h1 className="relative mb-5 pb-3 overflow-hidden text-center text-[107px] font-[800] leading-[105px] -tracking-[1px] text-white">
           <div className="relative z-10 invisible">
-            crafting for the shape<br/>of your vision
+            crafting for the shape<br />of your vision
           </div>
           <div aria-hidden="true" className="hero-text-neon pointer-events-none absolute inset-0 z-20">
-            crafting for the shape<br/>of your vision
+            crafting for the shape<br />of your vision
           </div>
         </h1>
         <div className="mb-15 mx-auto max-w-full w-auto rounded-[24px] bg-secondary/70 p-2">
           <div className="grid grid-cols-4 gap-2">
-            {roles.map(({ label, icon: Icon, active }) => (
-              <div key={label}  className={[
-                  "flex flex-col items-center justify-center rounded-[18px] p-5",
-                  "transition-all duration-300",
-                  active
-                    ? "bg-primary text-secondary shadow-[0_8px_20px_rgba(124,67,238,0.25)]"
-                    : "bg-primary/10 text-white hover:bg-[#d2d2d2]",
-                ].join(" ")}>
-                <div className={["mb-2 w-24 h-24 flex items-center justify-center rounded-full", active ? "bg-secondary/10" : "bg-secondary/30"].join(" ")}>
-                  <Icon strokeWidth={.65} className={["h-12 w-12", active ? "text-secondary" : "text-primary",].join(" ")}/>
+            {roles.map(({ label, icon: Icon, active, href }) => (
+              <Link href={href ?? "/services"} key={label} className={["group flex flex-col items-center justify-center rounded-[18px] p-5 transition-all duration-300", 
+                  active ? "bg-primary text-secondary shadow-[0_8px_20px_rgba(124,67,238,0.25)] hover:bg-primary/90" : "bg-primary/10 hover:bg-primary/5",
+                ].join(" ")}
+              >
+                <div className={["mb-2 flex h-24 w-24 items-center justify-center rounded-full",
+                    active ? "bg-secondary/10" : "bg-secondary/30",
+                  ].join(" ")}
+                >
+                  <Icon strokeWidth={0.65} className={["h-12 w-12 transition-colors duration-300",
+                      active ? "text-secondary" : "text-white group-hover:text-primary",
+                    ].join(" ")}
+                  />
                 </div>
-                <h4 className="font-[400] text-[20px] capitalize tracking-wide text-center">
+                <h4 className={["text-center text-[20px] font-[400] capitalize tracking-wide transition-all",
+                    active ? "text-secondary group-hover:text-secondary" : "text-white group-hover:text-primary",
+                  ].join(" ")}
+                >
                   {label}
                 </h4>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </div>
       <div className="px-10 absolute bottom-10 z-10 flex items-end justify-between w-full">
-        <ScrollToDiscover/>
+        <ScrollToDiscover />
         <div className="flex flex-col justify-end items-end gap-2 fixed bottom-10 right-10">
           <Link href="/" type="button" className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary 
             bg-secondary/50 p-1.5 ps-7 rounded-full">
             <span className="text-[18px] font-normal tracking-wide">Book a Meeting</span>
             <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 
               group-hover:bg-black/35 group-hover:text-primary">
-              <CalendarDays className="h-5 w-5 text-primary"/>
+              <CalendarDays className="h-5 w-5 text-primary" />
             </span>
           </Link>
           <Link href="/" type="button" className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary 
@@ -88,7 +77,7 @@ export default function Splash() {
             <span className="text-[18px] font-normal tracking-wide">Talk to an Expert</span>
             <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 
               group-hover:bg-black/35 group-hover:text-primary">
-              <FaWhatsapp className="h-6.5 w-6.5 text-[#27D367]"/>
+              <FaWhatsapp className="h-6.5 w-6.5 text-[#27D367]" />
             </span>
           </Link>
         </div>

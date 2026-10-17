@@ -161,7 +161,6 @@ export default function Cases() {
                             title={item.title}
                             description={item.description}
                             badge={item.badge}
-                            tags={item.tags}
                           />
                         </div>
                       </div>
@@ -206,26 +205,14 @@ export default function Cases() {
           <div className="cases-details relative min-h-[clamp(6.5rem,16svh,9rem)] lg:min-h-[18rem]">
             {previewSlides.map((slide, index) => {
               const isCta = slide.type === "cta";
-              const item =
-                slide.type === "case" ? slide.item : null;
-
+              const item = slide.type === "case" ? slide.item : null;
               const distance = Math.abs(slidePosition - index);
               const opacity = clamp(1 - distance, 0, 1);
-              const yOffset = clamp(
-                (index - slidePosition) * 18,
-                -18,
-                18
-              );
-
+              const yOffset = clamp( (index - slidePosition) * 18, -18, 18 );
               return (
-                <div
-                  key={item?.slug ?? "all-cases-details"}
-                  aria-hidden={index !== displayedIndex}
+                <div key={item?.slug ?? "all-cases-details"} aria-hidden={index !== displayedIndex}
                   className="absolute inset-0 flex flex-col justify-center"
-                  style={{
-                    opacity,
-                    transform: `translate3d(0, ${yOffset}px, 0)`,
-                    pointerEvents:
+                  style={{ opacity, transform: `translate3d(0, ${yOffset}px, 0)`, pointerEvents:
                       index === displayedIndex ? "auto" : "none",
                   }}
                 >
@@ -244,19 +231,6 @@ export default function Cases() {
                       ? "Visit the cases page to see more of our selected work."
                       : item?.description}
                   </p>
-
-                  {item && (
-                    <div className="mt-3 flex flex-wrap gap-2 sm:mt-5">
-                      {item.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-white/10 px-3 py-1.5 text-[10px] text-white/60 sm:text-xs"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
                 </div>
               );
             })}
