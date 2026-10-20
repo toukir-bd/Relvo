@@ -83,7 +83,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${urbanist.variable} ${denton.variable}`}>
-      <body className="bg-secondary text-white" cz-shortcut-listen="true">
+      <body className="bg-[#081111] text-white" cz-shortcut-listen="true">
         <DoorLoader/>
         <CursorTrail/>
         <SmoothScroll>
