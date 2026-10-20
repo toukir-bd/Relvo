@@ -180,7 +180,7 @@ export default function Cases() {
                       </h3>
                       <Link href="/cases" className="btn-relvo">
                         <span className="btnText">
-                          Explore Some Projects
+                          Explore Best Projects
                         </span>
                         <span className="iconArea">
                           <ArrowUpRight strokeWidth={1.5} />
