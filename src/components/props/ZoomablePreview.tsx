@@ -22,11 +22,13 @@ export default function ZoomablePreview({
   triggerClassName = "",
 }: ZoomablePreviewProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const closePreview = useCallback(() => {
     setIsOpen(false);
+    setIsDescriptionExpanded(false);
     window.requestAnimationFrame(() => triggerRef.current?.focus());
   }, []);
 
@@ -68,9 +70,9 @@ export default function ZoomablePreview({
                   priority
                   className="object-contain"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"/>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"/>
               </div>
-              <div className="relative flex h-full flex-col justify-between p-2 sm:p-4">
+              <div className="relative flex h-full flex-col justify-between">
                 <div className="flex items-start justify-end gap-4">
                   <button ref={closeButtonRef} type="button" onClick={closePreview} aria-label="Close fullscreen preview"
                     className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-black/50 text-white transition hover:border-red-200 hover:bg-black/40 hover:text-red-600"
@@ -78,13 +80,34 @@ export default function ZoomablePreview({
                     <X className="h-7 w-7"/>
                   </button>
                 </div>
-                <div className="max-w-3xl">
+                <div className="max-w-4xl mx-auto text-center w-full bg-gradient-to-t from-secondary via-secondary to-transparent p-6 pt-20">
                   <h2 id="zoomed-preview-title" className="text-3xl font-semibold text-white sm:text-5xl">
                     {title}
                   </h2>
                   {description && (
-                    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base">
-                      {description}
+                    <p className="mt-3 text-[16px] font-[500] leading-relaxed text-white sm:text-medium tracking-wide sm:mt-4 sm:text-[18px] sm:leading-relaxed">
+                      {(() => {
+                        const words = description.trim().split(/\s+/);
+                        const previewWordCount = 12;
+                        const shouldTruncate = words.length > previewWordCount;
+                        return (
+                          <>
+                            {shouldTruncate && !isDescriptionExpanded
+                              ? `${words.slice(0, previewWordCount).join(" ")}… `
+                              : description}
+                            {shouldTruncate && (
+                              <button
+                                type="button"
+                                onClick={() => setIsDescriptionExpanded((expanded) => !expanded)}
+                                aria-expanded={isDescriptionExpanded}
+                                className="ml-1 cursor-pointer font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                              >
+                                {isDescriptionExpanded ? "Hide details" : "See more"}
+                              </button>
+                            )}
+                          </>
+                        );
+                      })()}
                     </p>
                   )}
                 </div>

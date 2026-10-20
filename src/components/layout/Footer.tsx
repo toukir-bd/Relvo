@@ -26,7 +26,7 @@ const menus = [
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black text-white">
-      <div className="mx-auto max-w-[1600px] px-8 py-20 lg:px-16">
+      <div className="mx-auto max-w-[1600px] px-5 py-14 sm:px-8 sm:py-16 lg:px-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-3">
           <div>
             <h2 className="mb-4 text-3xl font-semibold">
@@ -71,7 +71,7 @@ export default function Footer() {
 
         </div>
 
-        <div className="mt-16 border-t border-white/10 pt-8 text-sm text-white/40">
+        <div className="mt-12 border-t border-white/10 pt-6 text-xs text-white/40 sm:mt-16 sm:pt-8 sm:text-sm">
           © {new Date().getFullYear()} Your Company. All rights reserved.
         </div>
 

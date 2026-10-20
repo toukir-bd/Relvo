@@ -147,22 +147,22 @@ export default function HorizontalStory() {
 
   return (
     <section ref={sectionRef} className="relative w-full bg-secondary" style={{ height: sectionHeight }}>
-      <div ref={viewportRef} className="sticky top-0 flex w-full flex-col justify-center overflow-hidden py-[100px]">
-        <div className="mb-[70px] px-[4.5vw]">
-          <h2 className="text-[94px] font-[700] leading-[0.9] tracking-tight text-white">
+      <div ref={viewportRef} className="sticky top-0 flex w-full flex-col justify-center overflow-hidden py-12 sm:py-16 lg:py-[100px]">
+        <div className="mb-8 px-4 sm:mb-12 sm:px-6 lg:mb-[70px] lg:px-[4.5vw]">
+          <h2 className="text-[clamp(40px,7vw,94px)] font-[700] leading-[0.95] tracking-tight text-white">
             our best cases prove it
           </h2>
         </div>
         <div className="w-full overflow-visible">
-          <div ref={trackRef} className="flex w-max gap-12 pl-[4.5vw] pr-[4.5vw] will-change-transform">
+          <div ref={trackRef} className="flex w-max gap-4 px-4 sm:gap-6 sm:px-6 lg:gap-12 lg:pl-[4.5vw] lg:pr-[4.5vw] will-change-transform">
             {cards.map((card) => (
-              <article key={card.category} className={`relative h-[620px] w-[32vw] min-w-[720px] shrink-0 overflow-hidden border border-white/10 rounded-[0px] ${card.gradient}`}>
+              <article key={card.category} className={`relative h-[min(68svh,620px)] min-h-[420px] w-[min(84vw,720px)] shrink-0 overflow-hidden border border-white/10 rounded-[0px] sm:w-[min(72vw,720px)] lg:h-[620px] lg:w-[max(32vw,720px)] ${card.gradient}`}>
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent" />
-                <div className="relative z-10 flex h-full flex-col p-8">
+                <div className="relative z-10 flex h-full flex-col p-5 sm:p-7 lg:p-8">
                   <span className="text-[13px] font-medium uppercase tracking-[0.14em] text-white/70">
                     {card.category}
                   </span>
-                  <h3 className="mt-9 max-w-[500px] text-[58px] font-[700] leading-[0.95] tracking-tight text-white">
+                  <h3 className="mt-6 max-w-[500px] whitespace-pre-line text-[clamp(34px,5vw,58px)] font-[700] leading-[0.98] tracking-tight text-white sm:mt-9 lg:whitespace-normal">
                     {card.title}
                   </h3>
                   <button type="button" className="mt-[30px] flex w-fit items-center gap-5 border border-white/30 px-[20px] py-[12px] text-[11px] font-medium uppercase 

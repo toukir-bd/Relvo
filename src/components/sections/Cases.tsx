@@ -18,7 +18,7 @@ const previewSlides = [
 ];
 
 const MOVE_VH = 0.85;
-const HOLD_VH = 0.35;
+const HOLD_VH = 0.5;
 const STEP_VH = MOVE_VH + HOLD_VH;
 const END_HOLD_VH = 0.8;
 const SCALE_MIN = 0.78;
@@ -97,8 +97,8 @@ export default function Cases() {
 
   return (
     <section ref={sectionRef} aria-label="Selected projects" className="relative" style={{height:`calc(100svh + ${totalScrollVh * 100}svh)`}}>
-      <div className="top-0 sticky mx-auto flex flex-col gap-8 min-h-screen w-full max-w-[1600px] items-center justify-center">
-        <span className="relative overflow-hidden text-center text-[85px] font-[600] leading-[90px] -tracking-[1px] text-white">
+      <div className="cases-inner top-0 sticky mx-auto flex min-h-screen w-full max-w-[1600px] flex-col items-center justify-center gap-5 px-4 py-6 sm:gap-8 sm:px-6 lg:gap-12 lg:px-10">
+        <span className="cases-header relative overflow-hidden text-center text-[clamp(38px,7vw,85px)] font-[600] leading-[1.05] -tracking-[1px] text-white">
           <h2 className="invisible">
             work that speaks for itself
           </h2>
@@ -106,10 +106,9 @@ export default function Cases() {
             work that speaks for itself
           </h2>
         </span>
-        <div className="cases-content grid min-h-0 w-full content-center gap-4 lg:grid-cols-[1.25fr_1fr] lg:items-center lg:gap-12">
+        <div className="cases-content grid min-h-0 w-full content-center gap-5 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-0">
           <div className="pointer-events-none absolute left-0 top-0 h-64 w-64 rounded-full bg-primary/10 blur-[80px] sm:h-96 sm:w-96 sm:blur-[90px]"/>
-          <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 rounded-full bg-primary/10 blur-[80px] sm:h-96 sm:w-96 sm:blur-[90px]"/>
-          <div className="cases-preview relative h-[clamp(12rem,37svh,23rem)] lg:h-[clamp(30rem,70svh,50rem)]">
+          <div className="cases-preview relative h-[clamp(16rem,42svh,26rem)] lg:h-[clamp(28rem,58svh,44rem)]">
             {previewSlides.map((slide, index) => {
               const item = slide.type === "case" ? slide.item : null;
               const isCurrent = index === transitionIndex;
@@ -120,7 +119,11 @@ export default function Cases() {
               const incomingScale = SCALE_MIN + transitionProgress * (SCALE_MAX - SCALE_MIN);
               const scale = isCurrent ? outgoingScale : incomingScale;
               const translateY = isIncoming ? (1 - transitionProgress) * ENTER_Y : 0;
-              const opacity = isCurrent ? 1 - transitionProgress : isIncoming ? 1 : 0;
+              const opacity = isCurrent
+                ? 1 - transitionProgress
+                : isIncoming
+                  ? transitionProgress
+                  : 0;
               const isVisible = !isPrevious && !isFuture && (isCurrent || isIncoming);
               return (
                 <article
@@ -150,11 +153,7 @@ export default function Cases() {
                         />
                       </div>
                       <div className="relative flex h-full flex-col justify-between p-2 sm:p-3 md:p-4">
-                        <div className="flex items-start justify-between">
-                          <span className="ms-1 rounded-full bg-black/50 px-3 py-2 text-[12px] font-semibold tracking-[0.12em] text-white backdrop-blur-sm 
-                            sm:px-5 sm:text-[14px] sm:tracking-[0.08em] uppercase">
-                            {item.badge}
-                          </span>
+                        <div className="flex items-start justify-end">
                           <ZoomablePreview
                             src={item.image}
                             alt={item.title}
@@ -166,15 +165,15 @@ export default function Cases() {
                       </div>
                     </div>
                     ) : (
-                    <div className="relative h-full flex flex-col items-center justify-center gap-8 p-4 sm:p-8 md:p-10 mx-auto max-w-full w-2xl">
+                    <div className="relative h-full flex flex-col items-center justify-center gap-8 p-4 sm:p-8 md:p-10 mx-auto w-full w-2xl">
                       <div className="pointer-events-none h-full absolute inset-0 rounded-[30px] sm:rounded-[42px] opacity-[0.12] [background-size:38px_38px]
                         [background-image:linear-gradient(rgba(255,255,255,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.25)_1px,transparent_1px)]"/>
                       <p className="text-center text-[16px] sm:text-[17px] font-[500] tracking-[0.16em] sm:tracking-[0.14em] text-primary/80 uppercase">
                         Every idea has a bigger possibility
                       </p>
-                      <h3 className="text-center text-[4rem] font-semibold leading-[1.1] tracking-tight text-white">
+                      <h3 className="text-center text-[clamp(2rem,5vw,4rem)] font-semibold leading-[1.1] tracking-tight text-white">
                         Your Ideas, Our Touch<br/>
-                        <span className="text-primary font-thin text-[3.5rem] sm:text-[6rem]">
+                        <span className="text-primary font-thin text-[clamp(2.25rem,6vw,6rem)] lg:text-[6rem]">
                           More Relvo
                         </span>
                       </h3>
@@ -194,7 +193,8 @@ export default function Cases() {
           </div>
 
           {/* Project details */}
-          <div className="cases-details relative min-h-[clamp(6.5rem,16svh,9rem)] lg:min-h-[18rem]">
+          <div className="cases-details relative min-h-[clamp(10rem,24svh,15rem)] lg:min-h-[30rem]">
+            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-full max-h-[24rem] w-[calc(100%+2rem)] max-w-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-[44px] bg-gradient-to-r from-primary/18 via-primary/10 to-transparent blur-[90px] sm:blur-[130px]" />
             {previewSlides.map((slide, index) => {
               const isCta = slide.type === "cta";
               const item = slide.type === "case" ? slide.item : null;
@@ -203,26 +203,27 @@ export default function Cases() {
               const yOffset = clamp( (index - slidePosition) * 18, -18, 18 );
               return (
                 <div key={item?.slug ?? "all-cases-details"} aria-hidden={index !== displayedIndex}
-                  className="absolute inset-0 flex flex-col justify-center"
+                  className="absolute inset-0 z-10 flex flex-col justify-center"
                   style={{ opacity, transform: `translate3d(0, ${yOffset}px, 0)`, pointerEvents:
                       index === displayedIndex ? "auto" : "none",
                   }}
                 >
-                  <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.2em] text-primary sm:mb-3 sm:text-xs sm:tracking-[0.24em]">
-                    {isCta ? "The full collection" : item?.badge}
-                  </p>
-
-                  <h3 className="text-xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl">
-                    {isCta
-                      ? "There’s more to explore."
-                      : item?.title}
-                  </h3>
-
-                  <p className="mt-2 line-clamp-3 max-w-xl text-xs leading-relaxed text-white/60 sm:mt-4 sm:text-base">
-                    {isCta
-                      ? "Visit the cases page to see more of our selected work."
-                      : item?.description}
-                  </p>
+                  <div className="mx-auto w-full max-w-2xl rounded-[28px] bg-gradient-to-r from-[#071714]/95 via-[#071714]/55 to-transparent px-5 py-6 sm:rounded-[36px] sm:px-8 sm:py-9 lg:px-10 lg:py-10">
+                    <div className="mb-5 flex items-center gap-3 sm:mb-7">
+                      <span aria-hidden="true" className="h-px w-8 bg-primary sm:w-12" />
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary sm:text-sm">
+                        {isCta ? "The full collection" : item?.badge}
+                      </p>
+                    </div>
+                    <h3 className="max-w-xl text-[clamp(1.5rem,2.8vw,2.75rem)] font-bold leading-[1.08] tracking-tight text-white">
+                      {isCta ? "There’s more to explore." : item?.title}
+                    </h3>
+                    <p className="mt-4 line-clamp-4 max-w-xl text-[15px] font-medium leading-relaxed tracking-[0.015em] text-white/65 sm:mt-6 sm:text-lg sm:leading-[1.55] lg:text-xl">
+                      {isCta
+                        ? "Visit the cases page to see more of our selected work."
+                        : item?.description}
+                    </p>
+                  </div>
                 </div>
               );
             })}

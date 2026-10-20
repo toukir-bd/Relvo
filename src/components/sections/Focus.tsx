@@ -89,7 +89,7 @@ export default function Focus({ lenis }: SplashProps) {
           Designed to Clarity. Effortless to Explore.
         </h4>
 
-        <h1 className="relative mb-5 pb-3 text-center text-[107px] font-[800] leading-[105px] -tracking-[1px] text-white">
+        <h1 className="relative mb-5 max-w-full px-3 pb-3 text-center text-[clamp(38px,8vw,107px)] font-[800] leading-[0.98] -tracking-[1px] text-white">
           <div className="relative z-10 invisible">
             We simplify complexity and bring<br />your vision to life
           </div>

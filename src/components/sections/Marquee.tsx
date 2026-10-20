@@ -53,7 +53,7 @@ export default function Marquee({
     <section className="overflow-hidden bg-primary py-12 text-secondary md:py-20">
       <div ref={motionRef} className="will-change-transform">
         <div className="marquee-track flex w-max whitespace-nowrap">
-          <h4 className="inline-block pe-3 text-8xl font-[500] tracking-tighter leading-5">{repeatedText}</h4>
+          <h4 className="inline-block pe-3 text-[clamp(3rem,10vw,6rem)] font-[500] leading-none tracking-tighter md:text-8xl">{repeatedText}</h4>
           <span aria-hidden="true" className="marquee-item">
             {repeatedText}
           </span>

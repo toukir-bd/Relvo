@@ -14,18 +14,18 @@ export default function Header({
 }: HeaderProps) {
   return (
     <header>
-      <Link href="/" className="fixed top-9 left-10 z-30 flex items-center w-auto">
+      <Link href="/" className="fixed left-4 top-5 z-30 flex w-auto items-center sm:left-6 sm:top-7 lg:left-10 lg:top-9">
         <Image
           src="/img/elements/logo.webp"
           alt="Relvo Logo"
           width={160}
           height={45}
-          className={`transition-all duration-500`}
+          className="h-auto w-[112px] transition-all duration-500 sm:w-[140px] lg:w-[160px]"
           priority
         />
       </Link>
       <button onClick={isMenuOpen ? onMenuClose : onMenuOpen} aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        className={`group cursor-pointer flex justify-center items-center h-[50px] w-[50px] gap-2 fixed top-9 right-10 z-100 rounded-full 
+        className={`group fixed right-4 top-5 z-100 flex h-11 w-11 cursor-pointer items-center justify-center gap-2 rounded-full sm:right-6 sm:top-7 sm:h-[50px] sm:w-[50px] lg:right-10 lg:top-9
           border border-white/30 hover:border-primary/50 transition-all duration-500"
           ${isMenuOpen
             ? "border-red-200 hover:border-red-400"

@@ -26,11 +26,11 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="bg-[#101010] px-6 py-16 text-white md:px-10 md:py-20 lg:px-14"
+      className="bg-[#101010] px-4 py-12 text-white sm:px-6 sm:py-16 md:px-10 md:py-20 lg:px-14"
     >
-      <div className="mx-auto grid max-w-[1600px] gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+      <div className="mx-auto grid max-w-[1600px] gap-10 sm:gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div>
-          <h2 className="max-w-[520px] text-5xl font-medium leading-[0.98] tracking-tight md:text-6xl">
+          <h2 className="max-w-[520px] text-[clamp(2.5rem,8vw,3.75rem)] font-medium leading-[0.98] tracking-tight">
             Tell us about
             <br />
             the project
@@ -44,7 +44,7 @@ export default function ContactSection() {
           <div className="mt-10 max-w-md border-t border-white/30 pt-5">
             <a
               href="mailto:partner@bytetown.agency"
-              className="text-xl font-semibold hover:text-[#aeb4ff] md:text-2xl"
+              className="break-all text-lg font-semibold hover:text-[#aeb4ff] sm:text-xl md:text-2xl"
             >
               partner@bytetown.agency
             </a>
@@ -65,7 +65,7 @@ export default function ContactSection() {
                 key={social.label}
                 href={social.href}
                 aria-label={social.label}
-                className="grid h-[68px] w-[100px] place-items-center rounded-2xl border border-white/30 text-2xl font-bold transition hover:border-[#5964ff] hover:bg-[#5964ff]"
+                className="grid h-14 w-14 place-items-center rounded-xl border border-white/30 text-xl font-bold transition hover:border-[#5964ff] hover:bg-[#5964ff] sm:h-[68px] sm:w-[100px] sm:rounded-2xl sm:text-2xl"
               >
                 {social.mark}
               </a>

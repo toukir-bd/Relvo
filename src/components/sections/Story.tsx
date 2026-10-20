@@ -87,7 +87,7 @@ export default function Story() {
                 backgroundSize: "42px 42px",
               }}
             />
-            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[850px] -translate-x-1/2 rounded-full bg-primary/15 blur-[140px]"/>
+            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-[min(850px,120vw)] -translate-x-1/2 rounded-full bg-primary/15 blur-[100px] sm:h-[420px] sm:blur-[140px]"/>
             <RelvoVisual activeSlide={activeSlide}/>
             <p className="relative overflow-hidden text-center text-[14px] font-semibold uppercase tracking-[0.28em] text-primary sm:text-[16px] lg:text-[20px]">
               <span className="invisible">
@@ -97,7 +97,7 @@ export default function Story() {
                 Relvo is built to create a presence that performs
               </span>
             </p>
-            <div className="my-7 relative min-h-[300px] w-full max-w-[1300px] mx-auto overflow-hidden">
+            <div className="relative mx-auto my-5 min-h-[260px] w-full max-w-[1300px] overflow-hidden px-4 sm:my-7 sm:min-h-[300px] sm:px-8 lg:px-0">
               {slides.map((slide, index) => {
                 const isActive = index === activeSlide;
                 const isPrevious = index < activeSlide;
@@ -110,7 +110,7 @@ export default function Story() {
                     isActive ? "translate-y-0 opacity-100" : isPrevious ? "-translate-y-[100px] opacity-0" : "translate-y-[100px] opacity-0",
                     ].join(" ")}
                   >
-                    <h2 className="w-full text-center text-[37px] font-normal leading-[1.16] tracking-tight text-white sm:text-[55px] lg:text-[73px] xl:text-[75px]">
+                    <h2 className="mx-auto w-full max-w-[1100px] px-3 break-words text-center text-[clamp(30px,5vw,75px)] font-normal leading-[1.16] tracking-tight text-white sm:text-[55px] lg:max-w-none lg:px-0 lg:text-[73px] xl:text-[75px]">
                       {words.map((word, wordIndex) => {
                         const wordProgress = clamp( slideProgress * words.length - wordIndex + 0.55, );
                         return (
