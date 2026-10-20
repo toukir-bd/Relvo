@@ -15,21 +15,22 @@ svg.mouse #wheel {
 
 
 .btn-relvo {
-	@apply relative inline-flex h-[60px] items-center justify-center overflow-hidden rounded-[12px] border border-transparent px-1 ps-7 text-base font-[500] text-white transition-all duration-500 ease-out sm:text-lg;
+	@apply relative inline-flex h-[48px] max-w-[calc(100%_-_1rem)] items-center justify-center overflow-hidden rounded-[12px] border border-transparent px-1 text-[13px] font-[500] text-white transition-all duration-500 ease-out sm:h-[60px] sm:max-w-full sm:text-lg;
+	padding-inline-start: clamp(0.75rem, 3vw, 1.75rem);
 	background-color: #071714;
 	background-image: linear-gradient(105deg, rgb(187 255 0 / 0.2) 0%, rgb(187 255 0 / 0.08) 42%, rgb(7 23 20 / 0.96) 100%);
 	background-size: 220% 100%;
 	background-position: 0% 50%;
-	box-shadow: 0 10px 30px rgb(0 0 0 / 0.24), inset 0 1px 0 rgb(255 255 255 / 0.08);
+	box-shadow: 0 10px 30px rgb(0 0 0 / 0.24);
 	.btnText,
 	.iconArea {
 		@apply relative z-10;
 	}
 	.btnText {
-		@apply transition-transform duration-500 ease-out;
+		@apply whitespace-nowrap transition-transform duration-500 ease-out;
 	}
 	.iconArea {
-		@apply ms-5 flex h-[50px] w-[50px] items-center justify-center rounded-[10px] bg-primary/15 text-primary;
+		@apply ms-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-primary/15 text-primary sm:ms-5 sm:h-[50px] sm:w-[50px];
 		@apply transition-all duration-500 ease-out;
 		box-shadow: 0 8px 20px rgb(187 255 0 / 0.15);
 		.btnIcon {

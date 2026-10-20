@@ -42,8 +42,15 @@ export default function Clients() {
   }, []);
 
   return (
-    <section aria-label="Selected clients" className="overflow-hidden py-10 bg-black/25 rounded-4xl border border-primary/15">
-      <div ref={viewportRef} className="overflow-hidden">
+    <div role="group" aria-label="Selected clients" className="overflow-hidden rounded-4xl border border-primary/15 bg-black/25 py-5 sm:py-7">
+      <div
+        ref={viewportRef}
+        className="overflow-hidden"
+        style={{
+          maskImage: "linear-gradient(to right, transparent 0%, black 9%, black 91%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 9%, black 91%, transparent 100%)",
+        }}
+      >
         <div className={`flex w-max ${ dimensions ? "marquee-track" : ""}`}>
           {Array.from(
             { length: dimensions?.copies ?? 1 },
@@ -67,6 +74,6 @@ export default function Clients() {
           )}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
