@@ -98,14 +98,9 @@ export default function Cases() {
   return (
     <section ref={sectionRef} aria-label="Selected projects" className="relative" style={{height:`calc(100svh + ${totalScrollVh * 100}svh)`}}>
       <div className="cases-inner top-0 sticky mx-auto flex min-h-screen w-full max-w-[1600px] flex-col items-center justify-center gap-5 px-4 py-6 sm:gap-8 sm:px-6 lg:gap-12 lg:px-10">
-        <span className="cases-header relative overflow-hidden text-center text-[clamp(38px,7vw,85px)] font-[600] leading-[1.05] -tracking-[1px] text-white">
-          <h2 className="invisible">
-            work that speaks for itself
-          </h2>
-          <h2 aria-hidden="true" className="hero-text-neon pointer-events-none absolute inset-0">
-            work that speaks for itself
-          </h2>
-        </span>
+        <h2 className="cases-header hero-text-neon relative overflow-hidden text-center text-[clamp(38px,7vw,85px)] font-[600] leading-[1.05] -tracking-[1px]">
+          work that speaks for itself
+        </h2>
         <div className="cases-content grid min-h-0 w-full content-center gap-5 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-0">
           <div className="pointer-events-none absolute left-0 top-0 h-64 w-64 rounded-full bg-primary/10 blur-[80px] sm:h-96 sm:w-96 sm:blur-[90px]"/>
           <div className="cases-preview relative h-[clamp(16rem,42svh,26rem)] lg:h-[clamp(28rem,58svh,44rem)]">

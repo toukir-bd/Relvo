@@ -14,7 +14,7 @@ export default function Header({
 }: HeaderProps) {
   return (
     <header>
-      <Link href="/" className="fixed left-4 top-5 z-30 flex w-auto items-center sm:left-6 sm:top-7 lg:left-10 lg:top-9">
+      <Link href="/" className="absolute left-4 top-5 z-30 flex w-auto items-center sm:left-6 sm:top-7 lg:left-10 lg:top-9">
         <Image
           src="/img/elements/logo.webp"
           alt="Relvo Logo"

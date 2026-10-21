@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-
-const services = ["Interface Design", "Branding", "Development"];
+import { useEffect, useState } from "react";
+import { serviceNames } from "@/data/services";
 
 const socials = [
   { label: "Dribbble", mark: "◉", href: "#" },
@@ -12,8 +11,18 @@ const socials = [
   { label: "Website", mark: "W.", href: "#" },
 ];
 
-export default function ContactSection() {
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+const EMPTY_SERVICE_SELECTION: string[] = [];
+
+export default function ContactSection({
+  initialSelectedServices = EMPTY_SERVICE_SELECTION,
+}: {
+  initialSelectedServices?: string[];
+}) {
+  const [selectedServices, setSelectedServices] = useState<string[]>(initialSelectedServices);
+
+  useEffect(() => {
+    setSelectedServices(initialSelectedServices);
+  }, [initialSelectedServices]);
 
   function toggleService(service: string) {
     setSelectedServices((current) =>
@@ -44,16 +53,16 @@ export default function ContactSection() {
           <div className="mt-10 max-w-md border-t border-white/30 pt-5">
             <a
               href="mailto:partner@bytetown.agency"
-              className="break-all text-lg font-semibold hover:text-[#aeb4ff] sm:text-xl md:text-2xl"
+              className="break-all text-lg font-semibold hover:text-primary sm:text-xl md:text-2xl"
             >
               partner@bytetown.agency
             </a>
 
             <div className="mt-4 flex gap-7 text-sm">
-              <a href="#" className="hover:text-[#aeb4ff]">
+              <a href="#" className="hover:text-primary">
                 Telegram ↗
               </a>
-              <a href="#" className="hover:text-[#aeb4ff]">
+              <a href="#" className="hover:text-primary">
                 WhatsApp ↗
               </a>
             </div>
@@ -65,7 +74,7 @@ export default function ContactSection() {
                 key={social.label}
                 href={social.href}
                 aria-label={social.label}
-                className="grid h-14 w-14 place-items-center rounded-xl border border-white/30 text-xl font-bold transition hover:border-[#5964ff] hover:bg-[#5964ff] sm:h-[68px] sm:w-[100px] sm:rounded-2xl sm:text-2xl"
+                className="grid h-14 w-14 place-items-center rounded-xl border border-white/30 text-xl font-bold transition hover:border-primary hover:bg-primary hover:text-secondary sm:h-[68px] sm:w-[100px] sm:rounded-2xl sm:text-2xl"
               >
                 {social.mark}
               </a>
@@ -81,7 +90,7 @@ export default function ContactSection() {
           }}
         >
           <fieldset>
-            <legend className="mb-3 text-sm font-semibold text-[#c4caff]">
+            <legend className="mb-3 text-sm font-semibold text-primary/80">
               Contact information*
             </legend>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -91,7 +100,7 @@ export default function ContactSection() {
                 autoComplete="name"
                 placeholder="Your name"
                 aria-label="Your name"
-                className="h-[60px] min-w-0 rounded-xl bg-[#272727] px-4 text-white outline-none placeholder:text-white/65 focus:ring-2 focus:ring-[#5964ff]"
+                className="h-[60px] min-w-0 rounded-xl bg-[#272727] px-4 text-white outline-none placeholder:text-white/65 focus:ring-2 focus:ring-primary"
               />
               <input
                 required
@@ -100,17 +109,17 @@ export default function ContactSection() {
                 autoComplete="email"
                 placeholder="Your email"
                 aria-label="Your email"
-                className="h-[60px] min-w-0 rounded-xl bg-[#272727] px-4 text-white outline-none placeholder:text-white/65 focus:ring-2 focus:ring-[#5964ff]"
+                className="h-[60px] min-w-0 rounded-xl bg-[#272727] px-4 text-white outline-none placeholder:text-white/65 focus:ring-2 focus:ring-primary"
               />
             </div>
           </fieldset>
 
           <fieldset>
-            <legend className="mb-3 text-sm font-semibold text-[#c4caff]">
+            <legend className="mb-3 text-sm font-semibold text-primary/80">
               You’re interested in
             </legend>
             <div className="flex flex-wrap gap-2">
-              {services.map((service) => {
+              {serviceNames.map((service) => {
                 const selected = selectedServices.includes(service);
 
                 return (
@@ -121,8 +130,8 @@ export default function ContactSection() {
                     onClick={() => toggleService(service)}
                     className={`rounded-xl border px-5 py-4 text-sm font-semibold transition ${
                       selected
-                        ? "border-[#5964ff] bg-[#5964ff] text-white"
-                        : "border-white/30 text-white/80 hover:border-white/70"
+                        ? "border-primary bg-primary text-secondary"
+                        : "border-white/30 text-white/80 hover:border-primary/70"
                     }`}
                   >
                     {service}
@@ -133,20 +142,20 @@ export default function ContactSection() {
           </fieldset>
 
           <label className="block">
-            <span className="mb-3 block text-sm font-semibold text-[#c4caff]">
+            <span className="mb-3 block text-sm font-semibold text-primary/80">
               About the project
             </span>
             <textarea
               name="project"
               placeholder="Describe the task"
               rows={5}
-              className="w-full resize-y rounded-xl bg-[#272727] px-4 py-4 text-white outline-none placeholder:text-white/65 focus:ring-2 focus:ring-[#5964ff]"
+              className="w-full resize-y rounded-xl bg-[#272727] px-4 py-4 text-white outline-none placeholder:text-white/65 focus:ring-2 focus:ring-primary"
             />
           </label>
 
           <button
             type="submit"
-            className="w-full rounded-xl bg-[#5964ff] py-5 font-bold transition hover:bg-[#7079ff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="w-full rounded-xl bg-primary py-5 font-bold text-secondary transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             SUBMIT
           </button>

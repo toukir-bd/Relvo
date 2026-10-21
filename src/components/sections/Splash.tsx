@@ -5,10 +5,10 @@ import { UserRound, Sparkles, Blocks, Orbit, CalendarDays } from "lucide-react";
 import ScrollToDiscover from "../props/ScrollToDiscover";
 
 const roles = [
-  { label: "User Centric", icon: UserRound, active: false, href: "/services#userCentric"},
-  { label: "Creatively Driven", icon: Sparkles, active: false, href: "/services#creativeDriven"},
-  { label: "Innovative Led", icon: Blocks, active: false, href: "/services#innovativeLed"},
-  { label: "Scalable Built", icon: Orbit, active: true, href: "/services#scalableBuilt"},
+  { label: "User Centric", icon: UserRound, active: false, href: "/services#service-ui-ux-product-design"},
+  { label: "Creatively Driven", icon: Sparkles, active: false, href: "/services#service-brand-strategy-identity"},
+  { label: "Innovative Led", icon: Blocks, active: false, href: "/services#service-web-applications"},
+  { label: "Scalable Built", icon: Orbit, active: true, href: "/services#service-website-design-development"},
 ];
 
 
@@ -26,13 +26,8 @@ export default function Splash() {
           <span className="text-primary pl-2">V</span>ision &
           <span className="text-primary pl-2">O</span>riginality
         </h4>
-        <h1 className="relative mb-5 max-w-full overflow-hidden pb-3 text-center text-[clamp(42px,8vw,107px)] font-[800] leading-[0.98] -tracking-[1px] text-white">
-          <div className="relative z-10 invisible">
-            crafting for the shape<br />of your vision
-          </div>
-          <div aria-hidden="true" className="hero-text-neon pointer-events-none absolute inset-0 z-20">
-            crafting for the shape<br />of your vision
-          </div>
+        <h1 className="hero-text-neon relative mb-5 max-w-full overflow-hidden pb-3 text-center text-[clamp(42px,8vw,107px)] font-[800] leading-[0.98] -tracking-[1px]">
+          crafting for the shape<br />of your vision
         </h1>
         <div className="mx-auto mb-8 w-full max-w-full rounded-[20px] bg-secondary/70 p-2 sm:mb-12 sm:w-auto sm:rounded-[24px] lg:mb-15">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">

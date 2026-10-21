@@ -20,8 +20,8 @@ const menus = [
     subtitle: "Who We Are",
   },
   {
-    title: "Expertise",
-    href: "/expertise",
+    title: "Services",
+    href: "/services",
     subtitle: "Our Services",
   },
   {

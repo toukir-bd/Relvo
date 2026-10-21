@@ -73,41 +73,25 @@ export default function Focus({ lenis }: SplashProps) {
         <div
           className="sticky top-0 relative flex h-screen w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
           style={{
-            backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 11%) 1px, transparent 1.5px)",
-            backgroundSize: "28px 28px",
+            backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 7%) 0.65px, transparent 1px)",
+            backgroundSize: "14px 14px",
           }}
         >
-          <h4 className="mb-5 text-center text-[clamp(20px,2vw,29px)] font-light tracking-wide">
+          <h4 className="mb-5 text-center text-[clamp(20px,2vw,29px)] font-normal tracking-wide">
             Designed to Clarity. Effortless to Explore.
           </h4>
 
-          <h1
-            className="focus-title relative mb-5 max-w-full px-3 pb-3 text-center text-[clamp(32px,7.4vw,124px)] font-[800] leading-[0.92] -tracking-[1px] text-white"
-          >
-            <div className="relative z-10 invisible">
-              <span className="block text-[1em]">We simplify complexity</span>
-              <span className="block text-[0.72em]">and bring your vision to life</span>
-            </div>
-
-            <div aria-hidden="true" className="hero-text-neon pointer-events-none absolute inset-0 z-20">
-              <span className="block text-[1em]">We simplify complexity</span>
-              <span className="block text-[0.72em]">and bring your vision to life</span>
-            </div>
+          <h1 className="focus-title relative mb-5 max-w-full px-3 pb-3 text-center text-[clamp(32px,7.4vw,124px)] font-[800] leading-[1.12] -tracking-[1px] text-white">
+            <span className="hero-text-neon block text-[0.82em]">we simplify complexity<br/>and bring your vision to life</span>
           </h1>
           <div className="relative z-[110] mt-8 w-[calc(100%-2rem)] max-w-[1200px] sm:mt-12 sm:w-[calc(100%-4rem)] lg:mt-14">
-            <h2
-              className="mb-3 text-center text-[clamp(20px,2vw,29px)] font-bold uppercase tracking-[0.18em] text-white sm:mb-4 sm:tracking-[0.24em]"
-              style={{ fontFamily: "var(--font-urbanist), sans-serif" }}
-            >
-              Meet with our prestigious top clients
-            </h2>
+            <h4 className="mb-3 text-center text-[clamp(20px,2vw,20px)] font-[500] uppercase tracking-[0.18em] text-primary sm:mb-4 sm:tracking-[0.15em]">
+              Meet with prestigious top partners
+            </h4>
             <Clients />
           </div>
-          <span
-            ref={windowRef}
-            className="pointer-events-none absolute left-1/2 top-1/2 z-[120] block h-screen w-screen overflow-hidden rounded-[24px] border-4 border-secondary bg-secondary will-change-transform sm:rounded-[32px]"
-            aria-hidden="true"
-          >
+          <span ref={windowRef} className="pointer-events-none absolute left-1/2 top-1/2 z-[120] block h-screen w-screen overflow-hidden rounded-[24px] border-4
+          border-secondary bg-secondary will-change-transform sm:rounded-[32px]" aria-hidden="true">
             <video
               ref={videoRef}
               className="block h-full w-full object-cover"

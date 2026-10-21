@@ -11,7 +11,7 @@ const menus = [
   },
   {
     title: "Expertise",
-    href: "/expertise",
+    href: "/services",
   },
   {
     title: "Projects",
