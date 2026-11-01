@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { caseStudies } from "@/data/cases";
 import ZoomablePreview from "@/components/props/ZoomablePreview";
 
-const featuredCases = caseStudies.slice(-4);
+const featuredCases = caseStudies.slice(0, 5);
 const previewSlides = [
   ...featuredCases.map((item) => ({
     type: "case" as const,
@@ -142,9 +142,11 @@ export default function Cases() {
                           src={item.image}
                           alt={item.title}
                           fill
-                          sizes="(max-width: 1023px) 100vw, 65vw"
+                          unoptimized
                           priority={index === 0}
-                          className="object-cover"
+                          loading={index === 0 ? "eager" : "lazy"}
+                          sizes="(max-width: 1023px) 100vw, 65vw"
+                          className="absolute inset-0 h-full w-full object-cover"
                         />
                       </div>
                       <div className="relative flex h-full flex-col justify-between p-2 sm:p-3 md:p-4">
@@ -207,15 +209,15 @@ export default function Cases() {
                     <div className="mb-5 flex items-center gap-3 sm:mb-7">
                       <span aria-hidden="true" className="h-px w-8 bg-primary sm:w-12" />
                       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary sm:text-sm">
-                        {isCta ? "The full collection" : item?.badge}
+                        {isCta ? "Some best cases" : item?.badge}
                       </p>
                     </div>
-                    <h3 className="max-w-xl text-[clamp(1.5rem,2.8vw,2.75rem)] font-bold leading-[1.08] tracking-tight text-white">
+                    <span className="max-w-xl text-[clamp(1.5rem,2.8vw,2.75rem)] font-normal leading-[1.12] tracking-tight text-white antialiased">
                       {isCta ? "There’s more to explore." : item?.title}
-                    </h3>
-                    <p className="mt-4 line-clamp-4 max-w-xl text-[15px] font-medium leading-relaxed tracking-[0.015em] text-white/65 sm:mt-6 sm:text-lg sm:leading-[1.55] lg:text-xl">
+                    </span>
+                    <p className="mt-4 line-clamp-4 max-w-xl text-[15px] font-normal leading-relaxed tracking-wide text-white/60 sm:mt-6 sm:text-lg sm:leading-[1.55] lg:text-xl">
                       {isCta
-                        ? "Visit the cases page to see more of our selected work."
+                        ? "Visit the cases page to see some more of our best work."
                         : item?.description}
                     </p>
                   </div>

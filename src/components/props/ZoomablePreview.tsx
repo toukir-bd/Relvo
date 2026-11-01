@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { Expand, X } from "lucide-react";
+import Image from "next/image";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -66,9 +66,10 @@ export default function ZoomablePreview({
                   src={src}
                   alt={alt}
                   fill
-                  sizes="100vw"
+                  unoptimized
                   priority
-                  className="object-contain"
+                  sizes="100vw"
+                  className="absolute inset-0 h-full w-full object-contain"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"/>
               </div>
