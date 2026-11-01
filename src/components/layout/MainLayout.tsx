@@ -44,7 +44,7 @@ export default function MainLayout({
 
   return (
     <>
-      <Header isScrolled={isScrolled} isMenuOpen={menuOpen} onMenuOpen={() => setMenuOpen(true)} onMenuClose={() => setMenuOpen(false)}/>
+      <Header isMenuOpen={menuOpen} onMenuOpen={() => setMenuOpen(true)} onMenuClose={() => setMenuOpen(false)}/>
       <MenuOverlay isOpen={menuOpen} isScrolled={isScrolled} onClose={() => setMenuOpen(false)}/>
       <main>
         {children}
