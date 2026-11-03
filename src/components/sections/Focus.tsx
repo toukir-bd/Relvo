@@ -77,7 +77,7 @@ export default function Focus({ lenis }: SplashProps) {
             backgroundSize: "14px 14px",
           }}
         >
-          <h4 className="mb-5 text-center text-[clamp(20px,2vw,29px)] font-normal tracking-wide">
+          <h4 className="mb-5 text-center text-[clamp(20px,2vw,29px)] font-[200] tracking-wide">
             Designed to Clarity. Effortless to Explore.
           </h4>
 
@@ -85,7 +85,7 @@ export default function Focus({ lenis }: SplashProps) {
             <span className="hero-text-neon block text-[0.82em]">we simplify complexity<br/>and bring your vision to life</span>
           </h1>
           <div className="relative z-[110] mt-8 w-[calc(100%-2rem)] max-w-[1200px] sm:mt-12 sm:w-[calc(100%-4rem)] lg:mt-14">
-            <h4 className="mb-3 text-center text-[clamp(20px,2vw,20px)] font-[500] uppercase tracking-[0.18em] text-primary sm:mb-4 sm:tracking-[0.15em]">
+            <h4 className="mb-3 text-center text-[clamp(20px,2vw,20px)] font-[400] uppercase tracking-[0.18em] text-primary sm:mb-4 sm:tracking-[0.18em]">
               Meet with prestigious top partners
             </h4>
             <Clients />
