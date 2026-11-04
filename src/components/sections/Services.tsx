@@ -122,28 +122,28 @@ export default function HomeServices() {
         <div className="w-full overflow-visible">
           <div ref={trackRef} className="relative z-10 flex w-max gap-5 px-10 sm:gap-7 sm:px-7 lg:gap-12 lg:pl-[6vw] lg:pr-[6vw]">
             {serviceOptions.map((service) => (
-              <article key={service.id} className="relative h-[min(64svh,480px)] min-h-[300px] w-[min(80vw,680px)] shrink-0 overflow-hidden rounded-[28px]
+              <article key={service.id} className="relative h-[min(64svh,480px)] min-h-[300px] w-[min(86vw,680px)] shrink-0 overflow-hidden rounded-[28px]
                 sm:w-[min(68vw,680px)] sm:rounded-[32px] lg:h-[580px] lg:w-[max(30vw,560px)] bg-gradient-to-b from-black/25 via-black/10 to-white/5">
-                <div className="relative z-20 flex h-full flex-col justify-between p-7 sm:p-10 lg:p-15">
+                <div className="absolute inset-y-0 right-0 z-10 w-[58%] sm:w-[54%]">
+                  <Image
+                    src={service.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 330px, 54vw"
+                    className="object-contain object-center opacity-100"
+                  />
+                  <div aria-hidden="true" className="absolute inset-y-0 left-0 w-[42%] bg-gradient-to-r from-[#081111] via-[#081111]/65 to-transparent" />
+                </div>
+                <div className="relative z-20 flex h-full w-[74%] flex-col justify-between p-6 sm:w-[64%] sm:p-8 lg:w-[54%] lg:p-10">
                   <div>
-                    <span className="text-[17px] font-semibold uppercase tracking-[0.08em] text-primary">
+                    <span className="block max-w-full text-[10px] font-semibold uppercase tracking-[0.07em] text-primary sm:text-xs lg:text-sm">
                       {service.number} / {service.name}
                     </span>
-                    <h3 className="mt-10 w-full max-w-full text-[clamp(30px,4.5vw,51px)] font-[800] leading-[1.16] tracking-normal text-white">
+                    <h3 className="mt-7 w-full max-w-full text-[clamp(24px,3vw,38px)] font-semibold leading-[1.1] tracking-[-0.025em] text-white sm:mt-9">
                       {service.headline}
                     </h3>
                   </div>
-                  <div className="flex w-full items-end justify-between gap-3">
-                    <div className="pointer-events-none relative h-20 w-1/4 shrink-0 sm:h-32 sm:w-[30%]">
-                      <Image
-                        src={`${service.image}?v=ffffff`}
-                        alt=""
-                        fill
-                        sizes="(min-width: 1024px) 220px, 34vw"
-                        className="object-contain object-left-bottom brightness-0 invert opacity-40"
-                        unoptimized
-                      />
-                    </div>
+                  <div className="flex w-full items-end justify-start gap-3">
                     <Link href={`/services#service-${service.id}`} className="btn-relvo w-fit">
                       <span className="btnText">Explore Service</span>
                       <span className="iconArea">

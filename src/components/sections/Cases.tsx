@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { caseStudies } from "@/data/cases";
 import ZoomablePreview from "@/components/props/ZoomablePreview";
 
-const featuredCases = caseStudies.slice(0, 5);
+const featuredCases = caseStudies.slice(0, 4);
 const previewSlides = [
   ...featuredCases.map((item) => ({
     type: "case" as const,

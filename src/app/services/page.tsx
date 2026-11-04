@@ -107,12 +107,11 @@ export default function ServicesPage() {
                 <div className="pointer-events-none absolute inset-y-0 right-0 w-full opacity-20 lg:relative lg:z-0 lg:w-full lg:opacity-100">
                   <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/70 to-transparent lg:from-secondary lg:via-secondary/20" />
                   <Image
-                    src={`${service.image}?v=bbff00`}
+                    src={service.image}
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 600px, 100vw"
                     className={`object-contain object-right-bottom ${index % 2 === 0 ? "lg:object-right" : "lg:object-left"}`}
-                    unoptimized
                   />
                 </div>
                 <div
