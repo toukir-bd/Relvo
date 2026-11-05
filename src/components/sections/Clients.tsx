@@ -1,14 +1,11 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const clients = [
-  "indya.ai",
-  "Geekster",
-  "AVIDΞRI",
-  "longlist.io",
-  "UnlistedZone",
-  "DIAMONDRENSU",
-];
+const clients = Array.from({ length: 21 }, (_, index) => ({
+  src: `/img/partners/p-${index + 1}.webp`,
+  name: `Partner ${index + 1}`,
+}));
 
 export default function Clients() {
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -51,7 +48,7 @@ export default function Clients() {
           WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 9%, black 91%, transparent 100%)",
         }}
       >
-        <div className={`flex w-max ${ dimensions ? "marquee-track" : ""}`}>
+        <div className={`flex w-max ${dimensions ? "clients-marquee-track" : ""}`}>
           {Array.from(
             { length: dimensions?.copies ?? 1 },
             (_, copyIndex) => (
@@ -61,12 +58,20 @@ export default function Clients() {
                 aria-hidden={copyIndex !== 0}
                 className="flex shrink-0 items-center gap-16 pr-16 md:gap-24 md:pr-24"
               >
-                {clients.map((name) => (
+                {clients.map(({ src, name }) => (
                   <span
-                    key={name}
-                    className="shrink-0 whitespace-nowrap text-2xl font-semibold text-white/55 md:text-3xl"
+                    key={src}
+                    className="flex h-8 shrink-0 items-center opacity-75 transition-opacity hover:opacity-100 sm:h-10"
                   >
-                    {name}
+                    <Image
+                      src={src}
+                      alt={name}
+                      width={200}
+                      height={54}
+                      sizes="200px"
+                      style={{ width: "auto" }}
+                      className="h-8 w-auto object-contain brightness-0 invert sm:h-10"
+                    />
                   </span>
                 ))}
               </div>

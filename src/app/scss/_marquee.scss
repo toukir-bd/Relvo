@@ -5,6 +5,11 @@
   will-change: transform;
 }
 
+.clients-marquee-track {
+  animation: marquee-move 42s linear infinite;
+  will-change: transform;
+}
+
 @keyframes marquee-move {
   from {
     transform: translate3d(0, 0, 0);
@@ -15,7 +20,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
+  .marquee-track,
+  .clients-marquee-track {
     animation: none;
   }
 }

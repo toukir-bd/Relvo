@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { caseStudies } from "@/data/cases";
 import ZoomablePreview from "@/components/props/ZoomablePreview";
 
-const featuredCases = caseStudies.slice(0, 5);
+const featuredCases = caseStudies.slice(0, 4);
 const previewSlides = [
   ...featuredCases.map((item) => ({
     type: "case" as const,
@@ -208,14 +208,14 @@ export default function Cases() {
                   <div className="mx-auto w-full max-w-2xl rounded-[28px] bg-gradient-to-r from-[#071714]/95 via-[#071714]/55 to-transparent px-5 py-6 sm:rounded-[36px] sm:px-8 sm:py-9 lg:px-10 lg:py-10">
                     <div className="mb-5 flex items-center gap-3 sm:mb-7">
                       <span aria-hidden="true" className="h-px w-8 bg-primary sm:w-12" />
-                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary sm:text-sm">
+                      <p className="text-xs font-normal uppercase tracking-[0.18em] text-primary sm:text-sm">
                         {isCta ? "Some best cases" : item?.badge}
                       </p>
                     </div>
-                    <span className="max-w-xl text-[clamp(1.5rem,2.8vw,2.75rem)] font-normal leading-[1.12] tracking-tight text-white antialiased">
+                    <span className="max-w-xl text-[clamp(1.5rem,2.8vw,2.75rem)] font-[300] leading-[1.12] tracking-normal text-white antialiased">
                       {isCta ? "There’s more to explore." : item?.title}
                     </span>
-                    <p className="mt-4 line-clamp-4 max-w-xl text-[15px] font-normal leading-relaxed tracking-wide text-white/60 sm:mt-6 sm:text-lg sm:leading-[1.55] lg:text-xl">
+                    <p className="mt-4 line-clamp-4 max-w-xl text-[15px] font-[400] leading-relaxed tracking-wide text-white/60 sm:mt-6 sm:text-lg sm:leading-[1.55] lg:text-xl">
                       {isCta
                         ? "Visit the cases page to see some more of our best work."
                         : item?.description}

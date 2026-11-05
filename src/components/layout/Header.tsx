@@ -20,6 +20,7 @@ export default function Header({
           alt="Relvo Logo"
           width={160}
           height={45}
+          style={{ height: "auto" }}
           className="h-auto w-[112px] transition-all duration-500 sm:w-[140px] lg:w-[160px]"
           priority
         />

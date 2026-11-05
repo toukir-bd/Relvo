@@ -111,45 +111,50 @@ export default function HomeServices() {
 
   return (
     <section ref={sectionRef} className="relative w-full" style={{ height: sectionHeight }}>
-      <div ref={viewportRef} className="sticky top-0 relative flex w-full flex-col justify-center overflow-hidden py-14 sm:py-20 lg:py-[100px]">
+      <div ref={viewportRef} className="sticky top-0 relative flex w-full flex-col justify-center overflow-hidden py-14 sm:py-20 lg:py-[90px]">
         <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[min(55vh,520px)] w-[min(76vw,1000px)] -translate-x-1/2 -translate-y-1/2
         rounded-[48px] bg-primary/[0.07] blur-[110px]"/>
         <div className="relative z-10 mb-10 px-4 sm:mb-14 sm:px-6 lg:mb-[64px] lg:px-[6vw]">
-          <h2 className="focus-title max-w-5xl text-[clamp(40px,7vw,94px)] font-[700] leading-[0.95] tracking-tight text-white">
+          <h2 className="focus-title max-w-5xl text-[clamp(40px,7vw,94px)] font-[700] leading-[0.95] tracking-normal text-white">
             <span className="hero-text-neon pe-3">clear service lifecycles</span>
           </h2>
         </div>
         <div className="w-full overflow-visible">
           <div ref={trackRef} className="relative z-10 flex w-max gap-5 px-10 sm:gap-7 sm:px-7 lg:gap-12 lg:pl-[6vw] lg:pr-[6vw]">
             {serviceOptions.map((service) => (
-              <article key={service.id} className="relative h-[min(64svh,480px)] min-h-[300px] w-[min(80vw,680px)] shrink-0 overflow-hidden rounded-[28px]
-                sm:w-[min(68vw,680px)] sm:rounded-[32px] lg:h-[580px] lg:w-[max(30vw,560px)] bg-gradient-to-b from-black/25 via-black/10 to-white/5">
-                <div className="relative z-20 flex h-full flex-col justify-between p-7 sm:p-10 lg:p-15">
-                  <div>
-                    <span className="text-[17px] font-semibold uppercase tracking-[0.08em] text-primary">
-                      {service.number} / {service.name}
-                    </span>
-                    <h3 className="mt-10 w-full max-w-full text-[clamp(30px,4.5vw,51px)] font-[800] leading-[1.16] tracking-normal text-white">
-                      {service.headline}
-                    </h3>
-                  </div>
-                  <div className="flex w-full items-end justify-between gap-3">
-                    <div className="pointer-events-none relative h-20 w-1/4 shrink-0 sm:h-32 sm:w-[30%]">
-                      <Image
-                        src={`${service.image}?v=ffffff`}
-                        alt=""
-                        fill
-                        sizes="(min-width: 1024px) 220px, 34vw"
-                        className="object-contain object-left-bottom brightness-0 invert opacity-40"
-                        unoptimized
-                      />
-                    </div>
-                    <Link href={`/services#service-${service.id}`} className="btn-relvo w-fit">
-                      <span className="btnText">Explore Service</span>
-                      <span className="iconArea">
-                        <ArrowUpRight strokeWidth={1.5} />
+              <article key={service.id} className="group relative h-[min(76svh,580px)] min-h-[460px] w-[min(86vw,520px)] shrink-0 overflow-hidden rounded-[34px] border border-white/[0.06]
+                sm:w-[min(60vw,520px)] sm:rounded-[40px] lg:h-[580px] lg:w-[min(38vw,520px)] bg-[#121914]">
+                <div aria-hidden="true" className="pointer-events-none absolute -left-[18%] -top-[22%] z-0 aspect-square w-[105%] rounded-full bg-primary/[0.15] blur-[100px]"/>
+                <div aria-hidden="true" className="pointer-events-none absolute -right-[50%] -top-[42%] z-0 aspect-square w-[90%] rounded-full bg-secondary/[0.35] blur-[50px]"/>
+                <Link
+                  href={`/services#service-${service.id}`}
+                  aria-label={`Explore ${service.name}`}
+                  className="absolute right-5 top-5 z-30 flex size-14 items-center justify-center rounded-[18px] bg-primary/[0.18] text-primary transition duration-300 hover:rotate-45 hover:bg-primary hover:text-black sm:right-7 sm:top-7 sm:size-17 sm:rounded-[20px]"
+                >
+                  <ArrowUpRight size={30} strokeWidth={1} />
+                </Link>
+                <div className="absolute inset-x-[8%] bottom-[30%] z-10 h-[32%]">
+                  <Image
+                    src={service.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 420px, 78vw"
+                    className="object-contain object-center transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div className="relative z-20 flex h-full flex-col p-6 sm:p-8">
+                  <span className="w-fit max-w-[72%] rounded-full bg-white/[0.1] px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.06em] text-white/90 sm:text-[14px]">
+                    {service.name}
+                  </span>
+                  <span className="mt-6 max-w-[88%] whitespace-pre-line text-[clamp(25px,3.2vw,34px)] font-[400] leading-[1.18] tracking-wide text-white sm:mt-7">
+                    {service.headline}
+                  </span>
+                  <div className="mt-auto flex flex-wrap gap-2 pt-4">
+                    {service.deliverables.slice(0, 4).map((deliverable) => (
+                      <span key={deliverable} className="rounded-full capitalize bg-white/[0.1] px-4 py-2.5 text-[13px] font-medium leading-none text-white/90 sm:text-sm">
+                        {deliverable}
                       </span>
-                    </Link>
+                    ))}
                   </div>
                 </div>
               </article>

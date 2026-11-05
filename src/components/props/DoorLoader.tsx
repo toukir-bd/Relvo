@@ -71,6 +71,7 @@ export default function DoorLoader() {
             alt="Relvo"
             width={240}
             height={65}
+            style={{ height: "auto" }}
             priority
             className="door-logo h-auto w-[clamp(130px,16vw,240px)]"
         />
