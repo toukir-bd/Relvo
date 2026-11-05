@@ -66,9 +66,9 @@ export default function Clients() {
                     <Image
                       src={src}
                       alt={name}
-                      width={240}
-                      height={64}
-                      sizes="240px"
+                      width={200}
+                      height={54}
+                      sizes="200px"
                       style={{ width: "auto" }}
                       className="h-8 w-auto object-contain brightness-0 invert sm:h-10"
                     />

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ArrowUpRight, Check } from "lucide-react";
 import { useState } from "react";
 import Started from "@/components/sections/Started";
 import { serviceOptions } from "@/data/services";
@@ -53,71 +54,60 @@ export default function ServicesPage() {
                 key={service.id}
                 id={`service-${service.id}`}
                 aria-labelledby={`service-title-${service.id}`}
-                className={`relative isolate grid min-h-[430px] overflow-hidden rounded-[28px] border transition-colors duration-300 sm:min-h-[480px] lg:grid-cols-[1.05fr_0.95fr] lg:rounded-[36px] ${
-                  selected ? "border-primary/60 bg-[#0a1c18]" : "border-white/10 bg-white/[0.025]"
+                className={`group relative isolate min-h-[640px] overflow-hidden rounded-[34px] border transition-colors duration-300 sm:min-h-[680px] sm:rounded-[40px] ${
+                  selected ? "border-primary/35 bg-[#121b16]" : "border-white/[0.07] bg-[#121914]"
                 }`}
               >
-                <div className="relative z-10 flex flex-col p-6 sm:p-9 lg:p-12">
-                  <div className="flex items-center gap-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary/85">
-                    <span>{service.number}</span>
-                    <span aria-hidden="true" className="h-px w-10 bg-primary/50" />
-                    <span>{service.name}</span>
-                  </div>
+                <div aria-hidden="true" className="pointer-events-none absolute -left-[12%] -top-[33%] z-0 aspect-square w-[78%] rounded-full bg-primary/[0.09]" />
+                <div aria-hidden="true" className="pointer-events-none absolute -right-[18%] -top-[48%] z-0 aspect-square w-[62%] rounded-full bg-[#8f42a5]/[0.1]" />
+                <button
+                  type="button"
+                  aria-label={selected ? `Remove ${service.name} from selected services` : `Choose ${service.name}`}
+                  aria-pressed={selected}
+                  onClick={() => toggleService(service.name)}
+                  className={`absolute right-5 top-5 z-30 grid size-14 place-items-center rounded-[18px] border transition duration-300 sm:right-7 sm:top-7 sm:size-16 sm:rounded-[20px] ${
+                    selected
+                      ? "border-primary bg-primary text-secondary"
+                      : "border-white/10 bg-white/[0.08] text-primary hover:rotate-45 hover:bg-primary hover:text-secondary"
+                  }`}
+                >
+                  {selected ? <Check size={23} strokeWidth={2} /> : <ArrowUpRight size={25} strokeWidth={1.7} />}
+                </button>
+
+                <div className="pointer-events-none absolute inset-x-[5%] bottom-[16%] z-0 h-[51%] sm:inset-x-[8%] sm:bottom-[15%] sm:h-[57%] lg:left-[39%] lg:right-[3%] lg:h-[76%]">
+                  <Image
+                    src={service.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 720px, 90vw"
+                    className={`object-contain object-center opacity-75 transition-transform duration-500 group-hover:scale-[1.03] sm:opacity-90 ${index % 2 === 0 ? "lg:object-right" : "lg:object-left"}`}
+                  />
+                </div>
+
+                <div className="relative z-10 flex min-h-[640px] flex-col p-6 sm:min-h-[680px] sm:p-9 lg:p-12">
+                  <span className="w-fit max-w-[72%] rounded-full bg-white/[0.1] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.08em] text-white/90 sm:text-xs">
+                    {service.number} / {service.name}
+                  </span>
                   <h2
                     id={`service-title-${service.id}`}
-                    className="focus-title mt-7 max-w-2xl text-[clamp(2.2rem,4.5vw,4.8rem)] font-bold leading-[0.98] tracking-tight"
+                    className="focus-title mt-6 max-w-[760px] whitespace-pre-line text-[clamp(2rem,5vw,4.2rem)] font-semibold leading-[1.02] tracking-[-0.035em] sm:mt-7 lg:max-w-[58%]"
                   >
                     {service.headline}
                   </h2>
-                  <p className="mt-5 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
+                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/70 sm:mt-5 sm:text-base lg:max-w-[54%]">
                     {service.description}
                   </p>
-                  <ul className="mt-6 flex flex-wrap gap-2" aria-label={`${service.name} includes`}>
+                  <ul className="mt-auto flex flex-wrap gap-2 pt-8 lg:max-w-[68%]" aria-label={`${service.name} includes`}>
                     {service.deliverables.map((deliverable) => (
                       <li
                         key={deliverable}
-                        className="rounded-full border border-white/10 bg-black/20 px-3 py-2 text-xs text-white/70 sm:text-sm"
+                        className="rounded-full bg-white/[0.1] px-4 py-2.5 text-[13px] font-medium text-white/90 sm:text-sm"
                       >
                         {deliverable}
                       </li>
                     ))}
                   </ul>
-                  <button
-                    type="button"
-                    aria-pressed={selected}
-                    onClick={() => toggleService(service.name)}
-                    className={`mt-8 flex min-h-12 w-fit items-center gap-3 rounded-full border px-5 py-3 text-sm font-semibold transition-colors ${
-                      selected
-                        ? "border-primary bg-primary text-secondary"
-                        : "border-white/25 text-white hover:border-primary hover:text-primary"
-                    }`}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={`grid h-5 w-5 place-items-center rounded-full border ${
-                        selected ? "border-secondary bg-secondary text-primary" : "border-current"
-                      }`}
-                    >
-                      {selected ? "✓" : "+"}
-                    </span>
-                    {selected ? "Selected" : "Choose this service"}
-                  </button>
                 </div>
-
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-full opacity-20 lg:relative lg:z-0 lg:w-full lg:opacity-100">
-                  <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/70 to-transparent lg:from-secondary lg:via-secondary/20" />
-                  <Image
-                    src={service.image}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 600px, 100vw"
-                    className={`object-contain object-right-bottom ${index % 2 === 0 ? "lg:object-right" : "lg:object-left"}`}
-                  />
-                </div>
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -bottom-24 -right-24 -z-10 h-72 w-72 rounded-full bg-primary/[0.045] blur-3xl"
-                />
               </section>
             );
           })}
