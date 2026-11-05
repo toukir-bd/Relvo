@@ -19,6 +19,8 @@ const slides = [
 ];
 
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
+const SCROLL_VH_PER_SLIDE = 1.3;
+const TEXT_REVEAL_FRACTION = 0.77;
 export default function Story() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
@@ -79,7 +81,7 @@ export default function Story() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="discover-us" className="relative w-full" style={{ height: `${(slides.length + 1) * 100}dvh`, }}>
+    <section ref={sectionRef} id="discover-us" className="relative w-full" style={{ height: `${(1 + slides.length * SCROLL_VH_PER_SLIDE) * 100}dvh`, }}>
       <div className="sticky top-0 min-h-screen w-full overflow-hidden">
         <ExploreRelvoCursor className="relative mx-auto flex-col flex min-h-screen w-full justify-center overflow-hidden">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40"
@@ -98,7 +100,8 @@ export default function Story() {
                 const isPrevious = index < activeSlide;
                 const words = slide.text.split(" ");
                 const slideProgress = clamp(
-                  scrollProgress * slides.length - index,
+                  (scrollProgress * slides.length - index) /
+                    TEXT_REVEAL_FRACTION,
                 );
                 return (
                   <div key={slide.number} className={[ "absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
