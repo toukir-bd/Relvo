@@ -7,57 +7,47 @@ type MarqueeTextProps = {
 };
 
 export default function Marquee({
-  text = "Refined Experiences, Led by Vision & Originality.",
+  text = "RELVO - Refined Experiences, Led by Vision & Originality.",
 }: MarqueeTextProps) {
-  const motionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let frameId = 0;
-    let previousScrollY = window.scrollY;
-    let currentSkew = 0;
-    let targetSkew = 0;
-
-    const handleScroll = () => {
-      const velocity = window.scrollY - previousScrollY;
-      previousScrollY = window.scrollY;
-
-      targetSkew = Math.max(-4, Math.min(4, velocity * -0.09));
-    };
-
-    const animate = () => {
-      currentSkew += (targetSkew - currentSkew) * 0.1;
-      targetSkew *= 0.9;
-
-      if (motionRef.current) {
-        motionRef.current.style.transform = `
-          translate3d(0, ${Math.abs(currentSkew) * -0.8}px, 0)
-          skewX(${currentSkew}deg)
-        `;
-      }
-
-      frameId = requestAnimationFrame(animate);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    frameId = requestAnimationFrame(animate);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      cancelAnimationFrame(frameId);
-    };
-  }, []);
-
+  const trackRef = useRef<HTMLDivElement>(null);
+  const groupRef = useRef<HTMLHeadingElement>(null);
   const repeatedText = `${text} ${text} ${text} ${text}`;
 
+  useEffect(() => {
+    const track = trackRef.current;
+    const group = groupRef.current;
+    if (!track || !group) return;
+
+    const updateMarquee = () => {
+      const distance = group.getBoundingClientRect().width;
+      if (!distance) return;
+      const duration = distance / 105;
+      track.style.setProperty("--marquee-shift", `${-distance}px`);
+      track.style.setProperty("--marquee-duration", `${duration}s`);
+    };
+
+    const observer = new ResizeObserver(updateMarquee);
+    observer.observe(group);
+    updateMarquee();
+    return () => observer.disconnect();
+  }, [repeatedText]);
+
   return (
-    <section className="overflow-hidden bg-primary py-12 text-secondary md:py-20">
-      <div ref={motionRef} className="will-change-transform">
-        <div className="marquee-track flex w-max whitespace-nowrap">
-          <h4 className="inline-block pe-3 text-[clamp(3rem,10vw,6rem)] font-[500] leading-none tracking-tighter md:text-8xl">{repeatedText}</h4>
-          <span aria-hidden="true" className="marquee-item">
+    <section
+      aria-label="Relvo brand statement"
+      className="overflow-hidden bg-primary py-6 text-secondary md:py-8"
+    >
+      <div ref={trackRef} className="marquee-track flex w-max whitespace-nowrap">
+        {[0, 1].map((group) => (
+          <h4
+            key={group}
+            ref={group === 0 ? groupRef : undefined}
+            aria-hidden="true"
+            className="shrink-0 pe-8 text-[clamp(2rem,10vw,4rem)] font-[700] leading-none tracking-tight md:text-7xl"
+          >
             {repeatedText}
-          </span>
-        </div>
+          </h4>
+        ))}
       </div>
     </section>
   );

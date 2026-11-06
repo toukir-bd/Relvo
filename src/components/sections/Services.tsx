@@ -123,7 +123,7 @@ export default function HomeServices() {
           <div ref={trackRef} className="relative z-10 flex w-max gap-5 px-10 sm:gap-7 sm:px-7 lg:gap-12 lg:pl-[6vw] lg:pr-[6vw]">
             {serviceOptions.map((service) => (
               <article key={service.id} className="group relative h-[min(76svh,580px)] min-h-[460px] w-[min(86vw,520px)] shrink-0 overflow-hidden rounded-[34px] border border-white/[0.06]
-                sm:w-[min(60vw,520px)] sm:rounded-[40px] lg:h-[580px] lg:w-[min(38vw,520px)] bg-[#121914]">
+                sm:w-[min(60vw,520px)] sm:rounded-[40px] lg:h-[580px] lg:w-[min(38vw,520px)]">
                 <div aria-hidden="true" className="pointer-events-none absolute -left-[18%] -top-[22%] z-0 aspect-square w-[105%] rounded-full bg-primary/[0.15] blur-[100px]"/>
                 <div aria-hidden="true" className="pointer-events-none absolute -right-[50%] -top-[42%] z-0 aspect-square w-[90%] rounded-full bg-secondary/[0.35] blur-[50px]"/>
                 <Link
@@ -143,7 +143,7 @@ export default function HomeServices() {
                   />
                 </div>
                 <div className="relative z-20 flex h-full flex-col p-6 sm:p-8">
-                  <span className="w-fit max-w-[72%] rounded-full bg-white/[0.1] px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.06em] text-white/90 sm:text-[14px]">
+                  <span className="w-fit max-w-[74%] rounded-full bg-primary/[0.1] px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.06em] text-primary/90 sm:text-[16px]">
                     {service.name}
                   </span>
                   <span className="mt-6 max-w-[88%] whitespace-pre-line text-[clamp(25px,3.2vw,34px)] font-[400] leading-[1.18] tracking-wide text-white sm:mt-7">
@@ -151,7 +151,7 @@ export default function HomeServices() {
                   </span>
                   <div className="mt-auto flex flex-wrap gap-2 pt-4">
                     {service.deliverables.slice(0, 4).map((deliverable) => (
-                      <span key={deliverable} className="rounded-full capitalize bg-white/[0.1] px-4 py-2.5 text-[13px] font-medium leading-none text-white/90 sm:text-sm">
+                      <span key={deliverable} className="rounded-full capitalize bg-white/[0.05] px-4 py-2.5 text-[13px] font-[500] tracking-wide leading-none text-white/90 sm:text-[16px]">
                         {deliverable}
                       </span>
                     ))}
