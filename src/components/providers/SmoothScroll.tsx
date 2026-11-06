@@ -12,11 +12,13 @@ import {
 type SmoothScrollControls = {
     start: () => void;
     stop: () => void;
+    scrollTo: (target: number) => void;
 };
 
 const SmoothScrollContext = createContext<SmoothScrollControls>({
     start: () => { },
     stop: () => { },
+    scrollTo: () => { },
 });
 
 export function useSmoothScroll() {
@@ -34,6 +36,8 @@ export default function SmoothScroll({
         () => ({
             start: () => lenisRef.current?.start(),
             stop: () => lenisRef.current?.stop(),
+            scrollTo: (target: number) =>
+                lenisRef.current?.scrollTo(target, { immediate: true, force: true }),
         }),
         [],
     );

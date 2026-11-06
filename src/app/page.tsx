@@ -17,7 +17,6 @@ export default function Home() {
       <Focus/>
       <Services/>
       <Marquee/>
-      <Manage/>
       <Started/>
     </>
   );
