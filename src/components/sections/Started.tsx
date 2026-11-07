@@ -1,16 +1,121 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Check, Mail, Phone, Sparkles } from "lucide-react";
+import { Check, ChevronDown, Mail, Phone, Send, Sparkles } from "lucide-react";
 import { serviceNames } from "@/data/services";
 import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 
 const EMPTY_SERVICE_SELECTION: string[] = [];
+const COUNTRY_CODES = [
+  ["Bangladesh", "+880"],
+  ["Australia", "+61"],
+  ["Austria", "+43"],
+  ["Belgium", "+32"],
+  ["Brazil", "+55"],
+  ["Canada", "+1"],
+  ["China", "+86"],
+  ["Denmark", "+45"],
+  ["Egypt", "+20"],
+  ["Finland", "+358"],
+  ["France", "+33"],
+  ["Germany", "+49"],
+  ["Ghana", "+233"],
+  ["Hong Kong", "+852"],
+  ["India", "+91"],
+  ["Indonesia", "+62"],
+  ["Ireland", "+353"],
+  ["Israel", "+972"],
+  ["Italy", "+39"],
+  ["Japan", "+81"],
+  ["Kenya", "+254"],
+  ["Kuwait", "+965"],
+  ["Malaysia", "+60"],
+  ["Mexico", "+52"],
+  ["Nepal", "+977"],
+  ["Netherlands", "+31"],
+  ["New Zealand", "+64"],
+  ["Nigeria", "+234"],
+  ["Norway", "+47"],
+  ["Oman", "+968"],
+  ["Pakistan", "+92"],
+  ["Philippines", "+63"],
+  ["Poland", "+48"],
+  ["Portugal", "+351"],
+  ["Qatar", "+974"],
+  ["Saudi Arabia", "+966"],
+  ["Singapore", "+65"],
+  ["South Africa", "+27"],
+  ["South Korea", "+82"],
+  ["Spain", "+34"],
+  ["Sri Lanka", "+94"],
+  ["Sweden", "+46"],
+  ["Switzerland", "+41"],
+  ["Thailand", "+66"],
+  ["Turkey", "+90"],
+  ["United Arab Emirates", "+971"],
+  ["United Kingdom", "+44"],
+  ["United States", "+1"],
+  ["Vietnam", "+84"],
+] as const;
+type CountryOption = { id: string; name: string; code: string; aliases: string[]; displayName: string; shortName: string };
+type ApiCountry = { name?: string; callingCodes?: string[] };
+
+const COUNTRY_SEARCH_ALIASES: Record<string, { displayName: string; shortName: string; aliases: string[] }> = {
+  "united states": {
+    displayName: "United States of America",
+    shortName: "USA",
+    aliases: ["USA", "US", "United States", "United States of America", "America"],
+  },
+  "united states of america": {
+    displayName: "United States of America",
+    shortName: "USA",
+    aliases: ["USA", "US", "United States", "United States of America", "America"],
+  },
+  "united kingdom": {
+    displayName: "United Kingdom",
+    shortName: "UK",
+    aliases: ["UK", "United Kingdom", "Great Britain", "Britain"],
+  },
+  "south korea": {
+    displayName: "South Korea",
+    shortName: "KOR",
+    aliases: ["South Korea", "Republic of Korea", "Korea"],
+  },
+  "north korea": {
+    displayName: "North Korea",
+    shortName: "PRK",
+    aliases: ["North Korea", "North Korea DPR", "DPRK"],
+  },
+  "united arab emirates": {
+    displayName: "United Arab Emirates",
+    shortName: "UAE",
+    aliases: ["UAE", "United Arab Emirates", "Emirates"],
+  },
+  "czechia": {
+    displayName: "Czech Republic",
+    shortName: "CZE",
+    aliases: ["Czechia", "Czech Republic"],
+  },
+  "czech republic": {
+    displayName: "Czech Republic",
+    shortName: "CZE",
+    aliases: ["Czechia", "Czech Republic"],
+  },
+};
+
+function countrySearchInfo(name: string) {
+  const normalizedName = name.toLowerCase().trim();
+  return COUNTRY_SEARCH_ALIASES[normalizedName] ?? {
+    displayName: name,
+    shortName: name.slice(0, 3).toUpperCase(),
+    aliases: [name],
+  };
+}
 
 const fieldClassName =
-  "peer h-14 w-full rounded-xl border border-transparent bg-[#101b15] px-4 pb-1 pt-7 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]";
+  "peer h-14 w-full rounded-xl border border-primary/10 bg-[#101b15] px-4 pb-1 pt-4 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]";
 const floatingLabelClassName =
-  "pointer-events-none absolute left-4 top-1 z-10 text-xs font-medium tracking-wide text-white/60 transition-all duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/55 peer-focus:top-1 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:text-primary";
+  "pointer-events-none absolute left-4 top-2 z-10 text-xs font-medium leading-none tracking-wider text-primary/40 transition-all duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[16px] peer-placeholder-shown:text-primary/40 peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:text-primary";
 
 function ContactForm({
   initialSelectedServices = EMPTY_SERVICE_SELECTION,
@@ -19,11 +124,92 @@ function ContactForm({
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const pendingFocusRef = useRef<HTMLElement | null>(null);
+  const countryTriggerRef = useRef<HTMLButtonElement>(null);
+  const countrySearchRef = useRef<HTMLInputElement>(null);
+  const countryListRef = useRef<HTMLDivElement>(null);
+  const countryPickerRef = useRef<HTMLDivElement>(null);
   const { start: startSmoothScroll, stop: stopSmoothScroll, scrollTo } = useSmoothScroll();
   const [selectedServices, setSelectedServices] = useState<string[]>(initialSelectedServices);
+  const [countryCode, setCountryCode] = useState("");
+  const [selectedCountryId, setSelectedCountryId] = useState("");
+  const [countryPickerOpen, setCountryPickerOpen] = useState(false);
+  const [countrySearch, setCountrySearch] = useState("");
+  const [countryListLoading, setCountryListLoading] = useState(true);
+  const [countryOptions, setCountryOptions] = useState<CountryOption[]>(() =>
+    COUNTRY_CODES.map(([name, code]) => ({
+      id: `${name}-${code}`,
+      name,
+      code,
+      ...countrySearchInfo(name),
+    })),
+  );
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [validationMessage, setValidationMessage] = useState("");
   const [submitMessage, setSubmitMessage] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadCountryCodes() {
+      try {
+        const response = await fetch(
+          "https://countries.dev/countries?fields=name,callingCodes&sort=name",
+          { signal: controller.signal },
+        );
+        if (!response.ok) return;
+
+        const countries = (await response.json()) as ApiCountry[];
+        const options = countries
+          .flatMap((country) =>
+            country.name && Array.isArray(country.callingCodes)
+              ? country.callingCodes
+                  .filter((code) => /^\d+$/.test(code))
+                  .map((code) => ({
+                    id: `${country.name}-${code}`,
+                    name: country.name!,
+                    code: `+${code}`,
+                    ...countrySearchInfo(country.name!),
+                  }))
+              : [],
+          )
+          .sort((a, b) => a.name.localeCompare(b.name));
+
+        if (options.length > 0) setCountryOptions(options);
+      } catch {
+        // Keep the bundled country list available if the API cannot be reached.
+      } finally {
+        if (!controller.signal.aborted) setCountryListLoading(false);
+      }
+    }
+
+    void loadCountryCodes();
+    return () => controller.abort();
+  }, []);
+
+  useEffect(() => {
+    if (!countryPickerOpen) return;
+
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      if (!countryPickerRef.current?.contains(event.target as Node)) {
+        setCountryPickerOpen(false);
+        setCountrySearch("");
+      }
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+    return () => document.removeEventListener("pointerdown", closeOnOutsidePointer);
+  }, [countryPickerOpen]);
+
+  const normalizedCountrySearch = countrySearch.trim().toLowerCase();
+  const filteredCountryOptions = countryOptions.filter(({ name, code, aliases }) => {
+    if (!normalizedCountrySearch) return true;
+    const normalizedCode = code.toLowerCase();
+    const numericSearch = normalizedCountrySearch.replace(/^\+/, "");
+    return aliases.some((alias) => alias.toLowerCase().startsWith(normalizedCountrySearch))
+      || name.toLowerCase().startsWith(normalizedCountrySearch)
+      || normalizedCode.startsWith(normalizedCountrySearch)
+      || normalizedCode.slice(1).startsWith(numericSearch);
+  });
 
   function closeValidation() {
     setValidationMessage("");
@@ -42,6 +228,7 @@ function ContactForm({
 
     const handleWheel = (event: WheelEvent) => {
       if (event.deltaY === 0) return;
+      if ((event.target as HTMLElement).closest("[data-country-scroll]")) return;
       const deltaMultiplier = event.deltaMode === WheelEvent.DOM_DELTA_LINE
         ? 16
         : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
@@ -125,6 +312,7 @@ function ContactForm({
     if (!emailField.value.trim()) errors.email = "Enter your email address.";
     else if (!emailField.validity.valid) errors.email = "Enter a valid email address.";
     if (!phoneField.value.trim()) errors.phone = "Enter your mobile number.";
+    if (!selectedCountryId) errors.country = "Select a country calling code.";
     if (!projectField.value.trim()) errors.project = "Tell us a little about your project.";
     if (selectedServices.length === 0) errors.services = "Choose at least one service.";
 
@@ -132,7 +320,9 @@ function ContactForm({
     if (Object.keys(errors).length > 0) {
       pendingFocusRef.current = errors.services
         ? form.querySelector<HTMLButtonElement>("[data-service-option]")
-        : form.querySelector<HTMLElement>("[aria-invalid='true']");
+        : errors.country
+          ? countryTriggerRef.current
+          : form.querySelector<HTMLElement>("[aria-invalid='true']");
       setValidationMessage("Please review the highlighted fields below.");
       return;
     }
@@ -140,7 +330,7 @@ function ContactForm({
     const values = new FormData(form);
     const name = String(values.get("name") ?? "");
     const email = String(values.get("email") ?? "");
-    const phone = String(values.get("phone") ?? "");
+    const phone = `${countryCode} ${String(values.get("phone") ?? "")}`;
     const project = String(values.get("project") ?? "");
     const subject = encodeURIComponent(`Project inquiry from ${name}`);
     const body = encodeURIComponent(
@@ -239,26 +429,9 @@ function ContactForm({
                 </div>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="relative block">
-                  <input required name="name" autoComplete="name" placeholder=" " className={fieldClassName} aria-invalid={Boolean(fieldErrors.name)} style={fieldErrors.name ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("name", event.currentTarget.checkValidity())} />
-                  <span className={floatingLabelClassName}>Your name</span>
-                  {fieldErrors.name && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.name}</span>}
-                </label>
-                <label className="relative block">
-                  <input required type="email" name="email" autoComplete="email" placeholder=" " className={fieldClassName} aria-invalid={Boolean(fieldErrors.email)} style={fieldErrors.email ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("email", event.currentTarget.checkValidity())} />
-                  <span className={floatingLabelClassName}>Email address</span>
-                  {fieldErrors.email && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.email}</span>}
-                </label>
-                <label className="relative block sm:col-span-2">
-                  <input required type="tel" name="phone" autoComplete="tel" placeholder=" " className={fieldClassName} aria-invalid={Boolean(fieldErrors.phone)} style={fieldErrors.phone ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("phone", event.currentTarget.checkValidity())} />
-                  <span className={floatingLabelClassName}>Mobile number</span>
-                  {fieldErrors.phone && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.phone}</span>}
-                </label>
-              </div>
-              <fieldset className="mt-4">
-                <label className="mb-1 block text-md font-[500] text-white/50 tracking-wide capitalize">
-                  Interested in
+              <fieldset className="mb-5">
+                <label className="mb-2 block text-md font-medium tracking-wide text-white/70 capitalize">
+                  Interested In
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {serviceNames.map((service) => {
@@ -270,13 +443,15 @@ function ContactForm({
                         type="button"
                         aria-pressed={selected}
                         onClick={() => toggleService(service)}
-                        className={`inline-flex min-h-6 items-center gap-1.5 rounded-full border px-4 py-1.5 text-[14px] font-medium transition sm:text-[14px] tracking-wide cursor-pointer ${
+                        className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 py-1.5 text-[13px] font-medium tracking-wide transition cursor-pointer sm:text-sm ${
                           selected
-                            ? "border-primary/60 bg-primary text-secondary"
-                            : "border-primary/15 bg-primary/10 text-white hover:border-primary/70 hover:text-white"
+                            ? "border-primary/70 bg-primary text-secondary"
+                            : "border-primary/20 bg-primary/[0.06] text-white/85 hover:border-primary/60 hover:bg-primary/[0.12] hover:text-white"
                         }`}
                       >
-                        {selected && <Check size={13} strokeWidth={2.5} />}
+                        <span className={`grid size-4 shrink-0 place-items-center rounded-[4px] border ${selected ? "border-secondary bg-secondary" : "border-white/45 bg-transparent"}`} aria-hidden="true">
+                          {selected && <Check size={11} strokeWidth={2.5} className="text-primary" />}
+                        </span>
                         {service}
                       </button>
                     );
@@ -285,28 +460,150 @@ function ContactForm({
                 {fieldErrors.services && <p role="alert" className="mt-2 text-xs font-medium text-red-400">{fieldErrors.services}</p>}
               </fieldset>
 
-              <label className="relative mt-6 block">
+              <div className="grid gap-3 sm:grid-cols-2">
+                <label className="relative block">
+                  <input required name="name" autoComplete="name" placeholder="" className={fieldClassName} aria-invalid={Boolean(fieldErrors.name)} style={fieldErrors.name ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("name", event.currentTarget.checkValidity())} />
+                  <span className={floatingLabelClassName}>Your Name</span>
+                  {fieldErrors.name && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.name}</span>}
+                </label>
+                <label className="relative block">
+                  <input required type="email" name="email" autoComplete="email" placeholder="" className={fieldClassName} aria-invalid={Boolean(fieldErrors.email)} style={fieldErrors.email ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("email", event.currentTarget.checkValidity())} />
+                  <span className={floatingLabelClassName}>Email Address</span>
+                  {fieldErrors.email && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.email}</span>}
+                </label>
+                <div className="sm:col-span-2">
+                  <div className="flex gap-2">
+                    <div ref={countryPickerRef} className="relative w-[42%] min-w-28 max-w-44 shrink-0 sm:w-44">
+                      {countryPickerOpen ? (
+                        <input
+                          ref={countrySearchRef}
+                          type="search"
+                          role="combobox"
+                          aria-label="Search"
+                          aria-expanded="true"
+                          aria-controls="country-code-options"
+                          autoComplete="off"
+                          value={countrySearch}
+                          onChange={(event) => setCountrySearch(event.currentTarget.value)}
+                          onKeyDown={(event) => {
+                            if (event.key === "Escape") setCountryPickerOpen(false);
+                            if (event.key === "ArrowDown") {
+                              event.preventDefault();
+                              countryListRef.current?.querySelector<HTMLButtonElement>("[data-country-option]")?.focus();
+                            }
+                          }}
+                          placeholder="Search"
+                          className={`h-14 w-full rounded-xl border bg-[#101b15] px-3 text-sm text-white outline-none placeholder:text-white/45 transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/10"} focus:border-primary/70 focus:bg-[#12251a]`}
+                        />
+                      ) : (
+                        <button
+                          ref={countryTriggerRef}
+                          type="button"
+                          aria-label="Select country calling code"
+                          aria-haspopup="listbox"
+                          aria-expanded={false}
+                          onClick={() => {
+                            setCountryPickerOpen(true);
+                            setCountrySearch("");
+                            requestAnimationFrame(() => countrySearchRef.current?.focus());
+                          }}
+                          className={`relative flex h-14 w-full cursor-pointer items-center gap-2 rounded-xl border py-3 pl-3 pr-10 text-sm font-medium outline-none transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/10"} bg-[#101b15] text-white focus:border-primary/70 focus:bg-[#12251a]`}
+                        >
+                          <span className={`pointer-events-none absolute left-3 z-10 leading-none tracking-wider transition-all ${selectedCountryId ? "top-2 text-[10px] font-medium text-primary/45" : "top-1/2 -translate-y-1/2 text-base font-medium tracking-wide text-primary/40"}`}>
+                            Country Code
+                          </span>
+                          {selectedCountryId && (
+                            <span className="mt-3 truncate text-left text-sm font-medium tracking-wide text-white">
+                              {countryOptions.find((country) => country.id === selectedCountryId)?.shortName} ({countryCode})
+                            </span>
+                          )}
+                          <ChevronDown aria-hidden="true" size={16} strokeWidth={1.8} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50 transition-transform" />
+                        </button>
+                      )}
+                      {countryPickerOpen && (
+                        <div className="absolute left-0 top-full z-40 mt-2 w-[min(22rem,calc(100vw-3rem))] rounded-xl border border-primary/15 bg-[#08100b] p-2 shadow-xl shadow-black/40">
+                          <div
+                            ref={countryListRef}
+                            id="country-code-options"
+                            role="listbox"
+                            data-country-scroll
+                            data-lenis-prevent
+                            className="max-h-50 overflow-y-auto overscroll-contain"
+                          >
+                            {filteredCountryOptions.map(({ id, code, displayName }) => (
+                              <button
+                                key={id}
+                                type="button"
+                                role="option"
+                                aria-selected={selectedCountryId === id}
+                                data-country-option
+                                onClick={() => {
+                                  setSelectedCountryId(id);
+                                  setCountryCode(code);
+                                  setCountryPickerOpen(false);
+                                  setCountrySearch("");
+                                  clearFieldError("country", true);
+                                }}
+                                onKeyDown={(event) => {
+                                  if (event.key === "Escape") setCountryPickerOpen(false);
+                                  if (event.key === "ArrowDown") {
+                                    event.preventDefault();
+                                    (event.currentTarget.nextElementSibling as HTMLButtonElement | null)?.focus();
+                                  }
+                                  if (event.key === "ArrowUp") {
+                                    event.preventDefault();
+                                    const previous = event.currentTarget.previousElementSibling as HTMLButtonElement | null;
+                                    if (previous) previous.focus();
+                                    else countrySearchRef.current?.focus();
+                                  }
+                                }}
+                                className="flex min-h-10 w-full cursor-pointer items-center justify-between rounded-lg px-3 text-left text-sm text-white/85 transition hover:bg-primary/10 hover:text-white focus-visible:bg-primary/10 focus-visible:outline-none"
+                              >
+                                <span>{displayName}</span>
+                                <span className="text-primary">{code}</span>
+                              </button>
+                            ))}
+                            {filteredCountryOptions.length === 0 && (
+                              <p className="px-3 py-3 text-sm text-white/55">
+                                {countryListLoading ? "Loading countries…" : "No matching countries found."}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <div className="relative min-w-0 flex-1">
+                      <input required type="tel" name="phone" aria-label="Mobile Number" autoComplete="tel-national" placeholder="" className={fieldClassName} aria-invalid={Boolean(fieldErrors.phone)} style={fieldErrors.phone ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("phone", event.currentTarget.checkValidity())} />
+                      <span className={floatingLabelClassName}>Mobile Number</span>
+                    </div>
+                  </div>
+                  {fieldErrors.country && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.country}</span>}
+                  {fieldErrors.phone && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.phone}</span>}
+                </div>
+              </div>
+              <label className="relative mt-3 block">
                 <textarea
                   required
                   name="project"
                   placeholder=" "
                   rows={2}
-                  className="peer min-h-28 w-full resize-y rounded-xl border border-transparent bg-[#101b15] px-4 pb-3 pt-8 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]"
+                  className="peer min-h-28 w-full resize-y rounded-xl border border-primary/10 bg-[#101b15] px-4 pb-3 pt-5 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]"
                   aria-invalid={Boolean(fieldErrors.project)}
                   style={fieldErrors.project ? { borderColor: "#f87171" } : undefined}
                   onChange={(event) => clearFieldError("project", event.currentTarget.value.trim().length > 0)}
                 />
-                <span className="pointer-events-none absolute left-4 top-2 z-10 text-xs font-medium tracking-wide text-white/60 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/55 peer-focus:top-2 peer-focus:text-xs peer-focus:text-primary">
-                  About the project
+                <span className="pointer-events-none absolute left-4 top-2 z-10 text-xs font-medium leading-none tracking-wide text-primary/40 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-[16px] peer-placeholder-shown:text-primary/40 peer-focus:top-2 peer-focus:text-xs peer-focus:text-primary">
+                  About The Project
                 </span>
                 {fieldErrors.project && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.project}</span>}
               </label>
               <p aria-live="polite" className="min-h-4 text-sm text-[#555]">{submitMessage}</p>
               <button
                 type="submit"
-                className="group mt-5 flex min-h-14 w-full items-center justify-center rounded-full bg-[#090909] px-5 text-base font-semibold text-white transition hover:bg-[#252525] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
+                className="group mt-5 flex min-h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-5 text-base font-semibold text-secondary transition hover:bg-[#9ed900] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
               >
                 Send Message
+                <Send size={17} strokeWidth={2} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>
             </div>
           </form>

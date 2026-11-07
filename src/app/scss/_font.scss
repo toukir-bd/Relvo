@@ -24,7 +24,7 @@ p{
   font-family: var(--font-primary), serif;
 }
 
-button, span, label{
+button, span, label, input, textarea, select, option, li, ul, ol{
   font-family: var(--font-primary), serif;
 }
 
@@ -41,3 +41,4 @@ a{
   font-family: var(--font-primary), serif;
   @apply inline-flex;
 }
+
