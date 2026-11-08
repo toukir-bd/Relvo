@@ -443,7 +443,7 @@ function ContactForm({
                         type="button"
                         aria-pressed={selected}
                         onClick={() => toggleService(service)}
-                        className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 py-1.5 text-[13px] font-medium tracking-wide transition cursor-pointer sm:text-sm ${
+                        className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-semibold tracking-wide transition cursor-pointer sm:text-[15px] ${
                           selected
                             ? "border-primary/70 bg-primary text-secondary"
                             : "border-primary/20 bg-primary/[0.06] text-white/85 hover:border-primary/60 hover:bg-primary/[0.12] hover:text-white"
@@ -493,7 +493,7 @@ function ContactForm({
                             }
                           }}
                           placeholder="Search"
-                          className={`h-14 w-full rounded-xl border bg-[#101b15] px-3 text-sm text-white outline-none placeholder:text-white/45 transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/10"} focus:border-primary/70 focus:bg-[#12251a]`}
+                          className={`h-14 w-full rounded-xl border bg-[#101b15] px-4 text-base font-medium tracking-wide text-white outline-none placeholder:text-white/45 transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/10"} focus:border-primary/70 focus:bg-[#12251a]`}
                         />
                       ) : (
                         <button
@@ -507,13 +507,13 @@ function ContactForm({
                             setCountrySearch("");
                             requestAnimationFrame(() => countrySearchRef.current?.focus());
                           }}
-                          className={`relative flex h-14 w-full cursor-pointer items-center gap-2 rounded-xl border py-3 pl-3 pr-10 text-sm font-medium outline-none transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/10"} bg-[#101b15] text-white focus:border-primary/70 focus:bg-[#12251a]`}
+                          className={`relative flex h-14 w-full cursor-pointer items-center gap-2 rounded-xl border py-3 pl-4 pr-10 text-base font-medium outline-none transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/10"} bg-[#101b15] text-white focus:border-primary/70 focus:bg-[#12251a]`}
                         >
-                          <span className={`pointer-events-none absolute left-3 z-10 leading-none tracking-wider transition-all ${selectedCountryId ? "top-2 text-[10px] font-medium text-primary/45" : "top-1/2 -translate-y-1/2 text-base font-medium tracking-wide text-primary/40"}`}>
+                          <span className={`pointer-events-none absolute left-4 right-10 z-10 truncate text-left leading-none transition-all ${selectedCountryId ? "top-2 text-xs font-medium tracking-wider text-primary/40" : "top-1/2 -translate-y-1/2 text-base font-medium tracking-wide text-primary/40"}`}>
                             Country Code
                           </span>
                           {selectedCountryId && (
-                            <span className="mt-3 truncate text-left text-sm font-medium tracking-wide text-white">
+                            <span className="mt-3 truncate text-left text-base font-medium tracking-wide text-white">
                               {countryOptions.find((country) => country.id === selectedCountryId)?.shortName} ({countryCode})
                             </span>
                           )}
@@ -557,7 +557,7 @@ function ContactForm({
                                     else countrySearchRef.current?.focus();
                                   }
                                 }}
-                                className="flex min-h-10 w-full cursor-pointer items-center justify-between rounded-lg px-3 text-left text-sm text-white/85 transition hover:bg-primary/10 hover:text-white focus-visible:bg-primary/10 focus-visible:outline-none"
+                                className="flex min-h-10 w-full cursor-pointer items-center justify-between rounded-lg px-3 text-left text-base font-medium tracking-wide text-white transition hover:bg-primary/10 focus-visible:bg-primary/10 focus-visible:outline-none"
                               >
                                 <span>{displayName}</span>
                                 <span className="text-primary">{code}</span>
