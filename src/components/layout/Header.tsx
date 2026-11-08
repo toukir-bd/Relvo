@@ -14,16 +14,17 @@ export default function Header({
 }: HeaderProps) {
   return (
     <header>
-      <Link href="/" className="absolute left-4 top-5 z-30 flex w-auto items-center sm:left-6 sm:top-7 lg:left-10 lg:top-9">
+      <Link href="/" className="absolute left-4 top-5 z-30 flex w-[112px] items-center sm:left-6 sm:top-7 sm:w-[140px] lg:left-10 lg:top-9 lg:w-[160px]">
+        <span className="relative block aspect-[32/9] w-full">
         <Image
           src="/img/elements/logo.webp"
           alt="Relvo Logo"
-          width={160}
-          height={45}
-          style={{ height: "auto" }}
-          className="h-auto w-[112px] transition-all duration-500 sm:w-[140px] lg:w-[160px]"
+          fill
+          sizes="(max-width: 640px) 112px, (max-width: 1024px) 140px, 160px"
+          className="object-contain transition-all duration-500"
           priority
         />
+        </span>
       </Link>
       <button onClick={isMenuOpen ? onMenuClose : onMenuOpen} aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         className={`group fixed right-4 top-5 z-100 flex h-11 w-11 cursor-pointer items-center justify-center gap-2 rounded-full sm:right-6 sm:top-7 sm:h-[50px] sm:w-[50px] lg:right-10 lg:top-9

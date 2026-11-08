@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Check, ChevronDown, Mail, Phone, Send, Sparkles } from "lucide-react";
+import { Check, ChevronDown, Mail, Phone, Send } from "lucide-react";
 import { serviceNames } from "@/data/services";
 import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 
@@ -113,7 +113,7 @@ function countrySearchInfo(name: string) {
 }
 
 const fieldClassName =
-  "peer h-14 w-full rounded-xl border border-primary/10 bg-[#101b15] px-4 pb-1 pt-4 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]";
+  "peer h-14 w-full rounded-xl border border-primary/0 bg-secondary/60 px-4 pb-1 pt-4 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]";
 const floatingLabelClassName =
   "pointer-events-none absolute left-4 top-2 z-10 text-xs font-medium leading-none tracking-wider text-primary/40 transition-all duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[16px] peer-placeholder-shown:text-primary/40 peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:text-primary";
 
@@ -361,30 +361,23 @@ function ContactForm({
 
       <div className="relative z-10 mx-auto grid max-w-[1440px] items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20 lg:py-10">
         <div className="lg:pb-12">
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/[0.07] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-            <Sparkles size={14} /> Let’s make it happen
-          </p>
-          <h2 className="focus-title max-w-[620px] text-[clamp(2.8rem,7vw,5.75rem)] font-semibold leading-[0.94] tracking-[-0.045em] text-white">
+          <h2 className="hero-text-neon focus-title max-w-[620px] text-[clamp(2.8rem,7vw,5.75rem)] font-semibold leading-[1.12] tracking-[-0.045em] text-white">
             Have a project?
-            <br />
-            <span className="hero-text-neon">Let’s build it.</span>
           </h2>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-white/60 sm:text-lg">
-            Tell us what you’re working on. Share a few details and we’ll get back to you to talk through the next steps.
+          <p className="mt-6 max-w-lg text-base font-[500] leading-relaxed tracking-wide text-primary/70 sm:text-[20px]">
+            Tell us about your idea. Share a few details and we’ll get back to you to talk through the next steps.
           </p>
 
           <div className="mt-9 grid max-w-lg gap-3 sm:grid-cols-2">
-            <a
-              href="mailto:partner@bytetown.agency"
-              className="group flex min-h-[78px] items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 transition hover:border-primary/40"
-            >
-              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Mail size={18} /></span>
+            <a href="mailto:partner@bytetown.agency" className="group flex items-center gap-3 rounded-2xl bg-primary/[0.1] 
+            px-2 py-1 transition hover:border-primary/40">
+              <span className="grid size-13 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Mail size={20} strokeWidth={1.2} /></span>
               <span className="min-w-0">
-                <span className="block text-[11px] uppercase tracking-wider text-white/40">Email us</span>
-                <span className="mt-1 block truncate text-sm font-medium text-white/85">partner@bytetown.agency</span>
+                <span className="block text-[14px] uppercase font-medium tracking-wider text-white/60">Email us</span>
+                <span className="block truncate text-sm font-medium text-white/85">partner@bytetown.agency</span>
               </span>
             </a>
-            <div className="flex min-h-[78px] items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
+            <div className="flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
               <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Phone size={18} /></span>
               <span>
                 <span className="block text-[11px] uppercase tracking-wider text-white/40">Your phone</span>
@@ -421,10 +414,8 @@ function ContactForm({
             <div className="relative">
               <div className="mb-10">
                 <div>
-                  <h4 className="max-w-[480px] text-[clamp(1.8rem,3.2vw,2.25rem)] font-semibold leading-[1.12] tracking-tight text-white">
-                    A quick conversation.
-                    <br />
-                    A clear next step.
+                  <h4 className="w-full text-center text-[clamp(3rem,5vw,4.25rem)] font-light leading-[1.05] tracking-normal text-white">
+                    Let’s build
                   </h4>
                 </div>
               </div>
@@ -443,7 +434,7 @@ function ContactForm({
                         type="button"
                         aria-pressed={selected}
                         onClick={() => toggleService(service)}
-                        className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-semibold tracking-wide transition cursor-pointer sm:text-[15px] ${
+                        className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-medium tracking-wide transition cursor-pointer sm:text-[14px] ${
                           selected
                             ? "border-primary/70 bg-primary text-secondary"
                             : "border-primary/20 bg-primary/[0.06] text-white/85 hover:border-primary/60 hover:bg-primary/[0.12] hover:text-white"
@@ -457,19 +448,19 @@ function ContactForm({
                     );
                   })}
                 </div>
-                {fieldErrors.services && <p role="alert" className="mt-2 text-xs font-medium text-red-400">{fieldErrors.services}</p>}
+                {fieldErrors.services && <p role="alert" className="mt-2 text-sm font-semibold tracking-wide text-red-400">{fieldErrors.services}</p>}
               </fieldset>
 
               <div className="grid gap-3 sm:grid-cols-2">
                 <label className="relative block">
                   <input required name="name" autoComplete="name" placeholder="" className={fieldClassName} aria-invalid={Boolean(fieldErrors.name)} style={fieldErrors.name ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("name", event.currentTarget.checkValidity())} />
                   <span className={floatingLabelClassName}>Your Name</span>
-                  {fieldErrors.name && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.name}</span>}
+                  {fieldErrors.name && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.name}</span>}
                 </label>
                 <label className="relative block">
                   <input required type="email" name="email" autoComplete="email" placeholder="" className={fieldClassName} aria-invalid={Boolean(fieldErrors.email)} style={fieldErrors.email ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("email", event.currentTarget.checkValidity())} />
                   <span className={floatingLabelClassName}>Email Address</span>
-                  {fieldErrors.email && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.email}</span>}
+                  {fieldErrors.email && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.email}</span>}
                 </label>
                 <div className="sm:col-span-2">
                   <div className="flex gap-2">
@@ -493,7 +484,7 @@ function ContactForm({
                             }
                           }}
                           placeholder="Search"
-                          className={`h-14 w-full rounded-xl border bg-[#101b15] px-4 text-base font-medium tracking-wide text-white outline-none placeholder:text-white/45 transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/10"} focus:border-primary/70 focus:bg-[#12251a]`}
+                          className={`h-14 w-full rounded-xl border bg-secondary/60 px-4 text-base font-medium tracking-wide text-white outline-none placeholder:text-white/45 transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/0"} focus:border-primary/70 focus:bg-[#12251a]`}
                         />
                       ) : (
                         <button
@@ -507,7 +498,7 @@ function ContactForm({
                             setCountrySearch("");
                             requestAnimationFrame(() => countrySearchRef.current?.focus());
                           }}
-                          className={`relative flex h-14 w-full cursor-pointer items-center gap-2 rounded-xl border py-3 pl-4 pr-10 text-base font-medium outline-none transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/10"} bg-[#101b15] text-white focus:border-primary/70 focus:bg-[#12251a]`}
+                          className={`relative flex h-14 w-full cursor-pointer items-center gap-2 rounded-xl border py-3 pl-4 pr-10 text-xs font-medium outline-none transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/0"} bg-secondary/60 text-white focus:border-primary/70 focus:bg-[#12251a]`}
                         >
                           <span className={`pointer-events-none absolute left-4 right-10 z-10 truncate text-left leading-none transition-all ${selectedCountryId ? "top-2 text-xs font-medium tracking-wider text-primary/40" : "top-1/2 -translate-y-1/2 text-base font-medium tracking-wide text-primary/40"}`}>
                             Country Code
@@ -577,8 +568,8 @@ function ContactForm({
                       <span className={floatingLabelClassName}>Mobile Number</span>
                     </div>
                   </div>
-                  {fieldErrors.country && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.country}</span>}
-                  {fieldErrors.phone && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.phone}</span>}
+                  {fieldErrors.country && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.country}</span>}
+                  {fieldErrors.phone && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.phone}</span>}
                 </div>
               </div>
               <label className="relative mt-3 block">
@@ -587,7 +578,7 @@ function ContactForm({
                   name="project"
                   placeholder=" "
                   rows={2}
-                  className="peer min-h-28 w-full resize-y rounded-xl border border-primary/10 bg-[#101b15] px-4 pb-3 pt-5 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]"
+                  className="peer min-h-28 w-full resize-y rounded-xl border border-primary/0 bg-secondary/60 px-4 pb-3 pt-5 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]"
                   aria-invalid={Boolean(fieldErrors.project)}
                   style={fieldErrors.project ? { borderColor: "#f87171" } : undefined}
                   onChange={(event) => clearFieldError("project", event.currentTarget.value.trim().length > 0)}
@@ -595,7 +586,7 @@ function ContactForm({
                 <span className="pointer-events-none absolute left-4 top-2 z-10 text-xs font-medium leading-none tracking-wide text-primary/40 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-[16px] peer-placeholder-shown:text-primary/40 peer-focus:top-2 peer-focus:text-xs peer-focus:text-primary">
                   About The Project
                 </span>
-                {fieldErrors.project && <span role="alert" className="mt-1 block text-xs font-medium text-red-400">{fieldErrors.project}</span>}
+                {fieldErrors.project && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.project}</span>}
               </label>
               <p aria-live="polite" className="min-h-4 text-sm text-[#555]">{submitMessage}</p>
               <button
@@ -628,7 +619,7 @@ function ContactForm({
           >
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Please check your form</p>
             <h2 id="contact-validation-title" className="mt-3 text-2xl font-semibold tracking-tight">One more step</h2>
-            <p id="contact-validation-description" className="mt-2 text-base leading-relaxed text-white/70">
+            <p id="contact-validation-description" className="mt-2 text-lg font-medium leading-relaxed tracking-wide text-white/80">
               {validationMessage}
             </p>
             <button

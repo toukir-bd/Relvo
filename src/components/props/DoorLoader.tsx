@@ -66,15 +66,16 @@ export default function DoorLoader() {
             : "scale-100 opacity-100",
         ].join(" ")}
         >
-        <Image
+        <div className="relative aspect-[48/13] w-[clamp(130px,16vw,240px)]">
+          <Image
             src="/img/elements/logo.webp"
             alt="Relvo"
-            width={240}
-            height={65}
-            style={{ height: "auto" }}
+            fill
+            sizes="(max-width: 768px) 16vw, 240px"
             priority
-            className="door-logo h-auto w-[clamp(130px,16vw,240px)]"
-        />
+            className="door-logo object-contain"
+          />
+        </div>
         </div>
     </div>
   );
