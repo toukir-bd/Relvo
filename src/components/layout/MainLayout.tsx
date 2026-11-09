@@ -12,21 +12,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const lenis = useSmoothScroll();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-    handleScroll();
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     if (menuOpen) {
@@ -45,7 +31,7 @@ export default function MainLayout({
   return (
     <>
       <Header isMenuOpen={menuOpen} onMenuOpen={() => setMenuOpen(true)} onMenuClose={() => setMenuOpen(false)}/>
-      <MenuOverlay isOpen={menuOpen} isScrolled={isScrolled} onClose={() => setMenuOpen(false)}/>
+      <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)}/>
       <main>
         {children}
       </main>

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 interface MenuOverlayProps {
   isOpen: boolean;
-  isScrolled: boolean;
   onClose: () => void;
 }
 
@@ -26,19 +25,18 @@ const menus = [
   },
   {
     title: "Projects",
-    href: "/projects",
+    href: "/#cases",
     subtitle: "Selected Works",
   },
   {
-    title: "Get Start",
-    href: "/get-start",
+    title: "Get Started",
+    href: "/#contact",
     subtitle: "Let's Talk",
   },
 ];
 
 export default function MenuOverlay({
   isOpen,
-  isScrolled,
   onClose,
 }: MenuOverlayProps) {
   return (
@@ -109,7 +107,7 @@ export default function MenuOverlay({
                   creativity, and technology designed to elevate brands and
                   inspire lasting impact.
                 </p>
-                <Link href="/get-start" onClick={onClose} className="mt-8 inline-block rounded-full bg-primary px-8 py-4 text-lg font-semibold text-white 
+                <Link href="/#contact" onClick={onClose} className="mt-8 inline-block rounded-full bg-primary px-8 py-4 text-lg font-semibold text-white
                   transition hover:bg-[#1DB67E]">
                   Get Started
                 </Link>

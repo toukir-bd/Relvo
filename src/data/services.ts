@@ -33,7 +33,7 @@ export const serviceOptions: ServiceOption[] = [
     name: "E-commerce Development",
     headline: "Launch Store, \nBoost Your Sales",
     description:"Create a smooth storefront and checkout experience that helps customers find the right products and complete a purchase.",
-    deliverables: ["Storefront design", "Shopify development", "Checkout optimization", "Payments & integrations"],
+    deliverables: ["Storefront design", "Intuitive Dashboard", "Checkout optimization", "Payments & integrations"],
     image: "/img/services/service-online-store.webp",
   },
   {

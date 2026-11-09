@@ -57,22 +57,12 @@ export const metadata: Metadata = {
     description:
       "A design-led digital agency creating websites, apps, digital products, and AI-powered solutions.",
     siteName: "RELVO",
-    url: "https://yourdomain.com",
-    images: [
-      {
-        url: "https://yourdomain.com/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "RELVO — Design. Development. Digital Experiences.",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "RELVO — Design. Development. Digital Experiences.",
     description:
       "A design-led digital agency creating websites, apps, digital products, and AI-powered solutions.",
-    images: ["https://yourdomain.com/og-image.jpg"],
   },
 };
 

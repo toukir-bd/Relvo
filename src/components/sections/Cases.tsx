@@ -96,7 +96,7 @@ export default function Cases() {
   );
 
   return (
-    <section ref={sectionRef} aria-label="Selected projects" className="relative" style={{height:`calc(100svh + ${totalScrollVh * 100}svh)`}}>
+    <section id="cases" ref={sectionRef} aria-label="Selected projects" className="relative" style={{height:`calc(100svh + ${totalScrollVh * 100}svh)`}}>
       <div className="cases-inner top-0 sticky mx-auto flex min-h-screen w-full max-w-[1600px] flex-col items-center justify-center gap-5 px-4 py-6 sm:gap-8 sm:px-6 lg:gap-12 lg:px-10">
         <h2 className="cases-header hero-text-neon relative overflow-hidden text-center text-[clamp(38px,7vw,85px)] font-[600] leading-[1.05] -tracking-[1px]">
           work that speaks for itself
@@ -174,7 +174,7 @@ export default function Cases() {
                           More Relvo
                         </span>
                       </h3>
-                      <Link href="/cases" className="btn-relvo">
+                      <Link href="https://dribbble.com/toukir-bd" target="_blank" rel="noreferrer" className="btn-relvo">
                         <span className="btnText">
                           Explore Best Projects
                         </span>

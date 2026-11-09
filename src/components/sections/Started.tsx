@@ -176,7 +176,6 @@ function ContactForm({
 
         if (options.length > 0) setCountryOptions(options);
       } catch {
-        // Keep the bundled country list available if the API cannot be reached.
       } finally {
         if (!controller.signal.aborted) setCountryListLoading(false);
       }
@@ -223,7 +222,6 @@ function ContactForm({
     let isHolding = false;
     let heldScroll = 0;
     let canHoldAgain = true;
-    // Consume about one wheel-step equivalent after the section is reached.
     const holdDistance = 50;
 
     const handleWheel = (event: WheelEvent) => {
@@ -345,20 +343,19 @@ function ContactForm({
     <section
       ref={sectionRef}
       id="contact"
-      className="relative isolate overflow-hidden bg-[#0b100d] px-4 py-20 text-white sm:px-6 sm:py-24 md:px-10 lg:min-h-svh lg:px-14 lg:py-0"
+      className="relative isolate overflow-hidden px-4 py-20 text-white sm:px-6 sm:py-24 md:px-10 lg:min-h-svh lg:px-14 lg:py-0"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-40"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-50"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgb(187 255 0 / 12%) 0.7px, transparent 1px)",
+            "radial-gradient(circle, rgb(187 255 0 / 25%) 0.7px, transparent 1px)",
           backgroundSize: "18px 18px",
           maskImage: "linear-gradient(to bottom, black, transparent 78%)",
         }}
       />
-      <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-16 -z-10 size-[28rem] rounded-full bg-primary/[0.08] blur-[100px]" />
-
+      <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-16 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
       <div className="relative z-10 mx-auto grid max-w-[1440px] items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20 lg:py-10">
         <div className="lg:pb-12">
           <h2 className="hero-text-neon focus-title max-w-[620px] text-[clamp(2.8rem,7vw,5.75rem)] font-semibold leading-[1.12] tracking-[-0.045em] text-white">
@@ -367,25 +364,24 @@ function ContactForm({
           <p className="mt-6 max-w-lg text-base font-[500] leading-relaxed tracking-wide text-primary/70 sm:text-[20px]">
             Tell us about your idea. Share a few details and we’ll get back to you to talk through the next steps.
           </p>
-
           <div className="mt-9 grid max-w-lg gap-3 sm:grid-cols-2">
-            <a href="mailto:partner@bytetown.agency" className="group flex items-center gap-3 rounded-2xl bg-primary/[0.1] 
-            px-2 py-1 transition hover:border-primary/40">
+            <a href="mailto:hello@relvodev.com" className="group flex items-center gap-3 rounded-2xl bg-primary/[0.1]
+            p-2 transition hover:border-primary/40">
               <span className="grid size-13 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Mail size={20} strokeWidth={1.2} /></span>
               <span className="min-w-0">
-                <span className="block text-[14px] uppercase font-medium tracking-wider text-white/60">Email us</span>
-                <span className="block truncate text-sm font-medium text-white/85">partner@bytetown.agency</span>
+                <span className="block text-[13px] uppercase font-[600] tracking-wider text-white/40">Email Us</span>
+                <span className="block truncate text-sm font-medium text-white/85">hello@relvodev.com</span>
               </span>
             </a>
-            <div className="flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
-              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Phone size={18} /></span>
-              <span>
-                <span className="block text-[11px] uppercase tracking-wider text-white/40">Your phone</span>
-                <span className="mt-1 block text-sm font-medium text-white/85">Add it in the form</span>
+            <a href="mailto:partner@bytetown.agency" className="group flex items-center gap-3 rounded-2xl bg-primary/[0.1]
+            p-2 transition hover:border-primary/40">
+              <span className="grid size-13 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Mail size={20} strokeWidth={1.2} /></span>
+              <span className="min-w-0">
+                <span className="block text-[13px] uppercase font-[600] tracking-wider text-white/40">Call Us</span>
+                <span className="block truncate text-sm font-medium text-white/85">+8801410-485824</span>
               </span>
-            </div>
+            </a>
           </div>
-
           <div className="mt-10 max-w-lg border-t border-white/10 pt-6">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-white/40">A simple start</p>
             <ol className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
