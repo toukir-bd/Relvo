@@ -117,7 +117,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${urbanist.variable} ${denton.variable}`}>
-      <body className="bg-[#081111] text-white" suppressHydrationWarning>
+      <body className="bg-secondary text-white" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -65,12 +65,12 @@ export default function Focus({ lenis }: SplashProps) {
   }, [lenis]);
 
   return (
-    <section aria-label="Our focus" className="relative bg-secondary">
-      <div ref={sectionRef} className="relative h-[360vh] overflow-clip bg-secondary text-white">
+    <section aria-label="Our focus" className="relative">
+      <div ref={sectionRef} className="relative h-[360vh] overflow-clip text-white">
         <div className="sticky top-0 relative flex h-screen w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
           style={{
-            backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 7%) 0.65px, transparent 1px)",
-            backgroundSize: "14px 14px",
+            backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 4%) 0.65px, transparent 1px)",
+            backgroundSize: "4px 4px",
           }}
         >
           <h4 className="mb-5 text-center text-[clamp(20px,2vw,29px)] font-[300] tracking-wide">

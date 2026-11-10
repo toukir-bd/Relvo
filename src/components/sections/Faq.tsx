@@ -39,13 +39,18 @@ const questions = [
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   return (
-    <section aria-labelledby="faq-title" className="relative isolate px-5 py-10 text-white sm:px-8 sm:py-24 lg:px-16 lg:py-20">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-35 [background-size:28px_28px] [background-image:radial-gradient(rgb(187_255_0_/_18%)_0.7px,transparent_0.7px)]" />
+    <section aria-labelledby="faq-title" className="relative overflow-hidden isolate px-5 py-10 text-white sm:px-8 sm:py-24 lg:px-16 lg:py-30">
+      <div className="inset-0 -z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 4%) 0.65px, transparent 1px)",
+          backgroundSize: "4px 4px",
+        }}
+      />
       <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[min(70vw,780px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[100px]" />
       <div className="mx-auto w-full max-w-[1440px]">
         <header className="mx-auto mb-10 max-w-3xl text-center sm:mb-14 lg:mb-16">
           <h2 id="faq-title" className="focus-title text-[clamp(2.6rem,6vw,5.5rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white">
-            <span className="hero-text-neon">have a question? <br/>we have answer</span>
+            <span className="hero-text-neon">Frequently Asked Questions</span>
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
             What to expect when we work together, from the first conversation to launch.
@@ -57,8 +62,7 @@ export default function Faq() {
             const questionId = `faq-question-${index}`;
             const answerId = `faq-answer-${index}`;
             return (
-            <article key={item.question} className={`group rounded-2xl border bg-[#0d1712]/75 transition-colors 
-              sm:rounded-[22px] ${isOpen ? "border-primary/30 bg-[#101d15]/90" : "border-white/[0.09]"}`}>
+            <article key={item.question} className={`group rounded-2xl border border-transparent bg-primary/5 transition-all duration-300 hover:border-primary/30 hover:bg-primary/10 sm:rounded-[22px] ${isOpen ? "border-primary/30 bg-primary/5" : ""}`}>
               <h3>
                 <button
                   id={questionId}
@@ -69,7 +73,7 @@ export default function Faq() {
                   className="flex w-full cursor-pointer items-center justify-between gap-5 px-5 py-5 text-left sm:px-7 sm:py-6 lg:px-9"
                 >
                 <span className="text-base font-[500] leading-snug text-white sm:text-lg lg:text-[25px]">{item.question}</span>
-                <span aria-hidden="true" className={`grid size-9 shrink-0 place-items-center rounded-full border border-primary/25 bg-primary/[0.08] text-primary transition duration-300 sm:size-10 ${isOpen ? "rotate-45 bg-primary text-secondary" : ""}`}>
+                <span aria-hidden="true" className={`grid size-9 shrink-0 place-items-center rounded-full bg-primary/[0.08] text-primary transition duration-300 sm:size-10 ${isOpen ? "rotate-45 bg-primary text-secondary" : ""}`}>
                   <Plus size={20} strokeWidth={2.2} />
                 </span>
                 </button>

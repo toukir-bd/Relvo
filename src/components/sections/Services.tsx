@@ -112,6 +112,11 @@ export default function HomeServices() {
   return (
     <section ref={sectionRef} className="relative w-full" style={{ height: sectionHeight }}>
       <div ref={viewportRef} className="sticky top-0 relative flex w-full flex-col justify-center overflow-hidden py-14 sm:py-20 lg:py-[120px]">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40"
+          style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 4%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)`,
+            backgroundSize: "4px 4px",
+          }}
+        />
         <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[min(55vh,520px)] w-[min(76vw,1000px)] -translate-x-1/2 -translate-y-1/2
         rounded-[48px] bg-primary/[0.07] blur-[110px]"/>
         <div className="relative z-10 mb-10 px-4 sm:mb-14 sm:px-6 lg:mb-[46px] lg:px-[6vw]">
@@ -122,7 +127,7 @@ export default function HomeServices() {
         <div className="w-full overflow-visible">
           <div ref={trackRef} className="relative z-10 flex w-max gap-5 px-10 sm:gap-7 sm:px-7 lg:gap-12 lg:pl-[6vw] lg:pr-[6vw]">
             {serviceOptions.map((service) => (
-              <article key={service.id} className="group relative h-[min(76svh,580px)] min-h-[460px] w-[min(86vw,520px)] shrink-0 overflow-hidden rounded-[34px] border border-white/[0.06]
+              <article key={service.id} className="group relative h-[min(76svh,580px)] min-h-[460px] w-[min(86vw,520px)] shrink-0 overflow-hidden rounded-[34px] bg-primary/3.5
                 sm:w-[min(60vw,520px)] sm:rounded-[40px] lg:h-[580px] lg:w-[min(38vw,520px)]">
                 <div aria-hidden="true" className="pointer-events-none absolute -left-[18%] -top-[22%] z-0 aspect-square w-[105%] rounded-full bg-primary/[0.15] blur-[100px]"/>
                 <div aria-hidden="true" className="pointer-events-none absolute -right-[50%] -top-[42%] z-0 aspect-square w-[90%] rounded-full bg-secondary/[0.35] blur-[50px]"/>

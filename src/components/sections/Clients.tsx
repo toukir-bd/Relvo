@@ -39,13 +39,13 @@ export default function Clients() {
   }, []);
 
   return (
-    <div role="group" aria-label="Selected clients" className="overflow-hidden rounded-full border-2 border-primary/20 bg-black/25 py-5 sm:py-10">
+    <div role="group" aria-label="Selected clients" className="overflow-hidden rounded-full bg-primary/3.5 py-5 sm:py-10">
       <div
         ref={viewportRef}
         className="overflow-hidden"
         style={{
-          maskImage: "linear-gradient(to right, transparent 0%, black 9%, black 91%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 9%, black 91%, transparent 100%)",
+          maskImage: "linear-gradient(to right, transparent 0%, black 19%, black 90%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 19%, black 90%, transparent 100%)",
         }}
       >
         <div className={`flex w-max ${dimensions ? "clients-marquee-track" : ""}`}>

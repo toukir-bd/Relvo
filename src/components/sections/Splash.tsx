@@ -60,7 +60,7 @@ export default function Splash() {
         <ScrollToDiscover />
         <div className="fixed bottom-4 right-4 z-20 flex flex-row items-end justify-end gap-2 sm:bottom-8 sm:right-8 lg:bottom-10 lg:right-10 lg:flex-col">
           <Link href="/" aria-label="Book a meeting" className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary
-            bg-secondary/70 p-1.5 sm:ps-4 lg:ps-7 rounded-full">
+            bg-secondary/70 p-1.5 sm:ps-4 lg:ps-7 rounded-full backdrop-blur-[10px]">
             <span className="hidden text-base font-normal tracking-wide md:inline lg:text-[18px]">Book a Meeting</span>
             <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 sm:h-12 sm:w-12
               group-hover:bg-black/35 group-hover:text-primary">
@@ -68,7 +68,7 @@ export default function Splash() {
             </span>
           </Link>
           <Link href="/" aria-label="Talk to an expert" className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary
-            bg-secondary/70 p-1.5 sm:ps-4 lg:ps-7 rounded-full">
+            bg-secondary/70 p-1.5 sm:ps-4 lg:ps-7 rounded-full backdrop-blur-[10px]">
             <span className="hidden text-base font-normal tracking-wide md:inline lg:text-[18px]">Talk to an Expert</span>
             <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 sm:h-12 sm:w-12
               group-hover:bg-black/35 group-hover:text-primary">
