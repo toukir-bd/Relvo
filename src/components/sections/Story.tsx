@@ -94,7 +94,7 @@ export default function Story() {
             <p className="hero-text-neon relative overflow-hidden text-center text-[14px] font-semibold uppercase tracking-[0.28em] sm:text-[16px] lg:text-[20px]">
               Relvo is built to create a presence that performs
             </p>
-            <div className="relative my-5 min-h-[260px] w-full overflow-hidden px-4 sm:my-7 sm:min-h-[300px] sm:px-8 lg:px-0">
+            <div className="relative mx-auto my-5 min-h-[260px] w-full max-w-[1300px] overflow-hidden px-4 sm:my-7 sm:min-h-[300px] sm:px-8 lg:px-0">
               {slides.map((slide, index) => {
                 const isActive = index === activeSlide;
                 const isPrevious = index < activeSlide;

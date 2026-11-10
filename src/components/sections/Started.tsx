@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Check, ChevronDown, Mail, Send } from "lucide-react";
+import { Check, ChevronDown, Mail, Phone, Send } from "lucide-react";
 import { serviceNames } from "@/data/services";
 import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 
@@ -343,7 +343,7 @@ function ContactForm({
     <section
       ref={sectionRef}
       id="contact"
-      className="relative isolate overflow-hidden px-4 py-20 text-white sm:px-6 sm:py-24 md:px-10 lg:min-h-svh lg:px-14 lg:py-0"
+      className="relative isolate overflow-hidden px-4 py-20 text-white sm:px-6 sm:py-24 md:px-10 lg:min-h-svh lg:px-20 lg:py-0 xl:px-24"
     >
       <div
         aria-hidden="true"
@@ -355,48 +355,43 @@ function ContactForm({
           maskImage: "linear-gradient(to bottom, black, transparent 78%)",
         }}
       />
-<<<<<<< HEAD
       <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-16 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
-      <div className="relative z-10 grid w-full items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20 lg:py-10">
-=======
-      <div aria-hidden="true" className="pointer-events-none absolute -left-40 -bottom-15 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
-      <div className="relative z-10 mx-auto grid max-w-[1440px] items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20 lg:py-10">
->>>>>>> b5cde6cd61f01ebf2c7408c172a05c314b7260c5
+      <div className="relative z-10 grid w-full items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-12 lg:py-10 xl:gap-16">
         <div className="lg:pb-12">
           <h2 className="hero-text-neon focus-title max-w-[620px] text-[clamp(2.8rem,7vw,5.75rem)] font-semibold leading-[1.12] tracking-[-0.045em] text-white">
             Have a project?
           </h2>
-          <p className="mt-6 max-w-lg text-base font-[500] leading-relaxed tracking-wide text-primary/70 sm:text-[20px]">
+          <p className="mt-6 text-base font-[500] leading-relaxed tracking-wide text-primary/70 sm:text-[20px] pe-10">
             Tell us about your idea. Share a few details and we’ll get back to you to talk through the next steps.
           </p>
-          <div className="mt-9 grid max-w-lg gap-3 sm:grid-cols-2">
+          <div className="mt-9 grid max-w-[640px] gap-4 sm:grid-cols-[1fr_1.08fr]">
             <a href="mailto:hello@relvodev.com" className="group flex items-center gap-3 rounded-2xl bg-primary/[0.1]
             p-2 transition hover:border-primary/40">
-              <span className="grid size-13 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Mail size={20} strokeWidth={1.2} /></span>
+              <span className="grid size-13 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Mail size={20} strokeWidth={1.8} /></span>
               <span className="min-w-0">
                 <span className="block text-[13px] uppercase font-[600] tracking-wider text-white/40">Email Us</span>
-                <span className="block truncate text-sm font-medium text-white/85">hello@relvodev.com</span>
+                <span className="block truncate text-[19px] font-[500] tracking-wide text-white/90">hello@relvodev.com</span>
               </span>
             </a>
-            <a href="mailto:partner@bytetown.agency" className="group flex items-center gap-3 rounded-2xl bg-primary/[0.1]
+            <a href="tel:+8801410485824" className="group flex items-center gap-3 rounded-2xl bg-primary/[0.1]
             p-2 transition hover:border-primary/40">
-              <span className="grid size-13 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Mail size={20} strokeWidth={1.2} /></span>
+              <span className="grid size-13 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Phone size={20} strokeWidth={1.8} /></span>
               <span className="min-w-0">
                 <span className="block text-[13px] uppercase font-[600] tracking-wider text-white/40">Call Us</span>
-                <span className="block truncate text-sm font-medium text-white/85">+8801410-485824</span>
+                <span className="block truncate text-[19px] font-[500] tracking-wide text-white/90">+8801410-485824</span>
               </span>
             </a>
           </div>
-          <div className="mt-10 max-w-lg border-t border-white/10 pt-6">
+          <div className="mt-10 max-w-[640px] border-t border-white/10 pt-6">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-white/40">A simple start</p>
-            <ol className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+            <ol className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-[0.9fr_1fr_1.2fr]">
               {[
                 ["01", "Tell us the goal"],
                 ["02", "Choose your services"],
                 ["03", "Start a conversation"],
               ].map(([step, title]) => (
-                <li key={step} className="flex items-center gap-3 text-sm text-white/70">
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full border border-primary/25 text-[11px] font-semibold text-primary">{step}</span>
+                <li key={step} className="flex items-center gap-3 text-[17px] font-bold text-white/90">
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full border border-primary/25 text-sm font-bold text-primary">{step}</span>
                   {title}
                 </li>
               ))}
@@ -415,17 +410,17 @@ function ContactForm({
             <div className="relative">
               <div className="mb-10">
                 <div>
-                  <h4 className="w-full text-center text-[clamp(3rem,5vw,4.25rem)] font-light leading-[1.05] tracking-normal text-white">
+                  <h4 className="w-full text-center text-[clamp(3rem,5vw,4.25rem)] font-normal leading-[1.05] tracking-normal text-white">
                     Let’s build
                   </h4>
                 </div>
               </div>
 
               <fieldset className="mb-5">
-                <label className="mb-2 block text-md font-medium tracking-wide text-white/70 capitalize">
+                <label className="mb-2 block text-[18px] font-medium tracking-wide text-white/70 capitalize">
                   Interested In
                 </label>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {serviceNames.map((service) => {
                     const selected = selectedServices.includes(service);
                     return (
@@ -435,10 +430,10 @@ function ContactForm({
                         type="button"
                         aria-pressed={selected}
                         onClick={() => toggleService(service)}
-                        className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-medium tracking-wide transition cursor-pointer sm:text-[14px] ${
+                        className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-5 py-2 text-sm font-[500] tracking-wide transition cursor-pointer sm:text-[17px] ${
                           selected
                             ? "border-primary/70 bg-primary text-secondary"
-                            : "border-primary/20 bg-primary/[0.06] text-white/85 hover:border-primary/60 hover:bg-primary/[0.12] hover:text-white"
+                            : "border-primary/20 bg-primary/[0.06] text-white/70 hover:border-primary/60 hover:bg-primary/[0.12] hover:text-white"
                         }`}
                       >
                         <span className={`grid size-4 shrink-0 place-items-center rounded-[4px] border ${selected ? "border-secondary bg-secondary" : "border-white/45 bg-transparent"}`} aria-hidden="true">

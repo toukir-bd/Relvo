@@ -97,13 +97,13 @@ export default function Cases() {
 
   return (
     <section id="cases" ref={sectionRef} aria-label="Selected projects" className="relative" style={{height:`calc(100svh + ${totalScrollVh * 100}svh)`}}>
-      <div className="cases-inner top-0 sticky flex min-h-screen w-full flex-col items-center justify-center gap-5 px-4 py-6 sm:gap-8 sm:px-6 lg:gap-12 lg:px-10">
+      <div className="cases-inner top-0 sticky flex min-h-screen w-full flex-col items-center justify-center gap-5 px-4 py-6 sm:gap-8 sm:px-6 lg:gap-12 lg:px-20 xl:px-24">
         <h2 className="cases-header hero-text-neon relative overflow-hidden text-center text-[clamp(38px,7vw,85px)] font-[600] leading-[1.05] -tracking-[1px]">
           work that speaks for itself
         </h2>
         <div className="cases-content grid min-h-0 w-full content-center gap-5 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-0">
-          <div className="pointer-events-none absolute left-0 top-0 h-64 w-64 rounded-full bg-primary/10 blur-[80px] sm:h-96 sm:w-96 sm:blur-[90px]"/>
-          <div className="cases-preview relative h-[clamp(16rem,42svh,26rem)] lg:h-[clamp(28rem,58svh,44rem)]">
+          <div className="pointer-events-none absolute left-0 top-0 h-64 w-64 rounded-full bg-primary/14 blur-[80px] sm:h-120 sm:w-120 sm:blur-[90px]"/>
+          <div className="cases-preview relative h-[clamp(16rem,42svh,26rem)] lg:h-[clamp(31rem,66svh,47rem)]">
             {previewSlides.map((slide, index) => {
               const item = slide.type === "case" ? slide.item : null;
               const isCurrent = index === transitionIndex;
@@ -191,7 +191,7 @@ export default function Cases() {
 
           {/* Project details */}
           <div className="cases-details relative min-h-[clamp(10rem,24svh,15rem)] lg:min-h-[30rem]">
-            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-full max-h-[24rem] w-[calc(100%+2rem)] max-w-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-[44px] bg-gradient-to-r from-primary/18 via-primary/10 to-transparent blur-[90px] sm:blur-[130px]" />
+            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-full max-h-[24rem] w-[calc(100%+2rem)] max-w-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-[44px] bg-gradient-to-r from-primary/24 via-primary/10 to-transparent blur-[90px] sm:blur-[130px]" />
             {previewSlides.map((slide, index) => {
               const isCta = slide.type === "cta";
               const item = slide.type === "case" ? slide.item : null;
@@ -205,7 +205,7 @@ export default function Cases() {
                       index === displayedIndex ? "auto" : "none",
                   }}
                 >
-                  <div className="mx-auto w-full max-w-2xl rounded-[28px] bg-gradient-to-r from-[#071714]/95 via-[#071714]/55 to-transparent px-5 py-6 sm:rounded-[36px] sm:px-8 sm:py-9 lg:px-10 lg:py-10">
+                  <div className="mx-auto w-full max-w-2xl rounded-[28px] bg-gradient-to-r from-[#071714]/95 via-[#071714]/55 to-transparent px-5 py-6 sm:rounded-[36px] sm:px-8 sm:py-9 lg:mx-0 lg:max-w-none lg:py-10 lg:pl-16 lg:pr-10">
                     <div className="mb-5 flex items-center gap-3 sm:mb-7">
                       <span aria-hidden="true" className="h-px w-8 bg-primary sm:w-12" />
                       <p className="text-xs font-normal uppercase tracking-[0.18em] text-primary sm:text-sm">
@@ -215,7 +215,7 @@ export default function Cases() {
                     <span className="max-w-xl text-[clamp(1.5rem,2.8vw,2.75rem)] font-[300] leading-[1.12] tracking-normal text-white antialiased">
                       {isCta ? "There’s more to explore." : item?.title}
                     </span>
-                    <p className="mt-4 line-clamp-4 max-w-xl text-[15px] font-[400] leading-relaxed tracking-wide text-white/60 sm:mt-6 sm:text-lg sm:leading-[1.55] lg:text-xl">
+                    <p className="mt-4 line-clamp-4 max-w-2xl text-[15px] font-[400] leading-relaxed tracking-wide text-white/60 sm:mt-6 sm:text-lg sm:leading-[1.55] lg:text-xl">
                       {isCta
                         ? "Visit the cases page to see some more of our best work."
                         : item?.description}

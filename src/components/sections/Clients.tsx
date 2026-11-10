@@ -39,7 +39,7 @@ export default function Clients() {
   }, []);
 
   return (
-    <div role="group" aria-label="Selected clients" className="overflow-hidden rounded-full border-2 border-primary/10 bg-black/25 py-5 sm:py-10">
+    <div role="group" aria-label="Selected clients" className="overflow-hidden rounded-full border-2 border-primary/20 bg-black/25 py-5 sm:py-10">
       <div
         ref={viewportRef}
         className="overflow-hidden"
