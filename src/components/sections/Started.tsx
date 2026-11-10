@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Check, ChevronDown, Mail, Phone, Send } from "lucide-react";
+import { Check, ChevronDown, Mail, Send } from "lucide-react";
 import { serviceNames } from "@/data/services";
 import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 
@@ -356,7 +356,7 @@ function ContactForm({
         }}
       />
       <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-16 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
-      <div className="relative z-10 mx-auto grid max-w-[1440px] items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20 lg:py-10">
+      <div className="relative z-10 grid w-full items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20 lg:py-10">
         <div className="lg:pb-12">
           <h2 className="hero-text-neon focus-title max-w-[620px] text-[clamp(2.8rem,7vw,5.75rem)] font-semibold leading-[1.12] tracking-[-0.045em] text-white">
             Have a project?
@@ -587,7 +587,7 @@ function ContactForm({
               <p aria-live="polite" className="min-h-4 text-sm text-[#555]">{submitMessage}</p>
               <button
                 type="submit"
-                className="group mt-5 flex min-h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-5 text-base font-semibold text-secondary transition hover:bg-[#9ed900] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
+                className="group mt-5 flex min-h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-primary/80 px-5 text-[20px] font-semibold text-secondary transition hover:bg-primary/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
               >
                 Send Message
                 <Send size={17} strokeWidth={2} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

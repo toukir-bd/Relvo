@@ -44,7 +44,7 @@ export default function ServicesPage() {
         </p>
       </header>
 
-      <div className="mx-auto max-w-[1600px] px-5 pb-24 sm:px-8 lg:px-[8vw]">
+      <div className="w-full px-5 pb-24 sm:px-8 lg:px-[8vw]">
         <div className="space-y-4 sm:space-y-6">
           {serviceOptions.map((service, index) => {
             const selected = selectedServices.includes(service.name);

@@ -83,7 +83,7 @@ export default function Story() {
   return (
     <section ref={sectionRef} id="discover-us" className="relative w-full" style={{ height: `${(1 + slides.length * SCROLL_VH_PER_SLIDE) * 100}dvh`, }}>
       <div className="sticky top-0 min-h-screen w-full overflow-hidden">
-        <ExploreRelvoCursor className="relative mx-auto flex-col flex min-h-screen w-full justify-center overflow-hidden">
+        <ExploreRelvoCursor className="relative flex min-h-screen w-full flex-col justify-center overflow-hidden">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40"
               style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)`,
                 backgroundSize: "42px 42px",
@@ -94,7 +94,7 @@ export default function Story() {
             <p className="hero-text-neon relative overflow-hidden text-center text-[14px] font-semibold uppercase tracking-[0.28em] sm:text-[16px] lg:text-[20px]">
               Relvo is built to create a presence that performs
             </p>
-            <div className="relative mx-auto my-5 min-h-[260px] w-full max-w-[1300px] overflow-hidden px-4 sm:my-7 sm:min-h-[300px] sm:px-8 lg:px-0">
+            <div className="relative my-5 min-h-[260px] w-full overflow-hidden px-4 sm:my-7 sm:min-h-[300px] sm:px-8 lg:px-0">
               {slides.map((slide, index) => {
                 const isActive = index === activeSlide;
                 const isPrevious = index < activeSlide;

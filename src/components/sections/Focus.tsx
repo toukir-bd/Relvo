@@ -80,7 +80,7 @@ export default function Focus({ lenis }: SplashProps) {
           <h1 className="focus-title relative mb-5 max-w-full px-3 pb-3 text-center text-[clamp(32px,7.4vw,124px)] font-[800] leading-[1.12] -tracking-[1px] text-white">
             <span className="hero-text-neon block text-[0.82em]">we simplify complexity<br/>and bring your vision to life</span>
           </h1>
-          <div className="relative z-[110] mt-8 w-[calc(100%-2rem)] max-w-[1200px] sm:mt-12 sm:w-[calc(100%-4rem)] lg:mt-14">
+          <div className="relative z-[110] mt-8 w-[calc(100%-2rem)] sm:mt-12 sm:w-[calc(100%-4rem)] lg:mt-14">
             <h4 className="mb-3 text-center text-[clamp(20px,2vw,20px)] font-[400] uppercase tracking-[0.18em] text-primary sm:mb-4 sm:tracking-[0.18em]">
               Meet with prestigious top partners
             </h4>

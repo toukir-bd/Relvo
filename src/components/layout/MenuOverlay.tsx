@@ -25,7 +25,7 @@ const menus = [
   },
   {
     title: "Projects",
-    href: "/#cases",
+    href: "/projects",
     subtitle: "Selected Works",
   },
   {
@@ -48,7 +48,7 @@ export default function MenuOverlay({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
           className="fixed inset-0 bottom-0 z-90 overflow-y-auto bg-secondary/95 text-white">
-          <div className="mx-auto flex min-h-full max-w-[1600px] flex-col lg:h-full lg:flex-row">
+          <div className="flex min-h-full w-full flex-col lg:h-full lg:flex-row">
             <div className="flex w-full shrink-0 flex-col justify-center border-b border-white/10 px-6 py-24 sm:px-8 lg:w-1/2 lg:border-b-0 lg:border-r lg:px-16 lg:py-10">
               {menus.map((item, index) => (
                 <motion.div

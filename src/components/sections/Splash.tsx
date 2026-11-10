@@ -19,7 +19,7 @@ export default function Splash() {
         <video autoPlay loop muted playsInline preload="metadata" className="h-full w-full object-cover" src="/videos/hero.mp4" />
       </div>
       <div className="absolute inset-0 z-10 flex w-full flex-col items-center justify-center px-4 pb-24 pt-24 text-center sm:px-8 lg:px-[100px]">
-        <h4 className="mb-4 max-w-5xl text-[clamp(14px,2.1vw,29px)] font-[300] leading-relaxed tracking-wide sm:mb-5">
+        <h4 className="mb-4 text-[clamp(14px,2.1vw,29px)] font-[300] leading-relaxed tracking-wide sm:mb-5">
           <span className="text-primary">R</span>efined
           <span className="text-primary pl-2">E</span>xperiences,
           <span className="text-primary pl-2">L</span>ed by
