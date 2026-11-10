@@ -355,8 +355,13 @@ function ContactForm({
           maskImage: "linear-gradient(to bottom, black, transparent 78%)",
         }}
       />
+<<<<<<< HEAD
       <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-16 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
       <div className="relative z-10 grid w-full items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20 lg:py-10">
+=======
+      <div aria-hidden="true" className="pointer-events-none absolute -left-40 -bottom-15 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
+      <div className="relative z-10 mx-auto grid max-w-[1440px] items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20 lg:py-10">
+>>>>>>> b5cde6cd61f01ebf2c7408c172a05c314b7260c5
         <div className="lg:pb-12">
           <h2 className="hero-text-neon focus-title max-w-[620px] text-[clamp(2.8rem,7vw,5.75rem)] font-semibold leading-[1.12] tracking-[-0.045em] text-white">
             Have a project?
