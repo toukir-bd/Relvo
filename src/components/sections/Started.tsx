@@ -365,16 +365,16 @@ function ContactForm({
             Tell us about your idea. Share a few details and we’ll get back to you to talk through the next steps.
           </p>
           <div className="mt-9 grid max-w-[640px] gap-4 sm:grid-cols-[1fr_1.08fr]">
-            <a href="mailto:hello@relvodev.com" className="group flex items-center gap-3 rounded-2xl bg-primary/[0.1]
-            p-2 transition hover:border-primary/40">
+            <a href="mailto:hello@relvodev.com" className="group flex items-center gap-3 rounded-2xl border border-transparent bg-primary/[0.1]
+            p-2 transition-colors hover:border-primary/50 hover:bg-primary/[0.13]">
               <span className="grid size-13 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Mail size={20} strokeWidth={1.8} /></span>
               <span className="min-w-0">
                 <span className="block text-[13px] uppercase font-[600] tracking-wider text-white/40">Email Us</span>
                 <span className="block truncate text-[19px] font-[500] tracking-wide text-white/90">hello@relvodev.com</span>
               </span>
             </a>
-            <a href="tel:+8801410485824" className="group flex items-center gap-3 rounded-2xl bg-primary/[0.1]
-            p-2 transition hover:border-primary/40">
+            <a href="tel:+8801410485824" className="group flex items-center gap-3 rounded-2xl border border-transparent bg-primary/[0.1]
+            p-2 transition-colors hover:border-primary/50 hover:bg-primary/[0.13]">
               <span className="grid size-13 shrink-0 place-items-center rounded-xl bg-primary/[0.1] text-primary"><Phone size={20} strokeWidth={1.8} /></span>
               <span className="min-w-0">
                 <span className="block text-[13px] uppercase font-[600] tracking-wider text-white/40">Call Us</span>

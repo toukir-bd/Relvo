@@ -5,10 +5,19 @@ import MainLayout from "../components/layout/MainLayout";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import CursorTrail from "@/components/props/CursorTrail";
 import DoorLoader from "@/components/props/DoorLoader";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Relvo - Design. Development. Digital Experiences.",
-  description: "RELVO is a design-led digital agency creating websites, mobile apps, digital products, and AI-powered solutions through thoughtful design and modern technology.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Relvo Dev | Web Design, Development & Digital Products in Bangladesh",
+    template: "%s | Relvo Dev",
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       {
@@ -24,46 +33,81 @@ export const metadata: Metadata = {
     ],
   },
   keywords: [
-    "RELVO",
-    "Relvo Agency",
-    "Web Design Agency",
-    "Web Development Agency",
-    "UI UX Design",
-    "Website Design",
-    "Website Development",
-    "Custom Website Development",
-    "Mobile App Development",
-    "Digital Product Design",
-    "SaaS Development",
-    "E-commerce Development",
-    "Custom Web Application",
-    "AI Solutions",
-    "Custom Software Development",
+    "Relvo",
+    "Relvo Dev",
+    "RelvoDev",
+    "Relvo Design",
+    "Relvo Development",
+    "Relvo BD",
+    "Relvo Software",
+    "Relvo IT",
+    "Relvo Ltd",
+    "web design Bangladesh",
+    "web development Bangladesh",
+    "software development Bangladesh",
+    "UI UX design",
+    "website design and development",
+    "custom software development",
+    "digital product design",
+    "e-commerce development",
   ],
   authors: [
     {
-      name: "RELVO",
+      name: SITE_NAME,
     },
   ],
-  creator: "RELVO",
-  publisher: "RELVO",
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
     type: "website",
-    title: "RELVO — Design. Development. Digital Experiences.",
-    description:
-      "A design-led digital agency creating websites, apps, digital products, and AI-powered solutions.",
-    siteName: "RELVO",
+    title: "Relvo Dev | Web Design, Development & Digital Products",
+    description: SITE_DESCRIPTION,
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    locale: "en_BD",
   },
   twitter: {
     card: "summary_large_image",
-    title: "RELVO — Design. Development. Digital Experiences.",
-    description:
-      "A design-led digital agency creating websites, apps, digital products, and AI-powered solutions.",
+    title: "Relvo Dev | Web Design, Development & Digital Products",
+    description: SITE_DESCRIPTION,
   },
+  category: "technology",
+  other: {
+    "geo.region": "BD",
+    "geo.placename": "Bangladesh",
+  },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      alternateName: ["Relvo", "RelvoDev", "Relvo BD"],
+      url: SITE_URL,
+      logo: `${SITE_URL}/img/elements/logo.webp`,
+      description: SITE_DESCRIPTION,
+      email: "hello@relvodev.com",
+      telephone: "+8801410485824",
+      areaServed: { "@type": "Country", name: "Bangladesh" },
+      sameAs: ["https://dribbble.com/toukir-bd"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      alternateName: ["Relvo", "RelvoDev"],
+      url: SITE_URL,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      inLanguage: "en-BD",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -74,6 +118,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${urbanist.variable} ${denton.variable}`}>
       <body className="bg-[#081111] text-white" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
+        />
         <DoorLoader/>
         <CursorTrail/>
         <SmoothScroll>

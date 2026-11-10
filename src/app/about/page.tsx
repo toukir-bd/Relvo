@@ -1,6 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Compass, Layers3, Sparkles, Workflow } from "lucide-react";
+import type { Metadata } from "next";
+import { SITE_URL } from "@/data/site";
+
+export const metadata: Metadata = {
+  title: "About Relvo Dev",
+  description:
+    "Meet Relvo Dev, a Bangladesh-based digital design and development studio bringing strategy, design, and technology together.",
+  alternates: { canonical: `${SITE_URL}/about` },
+};
 
 const principles = [
   {

@@ -5,10 +5,13 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 import Clients from "@/components/sections/Clients";
 import ZoomablePreview from "@/components/props/ZoomablePreview";
 import { caseStudies } from "@/data/cases";
+import { SITE_URL } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Projects | Relvo",
-  description: "Explore digital products, websites, and interfaces created by Relvo.",
+  title: "Projects and Case Studies",
+  description:
+    "Explore websites, software, apps, and digital product case studies by Relvo Dev in Bangladesh.",
+  alternates: { canonical: `${SITE_URL}/projects` },
 };
 
 const partnerLogos: Record<string, string> = {
