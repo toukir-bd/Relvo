@@ -111,10 +111,10 @@ export default function HomeServices() {
 
   return (
     <section ref={sectionRef} className="relative w-full" style={{ height: sectionHeight }}>
-      <div ref={viewportRef} className="sticky top-0 relative flex w-full flex-col justify-center overflow-hidden py-14 sm:py-20 lg:py-[90px]">
+      <div ref={viewportRef} className="sticky top-0 relative flex w-full flex-col justify-center overflow-hidden py-14 sm:py-20 lg:py-[120px]">
         <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[min(55vh,520px)] w-[min(76vw,1000px)] -translate-x-1/2 -translate-y-1/2
         rounded-[48px] bg-primary/[0.07] blur-[110px]"/>
-        <div className="relative z-10 mb-10 px-4 sm:mb-14 sm:px-6 lg:mb-[64px] lg:px-[6vw]">
+        <div className="relative z-10 mb-10 px-4 sm:mb-14 sm:px-6 lg:mb-[46px] lg:px-[6vw]">
           <h2 className="focus-title max-w-5xl text-[clamp(40px,7vw,94px)] font-[700] leading-[0.95] tracking-normal text-white">
             <span className="hero-text-neon pe-3">clear service lifecycles</span>
           </h2>

@@ -73,15 +73,14 @@ export default function Focus({ lenis }: SplashProps) {
             backgroundSize: "14px 14px",
           }}
         >
-          <h4 className="mb-5 text-center text-[clamp(20px,2vw,29px)] font-[200] tracking-wide">
+          <h4 className="mb-5 text-center text-[clamp(20px,2vw,29px)] font-[300] tracking-wide">
             Designed to Clarity. Effortless to Explore.
           </h4>
-
           <h1 className="focus-title relative mb-5 max-w-full px-3 pb-3 text-center text-[clamp(32px,7.4vw,124px)] font-[800] leading-[1.12] -tracking-[1px] text-white">
             <span className="hero-text-neon block text-[0.82em]">we simplify complexity and <br/>bring your vision to life</span>
           </h1>
           <div className="relative z-[110] mt-8 w-[calc(100%-2rem)] sm:mt-12 sm:w-[calc(100%-4rem)] lg:mt-14">
-            <h4 className="mb-3 text-center text-[clamp(20px,2vw,20px)] font-[500] uppercase tracking-[0.18em] text-primary sm:mb-4 sm:tracking-[0.24em]">
+            <h4 className="mb-3 text-center text-[clamp(20px,2vw,20px)] font-[500] uppercase tracking-[0.18em] text-primary sm:mb-4 sm:tracking-[0.18em]">
               Meet with prestigious top partners
             </h4>
             <Clients />

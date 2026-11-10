@@ -23,7 +23,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "turbienergy-wind-energy-dashboard",
-    title: "TurbiNergy — Wind Energy Monitoring Dashboard",
+    title: "TurbiNergy — Wind Energy",
     description: "A modern dashboard concept designed to visualize wind-turbine performance, energy generation, wind direction, temperature, and system status in one intuitive interface. The design combines clean data visualization with a soft, atmospheric visual language inspired by the natural environment of wind energy. Designed to make complex energy data feel simple.",
     badge: "Energy Monitoring Dashboard",
     image: "https://cdn.dribbble.com/userupload/48866276/file/28a5807cc0df50ed5d9a664fb668048f.png",

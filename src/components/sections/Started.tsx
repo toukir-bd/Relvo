@@ -119,8 +119,10 @@ const floatingLabelClassName =
 
 function ContactForm({
   initialSelectedServices = EMPTY_SERVICE_SELECTION,
+  isModal = false,
 }: {
   initialSelectedServices?: string[];
+  isModal?: boolean;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const pendingFocusRef = useRef<HTMLElement | null>(null);
@@ -216,6 +218,7 @@ function ContactForm({
   }
 
   useEffect(() => {
+    if (isModal) return;
     const section = sectionRef.current;
     if (!section) return;
 
@@ -275,7 +278,7 @@ function ContactForm({
       window.removeEventListener("wheel", handleWheel, true);
       if (isHolding) startSmoothScroll();
     };
-  }, [scrollTo, startSmoothScroll, stopSmoothScroll]);
+  }, [isModal, scrollTo, startSmoothScroll, stopSmoothScroll]);
 
   function toggleService(service: string) {
     setSelectedServices((current) =>
@@ -343,7 +346,9 @@ function ContactForm({
     <section
       ref={sectionRef}
       id="contact"
-      className="relative isolate overflow-hidden px-4 py-20 text-white sm:px-6 sm:py-24 md:px-10 lg:min-h-svh lg:px-20 lg:py-0 xl:px-24"
+      className={isModal
+        ? "relative isolate overflow-hidden px-4 py-6 text-white sm:px-6 sm:py-8 md:px-8 lg:px-10"
+        : "relative isolate overflow-hidden px-4 py-20 text-white sm:px-6 sm:py-24 md:px-10 lg:min-h-svh lg:px-20 lg:py-0 xl:px-24"}
     >
       <div
         aria-hidden="true"
@@ -356,9 +361,11 @@ function ContactForm({
         }}
       />
       <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-16 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
-      <div className="relative z-10 grid w-full items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-12 lg:py-10 xl:gap-16">
+      <div className={isModal
+        ? "relative z-10 grid w-full items-start gap-7 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:gap-10"
+        : "relative z-10 grid w-full items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-12 lg:py-10 xl:gap-16"}>
         <div className="lg:pb-12">
-          <h2 className="hero-text-neon focus-title max-w-[620px] text-[clamp(2.8rem,7vw,5.75rem)] font-semibold leading-[1.12] tracking-[-0.045em] text-white">
+          <h2 id={isModal ? "contact-modal-title" : undefined} className="hero-text-neon focus-title max-w-[620px] text-[clamp(2.8rem,7vw,5.75rem)] font-semibold leading-[1.12] tracking-[-0.045em] text-white">
             Have a project?
           </h2>
           <p className="mt-6 text-base font-[500] leading-relaxed tracking-wide text-primary/70 sm:text-[20px] pe-10">
@@ -635,9 +642,11 @@ function ContactForm({
 
 export default function ContactSection({
   initialSelectedServices = EMPTY_SERVICE_SELECTION,
+  isModal = false,
 }: {
   initialSelectedServices?: string[];
+  isModal?: boolean;
 }) {
   const selectionKey = initialSelectedServices.join("|") || "empty";
-  return <ContactForm key={selectionKey} initialSelectedServices={initialSelectedServices} />;
+  return <ContactForm key={selectionKey} initialSelectedServices={initialSelectedServices} isModal={isModal} />;
 }

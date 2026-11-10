@@ -33,17 +33,14 @@ export default function Marquee({
   }, [repeatedText]);
 
   return (
-    <section
-      aria-label="Relvo brand statement"
-      className="overflow-hidden bg-primary py-6 text-secondary md:py-8"
-    >
+    <section aria-label="Relvo brand statement" className="mt-15 mb-6 overflow-hidden bg-primary/5 py-6 text-primary/90 md:py-8">
       <div ref={trackRef} className="marquee-track flex w-max whitespace-nowrap">
         {[0, 1].map((group) => (
           <h4
             key={group}
             ref={group === 0 ? groupRef : undefined}
             aria-hidden="true"
-            className="shrink-0 pe-8 text-[clamp(2rem,10vw,4rem)] font-[700] leading-none tracking-tight md:text-7xl"
+            className="shrink-0 pe-8 text-[clamp(2rem,10vw,4rem)] font-[500] leading-none tracking-normal md:text-7xl"
           >
             {repeatedText}
           </h4>

@@ -3,8 +3,9 @@
 import Image from "next/image";
 import { ArrowUpRight, Check } from "lucide-react";
 import { useState } from "react";
-import Started from "@/components/sections/Started";
 import { serviceOptions } from "@/data/services";
+import Faq from "@/components/sections/Faq";
+import { openContactModal } from "@/utils/contactModal";
 
 export default function ServicesPage() {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
@@ -18,8 +19,7 @@ export default function ServicesPage() {
   }
 
   function proceedToContact() {
-    history.replaceState(null, "", "#contact");
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    openContactModal(selectedServices);
   }
 
   return (
@@ -133,7 +133,7 @@ export default function ServicesPage() {
         )}
       </div>
 
-      <Started initialSelectedServices={selectedServices} />
+      <Faq />
     </div>
   );
 }

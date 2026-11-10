@@ -165,7 +165,7 @@ export default function Cases() {
                     <div className="relative h-full flex flex-col items-center justify-center gap-8 p-4 sm:p-8 md:p-10 mx-auto w-full w-2xl">
                       <div className="pointer-events-none h-full absolute inset-0 rounded-[30px] sm:rounded-[42px] opacity-[0.12] [background-size:38px_38px]
                         [background-image:linear-gradient(rgba(255,255,255,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.25)_1px,transparent_1px)]"/>
-                      <p className="text-center text-[16px] sm:text-[17px] font-[500] tracking-[0.16em] sm:tracking-[0.14em] text-primary/80 uppercase">
+                      <p className="text-center text-[16px] sm:text-[20px] font-[500] tracking-[1.6] text-primary/80 uppercase">
                         Every idea has a bigger possibility
                       </p>
                       <h3 className="text-center text-[clamp(2rem,5vw,4rem)] font-semibold leading-[1.1] tracking-tight text-white">
@@ -205,17 +205,17 @@ export default function Cases() {
                       index === displayedIndex ? "auto" : "none",
                   }}
                 >
-                  <div className="mx-auto w-full max-w-2xl rounded-[28px] bg-gradient-to-r from-[#071714]/95 via-[#071714]/55 to-transparent px-5 py-6 sm:rounded-[36px] sm:px-8 sm:py-9 lg:mx-0 lg:max-w-none lg:py-10 lg:pl-16 lg:pr-10">
+                  <div className="mx-auto w-full rounded-[28px] bg-gradient-to-r from-[#071714]/95 via-[#071714]/55 to-transparent px-5 py-6 sm:rounded-[36px] sm:px-8 sm:py-9 lg:mx-0 lg:max-w-none lg:py-10 lg:pl-16 lg:pr-10">
                     <div className="mb-5 flex items-center gap-3 sm:mb-7">
                       <span aria-hidden="true" className="h-px w-8 bg-primary sm:w-12" />
-                      <p className="text-xs font-normal uppercase tracking-[0.18em] text-primary sm:text-sm">
+                      <p className="text-sm font-[500] uppercase tracking-[0.18em] text-primary sm:text-[18px]">
                         {isCta ? "Some best cases" : item?.badge}
                       </p>
                     </div>
-                    <span className="max-w-xl text-[clamp(1.5rem,2.8vw,2.75rem)] font-[300] leading-[1.12] tracking-normal text-white antialiased">
+                    <span className="text-[clamp(1.5rem,2.8vw,2.75rem)] font-[400] leading-[1.12] tracking-normal text-white antialiased">
                       {isCta ? "There’s more to explore." : item?.title}
                     </span>
-                    <p className="mt-4 line-clamp-4 max-w-2xl text-[15px] font-[400] leading-relaxed tracking-wide text-white/60 sm:mt-6 sm:text-lg sm:leading-[1.55] lg:text-xl">
+                    <p className="mt-4 line-clamp-4 text-[14px] font-[400] leading-relaxed tracking-wide text-white/75 sm:mt-6 sm:text-lg sm:leading-[1.65] lg:text-[20px]">
                       {isCta
                         ? "Visit the cases page to see some more of our best work."
                         : item?.description}
