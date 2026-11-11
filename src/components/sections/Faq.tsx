@@ -42,7 +42,7 @@ export default function Faq() {
     <section aria-labelledby="faq-title" className="relative overflow-hidden isolate px-5 py-10 text-white sm:px-8 sm:py-24 lg:px-16 lg:py-30">
       <div className="inset-0 -z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
         style={{
-          backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 4%) 0.65px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 5%) 0.65px, transparent 1px)",
           backgroundSize: "4px 4px",
         }}
       />
