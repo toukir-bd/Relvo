@@ -39,7 +39,7 @@ const questions = [
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   return (
-    <section aria-labelledby="faq-title" className="relative overflow-hidden isolate px-5 py-10 text-white sm:px-8 sm:py-24 lg:px-16 lg:py-30">
+    <section aria-labelledby="faq-title" className="relative isolate overflow-hidden px-5 pt-10 pb-32 text-white sm:px-8 sm:pt-24 sm:pb-40 lg:px-16 lg:pt-30 lg:pb-48">
       <div className="inset-0 -z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
         style={{
           backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 4%) 0.65px, transparent 1px)",

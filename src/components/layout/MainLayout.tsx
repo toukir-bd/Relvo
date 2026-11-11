@@ -5,6 +5,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import MenuOverlay from "./MenuOverlay";
 import ContactModal from "./ContactModal";
+import FloatingContactActions from "./FloatingContactActions";
 import { useSmoothScroll } from "../providers/SmoothScroll";
 import { CONTACT_MODAL_EVENT } from "@/utils/contactModal";
 
@@ -85,6 +86,7 @@ export default function MainLayout({
       <main>
         {children}
       </main>
+      <FloatingContactActions />
       <Footer />
       <ContactModal
         isOpen={contactOpen}
