@@ -69,10 +69,11 @@ export default function Focus({ lenis }: SplashProps) {
       <div ref={sectionRef} className="relative h-[360vh] overflow-clip text-white">
         <div className="sticky top-0 relative flex h-screen w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
           style={{
-            backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 8%) 0.65px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 7%) 0.65px, transparent 1px)",
             backgroundSize: "4px 4px",
           }}
         >
+          <div className="pointer-events-none absolute inset-0 m-auto h-64 w-64 rounded-full bg-primary/10 blur-[80px] sm:h-120 sm:w-120 sm:blur-[90px]"/>
           <h4 className="mb-5 text-center text-[clamp(20px,2vw,29px)] font-[300] tracking-wide">
             Designed to Clarity. Effortless to Explore.
           </h4>

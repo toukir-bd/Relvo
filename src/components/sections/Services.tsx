@@ -129,7 +129,7 @@ export default function HomeServices() {
             {serviceOptions.map((service) => (
               <article key={service.id} className="group relative h-[min(76svh,580px)] min-h-[460px] w-[min(86vw,520px)] shrink-0 overflow-hidden rounded-[34px] bg-primary/3.5
                 sm:w-[min(60vw,520px)] sm:rounded-[40px] lg:h-[580px] lg:w-[min(38vw,520px)]">
-                <div aria-hidden="true" className="pointer-events-none absolute -left-[18%] -top-[22%] z-0 aspect-square w-[105%] rounded-full bg-primary/[0.15] blur-[100px]"/>
+                <div aria-hidden="true" className="pointer-events-none absolute -left-[18%] -top-[22%] z-0 aspect-square w-[105%] rounded-full bg-primary/[0.1] blur-[100px]"/>
                 <div aria-hidden="true" className="pointer-events-none absolute -right-[50%] -top-[42%] z-0 aspect-square w-[90%] rounded-full bg-secondary/[0.35] blur-[50px]"/>
                 <Link
                   href={`/services#service-${service.id}`}

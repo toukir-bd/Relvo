@@ -2,11 +2,7 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background:
-    linear-gradient(rgb(187 255 0 / 2.5%), rgb(187 255 0 / 2.5%)),
-    radial-gradient(ellipse at 50% 45%, rgb(187 255 0 / 15%), transparent 38%),
-    radial-gradient(ellipse at 80% 15%, rgb(62 105 48 / 22%), transparent 38%),
-    linear-gradient(145deg, #142219, #081111 75%);
+  background: radial-gradient(circle, rgb(187 255 0 / 5%) 0.35px, transparent 1px);
 }
 
 .studio-partner-artwork::before,

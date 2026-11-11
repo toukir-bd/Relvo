@@ -7,7 +7,7 @@ type MarqueeTextProps = {
 };
 
 export default function Marquee({
-  text = "RELVO - Refined Experiences, Led by Vision & Originality.",
+  text = "RELVO - Refined Experiences, Led by Vision & Originality. ",
 }: MarqueeTextProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const groupRef = useRef<HTMLHeadingElement>(null);
@@ -33,14 +33,14 @@ export default function Marquee({
   }, [repeatedText]);
 
   return (
-    <section aria-label="Relvo brand statement" className="overflow-hidden bg-primary/5 py-6 text-primary/90 md:py-8">
+    <section aria-label="Relvo brand statement" className="overflow-hidden bg-primary/5 py-6 text-primary md:py-8">
       <div ref={trackRef} className="marquee-track flex w-max whitespace-nowrap">
         {[0, 1].map((group) => (
           <h4
             key={group}
             ref={group === 0 ? groupRef : undefined}
             aria-hidden="true"
-            className="shrink-0 pe-8 text-[clamp(2rem,10vw,4rem)] font-[500] leading-none tracking-normal md:text-7xl"
+            className="shrink-0 pe-8 text-[clamp(2rem,10vw,4rem)] font-[100] leading-none tracking-wider md:text-7xl"
           >
             {repeatedText}
           </h4>

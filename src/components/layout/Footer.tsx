@@ -24,23 +24,31 @@ export default function Footer() {
       />
       <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-0 -z-10 size-[34rem] rounded-full bg-primary/[0.055] blur-[110px]" />
 
-      <div className="w-full px-5 pb-6 pt-12 sm:px-8 sm:pb-8 sm:pt-16 lg:px-16 lg:pt-20">
-        <div className="relative overflow-hidden rounded-[28px] border border-primary/15 bg-[#0d1712]/55 p-6 sm:rounded-[36px] sm:p-9 lg:p-12">
+      <div className="w-full px-5 pb-6 pt-0 sm:px-8 sm:pb-8 sm:pt-0 lg:px-16 lg:pt-0">
+        <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-b-2 border-b-primary/35 bg-[#0d1712]/55 px-5 py-6 sm:px-8 sm:py-9 lg:px-16 lg:py-12">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.12] [background-size:38px_38px] [background-image:linear-gradient(rgba(187,255,0,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(187,255,0,0.18)_1px,transparent_1px)]" />
           <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-36 size-80 rounded-full border border-primary/10" />
-          <div className="relative grid items-center gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12">
-            <div className="max-w-3xl">
-              <p className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-primary sm:text-base">Have a project in mind?</p>
-              <h2 className="focus-title max-w-[13ch] text-[clamp(2.7rem,6.2vw,6rem)] font-semibold leading-[0.94] tracking-[-0.045em] text-white lg:max-w-none lg:whitespace-nowrap lg:text-[clamp(3rem,4vw,4rem)]">
-                let’s build <span className="hero-text-neon">what’s next.</span>
+          <div className="relative mx-auto grid w-full max-w-[1440px] items-center gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
+            <div className="order-1 max-w-3xl lg:order-2">
+              <h2 className="focus-title w-full whitespace-nowrap text-[clamp(1.4rem,4.5vw,4.25rem)] font-semibold leading-[1.05] tracking-normal text-white">
+                make <span className="hero-text-neon">your next move count.</span>
               </h2>
-              <p className="mt-5 max-w-2xl text-base font-medium leading-relaxed text-white/85 sm:text-lg lg:text-xl">
+              <p className="mt-5 w-full text-[24px] font-[400] leading-relaxed text-white/85">
                 Bring us your idea. We’ll shape it into a clear plan and build a digital experience ready to move your business forward.
               </p>
+              <Link
+                href="/#contact"
+                className="btn-relvo mt-7"
+              >
+                <span className="btnText">Start a conversation</span>
+                <span className="iconArea">
+                  <ArrowUpRight strokeWidth={1.5} />
+                </span>
+              </Link>
             </div>
-            <div className="relative flex min-h-64 flex-col items-center justify-center sm:min-h-72 lg:min-h-[22rem]">
+            <div className="relative order-2 flex min-h-64 flex-col items-center justify-center sm:min-h-72 lg:order-1 lg:min-h-[22rem]">
               <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-full bg-primary/[0.08] blur-3xl" />
-              <svg aria-hidden="true" viewBox="0 0 440 300" fill="none" className="relative h-auto w-full max-w-[440px] overflow-visible">
+              <svg aria-hidden="true" viewBox="0 0 440 300" fill="none" className="relative h-auto w-full max-w-[520px] overflow-visible">
                 <path d="M45 155C87 46 334 34 391 144c49 94-80 144-181 111C119 225 8 249 45 155Z" stroke="rgb(187 255 0 / 22%)" strokeDasharray="4 8" />
                 <path d="M79 204c41-30 66-61 97-93 29-29 82-32 119-4 30 22 47 54 72 70" stroke="rgb(187 255 0 / 45%)" strokeWidth="1.5" />
                 <circle cx="79" cy="204" r="5" fill="#BBFF00" />
@@ -55,18 +63,10 @@ export default function Footer() {
                 <path d="M278 202h77m-77 14h48" stroke="rgb(255 255 255 / 68%)" strokeWidth="5" strokeLinecap="round" />
                 <path d="m344 239 8-8 8 8" stroke="#BBFF00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 <circle cx="337" cy="76" r="27" fill="#1b2c1a" stroke="rgb(187 255 0 / 35%)" />
-                <path d="m337 64 3 8 8 3-8 3-3 8-3-8-8-3 8-3 3-8Z" fill="#BBFF00" />
+                <path d="M327 67h20a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-7l-7 5v-5h-6a4 4 0 0 1-4-4V71a4 4 0 0 1 4-4Z" fill="#BBFF00" />
+                <path d="M329 74h15m-15 5h10" stroke="#081111" strokeWidth="2" strokeLinecap="round" />
                 <path d="m365 89 2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z" fill="rgb(187 255 0 / 65%)" />
               </svg>
-              <Link
-                href="/#contact"
-                className="group relative mt-2 inline-flex min-h-14 shrink-0 items-center justify-between gap-5 rounded-full bg-primary py-2 pl-6 pr-2 text-sm font-semibold text-secondary transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-              >
-                Start a conversation
-                <span className="grid size-10 place-items-center rounded-full bg-secondary text-primary transition-transform group-hover:rotate-45">
-                  <ArrowUpRight size={20} strokeWidth={2.5} />
-                </span>
-              </Link>
             </div>
           </div>
         </div>

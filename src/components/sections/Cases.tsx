@@ -17,8 +17,8 @@ const previewSlides = [
   { type: "cta" as const },
 ];
 
-const MOVE_VH = 0.85;
-const HOLD_VH = 0.5;
+const MOVE_VH = 0.5;
+const HOLD_VH = 0.45;
 const STEP_VH = MOVE_VH + HOLD_VH;
 const END_HOLD_VH = 0.8;
 const SCALE_MIN = 0.78;
