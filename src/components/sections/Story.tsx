@@ -85,8 +85,8 @@ export default function Story() {
       <div className="sticky top-0 min-h-screen w-full overflow-hidden">
         <ExploreRelvoCursor className="relative flex min-h-screen w-full flex-col justify-center overflow-hidden">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40"
-              style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 4%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)`,
-                backgroundSize: "5px 5px",
+              style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)`,
+                backgroundSize: "4px 4px",
               }}
             />
             <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-[min(850px,120vw)] -translate-x-1/2 rounded-full bg-primary/15 blur-[100px] sm:h-[420px] sm:blur-[140px]"/>

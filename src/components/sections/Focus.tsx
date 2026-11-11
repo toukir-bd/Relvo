@@ -69,7 +69,7 @@ export default function Focus({ lenis }: SplashProps) {
       <div ref={sectionRef} className="relative h-[360vh] overflow-clip text-white">
         <div className="sticky top-0 relative flex h-screen w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
           style={{
-            backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 4%) 0.65px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 8%) 0.65px, transparent 1px)",
             backgroundSize: "4px 4px",
           }}
         >
