@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     ],
   },
   keywords: [
-    "Relvo",
+    "Relvo", "Revlo", "Revol", "Relov", "Realvo", "Relvon", "Reelvo",
     "Relvo Dev",
     "RelvoDev",
     "Relvo Design",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     "Relvo Software",
     "Relvo IT",
     "Relvo Ltd",
-    "web design Bangladesh",
-    "web development Bangladesh",
-    "software development Bangladesh",
+    "web design",
+    "web development",
+    "software development",
     "UI UX design",
     "website design and development",
     "custom software development",
@@ -124,8 +124,8 @@ export default function RootLayout({
             __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
           }}
         />
-        <DoorLoader/>
-        <CursorTrail/>
+        <DoorLoader />
+        <CursorTrail />
         <SmoothScroll>
           <MainLayout>{children}</MainLayout>
         </SmoothScroll>
