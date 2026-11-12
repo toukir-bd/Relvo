@@ -64,33 +64,52 @@ export default function ContactModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.24, ease: "easeOut" }}
-          className="fixed inset-0 z-[120] flex items-center justify-center bg-[#020807]/85 p-3 backdrop-blur-md sm:p-6 lg:p-8"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) onClose();
-          }}
+          data-lenis-prevent
+          className="fixed inset-0 z-[120] overflow-x-hidden overflow-y-auto overscroll-contain bg-[#020807]/80 backdrop-blur-md"
         >
-          <motion.div
-            ref={dialogRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="contact-modal-title"
-            initial={{ opacity: 0, y: 18, scale: 0.985 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 12, scale: 0.99 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="relative max-h-[92svh] w-full max-w-[1480px] overflow-y-auto rounded-[26px] border border-primary/25 bg-[#071311] shadow-[0_32px_120px_rgba(0,0,0,0.68)] sm:rounded-[34px]"
+          <div
+            aria-hidden="true"
+            className="pointer-events-none fixed inset-0 opacity-65"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle, rgb(187 255 0 / 17%) 0.7px, transparent 1px), linear-gradient(rgb(187 255 0 / 2%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 2%) 1px, transparent 1px)",
+              backgroundSize: "18px 18px, 52px 52px, 52px 52px",
+              maskImage: "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
+            }}
+          />
+          <div aria-hidden="true" className="pointer-events-none fixed -left-48 top-[12%] size-[34rem] rounded-full bg-primary/[0.1] blur-[120px]" />
+          <div aria-hidden="true" className="pointer-events-none fixed -right-40 bottom-[-8%] size-[32rem] rounded-full bg-primary/[0.08] blur-[120px]" />
+          <div
+            className="relative z-10 flex min-h-svh w-full items-center justify-center p-3 sm:p-6 lg:p-8"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) onClose();
+            }}
           >
-            <button
-              ref={closeButtonRef}
-              type="button"
-              onClick={onClose}
-              aria-label="Close contact form"
-              className="absolute right-4 top-4 z-50 grid size-11 place-items-center rounded-full border border-white/15 bg-[#081111]/85 text-white/80 backdrop-blur transition hover:border-primary/50 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:right-6 sm:top-6"
+            <motion.div
+              ref={dialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="contact-modal-title"
+              initial={{ opacity: 0, y: 18, scale: 0.985 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.99 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="relative w-full max-w-[960px]"
             >
-              <X size={21} strokeWidth={2} />
-            </button>
-            <Started isModal initialSelectedServices={initialSelectedServices} />
-          </motion.div>
+              <button
+                ref={closeButtonRef}
+                type="button"
+                onClick={onClose}
+                aria-label="Close contact form"
+                className="absolute right-8 top-8 z-50 grid size-11 cursor-pointer place-items-center rounded-full border border-red-200 bg-[#081111]/90 text-white/80 shadow-lg backdrop-blur transition-colors hover:border-red-400 hover:text-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:size-[50px]"
+              >
+                <X size={21} strokeWidth={2} />
+              </button>
+              <div className="flex w-full items-center justify-center">
+                <Started isModal initialSelectedServices={initialSelectedServices} />
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Check, ChevronDown, Mail, Phone, Send } from "lucide-react";
+import { Check, ChevronDown, Mail, Phone, PhoneCall, Send } from "lucide-react";
 import { serviceNames } from "@/data/services";
 import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 
@@ -148,6 +148,7 @@ function ContactForm({
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [validationMessage, setValidationMessage] = useState("");
   const [submitMessage, setSubmitMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -300,7 +301,7 @@ function ContactForm({
     });
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const nameField = form.elements.namedItem("name") as HTMLInputElement;
@@ -333,13 +334,38 @@ function ContactForm({
     const email = String(values.get("email") ?? "");
     const phone = `${countryCode} ${String(values.get("phone") ?? "")}`;
     const project = String(values.get("project") ?? "");
-    const subject = encodeURIComponent(`Project inquiry from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nInterested in: ${selectedServices.join(", ")}\n\nAbout the project:\n${project}`,
-    );
+    setIsSubmitting(true);
+    setSubmitMessage("");
 
-    window.location.href = `mailto:partner@bytetown.agency?subject=${subject}&body=${body}`;
-    setSubmitMessage("Your email app should open with your project inquiry ready to send.");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          services: selectedServices,
+          project,
+          website: String(values.get("website") ?? ""),
+        }),
+      });
+
+      if (!response.ok) {
+        const result = (await response.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(result?.error ?? "We couldn’t send your message. Please try again.");
+      }
+
+      form.reset();
+      setSelectedServices(initialSelectedServices);
+      setCountryCode("");
+      setSelectedCountryId("");
+      setSubmitMessage("Thanks! Your project inquiry has been sent. We’ll be in touch soon.");
+    } catch (error) {
+      setSubmitMessage(error instanceof Error ? error.message : "We couldn’t send your message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -347,7 +373,7 @@ function ContactForm({
       ref={sectionRef}
       id="contact"
       className={isModal
-        ? "relative isolate overflow-hidden px-4 py-6 text-white sm:px-6 sm:py-8 md:px-8 lg:px-10"
+        ? "relative isolate overflow-hidden px-0 py-0 text-white"
         : "relative isolate overflow-hidden px-4 py-20 text-white sm:px-6 sm:py-24 md:px-10 lg:min-h-svh lg:px-20 lg:py-0 xl:px-24"}
     >
       <div
@@ -362,9 +388,9 @@ function ContactForm({
       />
       <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-16 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
       <div className={isModal
-        ? "relative z-10 grid w-full items-start gap-7 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:gap-10"
+        ? "relative z-10 mx-auto w-full max-w-[960px]"
         : "relative z-10 grid w-full items-start gap-12 lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-12 lg:py-10 xl:gap-16"}>
-        <div className="lg:pb-12">
+        {!isModal && <div className="lg:pb-12">
           <h2 id={isModal ? "contact-modal-title" : undefined} className="hero-text-neon focus-title max-w-[620px] text-[clamp(2.8rem,7vw,5.75rem)] font-semibold leading-[1.12] tracking-[-0.045em] text-white">
             Have a project?
           </h2>
@@ -404,7 +430,7 @@ function ContactForm({
               ))}
             </ol>
           </div>
-        </div>
+        </div>}
 
         <div>
           <form noValidate onSubmit={handleSubmit}
@@ -413,11 +439,15 @@ function ContactForm({
               backgroundSize: "20px 20px",
             }}
           >
+            <div className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+              <label htmlFor="contact-website">Leave this field empty</label>
+              <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
             <div aria-hidden="true" className="pointer-events-none absolute -left-[18%] -bottom-[22%] z-0 aspect-square w-full rounded-full bg-primary/20 blur-[100px]"/>
             <div className="relative">
-              <div className="mb-10">
+              <div className="mb-9">
                 <div>
-                  <h4 className="w-full text-center text-[clamp(3rem,5vw,4.25rem)] font-normal leading-[1.05] tracking-normal text-white">
+                  <h4 id={isModal ? "contact-modal-title" : undefined} className="w-full text-center text-[clamp(3rem,5vw,4.25rem)] font-normal leading-[1.05] tracking-normal text-white">
                     Let’s build
                   </h4>
                 </div>
@@ -591,14 +621,28 @@ function ContactForm({
                 </span>
                 {fieldErrors.project && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.project}</span>}
               </label>
-              <p aria-live="polite" className="min-h-4 text-sm text-[#555]">{submitMessage}</p>
+              <p aria-live="polite" className="min-h-5 text-sm font-medium text-white/70">{submitMessage}</p>
               <button
                 type="submit"
-                className="group mt-5 flex min-h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-primary/80 px-5 text-[20px] font-semibold text-secondary transition hover:bg-primary/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
+                disabled={isSubmitting}
+                className="group mt-5 flex min-h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-primary/80 px-5 text-[20px] font-semibold text-secondary transition hover:bg-primary/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary disabled:cursor-wait disabled:opacity-70"
               >
-                Send Message
-                <Send size={17} strokeWidth={2} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                {isSubmitting ? "Sending…" : "Send Message"}
+                {!isSubmitting && <Send size={17} strokeWidth={2} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />}
               </button>
+              <div className="mt-6 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40" aria-hidden="true">
+                <span className="h-px flex-1 bg-white/10" />
+                <span>Or</span>
+                <span className="h-px flex-1 bg-white/10" />
+              </div>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <a href="mailto:hello@relvodev.com" className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.06] px-5 text-sm font-semibold text-white/85 transition hover:border-primary/70 hover:bg-primary/[0.14] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-base">
+                  <Mail size={18} strokeWidth={2.2} className="text-primary" /> Email us
+                </a>
+                <a href="tel:+8801410485824" className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.06] px-5 text-sm font-semibold text-white/85 transition hover:border-primary/70 hover:bg-primary/[0.14] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-base">
+                  <PhoneCall size={18} strokeWidth={2.2} className="text-primary" /> Call us
+                </a>
+              </div>
             </div>
           </form>
         </div>
