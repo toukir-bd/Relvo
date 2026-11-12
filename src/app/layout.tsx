@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/providers/SmoothScroll";
 import CursorTrail from "@/components/props/CursorTrail";
 import DoorLoader from "@/components/props/DoorLoader";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/data/site";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -129,6 +130,7 @@ export default function RootLayout({
         <SmoothScroll>
           <MainLayout>{children}</MainLayout>
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
