@@ -14,8 +14,8 @@ export default function Footer() {
     <footer className="relative isolate overflow-hidden text-white">
       <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-0 -z-10 size-[34rem] rounded-full bg-primary/[0.055] blur-[110px]" />
       <div className="w-full px-5 pb-12 pt-0 sm:px-8 sm:pb-14 sm:pt-0 lg:px-16">
-        <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-b border-b-primary/15 bg-[#0d1712]/55 px-5 py-6 sm:px-8 sm:py-9 lg:px-16 lg:py-12">
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.12] [background-size:10px_10px] [background-image:linear-gradient(rgba(187,255,0,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(187,255,0,0.15)_1px,transparent_1px)]" />
+        <div className="relative left-1/2 w-screen -translate-x-1/2 border-b border-b-primary/15 bg-[#0d1712]/55 px-5 py-6 sm:px-8 sm:py-9 lg:px-16 lg:py-12">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.12] [background-size:8px_8px] [background-image:linear-gradient(rgba(187,255,0,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(187,255,0,0.15)_1px,transparent_1px)]" />
           <div className="relative mx-auto grid w-full max-w-[1440px] items-center gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
             <div className="order-1 lg:order-2">
               <h2 className="focus-title w-full whitespace-nowrap text-[clamp(1.4rem,4.5vw,4.25rem)] font-semibold leading-[1.05] tracking-normal text-white">
@@ -58,7 +58,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mx-auto w-full pt-20 sm:pt-22 lg:pt-30 pb-6 sm:pb-8 lg:pb-10">
+        <div className="relative mx-auto w-full pt-20 sm:pt-22 lg:pt-30 pb-6 sm:pb-8 lg:pb-10 scale-[0.9]">
           <div className="grid items-end gap-10 border-b border-white/[0.08] pb-2 sm:pb-3 md:grid-cols-[1.2fr_1fr_1fr] lg:gap-16 lg:pb-5">
             <div>
               <p className="w-full text-2xl font-[400] leading-snug tracking-wide text-white sm:text-3xl relative -bottom-1">
