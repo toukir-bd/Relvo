@@ -28,7 +28,7 @@ export default function Header({
       </Link>
       <button onClick={isMenuOpen ? onMenuClose : onMenuOpen} aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         className={`group fixed right-4 top-5 z-100 flex h-11 w-11 cursor-pointer items-center justify-center gap-2 rounded-full sm:right-6 sm:top-7 sm:h-[50px] sm:w-[50px] lg:right-10 lg:top-9
-          border border-white/30 hover:border-primary/50 transition-all duration-500"
+          border border-white/30 hover:border-primary/50 transition-all duration-500 backdrop-blur-[100px] bg-secondary/10"
           ${isMenuOpen
             ? "border-red-200 hover:border-red-400"
             : "border-white/10 hover:border-primary/50"

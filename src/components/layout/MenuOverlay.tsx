@@ -47,7 +47,7 @@ export default function MenuOverlay({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
-          className="fixed inset-0 bottom-0 z-90 overflow-y-auto bg-secondary/95 text-white">
+          className="fixed inset-0 bottom-0 z-90 overflow-y-auto bg-secondary/95 text-white backdrop-blur-[10px] ">
           <div className="flex min-h-full w-full flex-col lg:h-full lg:flex-row">
             <div className="flex w-full shrink-0 flex-col justify-center border-b border-white/10 px-6 py-24 sm:px-8 lg:w-1/2 lg:border-b-0 lg:border-r lg:px-16 lg:py-10">
               {menus.map((item, index) => (
@@ -107,8 +107,8 @@ export default function MenuOverlay({
                   creativity, and technology designed to elevate brands and
                   inspire lasting impact.
                 </p>
-                <Link href="/#contact" onClick={onClose} className="mt-8 inline-block rounded-full bg-primary px-8 py-4 text-lg font-semibold text-white
-                  transition hover:bg-[#1DB67E]">
+                <Link href="/#contact" onClick={onClose} className="mt-8 inline-block rounded-full bg-primary/80 px-8 py-4 text-lg font-semibold text-white backdrop-blur-md
+                  transition hover:bg-[#1DB67E]/85">
                   Get Started
                 </Link>
               </motion.div>

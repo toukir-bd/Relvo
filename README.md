@@ -38,3 +38,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Contact form email
 
 The contact form sends submissions through the `/api/contact` Route Handler using Resend. Set `RESEND_API_KEY` in `.env.local` for local development and in the Vercel project environment variables for deployment. Verify `relvodev.com` as a sending domain in Resend before sending from `hello@relvodev.com`.
+

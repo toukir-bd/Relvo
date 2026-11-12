@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight, Compass, Layers3, Sparkles, Workflow } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Blocks, Compass, Layers3, Orbit, Sparkles, UserRound, Workflow } from "lucide-react";
 import type { Metadata } from "next";
 import { SITE_URL } from "@/data/site";
 
@@ -42,10 +42,41 @@ const process = [
   ["Launch", "We prepare the work for the real world and help you take the next step."],
 ];
 
+const studioTopics = [
+  {
+    id: "user-centric",
+    title: "User Centric",
+    description:
+      "We start with the people a product is for. Their goals, needs, and everyday context guide the experience from the first decision to the final detail.",
+    icon: UserRound,
+  },
+  {
+    id: "creatively-driven",
+    title: "Creatively Driven",
+    description:
+      "We bring strategy and imagination together to create distinctive brands and digital experiences with a clear point of view.",
+    icon: Sparkles,
+  },
+  {
+    id: "innovation-led",
+    title: "Innovative Led",
+    description:
+      "We explore thoughtful ideas and useful technology to solve real problems, making every interaction feel more considered and capable.",
+    icon: Blocks,
+  },
+  {
+    id: "scalably-built",
+    title: "Scalable Built",
+    description:
+      "We build on reliable, flexible foundations so your product can adapt as your audience, needs, and ambitions grow.",
+    icon: Orbit,
+  },
+];
+
 export default function AboutPage() {
   return (
     <div className="overflow-hidden bg-[#081111] text-white">
-      <section className="relative isolate flex min-h-[78svh] flex-col justify-center overflow-hidden px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40 lg:min-h-[88svh] lg:px-[8vw]">
+      <section className="relative isolate flex min-h-[78svh] flex-col justify-center overflow-hidden px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40 lg:min-h-[88svh] lg:px-10 xl:px-16">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10 opacity-45"
@@ -78,8 +109,28 @@ export default function AboutPage() {
         </a>
       </section>
 
-      <section id="studio" className="relative px-5 py-16 sm:px-8 sm:py-24 lg:px-[8vw] lg:py-32">
-        <div className="mx-auto grid max-w-[1440px] items-center gap-10 rounded-[32px] border border-white/[0.07] bg-[#111915] p-6 sm:gap-14 sm:rounded-[40px] sm:p-10 lg:grid-cols-[1fr_0.9fr] lg:p-16">
+      <section aria-labelledby="studio-topics-title" className="relative isolate overflow-hidden px-5 py-16 sm:px-8 sm:py-24 lg:px-10 lg:py-28 xl:px-16">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-25" style={{ backgroundImage: "linear-gradient(rgb(187 255 0 / 5%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 5%) 1px, transparent 1px)", backgroundSize: "44px 44px" }} />
+        <header className="mb-10 max-w-4xl sm:mb-14">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">What defines Relvo</p>
+          <h2 id="studio-topics-title" className="focus-title mt-4 text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.04em]">Principles behind every project.</h2>
+        </header>
+        <div className="grid w-full gap-4 lg:grid-cols-2">
+          {studioTopics.map(({ id, title, description, icon: Icon }, index) => (
+            <article id={id} key={id} className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-[#0d1713]/90 p-6 sm:rounded-[34px] sm:p-9 lg:p-11">
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-sm font-semibold tracking-[0.18em] text-primary">0{index + 1}</span>
+                <span className="grid size-12 place-items-center rounded-2xl border border-primary/20 bg-primary/[0.07] text-primary sm:size-14"><Icon size={24} strokeWidth={1.5} /></span>
+              </div>
+              <h3 className="mt-8 text-[clamp(1.65rem,3vw,2.5rem)] font-semibold leading-tight tracking-[-0.025em] text-white">{title}</h3>
+              <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/65 sm:text-lg sm:leading-8">{description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="studio" className="relative px-5 py-16 sm:px-8 sm:py-24 lg:px-10 lg:py-32 xl:px-16">
+        <div className="grid w-full items-center gap-10 rounded-[32px] border border-white/[0.07] bg-[#111915] p-6 sm:gap-14 sm:rounded-[40px] sm:p-10 lg:grid-cols-[1fr_0.9fr] lg:p-16">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Small team. Big-picture thinking.</p>
             <h2 className="focus-title mt-5 max-w-3xl text-[clamp(2.5rem,6vw,5.2rem)] font-semibold leading-[0.96] tracking-[-0.04em]">
@@ -105,8 +156,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-5 py-16 sm:px-8 sm:py-24 lg:px-[8vw] lg:py-28">
-        <div className="mx-auto max-w-[1440px]">
+      <section className="px-5 py-16 sm:px-8 sm:py-24 lg:px-10 lg:py-28 xl:px-16">
+        <div className="w-full">
           <div className="mb-10 flex flex-col gap-5 sm:mb-14 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">What guides us</p>
@@ -130,9 +181,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative isolate overflow-hidden px-5 py-16 sm:px-8 sm:py-24 lg:px-[8vw] lg:py-28">
+      <section className="relative isolate overflow-hidden px-5 py-16 sm:px-8 sm:py-24 lg:px-10 lg:py-28 xl:px-16">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-30" style={{ backgroundImage: "linear-gradient(rgb(187 255 0 / 6%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 6%) 1px, transparent 1px)", backgroundSize: "44px 44px" }} />
-        <div className="mx-auto max-w-[1440px]">
+        <div className="w-full">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">How we work</p>
           <div className="mt-4 grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
             <div>
@@ -152,8 +203,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-5 pb-20 pt-12 sm:px-8 sm:pb-28 sm:pt-16 lg:px-[8vw]">
-        <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[32px] bg-primary px-6 py-10 text-secondary sm:rounded-[40px] sm:px-12 sm:py-14 lg:px-16 lg:py-16">
+      <section className="px-5 pb-20 pt-12 sm:px-8 sm:pb-28 sm:pt-16 lg:px-10 xl:px-16">
+        <div className="relative w-full overflow-hidden rounded-[32px] bg-primary px-6 py-10 text-secondary sm:rounded-[40px] sm:px-12 sm:py-14 lg:px-16 lg:py-16">
           <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-40 size-[28rem] rounded-full border border-secondary/10" />
           <div aria-hidden="true" className="pointer-events-none absolute -right-8 -top-28 size-[22rem] rounded-full border border-secondary/10" />
           <div className="relative flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">

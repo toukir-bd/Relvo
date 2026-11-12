@@ -17,11 +17,11 @@ export default function Footer() {
         <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-b border-b-primary/15 bg-[#0d1712]/55 px-5 py-6 sm:px-8 sm:py-9 lg:px-16 lg:py-12">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.12] [background-size:10px_10px] [background-image:linear-gradient(rgba(187,255,0,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(187,255,0,0.15)_1px,transparent_1px)]" />
           <div className="relative mx-auto grid w-full max-w-[1440px] items-center gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
-            <div className="order-1 max-w-3xl lg:order-2">
+            <div className="order-1 lg:order-2">
               <h2 className="focus-title w-full whitespace-nowrap text-[clamp(1.4rem,4.5vw,4.25rem)] font-semibold leading-[1.05] tracking-normal text-white">
                 make <span className="hero-text-neon">your next move count.</span>
               </h2>
-              <p className="mt-5 w-full text-[24px] font-[400] leading-relaxed text-white/85">
+              <p className="mt-5 w-full text-[27px] font-[500] leading-relaxed text-white/85">
                 Bring us your idea. We’ll shape it into a clear plan and build a digital experience ready to move your business forward.
               </p>
               <Link
@@ -59,18 +59,18 @@ export default function Footer() {
           </div>
         </div>
         <div className="mx-auto w-full pt-20 sm:pt-22 lg:pt-30 pb-6 sm:pb-8 lg:pb-10">
-          <div className="grid items-end gap-10 border-b border-white/[0.08] pb-2 sm:pb-3 md:grid-cols-[1.5fr_1fr_1fr] lg:gap-16 lg:pb-5">
+          <div className="grid items-end gap-10 border-b border-white/[0.08] pb-2 sm:pb-3 md:grid-cols-[1.2fr_1fr_1fr] lg:gap-16 lg:pb-5">
             <div>
-              <p className="w-full text-3xl font-[300] leading-snug tracking-wide text-white sm:text-4xl">
+              <p className="w-full text-2xl font-[400] leading-snug tracking-wide text-white sm:text-3xl relative -bottom-1">
                 Design, technology, and<br />clear thinking for what comes next.
               </p>
             </div>
             <nav aria-label="Footer navigation" className="md:w-full md:justify-self-center">
-              <h4 className="mb-3 text-sm font-[700] uppercase tracking-widest text-white sm:text-[20px]">Explore</h4>
+              <h4 className="mb-4 text-sm font-[700] uppercase tracking-widest text-white sm:text-[20px]">Explore</h4>
               <ul className="grid grid-cols-2 gap-x-6 gap-y-3 md:flex md:flex-wrap md:justify-start md:gap-x-6">
                 {menus.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="group inline-flex items-center gap-1.5 text-base font-[600] text-primary/40 transition hover:text-primary sm:text-[18px]">
+                    <Link href={item.href} className="group inline-flex items-center gap-1.5 text-base font-[400] text-white/70 tracking-wider transition hover:text-primary sm:text-[18px]">
                       {item.title}
                       <ArrowUpRight size={18} className="-translate-y-0.5 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-80" />
                     </Link>
@@ -79,14 +79,14 @@ export default function Footer() {
               </ul>
             </nav>
             <div>
-              <h4 className="mb-3 text-sm font-[700] uppercase tracking-widest text-white sm:text-[20px]">Say hello</h4>
+              <h4 className="mb-4 text-sm font-[700] uppercase tracking-widest text-white sm:text-[20px]">Say hello</h4>
               <div className="grid gap-3 lg:grid-cols-2">
-                <a href="mailto:hello@relvodev.com" className="group flex w-fit items-center gap-3 text-base font-[500] text-primary/50 transition hover:text-primary sm:text-[18px] tracking-wider">
-                  <span className="grid size-8 place-items-center rounded-full bg-primary/[0.06] text-primary"><Mail size={16} /></span>
+                <a href="mailto:hello@relvodev.com" className="group flex w-fit items-center gap-3 text-base font-[400] text-white/70 transition hover:text-primary sm:text-[18px] tracking-wider">
+                  <span className="grid size-9 place-items-center rounded-full bg-primary/[0.06] text-white"><Mail size={16} /></span>
                   hello@relvodev.com
                 </a>
-                <a href="tel:+8801410485824" className="group flex w-fit items-center gap-3 text-base font-[500] text-primary/50 transition hover:text-primary sm:text-[18px] tracking-wider">
-                  <span className="grid size-8 place-items-center rounded-full bg-primary/[0.06] text-primary"><Phone size={16} /></span>
+                <a href="tel:+8801410485824" className="group flex w-fit items-center gap-3 text-base font-[400] text-white/70 transition hover:text-primary sm:text-[18px] tracking-wider">
+                  <span className="grid size-9 place-items-center rounded-full bg-primary/[0.06] text-white"><Phone size={16} /></span>
                   +880 1410-485824
                 </a>
               </div>
@@ -95,7 +95,7 @@ export default function Footer() {
           <Link
             href="/"
             aria-label="Relvo home"
-            className="relative left-1/2 mx-0 mt-2 flex w-screen -translate-x-1/2 justify-center px-5 sm:mt-5"
+            className="relative left-1/2 mx-0 mt-2 flex w-screen -translate-x-1/2 justify-center px-5 sm:mt-5 [background-image:linear-gradient(rgba(187,255,0,0.15),transparent)"
           >
             <Image
               src="/img/elements/logo.webp"
@@ -106,7 +106,7 @@ export default function Footer() {
               className="h-auto w-[min(70vw,980px)] object-contain sm:w-[min(60vw,980px)]"
             />
           </Link>
-          <div className="flex flex-col gap-2 border-t border-white/[0.08] pt-3 text-xs font-[500] text-white/50 sm:flex-row sm:items-center sm:justify-start sm:gap-2 sm:pt-5 sm:text-[14px] lg:gap-2">
+          <div className="flex flex-col gap-1 border-t border-white/[0.08] pt-3 text-xs font-[500] text-white/50 sm:flex-row sm:items-center sm:justify-start sm:gap-1 sm:pt-5 sm:text-[14px] lg:gap-2">
             <p>© {new Date().getFullYear()} Relvo. All rights reserved.</p>
             <p className="tracking-wide">Thoughtfully made for the digital world.</p>
           </div>

@@ -4,10 +4,10 @@ import { UserRound, Sparkles, Blocks, Orbit } from "lucide-react";
 import ScrollToDiscover from "../props/ScrollToDiscover";
 
 const roles = [
-  { label: "User Centric", icon: UserRound, active: false, href: "/services#service-ui-ux-product-design"},
-  { label: "Creatively Driven", icon: Sparkles, active: false, href: "/services#service-brand-strategy-identity"},
-  { label: "Innovative Led", icon: Blocks, active: false, href: "/services#service-web-applications"},
-  { label: "Scalable Built", icon: Orbit, active: true, href: "/services#service-website-design-development"},
+  { label: "User Centric", icon: UserRound, active: false, href: "/about#user-centric"},
+  { label: "Creatively Driven", icon: Sparkles, active: false, href: "/about#creatively-driven"},
+  { label: "Innovative Led", icon: Blocks, active: false, href: "/about#innovation-led"},
+  { label: "Scalable Built", icon: Orbit, active: true, href: "/about#scalably-built"},
 ];
 
 

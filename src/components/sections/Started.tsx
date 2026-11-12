@@ -149,7 +149,6 @@ function ContactForm({
   const [validationMessage, setValidationMessage] = useState("");
   const [submitMessage, setSubmitMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   useEffect(() => {
     const controller = new AbortController();
 
