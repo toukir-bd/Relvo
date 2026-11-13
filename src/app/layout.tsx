@@ -34,9 +34,9 @@ export const metadata: Metadata = {
     ],
   },
   keywords: [
-    "Relvo", "Revlo", "Revol", "Relov", "Realvo", "Relvon", "Reelvo",
-    "Relvo Dev",
-    "RelvoDev",
+    "Relvo", "relvo", "Revlo", "Revol", "Relov", "Realvo", "Relvon", "Reelvo",
+    "RelvoDev", "relvoDev", "relvodev", "Relvodev",
+    "Relvo Dev", "relvo Dev", "relvo dev", "Relvo dev",
     "Relvo Design",
     "Relvo Development",
     "Relvo BD",

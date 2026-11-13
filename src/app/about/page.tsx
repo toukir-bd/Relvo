@@ -18,8 +18,8 @@ export default function AboutPage() {
   return (
     <div className="overflow-hidden bg-[#081111] text-white">
       <AboutHero />
-      <StudioTopics />
       <StudioStory />
+      <StudioTopics />
       <Principles />
       <Process />
       <AboutCTA />
