@@ -49,8 +49,17 @@ export default function MenuOverlay({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
           className="fixed inset-0 bottom-0 z-90 overflow-y-auto bg-secondary/95 text-white backdrop-blur-[10px] ">
-          <div className="flex min-h-full w-full flex-col lg:h-full lg:flex-row">
-            <div className="flex w-full shrink-0 flex-col justify-center border-b border-white/10 px-6 py-24 sm:px-8 lg:w-1/2 lg:border-b-0 lg:border-r lg:px-55 lg:py-10">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-55"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 1px 1px, rgb(187 255 0 / 12%) 0.75px, transparent 1px), radial-gradient(ellipse at 78% 42%, rgb(187 255 0 / 7%), transparent 48%)",
+              backgroundSize: "18px 18px, 100% 100%",
+            }}
+          />
+          <div className="relative z-10 flex min-h-full w-full flex-col lg:h-full lg:flex-row">
+            <div className="flex w-full shrink-0 flex-col justify-center border-b border-primary/5 px-6 py-24 sm:px-8 lg:w-1/2 lg:border-b-0 lg:border-r lg:px-55 lg:py-10">
               {menus.map((item, index) => (
                 <motion.div key={item.href} initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.08, duration: 0.45,}}>
                   <Link href={item.href} onClick={onClose} className="group flex py-1 items-center justify-between gap-7 sm:py-2 lg:py-6 border-b border-primary/8 w-full">
@@ -77,15 +86,15 @@ export default function MenuOverlay({
                 transition={{ delay: 0.3, duration: 0.65 }}
                 className="relative w-full max-w-xl"
               >
-                <p className="mb-5 text-xs font-semibold uppercase tracking-[0.34em] text-primary">Ideas into impact</p>
-                <h2 className="focus-title max-w-[12ch] text-[clamp(2.8rem,5.2vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white">
-                  Make your next move <span className="hero-text-neon">mean more.</span>
+                <p className="mb-5 text-[16px] font-semibold uppercase tracking-[0.24em] text-primary">Ideas into impact</p>
+                <h2 className="focus-title text-[clamp(2.8rem,5.2vw,4.7rem)] font-semibold leading-[0.98] tracking-normal text-white">
+                  <span className="hero-text-neon">make your next move mean more.</span>
                 </h2>
-                <p className="mt-6 max-w-md text-base leading-relaxed text-white/60 sm:text-lg">
+                <p className="mt-4 text-base leading-relaxed font-[300] tracking-wide text-white/70 sm:text-[23px]">
                   Thoughtful design and purposeful technology, shaped around the ambition behind your business.
                 </p>
 
-                <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/10 pt-6 text-sm text-white/45">
+                <div className="mt-5 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/10 font-[500] tracking-wide pt-6 text-[18px] text-white">
                   <span>Strategy</span><span className="text-primary/60">/</span>
                   <span>Design</span><span className="text-primary/60">/</span>
                   <span>Development</span>
@@ -93,7 +102,7 @@ export default function MenuOverlay({
 
                 <Link href="/#contact" onClick={onClose} className="btn-relvo mt-9">
                   <span className="btnText">Start a conversation</span>
-                  <span className="iconArea"><ArrowUpRight className="btnIcon" size={20} strokeWidth={1.7} /></span>
+                  <span className="iconArea"><ArrowUpRight size={30} strokeWidth={1} /></span>
                 </Link>
               </motion.div>
             </div>

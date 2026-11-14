@@ -7,7 +7,12 @@ type Point = {
   y: number;
 };
 
-export default function CursorTrail({ count = 6 }) {
+type CursorTrailProps = {
+  count?: number;
+  enabled?: boolean;
+};
+
+export default function CursorTrail({ count = 6, enabled = true }: CursorTrailProps) {
   const dots = useRef<(HTMLSpanElement | null)[]>([]);
 
   /*
@@ -30,6 +35,13 @@ export default function CursorTrail({ count = 6 }) {
   const frameId = useRef<number | null>(null);
 
   useEffect(() => {
+    if (!enabled) {
+      dots.current.forEach((dot) => {
+        if (dot) dot.style.opacity = "0";
+      });
+      return;
+    }
+
     const hideDots = () => {
       dots.current.forEach((dot) => {
         if (dot) dot.style.opacity = "0";
@@ -114,12 +126,15 @@ export default function CursorTrail({ count = 6 }) {
 
       if (frameId.current !== null) {
         cancelAnimationFrame(frameId.current);
+        frameId.current = null;
       }
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[9999] hidden md:block">
+    <div className="cursor-trail pointer-events-none fixed inset-0 z-[110] hidden md:block" aria-hidden="true">
       {Array.from({ length: count }).map((_, index) => (
         <span
           key={index}

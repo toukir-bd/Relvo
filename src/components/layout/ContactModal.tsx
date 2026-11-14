@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, ChevronDown, Mail, PhoneCall, Send, X } from "lucide-react";
+import { AlertCircle, Check, CheckCircle2, ChevronDown, ClipboardCheck, Mail, PhoneCall, Send, X } from "lucide-react";
 import { serviceNames } from "@/data/services";
 import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 
@@ -148,7 +148,7 @@ function ContactForm({
   );
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [validationMessage, setValidationMessage] = useState("");
-  const [submitMessage, setSubmitMessage] = useState("");
+  const [feedbackType, setFeedbackType] = useState<"validation" | "success" | "error">("validation");
   const [isSubmitting, setIsSubmitting] = useState(false);
   useEffect(() => {
     const controller = new AbortController();
@@ -311,21 +311,22 @@ function ContactForm({
     const errors: Record<string, string> = {};
 
     if (!nameField.value.trim()) errors.name = "Enter your name.";
-    if (!emailField.value.trim()) errors.email = "Enter your email address.";
-    else if (!emailField.validity.valid) errors.email = "Enter a valid email address.";
-    if (!phoneField.value.trim()) errors.phone = "Enter your mobile number.";
-    if (!selectedCountryId) errors.country = "Select a country calling code.";
+    if (!emailField.value.trim()) errors.email = "Enter your Email address.";
+    else if (!emailField.validity.valid) errors.email = "Enter a valid Email address.";
+    if (!phoneField.value.trim()) errors.phone = "Enter your Mobile number.";
+    if (!selectedCountryId) errors.country = "Select a Country calling code.";
     if (!projectField.value.trim()) errors.project = "Tell us a little about your project.";
     if (selectedServices.length === 0) errors.services = "Choose at least one service.";
 
     setFieldErrors(errors);
     if (Object.keys(errors).length > 0) {
+      setFeedbackType("validation");
       pendingFocusRef.current = errors.services
         ? form.querySelector<HTMLButtonElement>("[data-service-option]")
         : errors.country
           ? countryTriggerRef.current
           : form.querySelector<HTMLElement>("[aria-invalid='true']");
-      setValidationMessage("Please review the highlighted fields below.");
+      setValidationMessage("Please review the highlighted fields");
       return;
     }
 
@@ -335,7 +336,7 @@ function ContactForm({
     const phone = `${countryCode} ${String(values.get("phone") ?? "")}`;
     const project = String(values.get("project") ?? "");
     setIsSubmitting(true);
-    setSubmitMessage("");
+    setValidationMessage("");
 
     try {
       const response = await fetch("/api/contact", {
@@ -353,20 +354,28 @@ function ContactForm({
 
       if (!response.ok) {
         const result = (await response.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(result?.error ?? "We couldn’t send your message. Please try again.");
+        throw new Error(result?.error ?? "We couldn’t send your message. Please try again!");
       }
 
       form.reset();
       setSelectedServices(initialSelectedServices);
       setCountryCode("");
       setSelectedCountryId("");
-      setSubmitMessage("Thanks! Your project inquiry has been sent. We’ll be in touch soon.");
+      setFeedbackType("success");
+      setValidationMessage("Thanks! Your project inquiry has been sent. We’ll be in touch soon.");
     } catch (error) {
-      setSubmitMessage(error instanceof Error ? error.message : "We couldn’t send your message. Please try again.");
+      setFeedbackType("error");
+      setValidationMessage(error instanceof Error ? error.message : "We couldn’t send your message. Please try again!");
     } finally {
       setIsSubmitting(false);
     }
   }
+
+  const feedbackContent = feedbackType === "success"
+    ? { title: "Message sent", Icon: CheckCircle2, iconClass: "text-primary" }
+    : feedbackType === "error"
+      ? { title: "Message not sent", Icon: AlertCircle, iconClass: "text-red-400" }
+      : { title: "Please check your details", Icon: ClipboardCheck, iconClass: "text-primary" };
 
   return (
     <section
@@ -578,7 +587,6 @@ function ContactForm({
                 </span>
                 {fieldErrors.project && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.project}</span>}
               </label>
-              <p aria-live="polite" className="min-h-5 text-sm font-medium text-white/70">{submitMessage}</p>
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -619,18 +627,21 @@ function ContactForm({
             aria-modal="true"
             aria-labelledby="contact-validation-title"
             aria-describedby="contact-validation-description"
-            className="w-full max-w-md rounded-3xl border border-white/10 bg-[#0d1911] p-6 text-white shadow-2xl sm:p-8"
+            className="w-full max-w-md rounded-3xl border border-white/10 bg-[#0d1911] p-6 text-white shadow-2xl sm:p-8 text-center"
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Please check your form</p>
-            <h2 id="contact-validation-title" className="mt-3 text-2xl font-semibold tracking-tight">One more step</h2>
-            <p id="contact-validation-description" className="mt-2 text-lg font-medium leading-relaxed tracking-wide text-white/80">
+            <div className={`mx-auto grid size-20 place-items-center rounded-full border bg-white/[0.03] ${feedbackType === "error" ? "border-red-400/20" : "border-primary/20"}`}>
+              <feedbackContent.Icon size={42} strokeWidth={1.6} className={feedbackContent.iconClass} aria-hidden="true" />
+            </div>
+
+            <span id="contact-validation-title" className="mt-5 text-2xl font-semibold tracking-wide sm:text-3xl">{feedbackContent.title}</span>
+            <p id="contact-validation-description" aria-live="assertive" className="mt-3 text-base font-medium leading-relaxed tracking-wide text-white/75 sm:text-lg">
               {validationMessage}
             </p>
             <button
               type="button"
               autoFocus
               onClick={closeValidation}
-              className="mt-6 flex min-h-12 w-full items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-secondary transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary"
+              className="cursor-pointer mt-6 min-h-12 rounded-full bg-primary/70 px-10 text-sm font-semibold text-secondary transition hover:bg-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary transition sm:text-base"
             >
               Got it
             </button>
@@ -658,6 +669,7 @@ export default function ContactModal({
   useEffect(() => {
     if (!isOpen) return;
 
+    document.body.classList.add("contact-modal-open");
     const previouslyFocused = document.activeElement as HTMLElement | null;
     requestAnimationFrame(() => closeButtonRef.current?.focus());
 
@@ -681,6 +693,7 @@ export default function ContactModal({
 
     document.addEventListener("keydown", handleKeyDown);
     return () => {
+      document.body.classList.remove("contact-modal-open");
       document.removeEventListener("keydown", handleKeyDown);
       requestAnimationFrame(() => previouslyFocused?.focus());
     };

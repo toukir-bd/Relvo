@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { urbanist, denton } from "./fonts/fonts";
 import MainLayout from "../components/layout/MainLayout";
 import SmoothScroll from "@/components/providers/SmoothScroll";
-import CursorTrail from "@/components/props/CursorTrail";
 import DoorLoader from "@/components/props/DoorLoader";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/data/site";
 import { Analytics } from "@vercel/analytics/next";
@@ -126,7 +125,6 @@ export default function RootLayout({
           }}
         />
         <DoorLoader />
-        <CursorTrail />
         <SmoothScroll>
           <MainLayout>{children}</MainLayout>
         </SmoothScroll>
