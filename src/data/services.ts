@@ -11,7 +11,7 @@ export type ServiceOption = {
 export const serviceOptions: ServiceOption[] = [
   {
     id: "ui-ux-product-design",
-    number: "02",
+    number: "01",
     name: "UI/UX Design",
     headline: "Seamless with \nUser-First Experiences",
     description:"Turn customer needs into intuitive websites and products with thoughtful user journeys and a flexible design system.",
@@ -20,7 +20,7 @@ export const serviceOptions: ServiceOption[] = [
   },
   {
     id: "website-design-development",
-    number: "03",
+    number: "02",
     name: "Website Design & Development",
     headline: "Built Websites \nThat Drive Growth",
     description:"Launch a polished marketing website that feels right on every screen and is simple for your team to manage.",
@@ -29,7 +29,7 @@ export const serviceOptions: ServiceOption[] = [
   },
   {
     id: "ecommerce-development",
-    number: "04",
+    number: "03",
     name: "E-commerce Development",
     headline: "Launch Store, \nBoost Your Sales",
     description:"Create a smooth storefront and checkout experience that helps customers find the right products and complete a purchase.",
@@ -38,7 +38,7 @@ export const serviceOptions: ServiceOption[] = [
   },
   {
     id: "web-applications",
-    number: "05",
+    number: "04",
     name: "Custom Software Development",
     headline: "Custom Tools \nThat Work Smarter",
     description:"Design and build custom web applications that make your service easier to use and your operations easier to scale.",
@@ -47,7 +47,7 @@ export const serviceOptions: ServiceOption[] = [
   },
   {
     id: "brand-strategy-identity",
-    number: "01",
+    number: "05",
     name: "Branding & Identity",
     headline: "Make Brand \nWorth Remembering",
     description:"Define your position, sharpen your story, and build a distinctive identity that stays consistent as your business grows.",
