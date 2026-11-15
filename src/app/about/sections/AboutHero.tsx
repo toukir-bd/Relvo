@@ -5,16 +5,14 @@ import AboutStudioLink from "@/components/props/AboutStudioLink";
 export default function AboutHero() {
   return (
     <section className="relative isolate flex min-h-screen flex-col justify-center items-center overflow-hidden px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-20 lg:px-10 xl:px-16">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 opacity-45"
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-45"
           style={{
             backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 10%) 0.7px, transparent 1px)",
             backgroundSize: "4px 4px",
           }}
         />
         <div aria-hidden="true" className="pointer-events-none absolute left-0 right-0 mx-auto top-0 -z-10 size-[min(58vw,720px)] rounded-full bg-primary/[0.09] blur-[100px]"/>
-        <h1 className="focus-title max-w-6xl text-[clamp(3rem,9vw,6.2rem)] font-semibold leading-[1] tracking-tight text-center">
+        <h1 className="focus-title max-w-6xl text-[clamp(3rem,9vw,6.2rem)] font-semibold leading-[1] tracking-normal text-center">
           we turn good ideas into <span className="hero-text-neon pb-3 pe-1">digital experiences</span>
         </h1>
         <p className="mt-7 max-w-4xl text-base leading-relaxed text-center text-white/85 sm:text-lg lg:text-[26px]">

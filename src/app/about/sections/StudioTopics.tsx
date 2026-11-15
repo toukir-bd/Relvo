@@ -7,28 +7,34 @@ const studioTopics = [
   { id: "scalably-built", title: "Scalable Built", description: "We build on reliable, flexible foundations so your product can adapt as your audience, needs, and ambitions grow.", icon: Orbit },
 ];
 
-
 export default function StudioTopics() {
   return (
-    <section aria-labelledby="studio-topics-title" className="relative isolate overflow-hidden px-5 py-16 sm:px-8 sm:py-24 lg:px-10 lg:py-28 xl:px-16">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-25" style={{ backgroundImage: "linear-gradient(rgb(187 255 0 / 5%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 5%) 1px, transparent 1px)", backgroundSize: "44px 44px" }} />
-        <header className="mb-10 max-w-4xl sm:mb-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">What defines Relvo</p>
-          <h2 id="studio-topics-title" className="focus-title mt-4 text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.04em]">Principles behind every project.</h2>
-        </header>
-        <div className="grid w-full gap-4 lg:grid-cols-2">
-          {studioTopics.map(({ id, title, description, icon: Icon }, index) => (
-            <article id={id} key={id} className="scroll-mt-24 rounded-[28px] border border-white/[0.08] bg-[#0d1713]/90 p-6 sm:rounded-[34px] sm:p-9 lg:p-11">
-              <div className="flex items-center justify-between gap-4">
-                <span className="text-sm font-semibold tracking-[0.18em] text-primary">0{index + 1}</span>
-                <span className="grid size-12 place-items-center rounded-2xl border border-primary/20 bg-primary/[0.07] text-primary sm:size-14"><Icon size={24} strokeWidth={1.5} /></span>
-              </div>
-              <h3 className="mt-8 text-[clamp(1.65rem,3vw,2.5rem)] font-semibold leading-tight tracking-[-0.025em] text-white">{title}</h3>
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/65 sm:text-lg sm:leading-8">{description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+    <section aria-labelledby="studio-topics-title" className="relative isolate overflow-hidden px-5 py-16 sm:px-8 sm:py-24 lg:px-20 lg:py-32 xl:px-32">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-25" 
+        style={{ 
+          backgroundImage: "linear-gradient(rgb(187 255 0 / 13%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 13%) 1px, transparent 1px)", 
+          backgroundSize: "4px 4px" 
+        }} 
+      />
+      <div aria-hidden="true" className="pointer-events-none absolute left-0 right-0 mx-auto bottom-0 -z-10 size-[min(58vw,720px)] rounded-full bg-primary/[0.09] blur-[100px]"/>
+      <header className="mb-5 sm:mb-10">
+        <h4 id="studio-topics-title" className="focus-title text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[0.98] tracking-normal">
+          <span className="hero-text-neon">principles behind every idea</span>
+        </h4>
+      </header>
+      <div className="grid w-full gap-4 lg:grid-cols-2">
+        {studioTopics.map(({ id, title, description, icon: Icon }, index) => (
+          <article id={id} key={id} className="relative rounded-[28px] bg-primary/5 p-6 sm:rounded-[48px] sm:p-9 lg:p-11">
+            <span className="absolute top-0 left-10 text-[200px] font-[800] tracking-normal text-primary/8 leading-[230px]">0{index + 1}</span>
+            <div className="flex items-center justify-end text-primary">
+              <Icon size={86} strokeWidth={.5} />
+            </div>
+            <h4 className="mt-0 text-[clamp(1.65rem,3vw,2.5rem)] font-[400] leading-tight tracking-normal text-white">{title}</h4>
+            <p className="mt-4 text-base tracking-[.85px] leading-normal text-white/85 sm:text-[20px]">{description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 

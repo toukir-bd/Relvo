@@ -5,7 +5,7 @@ import StudioTopics from "./sections/StudioTopics";
 import StudioStory from "./sections/StudioStory";
 import Principles from "./sections/Principles";
 import Process from "./sections/Process";
-import AboutCTA from "./sections/AboutCTA";
+import StudioMethod from "./sections/StudioMethod";
 
 export const metadata: Metadata = {
   title: "About Relvo Dev",
@@ -22,7 +22,7 @@ export default function AboutPage() {
       <StudioTopics />
       <Principles />
       <Process />
-      <AboutCTA />
+      <StudioMethod />
     </div>
   );
 }

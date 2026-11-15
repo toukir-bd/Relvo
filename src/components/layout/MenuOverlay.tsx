@@ -1,7 +1,7 @@
 
 "use client";
 import Link from "next/link";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 interface MenuOverlayProps {
   isOpen: boolean;
@@ -55,7 +55,7 @@ export default function MenuOverlay({
             style={{
               backgroundImage:
                 "radial-gradient(circle at 1px 1px, rgb(187 255 0 / 12%) 0.75px, transparent 1px), radial-gradient(ellipse at 78% 42%, rgb(187 255 0 / 7%), transparent 48%)",
-              backgroundSize: "18px 18px, 100% 100%",
+              backgroundSize: "3px 3px, 100% 100%",
             }}
           />
           <div className="relative z-10 flex min-h-full w-full flex-col lg:h-full lg:flex-row">
