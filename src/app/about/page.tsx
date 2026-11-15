@@ -7,7 +7,7 @@ import { SITE_URL } from "@/data/site";
 export const metadata: Metadata = {
   title: "About Relvo Dev",
   description:
-    "Meet Relvo Dev, a Bangladesh-based digital design and development studio bringing strategy, design, and technology together.",
+    "Meet Relvo Dev, a digital design and development studio bringing strategy, design, and technology together for ambitious teams around the world.",
   alternates: { canonical: `${SITE_URL}/about` },
 };
 

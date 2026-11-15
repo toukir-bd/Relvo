@@ -87,7 +87,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "edubd-result-mobile-app",
     title: "EduBD Result Mobile App",
-    description: "The Education Board Result mobile app in Bangladesh is an official platform that allows students, parents, and teachers to easily access public exam results like SSC, HSC, and JSC directly from their smartphones. Instead of waiting in long queues or struggling with overloaded websites, users can instantly check results by entering their roll, registration number, and exam details. The app is simple, fast, and designed to handle the huge traffic on result days, making it one of the most reliable ways for millions of students across the country to know their academic performance.",
+    description: "The Education Board Result mobile app is an official platform that allows students, parents, and teachers to easily access public exam results like SSC, HSC, and JSC directly from their smartphones. Instead of waiting in long queues or struggling with overloaded websites, users can instantly check results by entering their roll, registration number, and exam details. The app is simple, fast, and designed to handle the huge traffic on result days, making it one of the most reliable ways for students to know their academic performance.",
     badge: "Education Mobile App",
     image: "https://cdn.dribbble.com/userupload/44551605/file/ee83bbe4372aae6238417d5d30ca3317.png",
   },

@@ -11,7 +11,7 @@ import { Analytics } from "@vercel/analytics/next";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Relvo Dev | Web Design, Development & Digital Products in Bangladesh",
+    default: "Relvo Dev | Web Design, Development & Digital Products Worldwide",
     template: "%s | Relvo Dev",
   },
   description: SITE_DESCRIPTION,
@@ -20,18 +20,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: [
-      {
-        url: "/img/elements/favicon-32x32.webp",
-        sizes: "32x32",
-        type: "image/webp",
-      },
-      {
-        url: "/img/elements/favicon-48x48.webp",
-        sizes: "48x48",
-        type: "image/webp",
-      },
-    ],
+    icon: [{ url: "/favicon.png", sizes: "192x192", type: "image/png" }],
   },
   keywords: [
     "Relvo", "Revlo", "Revol", "Relov", "Realvo", "Relvon", "Reelvo",
@@ -39,7 +28,6 @@ export const metadata: Metadata = {
     "RelvoDev",
     "Relvo Design",
     "Relvo Development",
-    "Relvo BD",
     "Relvo Software",
     "Relvo IT",
     "Relvo Ltd",
@@ -69,7 +57,6 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     siteName: SITE_NAME,
     url: SITE_URL,
-    locale: "en_BD",
   },
   twitter: {
     card: "summary_large_image",
@@ -77,10 +64,6 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
   },
   category: "technology",
-  other: {
-    "geo.region": "BD",
-    "geo.placename": "Bangladesh",
-  },
 };
 
 const structuredData = {
@@ -90,13 +73,13 @@ const structuredData = {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
       name: SITE_NAME,
-      alternateName: ["Relvo", "RelvoDev", "Relvo BD"],
+      alternateName: ["Relvo", "RelvoDev"],
       url: SITE_URL,
       logo: `${SITE_URL}/img/elements/logo.webp`,
       description: SITE_DESCRIPTION,
       email: "hello@relvodev.com",
       telephone: "+8801410485824",
-      areaServed: { "@type": "Country", name: "Bangladesh" },
+      areaServed: "Worldwide",
       sameAs: ["https://dribbble.com/toukir-bd"],
     },
     {
@@ -106,7 +89,7 @@ const structuredData = {
       alternateName: ["Relvo", "RelvoDev"],
       url: SITE_URL,
       publisher: { "@id": `${SITE_URL}/#organization` },
-      inLanguage: "en-BD",
+      inLanguage: "en",
     },
   ],
 };
