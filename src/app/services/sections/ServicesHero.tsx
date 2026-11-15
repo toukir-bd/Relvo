@@ -16,22 +16,26 @@ export default function ServicesHero() {
       <div aria-hidden="true" className="pointer-events-none absolute left-0 right-0 top-0 -z-10 mx-auto size-[min(58vw,720px)] rounded-full bg-primary/[0.09] blur-[100px]" />
       <svg
         aria-hidden="true"
-        viewBox="0 0 1520 560"
+        viewBox="0 0 1440 900"
         fill="none"
-        className="pointer-events-none absolute inset-0 -z-10 hidden h-full w-full opacity-[0.12] lg:block"
+        className="pointer-events-none absolute inset-0 -z-10 hidden h-full w-full opacity-30 lg:block"
       >
-        <g stroke="rgb(187 255 0)" strokeLinecap="round" strokeLinejoin="round">
-          {/* Hand-drawn website layout */}
-          <path d="m86 172 310-13c12 0 20 8 20 20l-5 183c0 12-8 20-20 20l-309 12c-12 0-20-8-20-20l5-182c0-12 8-20 19-20Z" strokeWidth="7" />
-          <path d="m66 219 344-13m-297 2-1 145m30-105 93-3m-92 34 74-3m-73 34 61-2m41-68 126-5m-126 37 120-5m-119 37 98-4" strokeWidth="6" />
-          <circle cx="91" cy="195" r="4" fill="rgb(187 255 0)" strokeWidth="5" />
-          <circle cx="110" cy="194" r="4" fill="rgb(187 255 0)" strokeWidth="5" />
-          <circle cx="129" cy="193" r="4" fill="rgb(187 255 0)" strokeWidth="5" />
-          {/* App screen and a hand-drawn pointer */}
-          <path d="m1221 177 192-8c12 0 20 8 20 20l8 178c1 12-7 20-19 21l-192 8c-12 0-20-8-20-20l-8-178c0-12 7-20 19-21Z" strokeWidth="7" />
-          <path d="m1258 221 91-4m-89 29 122-5m-120 36 50-2m-46 57 107-5m-105 30 77-3" strokeWidth="6" />
-          <path d="m1403 120 8 26 24-11-32 55-1-31-25 11 26-50Z" fill="rgb(187 255 0 / 12%)" strokeWidth="6" />
-          <path d="m1367 399 6 17 17 6-17 6-6 17-6-17-17-6 17-6 6-17Z" strokeWidth="6" />
+        <defs>
+          <radialGradient id="service-art-orb" cx="0" cy="0" r="1" gradientTransform="matrix(0 376 -440 0 720 634)" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#D8FF67" stopOpacity="0.55" />
+            <stop offset="0.62" stopColor="#B9FF00" stopOpacity="0.24" />
+            <stop offset="1" stopColor="#8FCE00" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <ellipse cx="720" cy="886" rx="448" ry="372" fill="url(#service-art-orb)" />
+        <g stroke="#B9FF00" strokeLinecap="round" strokeLinejoin="round">
+          {/* Loose brush marks echo the reference while hinting at forward motion. */}
+          <path d="M90 265c28-38 70-63 126-74-27 23-49 49-66 79 32-22 68-36 108-40-31 25-67 45-109 59" strokeWidth="10" />
+          <path d="m91 266 23-27m20 12 27-29m40 23 31-25" strokeOpacity="0.58" strokeWidth="5" />
+          <path d="M1335 206c-31-48-76-79-136-94 28 30 50 62 65 98-35-29-74-47-119-54 31 34 69 60 114 79" strokeWidth="10" />
+          <path d="m1335 206-25-34m-22 2-28-34m-37 33-35-33" strokeOpacity="0.58" strokeWidth="5" />
+          <path d="M52 610c9-47 16-87 29-87 17 0 14 72 29 72 15 0 17-96 35-96 13 0 17 43 23 63" strokeWidth="11" />
+          <path d="M1272 602c9-47 16-87 29-87 17 0 14 72 29 72 15 0 17-96 35-96 13 0 17 43 23 63" strokeWidth="11" />
         </g>
       </svg>
       <h1 className="focus-title max-w-5xl text-[clamp(3rem,9vw,6.2rem)] font-semibold leading-[1] tracking-normal">
