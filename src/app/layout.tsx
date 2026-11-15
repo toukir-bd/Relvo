@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { urbanist, denton } from "./fonts/fonts";
 import MainLayout from "../components/layout/MainLayout";
 import SmoothScroll from "@/components/providers/SmoothScroll";
-import CursorTrail from "@/components/props/CursorTrail";
 import DoorLoader from "@/components/props/DoorLoader";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/data/site";
 import { Analytics } from "@vercel/analytics/next";
@@ -23,9 +22,9 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.png", sizes: "192x192", type: "image/png" }],
   },
   keywords: [
-    "Relvo", "Revlo", "Revol", "Relov", "Realvo", "Relvon", "Reelvo",
-    "Relvo Dev",
-    "RelvoDev",
+    "Relvo", "relvo", "Revlo", "Revol", "Relov", "Realvo", "Relvon", "Reelvo",
+    "RelvoDev", "relvoDev", "relvodev", "Relvodev",
+    "Relvo Dev", "relvo Dev", "relvo dev", "Relvo dev",
     "Relvo Design",
     "Relvo Development",
     "Relvo Software",
@@ -109,7 +108,6 @@ export default function RootLayout({
           }}
         />
         <DoorLoader />
-        <CursorTrail />
         <SmoothScroll>
           <MainLayout>{children}</MainLayout>
         </SmoothScroll>

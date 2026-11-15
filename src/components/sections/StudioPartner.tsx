@@ -9,12 +9,12 @@ export default function StudioPartner() {
         <div className="relative p-7 sm:p-12 lg:p-16 xl:p-[4.5rem]">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.11] [background-size:4px_4px] [background-image:linear-gradient(rgba(187,255,0,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(187,255,0,0.25)_1px,transparent_1px)]" />
           <div aria-hidden="true" className="pointer-events-none absolute -left-32 top-24 size-96 rounded-full bg-primary/15 blur-[90px]" />
-          <div className="relative mb-10">
-            <h2 id="studio-partner-title" className="focus-title text-[clamp(3rem,6.2vw,5rem)] font-semibold leading-[1.2] tracking-normal">
+          <div className="relative mb-8">
+            <h2 id="studio-partner-title" className="focus-title text-[clamp(3rem,6.2vw,5rem)] font-semibold leading-[1] tracking-normal">
               the team behind <span className="hero-text-neon pb-2">your digital products.</span>
             </h2>
           </div>
-          <p className="mb-10 self-center text-[20px] leading-[1.75] text-white/70 sm:text-[27px] font-[400] sm:leading-[1.7] border-t border-white/[0.12] pt-9">
+          <p className="mb-10 self-center text-[20px] leading-[1.75] text-white/70 sm:text-[27px] font-[400] sm:leading-[1.6] border-t border-white/[0.12] pt-5">
             Our designers and developers collaborate closely to create <strong className="font-semibold text-white">digital products that meet real business goals</strong>, with thoughtful design, reliable technology, and a clear path forward.
           </p>
           <Link href="/#contact" className="btn-relvo">

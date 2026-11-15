@@ -62,34 +62,34 @@ export default function Faq() {
             const questionId = `faq-question-${index}`;
             const answerId = `faq-answer-${index}`;
             return (
-            <article key={item.question} className={`group rounded-2xl border bg-primary/7 transition-all duration-300 hover:bg-primary/10 sm:rounded-[22px] ${isOpen ? "bg-primary/7 border-primary/30 hover:border-primary/30" : "border-transparent hover:border-primary/30"}`}>
-              <h3>
-                <button
-                  id={questionId}
-                  type="button"
-                  aria-expanded={isOpen}
-                  aria-controls={answerId}
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="flex w-full cursor-pointer items-center justify-between gap-5 px-5 py-5 text-left sm:px-7 sm:py-6 lg:px-9"
+              <article key={item.question} className={`group rounded-2xl border bg-primary/7 transition-all duration-300 hover:bg-primary/10 sm:rounded-[22px] ${isOpen ? "bg-primary/7 border-primary/30 hover:border-primary/30" : "border-transparent hover:border-primary/30"}`}>
+                <h3>
+                  <button
+                    id={questionId}
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={answerId}
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    className="flex w-full cursor-pointer items-center justify-between gap-5 px-5 py-5 text-left sm:px-7 sm:py-6 lg:px-9"
+                  >
+                    <span className={`text-base font-[400] leading-snug sm:text-lg lg:text-[27px] ${isOpen ? "text-primary group-hover:text-primary" : "text-white/70 group-hover:text-white"}`}>{item.question}</span>
+                    <span aria-hidden="true" className={`grid size-9 shrink-0 place-items-center rounded-full bg-primary/[0.08] text-primary transition duration-300 sm:size-10 ${isOpen ? "rotate-45 bg-primary text-secondary" : ""}`}>
+                      <Plus size={20} strokeWidth={2.2} />
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  id={answerId}
+                  role="region"
+                  aria-labelledby={questionId}
+                  aria-hidden={!isOpen}
+                  className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
                 >
-                <span className={`text-base font-[300] leading-snug sm:text-lg lg:text-[27px] ${isOpen ? "text-primary group-hover:text-primary" : "text-white/70 group-hover:text-white"}`}>{item.question}</span>
-                <span aria-hidden="true" className={`grid size-9 shrink-0 place-items-center rounded-full bg-primary/[0.08] text-primary transition duration-300 sm:size-10 ${isOpen ? "rotate-45 bg-primary text-secondary" : ""}`}>
-                  <Plus size={20} strokeWidth={2.2} />
-                </span>
-                </button>
-              </h3>
-              <div
-                id={answerId}
-                role="region"
-                aria-labelledby={questionId}
-                aria-hidden={!isOpen}
-                className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-              >
-                <div className="overflow-hidden">
-                  <p className={`mx-5 max-w-5xl border-t border-white/[0.08] pb-6 pt-4 text-sm font-[500] leading-relaxed text-white/80 transition-opacity sm:mx-7 sm:pb-7 sm:text-[18px] tracking-wide sm:leading-7 lg:mx-9 ${isOpen ? "opacity-100" : "opacity-0"}`}>{item.answer}</p>
+                  <div className="overflow-hidden">
+                    <p className={`mx-5 max-w-6xl border-t border-white/[0.08] pb-6 pt-4 text-sm font-[400] leading-5 text-white transition-opacity sm:mx-7 sm:pb-7 sm:text-[19px] tracking-wider sm:leading-8 lg:mx-9 ${isOpen ? "opacity-100" : "opacity-0"}`}>{item.answer}</p>
+                  </div>
                 </div>
-              </div>
-            </article>
+              </article>
             );
           })}
         </div>

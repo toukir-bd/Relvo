@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import MenuOverlay from "./MenuOverlay";
 import ContactModal from "./ContactModal";
 import FloatingContactActions from "./FloatingContactActions";
+import CursorTrail from "@/components/props/CursorTrail";
 import { useSmoothScroll } from "../providers/SmoothScroll";
 import { CONTACT_MODAL_EVENT } from "@/utils/contactModal";
 
@@ -81,6 +82,7 @@ export default function MainLayout({
 
   return (
     <>
+      <CursorTrail enabled={!contactOpen} />
       <Header isMenuOpen={menuOpen} onMenuOpen={() => setMenuOpen(true)} onMenuClose={() => setMenuOpen(false)}/>
       <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)}/>
       <main>

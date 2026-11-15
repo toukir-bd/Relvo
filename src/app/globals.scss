@@ -10,6 +10,10 @@
 @use "scss/studio-partner";
 @use "scss/responsive";
 
+body.contact-modal-open .cursor-trail {
+  display: none !important;
+}
+
 @theme{
   --color-primary: #BBFF00;
   --color-secondary: #051313;
