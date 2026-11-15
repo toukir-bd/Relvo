@@ -6,24 +6,26 @@ import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 export default function AboutStudioLink({
   children,
   className,
+  targetId = "studio",
 }: {
   children: ReactNode;
   className?: string;
+  targetId?: string;
 }) {
   const { scrollTo } = useSmoothScroll();
 
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
-    const target = document.getElementById("studio");
+    const target = document.getElementById(targetId);
     if (!target) return;
 
     event.preventDefault();
-    window.history.replaceState(window.history.state, "", `${window.location.pathname}${window.location.search}#studio`);
+    window.history.replaceState(window.history.state, "", `${window.location.pathname}${window.location.search}#${targetId}`);
     scrollTo(window.scrollY + target.getBoundingClientRect().top, false, 1.5);
   }
 
   return (
-    <a href="#studio" onClick={handleClick} className={className}>
+    <a href={`#${targetId}`} onClick={handleClick} className={className}>
       {children}
     </a>
   );

@@ -26,7 +26,7 @@ export default function AboutHero() {
             </span>
           </Link>
           <Link href="/services" className="inline-flex min-h-12 items-center rounded-[12px] border border-white/15 px-6 text-[13px] font-[500] text-white/75 transition-all duration-300 hover:border-primary/50 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary sm:min-h-[60px] sm:text-lg">
-            Explore services
+            Explore services <ArrowUpRight size={17} />
           </Link>
         </div>
         <AboutStudioLink className="mt-14 inline-flex w-fit items-center gap-2 text-[14px] font-[600] uppercase tracking-[0.18em] text-white/45 transition hover:text-primary">
