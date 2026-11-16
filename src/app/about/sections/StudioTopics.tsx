@@ -10,13 +10,8 @@ const studioTopics = [
 export default function StudioTopics() {
   return (
     <section aria-labelledby="studio-topics-title" className="relative isolate overflow-hidden px-5 py-16 sm:px-8 sm:py-24 lg:px-20 lg:py-32 xl:px-32">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-25" 
-        style={{ 
-          backgroundImage: "linear-gradient(rgb(187 255 0 / 13%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 13%) 1px, transparent 1px)", 
-          backgroundSize: "4px 4px" 
-        }} 
-      />
-      <div aria-hidden="true" className="pointer-events-none absolute left-0 right-0 mx-auto bottom-0 -z-10 size-[min(58vw,720px)] rounded-full bg-primary/[0.09] blur-[100px]"/>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-[0.1] [background-size:4px_4px] [background-image:linear-gradient(rgba(187,255,0,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(187,255,0,0.25)_1px,transparent_1px)]" />
+      <div aria-hidden="true" className="pointer-events-none absolute left-0 right-0 mx-auto bottom-0 -z-10 size-[min(58vw,720px)] rounded-full bg-primary/[0.08] blur-[100px]"/>
       <header className="mb-5 sm:mb-10">
         <h4 id="studio-topics-title" className="focus-title text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[0.98] tracking-normal">
           <span className="hero-text-neon">principles behind every idea</span>
@@ -24,7 +19,7 @@ export default function StudioTopics() {
       </header>
       <div className="grid w-full gap-4 lg:grid-cols-2">
         {studioTopics.map(({ id, title, description, icon: Icon }, index) => (
-          <article id={id} key={id} className="relative rounded-[28px] bg-primary/5 p-6 sm:rounded-[48px] sm:p-9 lg:p-11">
+          <article id={id} key={id} className="relative rounded-[28px] bg-primary/3 p-6 sm:rounded-[48px] sm:p-9 lg:p-11 backdrop-blur-[.5px]">
             <span className="absolute top-0 left-10 text-[200px] font-[800] tracking-normal text-primary/8 leading-[230px]">0{index + 1}</span>
             <div className="flex items-center justify-end text-primary">
               <Icon size={86} strokeWidth={.5} />

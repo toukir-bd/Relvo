@@ -90,7 +90,7 @@ export default function MenuOverlay({
                 <h2 className="focus-title text-[clamp(2.8rem,5.2vw,4.7rem)] font-semibold leading-[0.98] tracking-normal text-white">
                   <span className="hero-text-neon">make your next move mean more.</span>
                 </h2>
-                <p className="mt-4 text-base leading-relaxed font-[300] tracking-wide text-white/70 sm:text-[23px]">
+                <p className="mt-4 text-base leading-relaxed font-[300] tracking-wide text-white/85 sm:text-[23px]">
                   Thoughtful design and purposeful technology, shaped around the ambition behind your business.
                 </p>
 
@@ -101,7 +101,7 @@ export default function MenuOverlay({
                 </div>
 
                 <Link href="/#contact" onClick={onClose} className="btn-relvo mt-9">
-                  <span className="btnText">Start a conversation</span>
+                  <span className="btnText">Start a Conversation</span>
                   <span className="iconArea"><ArrowUpRight size={30} strokeWidth={1} /></span>
                 </Link>
               </motion.div>

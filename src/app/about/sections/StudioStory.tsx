@@ -4,12 +4,8 @@ import Image from "next/image";
 export default function StudioStory() {
   return (
     <section id="studio" className="relative px-5 py-16 sm:px-8 sm:py-24 lg:px-20 lg:py-32 lg:px-32">
-      <div className="relative overflow-hidden grid w-full items-center gap-10 rounded-[32px] bg-primary/5 p-6 sm:gap-14 sm:rounded-[52px] sm:p-10 grid-cols-[1.3fr_1fr] lg:p-19">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40"
-          style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)`,
-            backgroundSize: "4px 4px",
-          }}
-        />
+      <div className="relative overflow-hidden grid w-full items-center gap-10 rounded-[32px] bg-primary/2.5 p-6 sm:gap-14 sm:rounded-[52px] sm:p-10 grid-cols-[1.3fr_1fr] lg:p-19">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.11] [background-size:4px_4px] [background-image:linear-gradient(rgba(187,255,0,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(187,255,0,0.25)_1px,transparent_1px)]" />
         <div>
           <p className="mb-8 text-[19px] font-[500] uppercase tracking-[0.085em] text-primary">A focused team, shaping products aesthetically</p>
           <h2 className="focus-title text-[clamp(3rem,5vw,4.3rem)] font-semibold leading-[1.1] tracking-normal text-white">
@@ -17,7 +13,7 @@ export default function StudioStory() {
           </h2>
         </div>
         <div className="relative">
-          <div aria-hidden="true" className="absolute -inset-8 rounded-full bg-primary/[0.08] blur-3xl"/>
+          <div aria-hidden="true" className="pointer-events-none absolute left-15 top-24 size-96 rounded-full bg-primary/15 blur-[90px]" />
           <p className="relative text-base tracking-[.85px] leading-normal text-white/85 sm:text-[20px]">
             We believe digital work is at its best when it feels simple to use and unmistakably yours. Relvo brings creative thinking and practical technology into one close, collaborative process.
           </p>

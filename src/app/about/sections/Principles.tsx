@@ -21,7 +21,7 @@ export default function Principles() {
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             {principles.map(({ number, title, description, icon: Icon }) => (
-              <article key={number} className="group relative overflow-hidden rounded-[56px] bg-primary/5 p-6 transition duration-300 hover:-translate-y-1 hover:border-primary/30 sm:p-10">
+              <article key={number} className="group relative overflow-hidden rounded-[56px] bg-primary/2.5 p-6 transition duration-300 hover:-translate-y-1 hover:border-primary/30 sm:p-10">
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 opacity-45"
                   style={{
                     backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 7%) 0.7px, transparent 1px)",

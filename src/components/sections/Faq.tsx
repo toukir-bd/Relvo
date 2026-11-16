@@ -70,10 +70,9 @@ export default function Faq() {
                     aria-expanded={isOpen}
                     aria-controls={answerId}
                     onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="flex w-full cursor-pointer items-center justify-between gap-5 px-5 py-5 text-left sm:px-7 sm:py-6 lg:px-9"
-                  >
-                    <span className={`text-base font-[400] leading-snug sm:text-lg lg:text-[27px] ${isOpen ? "text-primary group-hover:text-primary" : "text-white/70 group-hover:text-white"}`}>{item.question}</span>
-                    <span aria-hidden="true" className={`grid size-9 shrink-0 place-items-center rounded-full bg-primary/[0.08] text-primary transition duration-300 sm:size-10 ${isOpen ? "rotate-45 bg-primary text-secondary" : ""}`}>
+                    className="flex w-full cursor-pointer items-center justify-between gap-5 px-5 py-5 text-left sm:px-7 sm:py-6 lg:px-9">
+                    <span className={`text-base font-[400] leading-snug sm:text-lg lg:text-[27px] tracking-[0.85px] ${isOpen ? "text-primary group-hover:text-primary" : "text-white/70 group-hover:text-white"}`}>{item.question}</span>
+                    <span aria-hidden="true" className={`grid size-9 shrink-0 place-items-center rounded-full bg-primary/[0.08] text-primary transition duration-300 sm:size-10 ${isOpen ? "rotate-45 bg-red/100 text-red-600" : ""}`}>
                       <Plus size={20} strokeWidth={2.2} />
                     </span>
                   </button>
@@ -83,10 +82,9 @@ export default function Faq() {
                   role="region"
                   aria-labelledby={questionId}
                   aria-hidden={!isOpen}
-                  className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-                >
+                  className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
                   <div className="overflow-hidden">
-                    <p className={`mx-5 max-w-6xl border-t border-white/[0.08] pb-6 pt-4 text-sm font-[400] leading-5 text-white transition-opacity sm:mx-7 sm:pb-7 sm:text-[19px] tracking-wider sm:leading-8 lg:mx-9 ${isOpen ? "opacity-100" : "opacity-0"}`}>{item.answer}</p>
+                    <p className={`mx-5 max-w-6xl border-t border-white/[0.08] pb-6 pt-4 text-sm font-[400] leading-5 text-white transition-opacity sm:mx-7 sm:pb-7 sm:text-[19px] tracking-[.85px] sm:leading-8 lg:mx-9 ${isOpen ? "opacity-100" : "opacity-0"}`}>{item.answer}</p>
                   </div>
                 </div>
               </article>

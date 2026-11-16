@@ -25,23 +25,23 @@ export default function Services() {
   return (
     <>
       <div className="w-full px-5 pb-24 sm:px-8 lg:px-32 lg:py-32">
-        <div className="space-y-4 sm:space-y-30">
+        <div className="space-y-4 sm:space-y-20">
           {serviceOptions.map((service) => {
             const selected = selectedServices.includes(service.name);
             return (
               <section key={service.id} id={`service-${service.id}`} aria-labelledby={`service-title-${service.id}`}
                 className={`group relative isolate overflow-hidden rounded-[34px] border transition-colors duration-300 sm:rounded-[70px] p-24 ${
-                  selected ? "border-primary/35 bg-[#121b16]" : "border-white/[0.07] bg-[#121914]"
+                  selected ? "border-primary/35 bg-primary/[0.05]" : "border-white/0 bg-primary/[0.025]"
                 }`}
               >
-                <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-45"
+                <div className="inset-0 -z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
                   style={{
-                    backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 10%) 0.7px, transparent 1px)",
+                    backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 4%) 1px, transparent 1px)",
                     backgroundSize: "4px 4px",
                   }}
                 />
-                <div aria-hidden="true" className="pointer-events-none absolute left-0 right-0 top-0 -z-10 mx-auto size-[min(58vw,720px)] rounded-full bg-primary/[0.09] blur-[100px]" />
-                <div className=" grid grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] grid-rows-1 items-start">
+                <div aria-hidden="true" className="pointer-events-none absolute left-0 right-0 top-0 z-0 mx-auto size-[min(58vw,720px)] rounded-full bg-primary/[0.06] blur-[100px]" />
+                <div className="relative z-10 grid grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] grid-rows-1 items-start">
                   <div className="relative">
                     <span className="w-fit max-w-[90%] rounded-full bg-white/[0.1] px-3 py-4 text-[10px] font-semibold uppercase tracking-[0.08em] text-primary/90 sm:px-8 sm:text-[17px]">
                       {service.name}
@@ -60,7 +60,7 @@ export default function Services() {
                     />
                   </div>
                 </div>
-                <ul className="mt-auto flex flex-wrap gap-2" aria-label={`${service.name} includes`}>
+                <ul className="relative z-10 mt-auto flex flex-wrap gap-2" aria-label={`${service.name} includes`}>
                   {service.deliverables.map((deliverable) => (
                     <li key={deliverable} className="rounded-full bg-white/[0.1] px-2 py-2 text-[10px] font-[500] tracking-wide text-white/90 sm:px-6 sm:py-3 sm:text-[16px]">
                       {deliverable}
@@ -82,7 +82,7 @@ export default function Services() {
           })}
         </div>
         {selectedServices.length > 0 && (
-          <div className="sticky bottom-4 z-30 mt-8 flex flex-col gap-4 rounded-2xl border border-primary/20 bg-[#071412]/95 p-4 shadow-[0_16px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <div className="sticky bottom-4 z-30 mt-8 flex flex-col gap-4 rounded-2xl border border-primary/20 bg-secondary/95 p-4 shadow-[0_16px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between sm:px-6">
             <p className="text-sm text-white/75">
               <span className="font-semibold text-white">{selectedServices.length} selected</span>
               <span className="ml-2 hidden text-white/50 sm:inline">{selectedServices.join(" · ")}</span>

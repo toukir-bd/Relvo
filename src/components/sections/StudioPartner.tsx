@@ -6,15 +6,15 @@ export default function StudioPartner() {
   return (
     <section aria-labelledby="studio-partner-title" className="px-5 py-16 text-white sm:px-8 sm:py-20 lg:px-32 lg:py-32">
       <div className="mx-auto grid w-full max-w-none overflow-hidden rounded-[28px] bg-primary/2.5 sm:rounded-[36px] lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="relative p-7 sm:p-12 lg:p-16 xl:p-[4.5rem]">
+        <div className="relative overflow-hidden p-7 sm:p-12 lg:p-16 xl:p-[4.5rem]">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.11] [background-size:4px_4px] [background-image:linear-gradient(rgba(187,255,0,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(187,255,0,0.25)_1px,transparent_1px)]" />
-          <div aria-hidden="true" className="pointer-events-none absolute -left-32 top-24 size-96 rounded-full bg-primary/15 blur-[90px]" />
+          <div aria-hidden="true" className="pointer-events-none absolute -right-32 top-24 size-96 rounded-full bg-primary/15 blur-[90px]" />
           <div className="relative mb-8">
             <h2 id="studio-partner-title" className="focus-title text-[clamp(3rem,6.2vw,5rem)] font-semibold leading-[1] tracking-normal">
               the team behind <span className="hero-text-neon pb-2">your digital products.</span>
             </h2>
           </div>
-          <p className="mb-10 self-center text-[20px] leading-[1.75] text-white/70 sm:text-[27px] font-[400] sm:leading-[1.6] border-t border-white/[0.12] pt-5">
+          <p className="mb-10 self-center text-[20px] leading-[1.75] text-white/70 tracking-[0.85px] sm:text-[26px] sm:leading-[1.6] border-t border-primary/[0.08] pt-5">
             Our designers and developers collaborate closely to create <strong className="font-semibold text-white">digital products that meet real business goals</strong>, with thoughtful design, reliable technology, and a clear path forward.
           </p>
           <Link href="/#contact" className="btn-relvo">
@@ -26,12 +26,12 @@ export default function StudioPartner() {
             </span>
           </Link>
         </div>
-        <div className="relative min-h-[400px] overflow-hidden border-t border-primary/5 sm:min-h-[520px] lg:min-h-full lg:border-l lg:border-t-0">
+        <div className="relative min-h-[400px] overflow-hidden sm:min-h-[520px] lg:min-h-full">
           <div aria-hidden="true" className="studio-partner-artwork" />
           <svg aria-hidden="true" viewBox="0 0 640 700" className="studio-partner-scene" fill="none">
             <defs>
               <linearGradient id="idea-card" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#1c2d20" /><stop offset="1" stopColor="#0a1310" /></linearGradient>
-              <radialGradient id="idea-core"><stop stopColor="#d7ff68" stopOpacity=".9" /><stop offset=".42" stopColor="#BBFF00" stopOpacity=".42" /><stop offset="1" stopColor="#BBFF00" stopOpacity="0" /></radialGradient>
+              <radialGradient id="idea-core"><stop stopColor="#d7ff68" stopOpacity=".5" /><stop offset=".42" stopColor="#BBFF00" stopOpacity=".42" /><stop offset="1" stopColor="#BBFF00" stopOpacity="0" /></radialGradient>
               <filter id="idea-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="14" /></filter>
             </defs>
             <ellipse cx="320" cy="350" rx="236" ry="178" stroke="#BBFF00" strokeOpacity=".16" strokeDasharray="2 10" className="studio-partner-orbit" />
@@ -57,12 +57,7 @@ export default function StudioPartner() {
             </g>
             <circle cx="84" cy="356" r="4" fill="#BBFF00" className="studio-partner-spark" /><path d="m548 341 4 9 9 4-9 4-4 9-4-9-9-4 9-4 4-9Z" fill="#d7ff68" className="studio-partner-spark studio-partner-spark-delay" /><circle cx="327" cy="83" r="3" fill="#BBFF00" className="studio-partner-spark studio-partner-spark-delay" />
           </svg>
-          <Image
-            src="/img/elements/favicon-48x48.webp"
-            alt=""
-            width={48}
-            height={48}
-            aria-hidden="true"
+          <Image src="/img/elements/favicon-48x48.webp" alt="" width={48} height={48} aria-hidden="true"
             className="pointer-events-none absolute left-1/2 top-[47%] z-10 size-12 -translate-x-1/2 -translate-y-1/2 rounded-xl"
           />
         </div>

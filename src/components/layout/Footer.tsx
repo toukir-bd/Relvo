@@ -21,14 +21,11 @@ export default function Footer() {
               <h2 className="focus-title w-full whitespace-nowrap text-[clamp(1.4rem,4.5vw,4.25rem)] font-semibold leading-[1.05] tracking-normal text-white">
                 make <span className="hero-text-neon">your next move count.</span>
               </h2>
-              <p className="mt-5 w-full text-[27px] font-[500] leading-relaxed text-white/85">
+              <p className="mt-5 w-full text-[26px] font-[400] tracking-[.85px] leading-normal text-white/85">
                 Bring us your idea. We’ll shape it into a clear plan and build a digital experience ready to move your business forward.
               </p>
-              <Link
-                href="/#contact"
-                className="btn-relvo mt-7"
-              >
-                <span className="btnText">Start a conversation</span>
+              <Link href="/#contact" className="btn-relvo mt-7">
+                <span className="btnText">Start a Conversation</span>
                 <span className="iconArea">
                   <ArrowUpRight strokeWidth={1.5} />
                 </span>
@@ -93,8 +90,8 @@ export default function Footer() {
             </div>
           </div>
           <Link href="/" aria-label="Relvo Home" className="relative w-full flex justify-center items-center pt-15 pb-12">
-            <span className="absolute top-0 left-0 w-full h-7 bg-linear-to-b from-primary/6 to-transparent"/>
-            <span className="absolute bottom-0 left-0 w-full h-7 bg-linear-to-t from-primary/6 to-transparent"/>
+            <span className="absolute top-0 left-0 w-full h-15 bg-linear-to-b from-primary/3 to-transparent rounded-t-[40px]"/>
+            <span className="absolute bottom-0 left-0 w-full h-15 bg-linear-to-t from-primary/3 to-transparent rounded-b-[40px]"/>
             <Image
               src="/img/elements/logo.webp"
               alt="Relvo"

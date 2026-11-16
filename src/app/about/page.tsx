@@ -17,13 +17,13 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="overflow-hidden bg-[#081111] text-white">
+    <div className="overflow-x-clip bg-secondary text-white">
       <AboutHero />
       <StudioStory />
-      <CoreTeam />
       <StudioTopics />
       <Principles />
       <Process />
+      <CoreTeam />
       <StudioMethod />
     </div>
   );
