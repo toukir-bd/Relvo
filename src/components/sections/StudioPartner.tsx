@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function StudioPartner() {
   return (
-    <section aria-labelledby="studio-partner-title" className="px-5 py-16 text-white sm:px-8 sm:py-20 lg:px-[4.7vw] lg:py-30">
+    <section aria-labelledby="studio-partner-title" className="px-5 py-16 text-white sm:px-8 sm:py-20 lg:px-32 lg:py-32">
       <div className="mx-auto grid w-full max-w-none overflow-hidden rounded-[28px] bg-primary/2.5 sm:rounded-[36px] lg:grid-cols-[1.2fr_0.8fr]">
         <div className="relative p-7 sm:p-12 lg:p-16 xl:p-[4.5rem]">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.11] [background-size:4px_4px] [background-image:linear-gradient(rgba(187,255,0,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(187,255,0,0.25)_1px,transparent_1px)]" />

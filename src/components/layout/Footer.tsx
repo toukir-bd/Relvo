@@ -13,8 +13,8 @@ export default function Footer() {
   return (
     <footer className="relative isolate overflow-hidden text-white">
       <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-0 -z-10 size-[34rem] rounded-full bg-primary/[0.055] blur-[110px]" />
-      <div className="w-full px-5 pb-12 pt-0 sm:px-8 sm:pb-14 sm:pt-0 lg:px-16">
-        <div className="relative left-1/2 w-screen -translate-x-1/2 border-b border-b-primary/15 bg-[#0d1712]/55 px-5 py-6 sm:px-8 sm:py-9 lg:px-16 lg:py-12">
+      <div className="w-full px-5 pb-12 pt-0 sm:px-8 sm:pb-20 sm:pt-0 lg:px-16">
+        <div className="relative left-1/2 w-screen -translate-x-1/2 border-b border-b-primary/15 bg-[#0d1712]/55 px-5 py-6 sm:px-8 sm:py-9 lg:px-20 lg:py-20">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.12] [background-size:8px_8px] [background-image:linear-gradient(rgba(187,255,0,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(187,255,0,0.15)_1px,transparent_1px)]" />
           <div className="relative mx-auto grid w-full max-w-[1440px] items-center gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
             <div className="order-1 lg:order-2">
@@ -59,7 +59,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="relative mx-auto w-full pt-20 sm:pt-22 lg:pt-30 pb-6 sm:pb-8 lg:pb-10 scale-[0.9]">
-          <div className="grid items-end gap-10 border-b border-white/[0.08] pb-2 sm:pb-3 md:grid-cols-[1.2fr_1fr_1fr] lg:gap-16 lg:pb-5">
+          <div className="grid items-end gap-10 pb-2 sm:pb-3 md:grid-cols-[1.2fr_1fr_1fr] lg:gap-16 lg:pb-8">
             <div>
               <p className="w-full text-2xl font-[400] leading-snug tracking-wide text-white sm:text-3xl relative -bottom-1">
                 Design, technology, and<br />clear thinking for what comes next.
@@ -92,21 +92,20 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          <Link
-            href="/"
-            aria-label="Relvo home"
-            className="relative left-1/2 mx-0 mt-2 flex w-screen -translate-x-1/2 justify-center px-5 sm:mt-5 [background-image:linear-gradient(rgba(187,255,0,0.15),transparent)"
-          >
+          <Link href="/" aria-label="Relvo Home" className="relative w-full flex justify-center items-center pt-15 pb-12">
+            <span className="absolute top-0 left-0 w-full h-7 bg-linear-to-b from-primary/6 to-transparent"/>
+            <span className="absolute bottom-0 left-0 w-full h-7 bg-linear-to-t from-primary/6 to-transparent"/>
             <Image
               src="/img/elements/logo.webp"
               alt="Relvo"
               width={4356}
               height={1215}
               sizes="(max-width: 1600px) calc(100vw - 3rem), 1400px"
-              className="h-auto w-[min(70vw,980px)] object-contain sm:w-[min(60vw,980px)]"
+              className="h-auto w-[min(70vw,980px)] sm:w-[min(60vw,980px)]"
             />
           </Link>
-          <div className="flex flex-col gap-1 border-t border-white/[0.08] pt-3 text-xs font-[500] text-white/50 sm:flex-row tracking-wider sm:items-center sm:justify-start sm:gap-1 sm:pt-5 sm:text-[15px] lg:gap-2">
+          <div className="flex flex-col gap-1 pt-3 text-xs font-[500] text-white/50 sm:flex-row tracking-wider sm:items-center sm:justify-start sm:gap-1 sm:pt-8 
+            sm:text-[15px] lg:gap-2">
             <p>© {new Date().getFullYear()} Relvo. All rights reserved.</p>
             <p className="tracking-wide">Thoughtfully made for the digital world.</p>
           </div>

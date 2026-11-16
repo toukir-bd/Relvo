@@ -6,9 +6,7 @@ import ServicesSideSketches from "@/components/props/ServicesSideSketches";
 export default function ServicesHero() {
   return (
     <section className="relative isolate flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-32 text-center sm:px-8 sm:pb-20 sm:pt-20 lg:px-10 xl:px-16">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-45"
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-45"
         style={{
           backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 10%) 0.7px, transparent 1px)",
           backgroundSize: "4px 4px",
