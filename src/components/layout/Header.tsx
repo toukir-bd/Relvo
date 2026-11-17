@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+import { openContactModal } from "@/utils/contactModal";
 interface HeaderProps {
   isMenuOpen: boolean;
   onMenuOpen: () => void;
@@ -26,9 +28,21 @@ export default function Header({
         />
         </span>
       </Link>
-      <button onClick={isMenuOpen ? onMenuClose : onMenuOpen} aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        className={`group fixed right-4 top-5 z-100 flex h-11 w-11 cursor-pointer items-center justify-center gap-2 rounded-full sm:right-6 sm:top-7 sm:h-[50px] sm:w-[50px] lg:right-10 lg:top-9
-          border border-white/30 hover:border-primary/50 transition-all duration-500 backdrop-blur-[100px] bg-secondary/10"
+      <div className="fixed right-4 top-5 z-[100] flex items-center gap-2 sm:right-6 sm:top-7 lg:right-10 lg:top-9">
+        <button
+          type="button"
+          aria-label="Ask about AI services"
+          onClick={() => openContactModal(["Custom Software Development"])}
+          className="btn-relvo !h-11 !px-1.5 !text-xs sm:!h-[50px] sm:!text-sm"
+        >
+          <span className="btnText hidden min-[390px]:inline">AI Services</span>
+          <span className="iconArea !ms-0 !h-8 !w-8 min-[390px]:!ms-2 sm:!h-9 sm:!w-9 sm:!ms-2">
+            <ArrowUpRight className="h-5 w-5" strokeWidth={1.5} />
+          </span>
+        </button>
+        <button onClick={isMenuOpen ? onMenuClose : onMenuOpen} aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        className={`group relative z-[100] flex h-11 w-11 cursor-pointer items-center justify-center gap-2 rounded-full sm:h-[50px] sm:w-[50px]
+          border border-white/30 hover:border-primary/50 transition-all duration-500 backdrop-blur-[100px] bg-secondary/10
           ${isMenuOpen
             ? "border-red-200 hover:border-red-400"
             : "border-white/10 hover:border-primary/50"
@@ -58,6 +72,7 @@ export default function Header({
             </span>
           )}
         </button>
+      </div>
     </header>
   );
 }

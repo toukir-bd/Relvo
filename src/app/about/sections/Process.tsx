@@ -1,6 +1,7 @@
 const process = [
   ["Listen", "We get to know your goals, your audience, and what is getting in the way."],
   ["Shape", "We map the right direction and turn early ideas into a plan you can see."],
+  ["Review", "We share the direction, gather your feedback, and refine it together."],
   ["Make", "We design and build together, sharing progress and refining the details."],
   ["Launch", "We prepare the work for the real world and help you take the next step."],
 ];
@@ -26,7 +27,7 @@ export default function Process() {
                 A good process keeps the big picture in view while making every next step feel manageable.
               </p>
             </div>
-            <ol className="divide-y divide-white/10 border-y border-white/10">
+            <ol className="divide-y divide-primary/10 border-y border-primary/10">
               {process.map(([title, description], index) => (
                 <li key={title} className="grid gap-4 py-5 sm:grid-cols-[64px_150px_1fr] sm:items-center sm:gap-6 sm:py-7">
                   <span className="text-[50px] font-[200] tracking-wider text-primary/85">0{index + 1}</span>

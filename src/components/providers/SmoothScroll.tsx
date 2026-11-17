@@ -44,9 +44,14 @@ export default function SmoothScroll({
 
     useEffect(() => {
         const lenis = new Lenis({
-            lerp: 0.18,
-            wheelMultiplier: 1.15,
-            touchMultiplier: 1.05,
+            // A low lerp gives each wheel gesture a calm, sustained glide.
+            lerp: 0.075,
+            wheelMultiplier: 0.95,
+            touchMultiplier: 1,
+            smoothWheel: true,
+            anchors: true,
+            stopInertiaOnNavigate: true,
+            respectReducedMotion: true,
         });
 
         lenisRef.current = lenis;

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 import RelvoVisual from "@/components/props/RelvoVisual";
 import ExploreRelvoCursor from "@/components/props/ExploreRelvoCursor";
 
@@ -23,6 +24,7 @@ const SCROLL_VH_PER_SLIDE = 1.3;
 const TEXT_REVEAL_FRACTION = 0.77;
 export default function Story() {
   const sectionRef = useRef<HTMLElement>(null);
+  const { scrollTo } = useSmoothScroll();
   const [activeSlide, setActiveSlide] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const goToSlide = (index: number) => {
@@ -30,10 +32,7 @@ export default function Story() {
     if (!section) return;
     const totalScroll = section.offsetHeight - window.innerHeight;
     const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({
-      top: sectionTop + totalScroll * (index / slides.length),
-      behavior: "smooth",
-    });
+    scrollTo(sectionTop + totalScroll * (index / slides.length), false, 0.85);
   };
 
   useEffect(() => {

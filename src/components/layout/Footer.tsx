@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Mail, Phone } from "lucide-react";
-import FooterLogoReveal from "./FooterLogoReveal";
+import FooterLogo from "./FooterLogo";
 
 const menus = [
   { title: "Home", href: "/" },
@@ -89,7 +89,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          <FooterLogoReveal />
+          <FooterLogo />
           <div className="flex flex-col gap-1 pt-3 text-xs font-[500] text-white/50 sm:flex-row tracking-wider sm:items-center sm:justify-start sm:gap-1 sm:pt-8 sm:text-[15px] lg:gap-2">
             <p>© {new Date().getFullYear()} Relvo. All rights reserved.</p>
             <p className="tracking-wide">Thoughtfully made for the digital world.</p>

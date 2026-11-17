@@ -1,11 +1,14 @@
 
 "use client";
 
+import { useSmoothScroll } from "@/components/providers/SmoothScroll";
+
 export default function ScrollToDiscover() {
+    const { scrollTo } = useSmoothScroll();
     const scrollToDiscover = () => {
-        document
-            .getElementById("discover-us")
-            ?.scrollIntoView({ behavior: "smooth" });
+        const target = document.getElementById("discover-us");
+        if (!target) return;
+        scrollTo(window.scrollY + target.getBoundingClientRect().top, false, 1.1);
     };
     return (
         <button type="button" onClick={scrollToDiscover} className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary bg-secondary/40 backdrop-blur-[100px] p-1.5 pe-7 rounded-full">
