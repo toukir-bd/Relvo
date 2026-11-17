@@ -30,7 +30,7 @@ export default function Process() {
               {process.map(([title, description], index) => (
                 <li key={title} className="grid gap-4 py-5 sm:grid-cols-[64px_150px_1fr] sm:items-center sm:gap-6 sm:py-7">
                   <span className="text-[50px] font-[200] tracking-wider text-primary/85">0{index + 1}</span>
-                  <h5 className="text-[40px] font-[500] text-white">{title}</h5>
+                  <h5 className="text-[40px] font-[400] text-white tracking-[0.85px]">{title}</h5>
                   <p className="text-sm font-[500] leading-relaxed tracking-wide text-white/75 sm:text-[21px]">{description}</p>
                 </li>
               ))}

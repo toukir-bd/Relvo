@@ -72,7 +72,7 @@ export default function Faq() {
                     onClick={() => setOpenIndex(isOpen ? null : index)}
                     className="flex w-full cursor-pointer items-center justify-between gap-5 px-5 py-5 text-left sm:px-7 sm:py-6 lg:px-9">
                     <span className={`text-base font-[400] leading-snug sm:text-lg lg:text-[27px] tracking-[0.85px] ${isOpen ? "text-primary group-hover:text-primary" : "text-white/70 group-hover:text-white"}`}>{item.question}</span>
-                    <span aria-hidden="true" className={`grid size-9 shrink-0 place-items-center rounded-full bg-primary/[0.08] text-primary transition duration-300 sm:size-10 ${isOpen ? "rotate-45 bg-red/100 text-red-600" : ""}`}>
+                    <span aria-hidden="true" className={`grid size-9 shrink-0 place-items-center rounded-full bg-primary/[0.08] text-primary transition duration-300 sm:size-10 ${isOpen ? "rotate-45 bg-red-400/30 text-red-500" : ""}`}>
                       <Plus size={20} strokeWidth={2.2} />
                     </span>
                   </button>

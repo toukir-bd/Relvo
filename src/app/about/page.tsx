@@ -9,9 +9,9 @@ import StudioMethod from "./sections/StudioMethod";
 import CoreTeam from "./sections/CoreTeam";
 
 export const metadata: Metadata = {
-  title: "Relvo Dev - About Us - About Relvo Dev",
+  title: "About Us",
   description:
-    "Relvo Dev believe digital products is at its best when it feels simple to use and unmistakably yours. Relvo brings creative thinking and practical technology into one close, collaborative process.",
+    "Meet Relvo Dev, a global digital design and development agency bringing strategy, design, and technology together to build useful digital products.",
   alternates: { canonical: `${SITE_URL}/about` },
 };
 

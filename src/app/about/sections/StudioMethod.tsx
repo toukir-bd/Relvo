@@ -1,12 +1,11 @@
-import { ArrowUpRight, Link } from "lucide-react";
 import Image from "next/image";
 
 export default function StudioMethod() {
   return (
     <section aria-labelledby="studio-method-title" className="relative isolate px-5 py-16 sm:px-8 sm:py-24 lg:px-10 lg:py-35 xl:px-32">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 opacity-20"
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0"
         style={{
-          backgroundImage: "linear-gradient(rgb(187 255 0 / 0%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 15%) 1px, transparent 1px)",
+          backgroundImage: "linear-gradient(rgb(187 255 0 / 0%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 6%) 1px, transparent 1px)",
           backgroundSize: "4px 4px"
         }}
       />

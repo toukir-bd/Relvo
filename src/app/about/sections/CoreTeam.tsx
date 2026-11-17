@@ -5,14 +5,14 @@ import { ArrowLeft, ArrowRight, UserRound } from "lucide-react";
 import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 
 const team = [
-  { name: "Toukir Rahman", role: "Founder & MD", location: "Dhaka, Bangladesh" },
-  { name: "Turzaun Toma", role: "Chairman", location: "Dhaka, Bangladesh" },
-  { name: "Tomal Ahmed", role: "CTO", location: "Dhaka, Bangladesh" },
-  { name: "Shakil Mahmud", role: "Senior Software Engineer", location: "Mymensingh, Bangladesh" },
-  { name: "Shipan Mazumder", role: "Senior Software Architect", location: "Manikganj, Bangladesh" },
-  { name: "Akash Chowdhury", role: "Frontend Engineer", location: "Sylhet, Bangladesh" },
-  { name: "Pavel Ahmed", role: "Senior UI/UX Designer", location: "Feni, Bangladesh" },
-  { name: "Niloy Karmokar", role: "Senior Graphics Designer", location: "Rangpur, Bangladesh" },
+  { name: "Toukir Rahman", role: "Founder & MD" },
+  { name: "Turzaun Toma", role: "Chairman" },
+  { name: "Tomal Ahmed", role: "CTO" },
+  { name: "Shakil Mahmud", role: "Senior Software Engineer" },
+  { name: "Shipan Mazumder", role: "Senior Software Architect" },
+  { name: "Akash Chowdhury", role: "Frontend Engineer" },
+  { name: "Pavel Ahmed", role: "Senior UI/UX Designer" },
+  { name: "Niloy Karmokar", role: "Senior Graphics Designer" },
 ];
 
 export default function CoreTeam() {
@@ -130,7 +130,7 @@ export default function CoreTeam() {
         <div className="overflow-visible ps-5 pe-5 sm:ps-8 sm:pe-8 lg:ps-20 lg:pe-20 xl:ps-32 xl:pe-32">
           <div ref={sliderRef} role="region" aria-label="Relvo team members" tabIndex={0} className="overflow-visible outline-none">
             <div ref={trackRef} className="flex w-max gap-4 will-change-transform sm:gap-5">
-              {team.map(({ name, role, location }) => (
+              {team.map(({ name, role }) => (
                 <article key={name} className="group w-[min(78vw,330px)] shrink-0 rounded-[28px] border border-white/[0.08] bg-primary/[0.025] p-3 transition-colors duration-300 hover:border-primary/25 sm:w-[340px] sm:rounded-[34px] sm:p-4 xl:w-[calc((100%_-_3.75rem)/4)]">
                   <div aria-label={`Photo placeholder for ${name}`} role="img" className="relative grid aspect-[4/3] place-items-center overflow-hidden rounded-[20px] bg-secondary/80 text-primary/45 sm:rounded-[26px]">
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-20 [background-size:14px_14px] [background-image:radial-gradient(circle,rgba(187,255,0,0.55)_0.7px,transparent_1px)]" />
@@ -142,7 +142,6 @@ export default function CoreTeam() {
                   <div className="px-3 pb-4 pt-5 sm:px-4 sm:pb-5 sm:pt-6">
                     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary/85 sm:text-sm">{role}</p>
                     <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-white sm:text-2xl">{name}</h3>
-                    <p className="mt-2 text-sm tracking-wide text-white/55 sm:text-base">{location}</p>
                   </div>
                 </article>
               ))}

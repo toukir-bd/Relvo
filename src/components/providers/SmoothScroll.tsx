@@ -44,9 +44,9 @@ export default function SmoothScroll({
 
     useEffect(() => {
         const lenis = new Lenis({
-            lerp: 0.16,
-            wheelMultiplier: 1,
-            touchMultiplier: 1,
+            lerp: 0.18,
+            wheelMultiplier: 1.15,
+            touchMultiplier: 1.05,
         });
 
         lenisRef.current = lenis;

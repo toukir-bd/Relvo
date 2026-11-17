@@ -10,7 +10,7 @@ import { Analytics } from "@vercel/analytics/next";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Relvo Dev | Web Design, Development & Digital Products Worldwide",
+    default: "Relvo Dev | Web Design, Software Development & Digital Products",
     template: "%s | Relvo Dev",
   },
   description: SITE_DESCRIPTION,
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: [{ url: "/favicon.png", sizes: "192x192", type: "image/png" }],
+    icon: [{ url: "/favicon.ico", sizes: "16x16 32x32 48x48 64x64 128x128 192x192 256x256", type: "image/x-icon" }],
   },
   keywords: [
     "Relvo", "relvo", "Revlo", "Revol", "Relov", "Realvo", "Relvon", "Reelvo",
@@ -52,14 +52,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Relvo Dev | Web Design, Development & Digital Products",
+    title: "Relvo Dev | Web Design, Software Development & Digital Products",
     description: SITE_DESCRIPTION,
     siteName: SITE_NAME,
     url: SITE_URL,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Relvo Dev | Web Design, Development & Digital Products",
+    title: "Relvo Dev | Web Design, Software Development & Digital Products",
     description: SITE_DESCRIPTION,
   },
   category: "technology",

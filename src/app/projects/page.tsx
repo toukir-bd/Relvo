@@ -10,7 +10,7 @@ import { SITE_URL } from "@/data/site";
 export const metadata: Metadata = {
   title: "Projects and Case Studies",
   description:
-    "Explore websites, software, apps, and digital product case studies by Relvo Dev for businesses around the world.",
+    "Explore Relvo Dev's websites, software, apps, and digital product case studies, designed and developed for businesses worldwide.",
   alternates: { canonical: `${SITE_URL}/projects` },
 };
 
