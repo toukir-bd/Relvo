@@ -15,7 +15,7 @@ svg.mouse #wheel {
 
 
 .btn-relvo {
-	@apply relative inline-flex h-[48px] items-center justify-center overflow-hidden rounded-full px-1 text-[13px] font-[500] tracking-[.75px] text-white transition-all duration-500 ease-out sm:h-[60px] sm:text-lg;
+	@apply relative inline-flex h-[48px] items-center justify-center overflow-hidden rounded-full px-1.5 text-[13px] font-[500] tracking-[.75px] text-white transition-all duration-500 ease-out sm:h-[60px] sm:text-lg;
 	padding-inline-start: 1.75rem;
 	background-color: #071714;
 	background-image: linear-gradient(105deg, rgb(187 255 0 / 0.2) 0%, rgb(187 255 0 / 0.08) 42%, rgb(7 23 20 / 0.96) 100%);

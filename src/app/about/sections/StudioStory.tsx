@@ -9,7 +9,7 @@ export default function StudioStory() {
         <div>
           <p className="mb-8 text-[19px] font-[500] uppercase tracking-[0.085em] text-primary">A focused team, shaping products aesthetically</p>
           <h2 className="focus-title text-[clamp(3rem,5vw,4.3rem)] font-semibold leading-[1.1] tracking-normal text-white">
-            thoughtful design and development, from the first <span className="hero-text-neon pb-1">sketch to final navigation</span>
+            build user-centric creative products from the first <span className="hero-text-neon pb-1">sketch to the final navigator</span>
           </h2>
         </div>
         <div className="relative">

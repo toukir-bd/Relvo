@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Mail, Phone } from "lucide-react";
+import FooterLogoReveal from "./FooterLogoReveal";
 
 const menus = [
   { title: "Home", href: "/" },
@@ -89,18 +89,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          <Link href="/" aria-label="Relvo Home" className="relative w-full flex justify-center items-center pt-15 pb-12">
-            <span className="absolute top-0 left-0 w-full h-15 bg-linear-to-b from-primary/3 to-transparent rounded-t-[40px]"/>
-            <span className="absolute bottom-0 left-0 w-full h-15 bg-linear-to-t from-primary/3 to-transparent rounded-b-[40px]"/>
-            <Image
-              src="/img/elements/logo.webp"
-              alt="Relvo"
-              width={4356}
-              height={1215}
-              sizes="(max-width: 1600px) calc(100vw - 3rem), 1400px"
-              className="h-auto w-[min(70vw,980px)] sm:w-[min(60vw,980px)]"
-            />
-          </Link>
+          <FooterLogoReveal />
           <div className="flex flex-col gap-1 pt-3 text-xs font-[500] text-white/50 sm:flex-row tracking-wider sm:items-center sm:justify-start sm:gap-1 sm:pt-8 
             sm:text-[15px] lg:gap-2">
             <p>© {new Date().getFullYear()} Relvo. All rights reserved.</p>
