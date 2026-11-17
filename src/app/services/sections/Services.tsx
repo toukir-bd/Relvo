@@ -36,7 +36,7 @@ export default function Services() {
               >
                 <div className="inset-0 -z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
                   style={{
-                    backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 4%) 1px, transparent 1px)",
+                    backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 3%) 1px, transparent 1px)",
                     backgroundSize: "4px 4px",
                   }}
                 />

@@ -15,7 +15,7 @@ export default function StudioMethod() {
         <h4 id="studio-method-title" className="focus-title max-w-5xl text-[clamp(2.7rem,5.6vw,5.4rem)] font-semibold leading-[.98] tracking-normal">
           a clear path through <span className="hero-text-neon pb-1">development.</span>
         </h4>
-        <p className="mt-6 max-w-5xl text-base leading-relaxed text-white/90 sm:text-[22px] sm:leading-8">
+        <p className="mt-6 max-w-5xl text-base leading-relaxed text-white/90 tracking-[.85px] sm:text-[22px] sm:leading-8">
           We look closely before we build. Briefings, research, interviews, and prototypes help us turn early ideas into clear product decisions and experiences that feel right for the people using them.
         </p>
         <figure className="mx-auto mt-10 w-full max-w-[900px] flex items-center justify-center sm:mt-14 border-b-2 border-primary/30">
