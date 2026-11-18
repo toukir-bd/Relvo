@@ -19,7 +19,7 @@ export default function RelvoVisual({ activeSlide }: RelvoVisualProps) {
         <div className={sceneClass(0)}>
           <div className="relvo-card__inner">
             <div className="relvo-card__top">
-              <Palette className="h-5 w-5 text-primary" strokeWidth={1.3} />
+              <Palette className="h-10 w-10 text-primary" strokeWidth={1} />
               <span className="relvo-card__label">VISUAL SYSTEM</span>
             </div>
             <div className="relvo-card__identity">
@@ -48,7 +48,7 @@ export default function RelvoVisual({ activeSlide }: RelvoVisualProps) {
         <div className={sceneClass(1)}>
           <div className="relvo-card__inner">
             <div className="relvo-card__top">
-              <LayoutTemplate className="h-5 w-5 text-primary" strokeWidth={1.3} />
+              <LayoutTemplate className="h-10 w-10 text-primary" strokeWidth={1} />
               <span className="relvo-card__label">DESIGN PRESIDENCY</span>
             </div>
             <div className="relvo-card__browser">
@@ -74,7 +74,7 @@ export default function RelvoVisual({ activeSlide }: RelvoVisualProps) {
         <div className={sceneClass(2)}>
           <div className="relvo-card__inner">
             <div className="relvo-card__top">
-              <Waypoints className="h-5 w-5 text-primary" strokeWidth={1.3} />
+              <Waypoints className="h-10 w-10 text-primary" strokeWidth={1} />
               <span className="relvo-card__label">PRODUCT NAVIGATION</span>
             </div>
             <div className="relvo-card__nodes">

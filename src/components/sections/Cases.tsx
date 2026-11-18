@@ -205,7 +205,7 @@ export default function Cases() {
                       index === displayedIndex ? "auto" : "none",
                   }}
                 >
-                  <div className="mx-auto w-full bg-gradient-to-r from-[#071714]/95 via-[#071714]/55 to-transparent px-5 py-6 sm:px-8 sm:py-9 lg:mx-0 lg:max-w-none lg:py-10 lg:pl-16 lg:pr-10">
+                  <div className="mx-auto w-full bg-gradient-to-r from-secondary/65 via-secondary/55 to-transparent px-5 py-6 sm:px-8 sm:py-9 lg:mx-0 lg:max-w-none lg:py-10 lg:pl-16 lg:pr-10">
                     <div className="mb-5 flex items-center gap-3 sm:mb-7">
                       <span aria-hidden="true" className="h-px w-8 bg-primary sm:w-12" />
                       <p className="text-sm font-[500] uppercase tracking-[2px] text-primary sm:text-[18px]">
@@ -213,11 +213,11 @@ export default function Cases() {
                       </p>
                     </div>
                     <span className="text-[clamp(1.5rem,2.8vw,2.75rem)] font-[400] leading-[1.12] tracking-normal text-white antialiased">
-                      {isCta ? "There’s more to explore." : item?.title}
+                      {isCta ? "There’re more to explore" : item?.title}
                     </span>
-                    <p className="mt-4 line-clamp-4 text-[14px] font-[400] leading-relaxed tracking-[.85px] text-white/85 sm:mt-6 sm:text-lg sm:leading-[1.65] lg:text-[20px]">
+                    <p className="mt-4 text-[14px] font-[400] leading-relaxed tracking-[.85px] text-white/85 sm:mt-6 sm:text-lg sm:leading-[1.65] lg:text-[20px]">
                       {isCta
-                        ? "Visit the cases page to see some more of our best work."
+                        ? "Visit the cases page to see some more of our best work"
                         : item?.description}
                     </p>
                   </div>

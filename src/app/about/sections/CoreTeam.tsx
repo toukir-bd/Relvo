@@ -7,12 +7,12 @@ import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 const team = [
   { name: "Toukir Rahman", role: "Founder & MD" },
   { name: "Turzaun Toma", role: "Chairman" },
-  { name: "Tomal Ahmed", role: "CTO" },
-  { name: "Shakil Mahmud", role: "Senior Software Engineer" },
-  { name: "Shipan Mazumder", role: "Senior Software Architect" },
+  { name: "Tomal Ahmed", role: "Chief Technology Officer" },
+  { name: "Shakil Mahmud", role: "Software Engineer" },
+  { name: "Shipan Mazumder", role: "Software Architect" },
   { name: "Akash Chowdhury", role: "Frontend Engineer" },
-  { name: "Pavel Ahmed", role: "Senior UI/UX Designer" },
-  { name: "Niloy Karmokar", role: "Senior Graphics Designer" },
+  { name: "Pavel Ahmed", role: "UI/UX Designer" },
+  { name: "Niloy Karmokar", role: "Graphics Designer" },
 ];
 
 export default function CoreTeam() {
@@ -107,35 +107,34 @@ export default function CoreTeam() {
         <div className="mb-6 flex items-end justify-between gap-5 px-5 sm:mb-9 sm:px-8 lg:px-20 xl:px-32">
           <div className="relative">
             <h2 id="core-team-title" className="focus-title text-[clamp(2.5rem,6vw,5.4rem)] font-semibold leading-[0.98] tracking-normal">
-              <span className="hero-text-neon">the people behind the work</span>
+              <span className="hero-text-neon">behind the products</span>
             </h2>
             <p className="mt-3 text-sm leading-relaxed tracking-[0.85px] text-white/85 sm:text-[24px] sm:leading-8">
-              Meet the people bringing strategy, design, and technology together at Relvo.
+              Meet the people bringing strategy, design, and technology together at Relvo
             </p>
           </div>
         </div>
         <div className="overflow-visible ps-5 pe-5 sm:ps-8 sm:pe-8 lg:ps-20 lg:pe-20 xl:ps-32 xl:pe-32">
           <div ref={sliderRef} role="region" aria-label="Relvo team members" tabIndex={0} className="overflow-visible outline-none">
-            <div ref={trackRef} className="flex w-max gap-4 will-change-transform sm:gap-5">
+            <div ref={trackRef} className="flex w-max gap-4 will-change-transform sm:gap-10">
               {team.map(({ name, role }) => (
-                <article key={name} className="relative overflow-hidden group w-[300px] shrink-0 rounded-[28px] p-3 transition-colors duration-300 hover:border-primary/25 sm:w-[320px] sm:rounded-[34px] sm:p-4 xl:w-[360px]">
+                <article key={name} className="relative overflow-hidden group w-[280px] shrink-0 rounded-[28px] p-3 transition-colors duration-300 hover:border-primary/25 sm:w-[300px] sm:rounded-[34px] sm:p-4 xl:w-[350px]">
                   <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-1"
                     style={{
                       backgroundImage: "linear-gradient(rgb(187 255 0 / 2.5%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 2.5%) 1px, transparent 1px)",
                       backgroundSize: "4px 4px"
                     }}
                   />
-                  <div aria-hidden="true" className="pointer-events-none absolute left-0 top-1/3 -z-10 size-[28rem] rounded-full bg-primary/[0.07] blur-[110px]" />
-                  <div aria-label={`Photo placeholder for ${name}`} role="img" className="relative grid aspect-[4/3] place-items-center overflow-hidden rounded-[20px] bg-secondary/80 text-primary/45 sm:rounded-[26px]">
+                  <div aria-hidden="true" className="pointer-events-none absolute left-0 top-1/3 -z-10 size-[25rem] rounded-full bg-primary/[0.07] blur-[110px]" />
+                  <div aria-label={`Photo placeholder for ${name}`} role="img" className="relative grid h-[350px] place-items-center overflow-hidden rounded-[20px] bg-secondary/80 text-primary/45 sm:rounded-[26px]">
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-20 [background-size:14px_14px] [background-image:radial-gradient(circle,rgba(187,255,0,0.55)_0.7px,transparent_1px)]" />
                     <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 size-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.08] blur-3xl" />
                     <UserRound size={64} strokeWidth={0.8} className="relative transition-transform duration-500 group-hover:scale-105 sm:size-[76px]" />
                     <span className="absolute bottom-4 left-4 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/30">Portrait</span>
                   </div>
-
-                  <div className="px-3 pb-4 pt-5 sm:px-4 sm:pb-5 sm:pt-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary/85 sm:text-sm">{role}</p>
-                    <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-white sm:text-2xl">{name}</h3>
+                  <div className="flex flex-col items-center p-3 sm:p-5">
+                    <h4 className="text-xl font-[600] tracking-[.85px] text-white sm:text-[26px]">{name}</h4>
+                    <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-primary/85 sm:text-[16px]">{role}</p>
                   </div>
                 </article>
               ))}

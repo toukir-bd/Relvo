@@ -71,6 +71,16 @@ svg.mouse #wheel {
   }
 }
 
+.btn-relvo.service-added {
+	border: 1px solid rgb(187 255 0 / 0.38);
+	color: #dfff91;
+	background-image: linear-gradient(105deg, rgb(187 255 0 / 0.23) 0%, rgb(187 255 0 / 0.12) 48%, rgb(7 23 20 / 0.96) 100%);
+	.iconArea {
+		background-color: rgb(187 255 0 / 0.24);
+		color: #bbff00;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn-relvo,
   .btn-relvo * {

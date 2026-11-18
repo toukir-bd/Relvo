@@ -1,6 +1,7 @@
 
 "use client";
-import { Plus } from "lucide-react";
+import { ArrowUpRight, Plus } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 const questions = [
@@ -37,9 +38,9 @@ const questions = [
 ];
 
 export default function Faq() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
-    <section aria-labelledby="faq-title" className="relative isolate overflow-hidden px-5 pt-10 pb-32 text-white sm:px-8 sm:pt-24 sm:pb-40 lg:px-16 lg:pt-30 lg:pb-48">
+    <section aria-labelledby="faq-title" className="relative isolate overflow-hidden px-5 pt-10 pb-32 text-white sm:px-8 sm:pt-24 sm:pb-40 lg:px-16 lg:pt-30 lg:pb-30">
       <div className="inset-0 -z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
         style={{
           backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 4%) 0.65px, transparent 1px)",
@@ -53,7 +54,7 @@ export default function Faq() {
             <span className="hero-text-neon">clarity starts here</span>
           </h2>
           <p className="text-center text-[clamp(20px,2vw,29px)] font-[300] tracking-wide">
-            Answered the questions those clients ask most often.
+            Answered the questions those clients ask most often
           </p>
         </header>
         <div className="space-y-3">
@@ -62,7 +63,7 @@ export default function Faq() {
             const questionId = `faq-question-${index}`;
             const answerId = `faq-answer-${index}`;
             return (
-              <article key={item.question} className={`group rounded-2xl border bg-primary/7 transition-all duration-300 hover:bg-primary/10 sm:rounded-[22px] ${isOpen ? "bg-primary/7 border-primary/30 hover:border-primary/30" : "border-transparent hover:border-primary/30"}`}>
+              <article key={item.question} className={`group rounded-2xl transition-all duration-300 hover:bg-primary/10 sm:rounded-[22px] ${isOpen ? "bg-primary/10" : "bg-primary/5"}`}>
                 <h3>
                   <button
                     id={questionId}
@@ -90,6 +91,14 @@ export default function Faq() {
               </article>
             );
           })}
+        </div>
+        <div className="relative z-10 mt-9 flex flex-wrap items-center justify-center gap-4">
+          <Link href="/#contact" className="btn-relvo">
+            <span className="btnText">Ask Your Question</span>
+            <span className="iconArea">
+              <ArrowUpRight strokeWidth={1.5}/>
+            </span>
+          </Link>
         </div>
       </div>
     </section>

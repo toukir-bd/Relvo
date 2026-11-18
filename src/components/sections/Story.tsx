@@ -7,15 +7,15 @@ import ExploreRelvoCursor from "@/components/props/ExploreRelvoCursor";
 const slides = [
   {
     number: "01",
-    text: "We design distinctive visual identities that help businesses stand out and stay memorable to perform.",
+    text: "We design distinctive visual identities that help businesses stand out and stay memorable to perform",
   },
   {
     number: "02",
-    text: "A clear design is a must for every brand. Because it matters, users may leave when usability is missing.",
+    text: "A clear design is a must for every brand. Because it matters, users may leave when usability is missing",
   },
   {
     number: "03",
-    text: "We create a clear and logical structure that aligns your vision and business purpose with user needs.",
+    text: "We create a clear and logical structure that aligns your vision and business purpose with user needs",
   },
 ];
 
