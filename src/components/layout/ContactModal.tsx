@@ -121,9 +121,11 @@ const floatingLabelClassName =
 function ContactForm({
   initialSelectedServices = EMPTY_SERVICE_SELECTION,
   isModal = false,
+  isAiInquiry = false,
 }: {
   initialSelectedServices?: string[];
   isModal?: boolean;
+  isAiInquiry?: boolean;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const pendingFocusRef = useRef<HTMLElement | null>(null);
@@ -335,6 +337,7 @@ function ContactForm({
     const email = String(values.get("email") ?? "");
     const phone = `${countryCode} ${String(values.get("phone") ?? "")}`;
     const project = String(values.get("project") ?? "");
+    const wantedAiService = String(values.get("wantedAiService") ?? "");
     setIsSubmitting(true);
     setValidationMessage("");
 
@@ -348,6 +351,8 @@ function ContactForm({
           phone,
           services: selectedServices,
           project,
+          isAiInquiry,
+          wantedAiService,
           website: String(values.get("website") ?? ""),
         }),
       });
@@ -414,7 +419,7 @@ function ContactForm({
               <div className="mb-9">
                 <div>
                   <h4 id={isModal ? "contact-modal-title" : undefined} className="w-full text-center text-[clamp(3rem,5vw,4.25rem)] font-normal leading-[1.05] tracking-normal text-white">
-                    Let’s build
+                    {isAiInquiry ? "Let’s do with AI" : "Let’s Start"}
                   </h4>
                 </div>
               </div>
@@ -449,6 +454,20 @@ function ContactForm({
                 </div>
                 {fieldErrors.services && <p role="alert" className="mt-2 text-sm font-semibold tracking-wide text-red-400">{fieldErrors.services}</p>}
               </fieldset>
+
+              {isAiInquiry && (
+                <label className="relative mb-3 block">
+                  <input
+                    type="text"
+                    name="wantedAiService"
+                    maxLength={1000}
+                    placeholder=""
+                    className={fieldClassName}
+                    aria-label="Wanted AI-powered service"
+                  />
+                  <span className={floatingLabelClassName}>Wanted AI-Powered Service</span>
+                </label>
+              )}
 
               <div className="grid gap-3 sm:grid-cols-2">
                 <label className="relative block">
@@ -656,12 +675,14 @@ type ContactModalProps = {
   isOpen: boolean;
   onClose: () => void;
   initialSelectedServices: string[];
+  isAiInquiry: boolean;
 };
 
 export default function ContactModal({
   isOpen,
   onClose,
   initialSelectedServices,
+  isAiInquiry,
 }: ContactModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -753,7 +774,7 @@ export default function ContactModal({
                 className="w-full"
               >
                 <div className="flex w-full items-center justify-center">
-                  <ContactForm isModal initialSelectedServices={initialSelectedServices} />
+                  <ContactForm isModal initialSelectedServices={initialSelectedServices} isAiInquiry={isAiInquiry} />
                 </div>
               </motion.div>
             </motion.div>

@@ -1,6 +1,6 @@
 import "./globals.scss";
 import type { Metadata } from "next";
-import { urbanist, denton } from "./fonts/fonts";
+import { urbanist, denton, momo } from "./fonts/fonts";
 import MainLayout from "../components/layout/MainLayout";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import DoorLoader from "@/components/props/DoorLoader";
@@ -99,7 +99,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${urbanist.variable} ${denton.variable}`}>
+    <html lang="en" className={`${urbanist.variable} ${momo.variable}`}>
       <body className="bg-secondary text-white" suppressHydrationWarning>
         <script
           type="application/ld+json"

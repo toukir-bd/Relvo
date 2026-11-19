@@ -8,14 +8,14 @@ export default function AboutHero() {
     <section className="relative isolate flex min-h-screen flex-col justify-center items-center overflow-hidden px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-20 lg:px-10 xl:px-16">
         <div className="inset-0 -z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
           style={{
-            backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 3%) 1px, transparent 1px)",
-            backgroundSize: "4px 4px",
+            backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 7%) 1px, transparent 1px)",
+            backgroundSize: "3px 3px",
           }}
         />
         <div aria-hidden="true" className="pointer-events-none absolute left-0 right-0 mx-auto top-0 -z-10 size-[min(58vw,720px)] rounded-full bg-primary/[0.09] blur-[100px]"/>
         <StudioSideSketches />
-        <h1 className="focus-title relative z-10 max-w-6xl text-[clamp(3rem,9vw,6.2rem)] font-semibold leading-[1] tracking-normal text-center">
-          we turn good ideas into <span className="hero-text-neon pb-3 pe-1">digital experiences</span>
+        <h1 className="focus-title relative z-10 max-w-6xl text-[clamp(3rem,9vw,6rem)] leading-[1.2] -tracking-[3.5px] text-center">
+          <span className="hero-text-neon">we turn good ideas into<br/>digital experiences</span>
         </h1>
         <p className="relative z-10 mt-7 max-w-4xl text-base leading-relaxed text-center text-white/85 sm:text-lg lg:text-[26px]">
           Relvo is a digital studio bringing strategy, design, and development together to help ambitious ideas find their place in the world.

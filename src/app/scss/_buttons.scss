@@ -81,6 +81,36 @@ svg.mouse #wheel {
 	}
 }
 
+.header-ai-label {
+	color: transparent;
+	background-image: linear-gradient(100deg, #fff 10%, #bbff00 48%, #fff 86%);
+	background-size: 220% 100%;
+	background-position: 100% 50%;
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: header-ai-label-sweep 3s linear infinite;
+}
+
+.header-ai-button:hover .header-ai-label,
+.header-ai-button:focus-visible .header-ai-label {
+	color: #bbff00;
+	background: none;
+	-webkit-text-fill-color: #bbff00;
+	animation: none;
+}
+
+@keyframes header-ai-label-sweep {
+	0% { background-position: 100% 50%; }
+	100% { background-position: -120% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.header-ai-label { color: #fff; -webkit-text-fill-color: #fff; animation: none; }
+	.header-ai-button:hover .header-ai-label,
+	.header-ai-button:focus-visible .header-ai-label { color: #bbff00; -webkit-text-fill-color: #bbff00; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn-relvo,
   .btn-relvo * {

@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 import RelvoVisual from "@/components/props/RelvoVisual";
-import ExploreRelvoCursor from "@/components/props/ExploreRelvoCursor";
 
 const slides = [
   {
@@ -82,17 +83,17 @@ export default function Story() {
   return (
     <section ref={sectionRef} id="discover-us" className="relative w-full" style={{ height: `${(1 + slides.length * SCROLL_VH_PER_SLIDE) * 100}dvh`, }}>
       <div className="sticky top-0 min-h-screen w-full overflow-hidden">
-        <ExploreRelvoCursor className="relative flex min-h-screen w-full flex-col justify-center overflow-hidden">
+        <div className="relative flex min-h-screen w-full flex-col justify-center overflow-hidden">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40"
               style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)`,
-                backgroundSize: "4px 4px",
+                backgroundSize: "3px 3px",
               }}
             />
             <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-[min(850px,120vw)] -translate-x-1/2 rounded-full bg-primary/15 blur-[100px] sm:h-[420px] sm:blur-[140px]"/>
             <RelvoVisual activeSlide={activeSlide}/>
-            <p className="hero-text-neon relative overflow-hidden text-center text-[14px] font-semibold uppercase tracking-[0.28em] sm:text-[16px] lg:text-[20px]">
+            <h4 className="hero-text-neon relative overflow-hidden text-center text-[14px] font-[500] uppercase tracking-[1.8px] sm:text-[16px] lg:text-[23px]">
               Relvo is built to create a presence that performs
-            </p>
+            </h4>
             <div className="relative mx-auto my-5 min-h-[260px] w-full max-w-[1300px] overflow-hidden px-4 sm:my-7 sm:min-h-[300px] sm:px-8 lg:px-0">
               {slides.map((slide, index) => {
                 const isActive = index === activeSlide;
@@ -107,17 +108,17 @@ export default function Story() {
                     isActive ? "translate-y-0 opacity-100" : isPrevious ? "-translate-y-[100px] opacity-0" : "translate-y-[100px] opacity-0",
                     ].join(" ")}
                   >
-                    <h2 className="mx-auto w-full max-w-[1100px] px-3 break-words text-center text-[clamp(30px,5vw,75px)] font-normal leading-[1.16] tracking-tight text-white sm:text-[55px] lg:max-w-none lg:px-0 lg:text-[73px] xl:text-[75px]">
+                    <h1 className="mx-auto w-full max-w-[1100px] px-3 break-words text-center font-normal leading-[1.4] tracking-tight text-white/95 sm:text-[55px] lg:max-w-none lg:px-0 lg:text-[73px] xl:text-[66px]">
                       {words.map((word, wordIndex) => {
                         const wordProgress = clamp( slideProgress * words.length - wordIndex + 0.55, );
                         return (
-                          <span key={`${slide.number}-${wordIndex}`} className="inline-block transition-[opacity,transform] duration-100"
+                          <span key={`${slide.number}-${wordIndex}`} className="focus-title inline-block text-center transition-[opacity,transform] duration-100"
                             style={{ opacity: 0.15 + wordProgress * 0.85, transform: `translateY(${(1 - wordProgress) * 16}px)`,}}>
                             {word}&nbsp;
                           </span>
                         );
                       })}
-                    </h2>
+                    </h1>
                   </div>
                 );
               })}
@@ -141,7 +142,13 @@ export default function Story() {
                 />
               ))}
             </div>
-        </ExploreRelvoCursor>
+            <Link href="/about" className="group absolute bottom-5 left-5 z-30 inline-flex cursor-pointer items-center gap-3 rounded-full bg-secondary/40 p-1.5 pe-7 text-sm font-medium text-white backdrop-blur-[100px] transition hover:text-primary sm:bottom-8 sm:left-8 lg:bottom-10 lg:left-10">
+              <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 group-hover:bg-black/35 group-hover:text-primary">
+                <ArrowUpRight aria-hidden="true" className="h-5 w-5 text-primary transition group-hover:text-primary" strokeWidth={1.8} />
+              </span>
+              <span className="text-base font-normal tracking-wide sm:text-[18px]">Explore Relvo</span>
+            </Link>
+        </div>
       </div>
     </section>
   );

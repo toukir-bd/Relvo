@@ -9,6 +9,8 @@ type ContactSubmission = {
   phone?: unknown;
   services?: unknown;
   project?: unknown;
+  isAiInquiry?: unknown;
+  wantedAiService?: unknown;
   website?: unknown;
 };
 
@@ -45,6 +47,8 @@ export async function POST(request: Request) {
   const email = cleanText(submission.email, 254);
   const phone = cleanText(submission.phone, 80);
   const project = cleanText(submission.project);
+  const isAiInquiry = submission.isAiInquiry === true;
+  const wantedAiService = cleanText(submission.wantedAiService, 1000);
   const services = Array.isArray(submission.services)
     ? submission.services
         .filter((service): service is string => typeof service === "string")
@@ -74,6 +78,7 @@ export async function POST(request: Request) {
     `Email: ${email}`,
     `Phone: ${phone}`,
     `Interested in: ${services.join(", ")}`,
+    ...(isAiInquiry ? [`Wanted AI-powered service: ${wantedAiService || "Not specified"}`] : []),
     "",
     "About the project:",
     project,
@@ -84,6 +89,7 @@ export async function POST(request: Request) {
     <p><strong>Email:</strong> ${safeEmail}</p>
     <p><strong>Phone:</strong> ${safePhone}</p>
     <p><strong>Interested in:</strong> ${safeServices.join(", ")}</p>
+    ${isAiInquiry ? `<p><strong>Wanted AI-powered service:</strong> ${escapeHtml(wantedAiService || "Not specified")}</p>` : ""}
     <p><strong>About the project:</strong></p>
     <p>${safeProject.replace(/\n/g, "<br>")}</p>
   `;

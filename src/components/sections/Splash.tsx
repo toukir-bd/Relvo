@@ -18,16 +18,16 @@ export default function Splash() {
         <video autoPlay loop muted playsInline preload="metadata" className="h-full w-full object-cover" src="/videos/hero.mp4" />
       </div>
       <div className="absolute inset-0 z-10 flex w-full flex-col items-center justify-center px-4 pb-24 pt-24 text-center sm:px-8 lg:px-[100px]">
-        <h4 className="mb-4 text-[clamp(14px,2.1vw,29px)] font-[300] leading-relaxed tracking-wide sm:mb-5">
+        <h4 className="mb-5 text-[clamp(14px,2.1vw,29px)] font-[300] leading-relaxed tracking-wide sm:mb-7">
           <span className="text-primary">R</span>efined
           <span className="text-primary pl-2">E</span>xperiences,
           <span className="text-primary pl-2">L</span>ed by
           <span className="text-primary pl-2">V</span>ision &
           <span className="text-primary pl-2">O</span>riginality
         </h4>
-        <h1 className="hero-text-neon relative mb-5 max-w-full overflow-hidden pb-3 text-center text-[clamp(42px,8vw,107px)] font-[800] leading-[0.98] -tracking-[1px]">
-          crafting for the shape<br />of your vision
-        </h1>
+        <h2 className="focus-title mb-7 max-w-[1200px] w-full mx-auto px-3 text-[clamp(32px,7.4vw,85px)] leading-[1.2] -tracking-[3.5px]">
+          <span className="hero-text-neon uppercase">crafting for the shape<br/>of your vision</span>
+        </h2>
         <div className="mx-auto mb-8 w-full max-w-full rounded-[20px] bg-secondary/70 p-2 sm:mb-12 sm:w-auto sm:rounded-[24px] lg:mb-15">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {roles.map(({ label, icon: Icon, active, href }) => (

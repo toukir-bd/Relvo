@@ -43,15 +43,15 @@ export default function Faq() {
     <section aria-labelledby="faq-title" className="relative isolate overflow-hidden px-5 pt-10 pb-32 text-white sm:px-8 sm:pt-24 sm:pb-40 lg:px-16 lg:pt-30 lg:pb-30">
       <div className="inset-0 -z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
         style={{
-          backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 4%) 0.65px, transparent 1px)",
-          backgroundSize: "4px 4px",
+          backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 6%) 0.65px, transparent 1px)",
+          backgroundSize: "3px 3px",
         }}
       />
       <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[min(70vw,780px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[100px]" />
       <div className="mx-auto w-full max-w-[1440px]">
-        <header className="mx-auto mb-5 max-w-3xl text-center sm:mb-8 lg:mb-10">
-          <h2 id="faq-title" className="focus-title whitespace-nowrap text-[clamp(2.6rem,6vw,5.5rem)] font-semibold leading-[0.98] tracking-normal text-white">
-            <span className="hero-text-neon">clarity starts here</span>
+        <header className="mx-auto mb-5 max-w-6xl w-full text-center sm:mb-8 lg:mb-10">
+          <h2 id="faq-title" className="focus-title whitespace-nowrap text-[clamp(2.6rem,6vw,4.3rem)] font-semibold leading-[0.98] -tracking-[3px] text-white">
+            <span className="hero-text-neon uppercase">clarity starts here</span>
           </h2>
           <p className="text-center text-[clamp(20px,2vw,29px)] font-[300] tracking-wide">
             Answered the questions those clients ask most often
@@ -71,7 +71,7 @@ export default function Faq() {
                     aria-expanded={isOpen}
                     aria-controls={answerId}
                     onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="flex w-full cursor-pointer items-center justify-between gap-5 px-5 py-5 text-left sm:px-7 sm:py-6 lg:px-9">
+                    className="flex w-full cursor-pointer items-center justify-between gap-5 px-5 py-5 text-left sm:px-7 sm:py-5 lg:px-8">
                     <span className={`text-base font-[400] leading-snug sm:text-lg lg:text-[27px] tracking-[0.85px] ${isOpen ? "text-primary group-hover:text-primary" : "text-white/70 group-hover:text-white"}`}>{item.question}</span>
                     <span aria-hidden="true" className={`grid size-9 shrink-0 place-items-center rounded-full bg-primary/[0.08] text-primary transition duration-300 sm:size-10 ${isOpen ? "rotate-45 bg-red-400/30 text-red-500" : ""}`}>
                       <Plus size={20} strokeWidth={2.2} />

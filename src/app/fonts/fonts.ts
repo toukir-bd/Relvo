@@ -79,3 +79,15 @@ export const denton = localFont({
   display: "swap",
   preload: false,
 });
+
+export const momo = localFont({
+  src: [
+    {
+      path: "/momo.ttf",
+      weight: "400"
+    }
+  ],
+  variable: "--font-momo",
+  display: "swap",
+  preload: false,
+});

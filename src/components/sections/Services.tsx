@@ -114,27 +114,28 @@ export default function HomeServices() {
       <div ref={viewportRef} className="sticky top-0 relative flex w-full flex-col justify-center overflow-hidden py-14 sm:py-20 lg:py-[120px]">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40"
           style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)`,
-            backgroundSize: "4px 4px",
+            backgroundSize: "3px 3px",
           }}
         />
         <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[min(55vh,520px)] w-[min(76vw,1000px)] -translate-x-1/2 -translate-y-1/2
         rounded-[48px] bg-primary/[0.07] blur-[110px]"/>
         <div className="relative z-10 mb-10 px-4 sm:mb-14 sm:px-6 lg:mb-[46px] lg:px-[6vw]">
-          <h2 className="focus-title max-w-5xl text-[clamp(40px,7vw,94px)] font-[700] leading-[0.95] tracking-normal text-white">
-            <span className="hero-text-neon pe-3">clear service lifecycles</span>
+          <h2 className="focus-title max-w-5xl text-[clamp(40px,7vw,68px)] font-[700] leading-[0.95] -tracking-[3px] text-white">
+            <span className="hero-text-neon uppercase">clear service lifecycles</span>
           </h2>
         </div>
         <div className="w-full overflow-visible">
           <div ref={trackRef} className="relative z-10 flex w-max gap-5 px-10 sm:gap-7 sm:px-7 lg:gap-12 lg:pl-[6vw] lg:pr-[6vw]">
             {serviceOptions.map((service) => (
               <article key={service.id} className="group relative h-[min(76svh,580px)] min-h-[460px] w-[min(86vw,520px)] shrink-0 overflow-hidden rounded-[34px] bg-primary/3.5
-                sm:w-[min(60vw,520px)] sm:rounded-[40px] lg:h-[580px] lg:w-[min(38vw,520px)]">
-                <div aria-hidden="true" className="pointer-events-none absolute -left-[18%] -top-[22%] z-0 aspect-square w-[105%] rounded-full bg-primary/[0.1] blur-[100px]"/>
-                <div aria-hidden="true" className="pointer-events-none absolute -right-[50%] -top-[42%] z-0 aspect-square w-[90%] rounded-full bg-secondary/[0.35] blur-[50px]"/>
+                sm:w-[min(60vw,520px)] sm:rounded-[40px] lg:h-[610px] lg:w-[min(38vw,520px)]">
+                <div aria-hidden="true" className="pointer-events-none absolute -left-[18%] -top-[22%] z-0 aspect-square w-[105%] rounded-full bg-primary/[0.06] blur-[100px]"/>
+                <div aria-hidden="true" className="pointer-events-none absolute -right-[50%] -top-[42%] z-0 aspect-square w-[90%] rounded-full bg-secondary/[0.75] blur-[50px]"/>
                 <Link
                   href={`/services#service-${service.id}`}
                   aria-label={`Explore ${service.name}`}
-                  className="absolute right-5 top-5 z-30 flex size-14 items-center justify-center rounded-[18px] bg-primary/[0.18] text-primary transition duration-300 hover:rotate-45 hover:bg-primary hover:text-black sm:right-7 sm:top-7 sm:size-17 sm:rounded-[20px]"
+                  className="absolute right-5 top-5 z-30 flex size-14 items-center justify-center rounded-[18px] bg-primary/[0.18] text-primary transition duration-300 hover:rotate-45 
+                  hover:bg-primary hover:text-black sm:right-7 sm:top-7 sm:size-17 sm:rounded-[20px]"
                 >
                   <ArrowUpRight size={30} strokeWidth={1} />
                 </Link>

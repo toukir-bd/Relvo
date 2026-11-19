@@ -23,7 +23,7 @@ export default function Footer() {
               <FooterConversationArtwork />
             </div>
             <div className="relative">
-              <h2 className="focus-title w-full whitespace-nowrap text-[clamp(1.4rem,4.5vw,4.25rem)] font-semibold leading-[1.05] tracking-normal text-white">
+              <h2 className="focus-title w-full whitespace-nowrap uppercase text-[clamp(1.4rem,4.5vw,3.4rem)] font-semibold leading-[1.05] -tracking-[3px] text-white">
                 make <span className="hero-text-neon">your next move count</span>
               </h2>
               <p className="mt-7 w-full text-[24px] font-[400] tracking-[.85px] leading-normal text-white/85">

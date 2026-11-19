@@ -106,8 +106,8 @@ export default function CoreTeam() {
       <div ref={stickyRef} className="sticky top-0 flex h-svh flex-col justify-center overflow-visible py-8 sm:py-10">
         <div className="mb-6 flex items-end justify-between gap-5 px-5 sm:mb-9 sm:px-8 lg:px-20 xl:px-32">
           <div className="relative">
-            <h2 id="core-team-title" className="focus-title text-[clamp(2.5rem,6vw,5.4rem)] font-semibold leading-[0.98] tracking-normal">
-              <span className="hero-text-neon">behind the products</span>
+            <h2 id="core-team-title" className="focus-title text-[clamp(2.5rem,6vw,4.2rem)] leading-[0.98] -tracking-[3px] text-white">
+              <span className="hero-text-neon uppercase">behind the products</span>
             </h2>
             <p className="mt-3 text-sm leading-relaxed tracking-[0.85px] text-white/85 sm:text-[24px] sm:leading-8">
               Meet the people bringing strategy, design, and technology together at Relvo
@@ -122,10 +122,10 @@ export default function CoreTeam() {
                   <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-1"
                     style={{
                       backgroundImage: "linear-gradient(rgb(187 255 0 / 2.5%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 2.5%) 1px, transparent 1px)",
-                      backgroundSize: "4px 4px"
+                      backgroundSize: "3px 3px"
                     }}
                   />
-                  <div aria-hidden="true" className="pointer-events-none absolute left-0 top-1/3 -z-10 size-[25rem] rounded-full bg-primary/[0.07] blur-[110px]" />
+                  <div aria-hidden="true" className="pointer-events-none absolute left-0 top-1/3 -z-10 size-[25rem] rounded-full bg-primary/[0.035] blur-[110px]" />
                   <div aria-label={`Photo placeholder for ${name}`} role="img" className="relative grid h-[350px] place-items-center overflow-hidden rounded-[20px] bg-secondary/80 text-primary/45 sm:rounded-[26px]">
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-20 [background-size:14px_14px] [background-image:radial-gradient(circle,rgba(187,255,0,0.55)_0.7px,transparent_1px)]" />
                     <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 size-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.08] blur-3xl" />
@@ -133,7 +133,7 @@ export default function CoreTeam() {
                     <span className="absolute bottom-4 left-4 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/30">Portrait</span>
                   </div>
                   <div className="flex flex-col items-center p-3 sm:p-5">
-                    <h4 className="text-xl font-[600] tracking-[.85px] text-white sm:text-[26px]">{name}</h4>
+                    <h2 className="text-xl -tracking-[.25px] text-white sm:text-[23px]">{name}</h2>
                     <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-primary/85 sm:text-[16px]">{role}</p>
                   </div>
                 </article>

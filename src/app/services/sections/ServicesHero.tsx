@@ -8,14 +8,14 @@ export default function ServicesHero() {
     <section className="relative isolate flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-32 text-center sm:px-8 sm:pb-20 sm:pt-20 lg:px-10 xl:px-16">
       <div className="inset-0 -z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
         style={{
-          backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 4%) 0.65px, transparent 1px)",
-          backgroundSize: "4px 4px",
+          backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 7%) 0.65px, transparent 1px)",
+          backgroundSize: "3px 3px",
         }}
       />
       <div aria-hidden="true" className="pointer-events-none absolute left-0 right-0 top-0 -z-10 mx-auto size-[min(58vw,720px)] rounded-full bg-primary/[0.07] blur-[100px]" />
       <ServicesSideSketches />
-      <h1 className="focus-title relative z-10 max-w-5xl text-[clamp(3rem,9vw,6.2rem)] font-semibold leading-[1] tracking-normal">
-        services built around <span className="hero-text-neon pb-3 pe-1">your next move</span>
+      <h1 className="focus-title relative z-10 max-w-6xl text-[clamp(3rem,9vw,6rem)] leading-[1.2] -tracking-[3.5px] text-center">
+        <span className="hero-text-neon">services built around<br/>your next move</span>
       </h1>
       <p className="relative z-10 mt-7 max-w-4xl text-base leading-relaxed text-white/85 sm:text-lg lg:text-[26px]">
         Choose the support you need today. We bring strategy, design, and development together to help your business move forward.

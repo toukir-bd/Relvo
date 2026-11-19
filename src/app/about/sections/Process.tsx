@@ -12,26 +12,26 @@ export default function Process() {
     <section className="relative isolate overflow-hidden px-5 py-16 sm:px-8 sm:py-24 lg:px-10 lg:py-32 xl:px-32">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-45"
           style={{
-            backgroundImage: "radial-gradient(circle, rgba(187, 255, 0, 8%) 0.7px, transparent 1px)",
-            backgroundSize: "4px 4px"
+            backgroundImage: "radial-gradient(circle, rgba(187, 255, 0, 16%) 1px, transparent 1px)",
+            backgroundSize: "3px 3px"
           }}
         />
-        <div aria-hidden="true" className="pointer-events-none absolute bottom-0 right-0 z-0 size-150 rounded-full bg-primary/[0.07] blur-[300px]"/>
+        <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-100 z-0 size-150 rounded-full bg-primary/[0.08] blur-[300px]"/>
         <div className="relative z-10 w-full">
           <div className="mt-4 grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
             <div>
-              <h2 className="focus-title text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[1.1] tracking-normal">
+              <h2 className="focus-title text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] -tracking-[3px] text-white">
                 <span className="hero-text-neon">a clear path from idea to impact</span>
               </h2>
-              <p className="mt-5 text-[26px] font-normal leading-relaxed text-white/85">
+              <p className="mt-5 text-[25px] font-medium leading-[1.4] text-white/85 tracking-[0.75px]">
                 A good process keeps the big picture in view while making every next step feel manageable.
               </p>
             </div>
             <ol className="divide-y divide-primary/10 border-y border-primary/10">
               {process.map(([title, description], index) => (
-                <li key={title} className="grid gap-4 py-5 sm:grid-cols-[64px_150px_1fr] sm:items-center sm:gap-6 sm:py-7">
+                <li key={title} className="grid gap-4 py-3 sm:grid-cols-[64px_150px_1fr] sm:items-center sm:gap-6 sm:py-5">
                   <span className="text-[50px] font-[200] tracking-wider text-primary/85">0{index + 1}</span>
-                  <h5 className="text-[40px] font-[400] text-white tracking-[0.85px]">{title}</h5>
+                  <h1 className="text-[33px] font-[400] text-white uppercase -tracking-[0.85px]">{title}</h1>
                   <p className="text-sm font-[500] leading-relaxed tracking-wide text-white/75 sm:text-[21px]">{description}</p>
                 </li>
               ))}

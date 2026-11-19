@@ -13,8 +13,8 @@ export default function Principles() {
     <section className="px-5 py-16 sm:px-8 sm:py-24 lg:px-10 lg:py-32 xl:px-32">
         <div className="w-full">
           <div className="mb-5 flex flex-col items-center justify-center gap-2 sm:mb-10">
-            <h4 id="studio-topics-title" className="focus-title text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[0.98] tracking-normal">
-              <span className="hero-text-neon">way with intention</span>
+            <h4 id="studio-topics-title" className="focus-title text-[clamp(2.5rem,6vw,4.65rem)] leading-[0.98] -tracking-[3.5px] text-center">
+              <span className="hero-text-neon uppercase">way with intention</span>
             </h4>
             <p className="text-center text-[clamp(20px,2vw,29px)] font-[300] tracking-wide">
               A few simple beliefs shape how we think, collaborate, and bring each project to life.
@@ -25,18 +25,18 @@ export default function Principles() {
               <article key={number} className="relative overflow-hidden rounded-[56px] bg-primary/2.5 p-6 transition duration-300 sm:p-10">
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10"
                   style={{
-                    backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 10%) 1px, transparent 1px)",
+                    backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 3.5%) 1px, transparent 1px)",
                     backgroundSize: "3px 3px",
                   }}
                 />
-                <div aria-hidden="true" className="pointer-events-none absolute -right-10 -top-20 size-80 rounded-full bg-primary/[0.1] blur-2xl transition" />
-                <div className="relative flex items-start justify-between">
-                  <h4 className="grid size-18 place-items-center rounded-full bg-primary/[0.1] text-primary">
-                    <Icon size={30} strokeWidth={1} />
+                <div aria-hidden="true" className="pointer-events-none absolute -right-10 -top-20 size-80 rounded-full bg-primary/[0.05] blur-2xl transition" />
+                <div className="relative flex items-start justify-center">
+                  <h4 className="grid size-34 place-items-center rounded-full bg-primary/[0.035] text-white">
+                    <Icon size={56} strokeWidth={.5} />
                   </h4>
                 </div>
-                <h4 className="relative mt-8 text-xl font-[400] tracking-[.85px] sm:text-[32px]">{title}</h4>
-                <p className="mt-4 font-[500] text-base tracking-[.85px] leading-normal text-white/85 sm:text-[17px]">{description}</p>
+                <h4 className="relative mt-8 text-xl font-[600] text-center -tracking-[.85px] sm:text-[33px]">{title}</h4>
+                <p className="mt-4 font-[500] text-base text-center tracking-[.85px] leading-normal text-white/85 sm:text-[17px]">{description}</p>
               </article>
             ))}
           </div>

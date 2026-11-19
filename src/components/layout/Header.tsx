@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, X } from "lucide-react";
 import { openContactModal } from "@/utils/contactModal";
 interface HeaderProps {
   isMenuOpen: boolean;
@@ -31,46 +31,35 @@ export default function Header({
       <div className="fixed right-4 top-5 z-[100] flex items-center gap-2 sm:right-6 sm:top-7 lg:right-10 lg:top-9">
         <button
           type="button"
-          aria-label="Ask about AI services"
-          onClick={() => openContactModal(["Custom Software Development"])}
-          className="btn-relvo !h-11 !px-1.5 !text-xs sm:!h-[50px] sm:!text-sm"
+          aria-label="Take AI Services"
+          onClick={() => openContactModal(["Custom Software Development"], { aiServices: true })}
+          className="header-ai-button group inline-flex cursor-pointer items-center gap-3 rounded-full bg-secondary/70 p-1.5 text-sm font-medium text-white backdrop-blur-[5px] transition hover:text-primary sm:ps-4 lg:ps-7"
         >
-          <span className="btnText hidden min-[390px]:inline">AI Services</span>
-          <span className="iconArea !ms-0 !h-8 !w-8 min-[390px]:!ms-2 sm:!h-9 sm:!w-9 sm:!ms-2">
-            <ArrowUpRight className="h-5 w-5" strokeWidth={1.5} />
+          <span className="header-ai-label hidden text-base font-normal tracking-wide md:inline lg:text-[18px]">Take AI Services</span>
+          <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 group-hover:bg-black/35 group-hover:text-primary sm:h-12 sm:w-12">
+            <ArrowUpRight className="h-[18px] w-[18px]" strokeWidth={1.5} />
           </span>
         </button>
-        <button onClick={isMenuOpen ? onMenuClose : onMenuOpen} aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        className={`group relative z-[100] flex h-11 w-11 cursor-pointer items-center justify-center gap-2 rounded-full sm:h-[50px] sm:w-[50px]
-          border border-white/30 hover:border-primary/50 transition-all duration-500 backdrop-blur-[100px] bg-secondary/10
-          ${isMenuOpen
-            ? "border-red-200 hover:border-red-400"
-            : "border-white/10 hover:border-primary/50"
-          }
-        `}
-      >
-          {isMenuOpen ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="text-white transition-colors group-hover:text-red-400"
-            >
-              <path d="M6 6l12 12" />
-              <path d="M18 6L6 18" />
-            </svg>
-          ) : (
-            <span className="flex flex-col space-y-[3px]">
-              <span className="h-[2px] w-[20px] transition-all duration-300 group-hover:w-[26px] bg-primary" />
-              <span className="h-[2px] w-[16px] transition-all duration-300 group-hover:w-[26px] bg-primary" />
-              <span className="h-[2px] w-[26px] transition-all duration-300 bg-primary" />
-              <span className="h-[2px] w-[22px] transition-all duration-300 group-hover:w-[26px] bg-primary" />
-            </span>
-          )}
+        <button
+          type="button"
+          onClick={isMenuOpen ? onMenuClose : onMenuOpen}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
+          className="group inline-flex cursor-pointer items-center gap-3 rounded-full bg-secondary/70 p-1.5 text-sm font-medium text-white backdrop-blur-[5px] transition hover:text-primary sm:ps-4 lg:ps-7"
+        >
+          <span className="hidden text-base font-normal tracking-wide md:inline lg:text-[18px]">Menus</span>
+          <span className={`relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border transition sm:h-12 sm:w-12 ${isMenuOpen ? "border-red-400/25 bg-red-500/[0.04] text-red-400 group-hover:border-red-400/40 group-hover:bg-red-500/[0.08]" : "border-white/20 text-primary group-hover:border-primary/35 group-hover:bg-black/35"}`}>
+            {isMenuOpen ? (
+              <X className="h-5 w-5" strokeWidth={1.7} />
+            ) : (
+              <span aria-hidden="true" className="flex flex-col gap-[3px]">
+                <span className="h-px w-4 bg-primary transition-all duration-300 group-hover:w-5" />
+                <span className="h-px w-3 bg-primary transition-all duration-300 group-hover:w-5" />
+                <span className="h-px w-5 bg-primary transition-all duration-300 group-hover:w-5" />
+                <span className="h-px w-[17px] bg-primary transition-all duration-300 group-hover:w-5" />
+              </span>
+            )}
+          </span>
         </button>
       </div>
     </header>

@@ -18,10 +18,12 @@ export default function MainLayout({
   const [menuOpen, setMenuOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [isAiInquiry, setIsAiInquiry] = useState(false);
   const lenis = useSmoothScroll();
 
   const closeContact = useCallback(() => {
     setContactOpen(false);
+    setIsAiInquiry(false);
     if (window.location.hash === "#contact") {
       window.history.replaceState(window.history.state, "", `${window.location.pathname}${window.location.search}`);
     }
@@ -43,8 +45,9 @@ export default function MainLayout({
 
   useEffect(() => {
     const handleOpenRequest = (event: Event) => {
-      const detail = (event as CustomEvent<{ initialSelectedServices?: string[] }>).detail;
+      const detail = (event as CustomEvent<{ initialSelectedServices?: string[]; aiServices?: boolean }>).detail;
       setSelectedServices(detail?.initialSelectedServices ?? []);
+      setIsAiInquiry(detail?.aiServices ?? false);
       setMenuOpen(false);
       setContactOpen(true);
     };
@@ -94,6 +97,7 @@ export default function MainLayout({
         isOpen={contactOpen}
         onClose={closeContact}
         initialSelectedServices={selectedServices}
+        isAiInquiry={isAiInquiry}
       />
     </>
   );

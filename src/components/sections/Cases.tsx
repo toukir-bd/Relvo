@@ -98,7 +98,7 @@ export default function Cases() {
   return (
     <section id="cases" ref={sectionRef} aria-label="Selected projects" className="relative" style={{height:`calc(100svh + ${totalScrollVh * 100}svh)`}}>
       <div className="cases-inner top-0 sticky flex min-h-screen w-full overflow-hidden flex-col items-center justify-center gap-5 px-4 py-6 sm:gap-8 sm:px-6 lg:gap-12 lg:px-20 xl:px-24">
-        <h2 className="cases-header hero-text-neon relative overflow-hidden text-center text-[clamp(38px,7vw,85px)] font-[600] leading-[1.05] -tracking-[1px]">
+        <h2 className="cases-header hero-text-neon relative overflow-hidden uppercase text-center text-[clamp(38px,7vw,57px)] leading-[1.05] -tracking-[3px]">
           work that speaks for itself
         </h2>
         <div className="cases-content grid min-h-0 w-full content-center gap-5 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-0">
@@ -124,7 +124,7 @@ export default function Cases() {
                 <article
                   key={item?.slug ?? "all-cases-cta"}
                   aria-hidden={index !== displayedIndex}
-                  className="absolute inset-0 bg-primary/3 rounded-[30px] sm:rounded-[42px]"
+                  className="absolute inset-0 rounded-[30px] sm:rounded-[42px]"
                   style={{
                     zIndex: index + 1,
                     opacity: isVisible ? opacity : 0,
@@ -163,18 +163,21 @@ export default function Cases() {
                     </div>
                     ) : (
                     <div className="relative h-full flex flex-col items-center justify-center gap-8 p-4 sm:p-8 md:p-10 mx-auto w-full w-2xl">
-                      <div className="pointer-events-none h-full absolute inset-0 rounded-[30px] sm:rounded-[42px] opacity-[0.12] [background-size:5px_5px]
-                        [background-image:linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.15)_1px,transparent_1px)]"/>
+                      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40 rounded-[30px] sm:rounded-[42px]"
+                        style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 10%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 10%) 1px, transparent 1px)`,
+                          backgroundSize: "2px 2px",
+                        }}
+                      />
                       <p className="text-center text-[16px] sm:text-[20px] font-[500] tracking-[1.6] text-primary/80 uppercase">
                         Every idea has a bigger possibility
                       </p>
-                      <h3 className="text-center text-[clamp(2rem,5vw,4rem)] font-semibold leading-[1.1] tracking-tight text-white">
-                        Your Ideas, Our Touch<br/>
-                        <span className="text-primary font-thin text-[clamp(2.25rem,6vw,6rem)] lg:text-[6rem]">
-                          More Relvo
-                        </span>
+                      <h3 className="text-center text-[clamp(2rem,5vw,3.8rem)] leading-[.8] tracking-tight text-white">
+                        Your Ideas, Our Touch
                       </h3>
-                      <Link href="/projects" className="btn-relvo">
+                      <span className="text-primary font-thin text-[clamp(2.25rem,6vw,6rem)] leading-[.85] lg:text-[6rem]">
+                        More Relvo
+                      </span>
+                      <Link href="/projects" className="btn-relvo mt-5">
                         <span className="btnText">
                           Explore Best Projects
                         </span>
