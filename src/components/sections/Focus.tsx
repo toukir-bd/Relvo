@@ -81,7 +81,7 @@ export default function Focus({ lenis }: SplashProps) {
             <span className="hero-text-neon uppercase">we simplify complexity and<br/>bring your vision to life</span>
           </h1>
           <div className="relative z-[110] mt-8 w-[calc(100%-2rem)] sm:mt-12 sm:w-[calc(100%-4rem)] lg:mt-14">
-            <h4 className="mb-3 text-center text-[clamp(20px,2vw,20px)] font-[500] uppercase tracking-[0.18em] text-primary sm:mb-4 sm:tracking-[0.18em]">
+            <h4 className="mb-3 text-center text-[clamp(20px,2vw,23px)] font-[500] uppercase text-primary sm:mb-4 tracking-[0.12em]">
               Meet with prestigious top partners
             </h4>
             <Clients />

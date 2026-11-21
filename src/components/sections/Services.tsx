@@ -120,7 +120,7 @@ export default function HomeServices() {
         <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[min(55vh,520px)] w-[min(76vw,1000px)] -translate-x-1/2 -translate-y-1/2
         rounded-[48px] bg-primary/[0.07] blur-[110px]"/>
         <div className="relative z-10 mb-10 px-4 sm:mb-14 sm:px-6 lg:mb-[46px] lg:px-[6vw]">
-          <h2 className="focus-title max-w-5xl text-[clamp(40px,7vw,68px)] font-[700] leading-[0.95] -tracking-[3px] text-white">
+          <h2 className="focus-title max-w-5xl text-[clamp(40px,7vw,67px)] font-[700] leading-[0.95] -tracking-[3px] text-white">
             <span className="hero-text-neon uppercase">clear service lifecycles</span>
           </h2>
         </div>

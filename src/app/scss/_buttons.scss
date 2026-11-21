@@ -71,13 +71,101 @@ svg.mouse #wheel {
   }
 }
 
-.btn-relvo.service-added {
-	border: 1px solid rgb(187 255 0 / 0.38);
-	color: #dfff91;
-	background-image: linear-gradient(105deg, rgb(187 255 0 / 0.23) 0%, rgb(187 255 0 / 0.12) 48%, rgb(7 23 20 / 0.96) 100%);
+.service-get-btn {
+	position: relative;
+	display: inline-flex;
+	height: 48px;
+	align-items: center;
+	justify-content: center;
+	gap: 0;
+	overflow: hidden;
+	border-radius: 9999px;
+	padding: 0 6px 0 28px;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: .75px;
+	background-color: #071714;
+	background-image: linear-gradient(105deg, rgb(187 255 0 / 0.16) 0%, rgb(187 255 0 / 0.07) 52%, rgb(187 255 0 / 0.14) 100%);
+	background-size: 220% 100%;
+	background-position: 0% 50%;
+	box-shadow: 0 10px 30px rgb(0 0 0 / 0.24);
+	transition: none !important;
+	animation: none !important;
+	transform: none !important;
+	translate: none !important;
+	rotate: none !important;
+	scale: none !important;
+
+	&::after { display: none; }
+	&::before {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		border-radius: inherit;
+		background: linear-gradient(105deg, rgb(187 255 0 / 0.22), rgb(187 255 0 / 0.1) 52%, rgb(187 255 0 / 0.2));
+		content: "";
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 240ms ease;
+	}
+	&:hover::before { opacity: 1; }
+	&:hover,
+	&:active { color: #fff; background-position: 0% 50%; }
+	&:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 4px; }
+
+	.btnText {
+		position: relative;
+		z-index: 1;
+		white-space: nowrap;
+		transition: none !important;
+		transform: none !important;
+		translate: none !important;
+	}
+
 	.iconArea {
-		background-color: rgb(187 255 0 / 0.24);
+		position: relative;
+		z-index: 1;
+		display: flex;
+		height: 36px;
+		width: 36px;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+		margin-inline-start: 8px;
+		border-radius: 9999px;
+		background-color: rgb(187 255 0 / 0.15);
 		color: #bbff00;
+		transition: none !important;
+		transform: none !important;
+		translate: none !important;
+		rotate: none !important;
+		scale: none !important;
+	}
+
+	&.service-added {
+		color: #dfff91;
+		background-image: linear-gradient(105deg, rgb(187 255 0 / 0.23) 0%, rgb(187 255 0 / 0.12) 52%, rgb(187 255 0 / 0.2) 100%);
+
+		.iconArea { background-color: rgb(187 255 0 / 0.24); }
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.service-get-btn::before { transition: none; }
+}
+
+@media (min-width: 640px) {
+	.service-get-btn {
+		height: 60px;
+		font-size: 18px;
+		padding-inline-start: 28px;
+
+		.iconArea {
+			height: 50px;
+			width: 50px;
+			margin-inline-start: 20px;
+		}
 	}
 }
 

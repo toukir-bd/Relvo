@@ -122,10 +122,12 @@ function ContactForm({
   initialSelectedServices = EMPTY_SERVICE_SELECTION,
   isModal = false,
   isAiInquiry = false,
+  isQuestionInquiry = false,
 }: {
   initialSelectedServices?: string[];
   isModal?: boolean;
   isAiInquiry?: boolean;
+  isQuestionInquiry?: boolean;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const pendingFocusRef = useRef<HTMLElement | null>(null);
@@ -318,7 +320,7 @@ function ContactForm({
     if (!phoneField.value.trim()) errors.phone = "Enter your Mobile number.";
     if (!selectedCountryId) errors.country = "Select a Country calling code.";
     if (!projectField.value.trim()) errors.project = "Tell us a little about your project.";
-    if (selectedServices.length === 0) errors.services = "Choose at least one service.";
+    if (!isQuestionInquiry && selectedServices.length === 0) errors.services = "Choose at least one service.";
 
     setFieldErrors(errors);
     if (Object.keys(errors).length > 0) {
@@ -337,7 +339,6 @@ function ContactForm({
     const email = String(values.get("email") ?? "");
     const phone = `${countryCode} ${String(values.get("phone") ?? "")}`;
     const project = String(values.get("project") ?? "");
-    const wantedAiService = String(values.get("wantedAiService") ?? "");
     setIsSubmitting(true);
     setValidationMessage("");
 
@@ -352,7 +353,7 @@ function ContactForm({
           services: selectedServices,
           project,
           isAiInquiry,
-          wantedAiService,
+          isQuestionInquiry,
           website: String(values.get("website") ?? ""),
         }),
       });
@@ -383,257 +384,220 @@ function ContactForm({
       : { title: "Please check your details", Icon: ClipboardCheck, iconClass: "text-primary" };
 
   return (
-    <section
-      ref={sectionRef}
-      id="contact"
-      className={isModal
-        ? "relative isolate overflow-hidden px-0 py-0 text-white"
-        : "relative isolate overflow-hidden px-4 py-20 text-white sm:px-6 sm:py-24 md:px-10 lg:min-h-svh lg:px-20 lg:py-0 xl:px-24"}
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-80"
-        style={{
-          backgroundSize: "4px 4px",
-          maskImage: "linear-gradient(to bottom, black, transparent 78%)",
+    <section ref={sectionRef} id="contact" className="relative isolate rounded-[52px] overflow-hidden p-4 text-white sm:p-8 md:p-10 lg:p-15 xl:p-16">
+      <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-5 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-5 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-seccondary"
+        style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 3.5%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 3.5%) 1px, transparent 1px)`,
+          backgroundSize: "3px 3px",
         }}
       />
-      <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-16 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
-      <div className={isModal
-        ? "relative z-10 mx-auto w-full max-w-[960px]"
-        : "relative z-10 mx-auto flex w-full max-w-[960px] items-center justify-center lg:min-h-svh lg:py-10"}>
-
-        <div>
-          <form noValidate onSubmit={handleSubmit}
-            className="relative isolate overflow-hidden rounded-[30px] p-5 text-white sm:rounded-[52px] sm:p-10 lg:p-14 border border-white/[0.05] bg-secondary/[0.5]"
-              style={{backgroundImage:"linear-gradient(rgb(187 255 0 / 2.5%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 2.5%) 1px, transparent 1px)",
-              backgroundSize: "8px 8px",
-            }}
-          >
-            <div className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
-              <label htmlFor="contact-website">Leave this field empty</label>
-              <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      <form noValidate onSubmit={handleSubmit}>
+        <div className="relative">
+          <div className="mb-9">
+            <div>
+              <h4 id={isModal ? "contact-modal-title" : undefined} className="w-full text-center text-[clamp(3rem,5vw,4.25rem)] font-normal leading-[1.05] tracking-normal text-white">
+                {isQuestionInquiry ? "Ask Question" : isAiInquiry ? "Let’s do with AI" : "Let’s Start"}
+              </h4>
             </div>
-            <div aria-hidden="true" className="pointer-events-none absolute -left-[18%] -bottom-[22%] z-0 aspect-square w-full rounded-full bg-primary/20 blur-[100px]"/>
-            <div className="relative">
-              <div className="mb-9">
-                <div>
-                  <h4 id={isModal ? "contact-modal-title" : undefined} className="w-full text-center text-[clamp(3rem,5vw,4.25rem)] font-normal leading-[1.05] tracking-normal text-white">
-                    {isAiInquiry ? "Let’s do with AI" : "Let’s Start"}
-                  </h4>
-                </div>
-              </div>
-
-              <fieldset className="mb-5">
-                <label className="mb-2 block text-[18px] font-medium tracking-wide text-white/70 capitalize">
-                  Interested In
-                </label>
-                <div className="flex flex-wrap gap-3">
-                  {serviceNames.map((service) => {
-                    const selected = selectedServices.includes(service);
-                    return (
-                      <button
-                        key={service}
-                        data-service-option
-                        type="button"
-                        aria-pressed={selected}
-                        onClick={() => toggleService(service)}
-                        className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-5 py-2 text-sm font-[500] tracking-wide transition cursor-pointer sm:text-[17px] ${
-                          selected
-                            ? "border-primary/70 bg-primary text-secondary"
-                            : "border-primary/20 bg-primary/[0.06] text-white/70 hover:border-primary/60 hover:bg-primary/[0.12] hover:text-white"
-                        }`}
-                      >
-                        <span className={`grid size-4 shrink-0 place-items-center rounded-[4px] border ${selected ? "border-secondary bg-secondary" : "border-white/45 bg-transparent"}`} aria-hidden="true">
-                          {selected && <Check size={11} strokeWidth={2.5} className="text-primary" />}
-                        </span>
-                        {service}
-                      </button>
-                    );
-                  })}
-                </div>
-                {fieldErrors.services && <p role="alert" className="mt-2 text-sm font-semibold tracking-wide text-red-400">{fieldErrors.services}</p>}
-              </fieldset>
-
-              {isAiInquiry && (
-                <label className="relative mb-3 block">
-                  <input
-                    type="text"
-                    name="wantedAiService"
-                    maxLength={1000}
-                    placeholder=""
-                    className={fieldClassName}
-                    aria-label="Wanted AI-powered service"
-                  />
-                  <span className={floatingLabelClassName}>Wanted AI-Powered Service</span>
-                </label>
-              )}
-
-              <div className="grid gap-3 sm:grid-cols-2">
-                <label className="relative block">
-                  <input required name="name" autoComplete="name" placeholder="" className={fieldClassName} aria-invalid={Boolean(fieldErrors.name)} style={fieldErrors.name ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("name", event.currentTarget.checkValidity())} />
-                  <span className={floatingLabelClassName}>Your Name</span>
-                  {fieldErrors.name && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.name}</span>}
-                </label>
-                <label className="relative block">
-                  <input required type="email" name="email" autoComplete="email" placeholder="" className={fieldClassName} aria-invalid={Boolean(fieldErrors.email)} style={fieldErrors.email ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("email", event.currentTarget.checkValidity())} />
-                  <span className={floatingLabelClassName}>Email Address</span>
-                  {fieldErrors.email && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.email}</span>}
-                </label>
-                <div className="sm:col-span-2">
-                  <div className="flex gap-2">
-                    <div ref={countryPickerRef} className="relative w-[42%] min-w-28 max-w-44 shrink-0 sm:w-44">
-                      {countryPickerOpen ? (
-                        <input
-                          ref={countrySearchRef}
-                          type="search"
-                          role="combobox"
-                          aria-label="Search"
-                          aria-expanded="true"
-                          aria-controls="country-code-options"
-                          autoComplete="off"
-                          value={countrySearch}
-                          onChange={(event) => setCountrySearch(event.currentTarget.value)}
-                          onKeyDown={(event) => {
-                            if (event.key === "Escape") setCountryPickerOpen(false);
-                            if (event.key === "ArrowDown") {
-                              event.preventDefault();
-                              countryListRef.current?.querySelector<HTMLButtonElement>("[data-country-option]")?.focus();
-                            }
-                          }}
-                          placeholder="Search"
-                          className={`h-14 w-full rounded-xl border bg-secondary/60 px-4 text-base font-medium tracking-wide text-white outline-none placeholder:text-white/45 transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/0"} focus:border-primary/70 focus:bg-[#12251a]`}
-                        />
-                      ) : (
-                        <button
-                          ref={countryTriggerRef}
-                          type="button"
-                          aria-label="Select country calling code"
-                          aria-haspopup="listbox"
-                          aria-expanded={false}
-                          onClick={() => {
-                            setCountryPickerOpen(true);
-                            setCountrySearch("");
-                            requestAnimationFrame(() => countrySearchRef.current?.focus());
-                          }}
-                          className={`relative flex h-14 w-full cursor-pointer items-center gap-2 rounded-xl border py-3 pl-4 pr-10 text-xs font-medium outline-none transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/0"} bg-secondary/60 text-white focus:border-primary/70 focus:bg-[#12251a]`}
-                        >
-                          <span className={`pointer-events-none absolute left-4 right-10 z-10 truncate text-left leading-none transition-all ${selectedCountryId ? "top-2 text-xs font-medium tracking-wider text-primary/40" : "top-1/2 -translate-y-1/2 text-base font-medium tracking-wide text-primary/40"}`}>
-                            Country Code
-                          </span>
-                          {selectedCountryId && (
-                            <span className="mt-3 truncate text-left text-base font-medium tracking-wide text-white">
-                              {countryOptions.find((country) => country.id === selectedCountryId)?.shortName} ({countryCode})
-                            </span>
-                          )}
-                          <ChevronDown aria-hidden="true" size={16} strokeWidth={1.8} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50 transition-transform" />
-                        </button>
-                      )}
-                      {countryPickerOpen && (
-                        <div className="absolute left-0 top-full z-40 mt-2 w-[min(22rem,calc(100vw-3rem))] rounded-xl border border-primary/15 bg-[#08100b] p-2 shadow-xl shadow-black/40">
-                          <div
-                            ref={countryListRef}
-                            id="country-code-options"
-                            role="listbox"
-                            data-country-scroll
-                            data-lenis-prevent
-                            className="max-h-50 overflow-y-auto overscroll-contain"
-                          >
-                            {filteredCountryOptions.map(({ id, code, displayName }) => (
-                              <button
-                                key={id}
-                                type="button"
-                                role="option"
-                                aria-selected={selectedCountryId === id}
-                                data-country-option
-                                onClick={() => {
-                                  setSelectedCountryId(id);
-                                  setCountryCode(code);
-                                  setCountryPickerOpen(false);
-                                  setCountrySearch("");
-                                  clearFieldError("country", true);
-                                }}
-                                onKeyDown={(event) => {
-                                  if (event.key === "Escape") setCountryPickerOpen(false);
-                                  if (event.key === "ArrowDown") {
-                                    event.preventDefault();
-                                    (event.currentTarget.nextElementSibling as HTMLButtonElement | null)?.focus();
-                                  }
-                                  if (event.key === "ArrowUp") {
-                                    event.preventDefault();
-                                    const previous = event.currentTarget.previousElementSibling as HTMLButtonElement | null;
-                                    if (previous) previous.focus();
-                                    else countrySearchRef.current?.focus();
-                                  }
-                                }}
-                                className="flex min-h-10 w-full cursor-pointer items-center justify-between rounded-lg px-3 text-left text-base font-medium tracking-wide text-white transition hover:bg-primary/10 focus-visible:bg-primary/10 focus-visible:outline-none"
-                              >
-                                <span>{displayName}</span>
-                                <span className="text-primary">{code}</span>
-                              </button>
-                            ))}
-                            {filteredCountryOptions.length === 0 && (
-                              <p className="px-3 py-3 text-sm text-white/55">
-                                {countryListLoading ? "Loading countries…" : "No matching countries found."}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    <div className="relative min-w-0 flex-1">
-                      <input required type="tel" name="phone" aria-label="Mobile Number" autoComplete="tel-national" placeholder="" className={fieldClassName} aria-invalid={Boolean(fieldErrors.phone)} style={fieldErrors.phone ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("phone", event.currentTarget.checkValidity())} />
-                      <span className={floatingLabelClassName}>Mobile Number</span>
-                    </div>
-                  </div>
-                  {fieldErrors.country && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.country}</span>}
-                  {fieldErrors.phone && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.phone}</span>}
-                </div>
-              </div>
-              <label className="relative mt-3 block">
-                <textarea
-                  required
-                  name="project"
-                  placeholder=" "
-                  rows={2}
-                  className="peer min-h-28 w-full resize-y rounded-xl border border-primary/0 bg-secondary/60 px-4 pb-3 pt-5 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]"
-                  aria-invalid={Boolean(fieldErrors.project)}
-                  style={fieldErrors.project ? { borderColor: "#f87171" } : undefined}
-                  onChange={(event) => clearFieldError("project", event.currentTarget.value.trim().length > 0)}
-                />
-                <span className="pointer-events-none absolute left-4 top-2 z-10 text-xs font-medium leading-none tracking-wide text-primary/40 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-[16px] peer-placeholder-shown:text-primary/40 peer-focus:top-2 peer-focus:text-xs peer-focus:text-primary">
-                  About The Project
-                </span>
-                {fieldErrors.project && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.project}</span>}
+          </div>
+          {!isQuestionInquiry &&
+            <fieldset className="mb-5">
+              <label className="mb-2 block text-[18px] font-medium tracking-wide text-white/70 capitalize">
+                Interested In
               </label>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="group mt-5 flex min-h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-primary/80 px-5 text-[20px] font-semibold text-secondary transition hover:bg-primary/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary disabled:cursor-wait disabled:opacity-70"
-              >
-                {isSubmitting ? "Sending…" : "Send Message"}
-                {!isSubmitting && <Send size={17} strokeWidth={2} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />}
-              </button>
-              <div className="mt-6 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40" aria-hidden="true">
-                <span className="h-px flex-1 bg-white/10" />
-                <span>Or</span>
-                <span className="h-px flex-1 bg-white/10" />
+              <div className="flex flex-wrap gap-3">
+                {serviceNames.map((service) => {
+                  const selected = selectedServices.includes(service);
+                  return (
+                    <button
+                      key={service}
+                      data-service-option
+                      type="button"
+                      aria-pressed={selected}
+                      onClick={() => toggleService(service)}
+                      className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-5 py-2 text-sm font-[500] tracking-wide transition cursor-pointer sm:text-[17px] ${
+                        selected
+                          ? "border-primary/70 bg-primary text-secondary"
+                          : "border-primary/20 bg-primary/[0.06] text-white/70 hover:border-primary/60 hover:bg-primary/[0.12] hover:text-white"
+                      }`}
+                    >
+                      <span className={`grid size-4 shrink-0 place-items-center rounded-[4px] border ${selected ? "border-secondary bg-secondary" : "border-white/45 bg-transparent"}`} aria-hidden="true">
+                        {selected && <Check size={11} strokeWidth={2.5} className="text-primary" />}
+                      </span>
+                      {service}
+                    </button>
+                  );
+                })}
               </div>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <a href="mailto:hello@relvodev.com" className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.06] px-5 text-sm font-semibold text-white/85 transition hover:border-primary/70 hover:bg-primary/[0.14] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-base">
-                  <Mail size={18} strokeWidth={2.2} className="text-primary" /> Email us
-                </a>
-                <a href="tel:+8801410485824" className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.06] px-5 text-sm font-semibold text-white/85 transition hover:border-primary/70 hover:bg-primary/[0.14] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-base">
-                  <PhoneCall size={18} strokeWidth={2.2} className="text-primary" /> Call us
-                </a>
+              {fieldErrors.services && <p role="alert" className="mt-2 text-sm font-semibold tracking-wide text-red-400">{fieldErrors.services}</p>}
+            </fieldset>
+          }
+          <div className="grid gap-3 sm:grid-cols-2">
+            <label className="relative block">
+              <input required name="name" autoComplete="name" placeholder="" className={fieldClassName} aria-invalid={Boolean(fieldErrors.name)} style={fieldErrors.name ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("name", event.currentTarget.checkValidity())} />
+              <span className={floatingLabelClassName}>Your Name</span>
+              {fieldErrors.name && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.name}</span>}
+            </label>
+            <label className="relative block">
+              <input required type="email" name="email" autoComplete="email" placeholder="" className={fieldClassName} aria-invalid={Boolean(fieldErrors.email)} style={fieldErrors.email ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("email", event.currentTarget.checkValidity())} />
+              <span className={floatingLabelClassName}>Email Address</span>
+              {fieldErrors.email && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.email}</span>}
+            </label>
+            <div className="sm:col-span-2">
+              <div className="flex gap-2">
+                <div ref={countryPickerRef} className="relative w-[42%] min-w-28 max-w-44 shrink-0 sm:w-44">
+                  {countryPickerOpen ? (
+                    <input
+                      ref={countrySearchRef}
+                      type="search"
+                      role="combobox"
+                      aria-label="Search"
+                      aria-expanded="true"
+                      aria-controls="country-code-options"
+                      autoComplete="off"
+                      value={countrySearch}
+                      onChange={(event) => setCountrySearch(event.currentTarget.value)}
+                      onKeyDown={(event) => {
+                        if (event.key === "Escape") setCountryPickerOpen(false);
+                        if (event.key === "ArrowDown") {
+                          event.preventDefault();
+                          countryListRef.current?.querySelector<HTMLButtonElement>("[data-country-option]")?.focus();
+                        }
+                      }}
+                      placeholder="Search"
+                      className={`h-14 w-full rounded-xl border bg-secondary/60 px-4 text-base font-medium tracking-wide text-white outline-none placeholder:text-white/45 transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/0"} focus:border-primary/70 focus:bg-[#12251a]`}
+                    />
+                  ) : (
+                    <button
+                      ref={countryTriggerRef}
+                      type="button"
+                      aria-label="Select country calling code"
+                      aria-haspopup="listbox"
+                      aria-expanded={false}
+                      onClick={() => {
+                        setCountryPickerOpen(true);
+                        setCountrySearch("");
+                        requestAnimationFrame(() => countrySearchRef.current?.focus());
+                      }}
+                      className={`relative flex h-14 w-full cursor-pointer items-center gap-2 rounded-xl border py-3 pl-4 pr-10 text-xs font-medium outline-none transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/0"} bg-secondary/60 text-white focus:border-primary/70 focus:bg-[#12251a]`}
+                    >
+                      <span className={`pointer-events-none absolute left-4 right-10 z-10 truncate text-left leading-none transition-all ${selectedCountryId ? "top-2 text-xs font-medium tracking-wider text-primary/40" : "top-1/2 -translate-y-1/2 text-base font-medium tracking-wide text-primary/40"}`}>
+                        Country Code
+                      </span>
+                      {selectedCountryId && (
+                        <span className="mt-3 truncate text-left text-base font-medium tracking-wide text-white">
+                          {countryOptions.find((country) => country.id === selectedCountryId)?.shortName} ({countryCode})
+                        </span>
+                      )}
+                      <ChevronDown aria-hidden="true" size={16} strokeWidth={1.8} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50 transition-transform" />
+                    </button>
+                  )}
+                  {countryPickerOpen && (
+                    <div className="absolute left-0 top-full z-40 mt-2 w-[min(22rem,calc(100vw-3rem))] rounded-xl border border-primary/15 bg-[#08100b] p-2 shadow-xl shadow-black/40">
+                      <div
+                        ref={countryListRef}
+                        id="country-code-options"
+                        role="listbox"
+                        data-country-scroll
+                        data-lenis-prevent
+                        className="max-h-50 overflow-y-auto overscroll-contain"
+                      >
+                        {filteredCountryOptions.map(({ id, code, displayName }) => (
+                          <button
+                            key={id}
+                            type="button"
+                            role="option"
+                            aria-selected={selectedCountryId === id}
+                            data-country-option
+                            onClick={() => {
+                              setSelectedCountryId(id);
+                              setCountryCode(code);
+                              setCountryPickerOpen(false);
+                              setCountrySearch("");
+                              clearFieldError("country", true);
+                            }}
+                            onKeyDown={(event) => {
+                              if (event.key === "Escape") setCountryPickerOpen(false);
+                              if (event.key === "ArrowDown") {
+                                event.preventDefault();
+                                (event.currentTarget.nextElementSibling as HTMLButtonElement | null)?.focus();
+                              }
+                              if (event.key === "ArrowUp") {
+                                event.preventDefault();
+                                const previous = event.currentTarget.previousElementSibling as HTMLButtonElement | null;
+                                if (previous) previous.focus();
+                                else countrySearchRef.current?.focus();
+                              }
+                            }}
+                            className="flex min-h-10 w-full cursor-pointer items-center justify-between rounded-lg px-3 text-left text-base font-medium tracking-wide text-white transition hover:bg-primary/10 focus-visible:bg-primary/10 focus-visible:outline-none"
+                          >
+                            <span>{displayName}</span>
+                            <span className="text-primary">{code}</span>
+                          </button>
+                        ))}
+                        {filteredCountryOptions.length === 0 && (
+                          <p className="px-3 py-3 text-sm text-white/55">
+                            {countryListLoading ? "Loading countries…" : "No matching countries found."}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="relative min-w-0 flex-1">
+                  <input required type="tel" name="phone" aria-label="Mobile Number" autoComplete="tel-national" placeholder="" className={fieldClassName} aria-invalid={Boolean(fieldErrors.phone)} style={fieldErrors.phone ? { borderColor: "#f87171" } : undefined} onChange={(event) => clearFieldError("phone", event.currentTarget.checkValidity())} />
+                  <span className={floatingLabelClassName}>Mobile Number</span>
+                </div>
               </div>
+              {fieldErrors.country && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.country}</span>}
+              {fieldErrors.phone && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.phone}</span>}
             </div>
-          </form>
+          </div>
+          <label className="relative mt-3 block">
+            <textarea
+              required
+              name="project"
+              placeholder=" "
+              rows={2}
+              className="peer min-h-28 w-full resize-y rounded-xl border border-primary/0 bg-secondary/60 px-4 pb-3 pt-5 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]"
+              aria-invalid={Boolean(fieldErrors.project)}
+              style={fieldErrors.project ? { borderColor: "#f87171" } : undefined}
+              onChange={(event) => clearFieldError("project", event.currentTarget.value.trim().length > 0)}
+            />
+              <span className="pointer-events-none absolute left-4 top-2 z-10 text-xs font-medium leading-none tracking-wide text-primary/40 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-[16px] peer-placeholder-shown:text-primary/40 peer-focus:top-2 peer-focus:text-xs peer-focus:text-primary">
+              {isQuestionInquiry ? "Type your question" : "About The Project"}
+            </span>
+            {fieldErrors.project && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.project}</span>}
+          </label>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="group mt-5 flex min-h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-primary/80 px-5 text-[20px] font-[700] tracking-[.075px] text-secondary transition-all
+            hover:bg-primary/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary disabled:cursor-wait disabled:opacity-70"
+          >
+            {isSubmitting ? "Sending…" : isQuestionInquiry ? "Send Question" : "Send Message"}
+            {!isSubmitting && <Send size={24} strokeWidth={1.5} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />}
+          </button>
+          <div className="mt-6 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40" aria-hidden="true">
+            <span className="h-px flex-1 bg-white/10" />
+            <span>Or</span>
+            <span className="h-px flex-1 bg-white/10" />
+          </div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <a href="mailto:hello@relvodev.com" className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-primary/[0.1] px-5 text-sm font-[500] tracking-[0.85px] hover:bg-primary/[0.25]
+              text-white/85 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-[18px]">
+              <Mail size={24} strokeWidth={1.2} className="text-primary"/> Email Us
+            </a>
+            <a href="tel:+8801410485824" className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-primary/[0.1] px-5 text-sm font-[500] tracking-[0.85px] hover:bg-primary/[0.25]
+              text-white/85 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-[18px]">
+              <PhoneCall size={24} strokeWidth={1.2} className="text-primary"/> Call Us
+            </a>
+          </div>
         </div>
-      </div>
+      </form>
       {validationMessage && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
           onKeyDown={(event) => {
             if (event.key === "Escape") closeValidation();
           }}
@@ -641,17 +605,12 @@ function ContactForm({
             if (event.target === event.currentTarget) closeValidation();
           }}
         >
-          <div
-            role="alertdialog"
-            aria-modal="true"
-            aria-labelledby="contact-validation-title"
-            aria-describedby="contact-validation-description"
+          <div role="alertdialog" aria-modal="true" aria-labelledby="contact-validation-title" aria-describedby="contact-validation-description"
             className="w-full max-w-md rounded-3xl border border-white/10 bg-[#0d1911] p-6 text-white shadow-2xl sm:p-8 text-center"
           >
             <div className={`mx-auto grid size-20 place-items-center rounded-full border bg-white/[0.03] ${feedbackType === "error" ? "border-red-400/20" : "border-primary/20"}`}>
               <feedbackContent.Icon size={42} strokeWidth={1.6} className={feedbackContent.iconClass} aria-hidden="true" />
             </div>
-
             <span id="contact-validation-title" className="mt-5 text-2xl font-semibold tracking-wide sm:text-3xl">{feedbackContent.title}</span>
             <p id="contact-validation-description" aria-live="assertive" className="mt-3 text-base font-medium leading-relaxed tracking-wide text-white/75 sm:text-lg">
               {validationMessage}
@@ -660,8 +619,8 @@ function ContactForm({
               type="button"
               autoFocus
               onClick={closeValidation}
-              className="cursor-pointer mt-6 min-h-12 rounded-full bg-primary/70 px-10 text-sm font-semibold text-secondary transition hover:bg-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary transition sm:text-base"
-            >
+              className="cursor-pointer mt-6 min-h-12 rounded-full bg-primary/70 px-10 text-sm font-semibold text-secondary transition hover:bg-primary/40
+              focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary transition sm:text-base">
               Got it
             </button>
           </div>
@@ -676,6 +635,7 @@ type ContactModalProps = {
   onClose: () => void;
   initialSelectedServices: string[];
   isAiInquiry: boolean;
+  isQuestionInquiry: boolean;
 };
 
 export default function ContactModal({
@@ -683,6 +643,7 @@ export default function ContactModal({
   onClose,
   initialSelectedServices,
   isAiInquiry,
+  isQuestionInquiry,
 }: ContactModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -729,23 +690,18 @@ export default function ContactModal({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.24, ease: "easeOut" }}
           data-lenis-prevent
-          className="fixed inset-0 z-[120] overflow-x-hidden overflow-y-auto overscroll-contain bg-[#020807]/80 backdrop-blur-md"
+          className="fixed inset-0 z-[120] overflow-x-hidden overflow-y-auto overscroll-contain bg-[#020807]/90 backdrop-blur-[20px]"
         >
-          <div
-            aria-hidden="true"
-            className="pointer-events-none fixed inset-0 opacity-50"
+          <div aria-hidden="true" className="pointer-events-none fixed inset-0 opacity-50"
             style={{
-              backgroundImage:
-                "radial-gradient(circle, rgb(187 255 0 / 10%) 0.7px, transparent 1px), linear-gradient(rgb(187 255 0 / 3%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 3%) 1px, transparent 1px)",
-              backgroundSize: "8px 8px, 8px 8px, 8px 8px",
+              backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 10%) 0.7px, transparent 1px), linear-gradient(rgb(187 255 0 / 3%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 3%) 1px, transparent 1px)",
+              backgroundSize: "3px 3px, 3px 3px, 3px 3px",
               maskImage: "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
             }}
           />
-          <div aria-hidden="true" className="pointer-events-none fixed -left-48 top-[12%] size-[34rem] rounded-full bg-primary/[0.1] blur-[120px]" />
-          <div aria-hidden="true" className="pointer-events-none fixed -right-40 bottom-[-8%] size-[32rem] rounded-full bg-primary/[0.08] blur-[120px]" />
-          <div
-            className="relative z-10 flex min-h-svh w-full items-center justify-center p-3 sm:p-6 lg:p-8"
-          >
+          <div aria-hidden="true" className="pointer-events-none fixed -left-48 bottom-[5%] size-[34rem] rounded-full bg-primary/[0.08] blur-[120px]" />
+          <div aria-hidden="true" className="pointer-events-none fixed right-[8%] top-0 size-[32rem] rounded-full bg-primary/[0.08] blur-[120px]" />
+          <div className="relative z-10 flex min-h-svh w-full items-center justify-center p-3 sm:p-6 lg:p-8">
             <motion.div
               ref={dialogRef}
               role="dialog"
@@ -766,17 +722,9 @@ export default function ContactModal({
               >
                 <X size={21} strokeWidth={2} />
               </button>
-              <motion.div
-                initial={{ opacity: 0, y: 18, scale: 0.985 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 12, scale: 0.99 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full"
-              >
-                <div className="flex w-full items-center justify-center">
-                  <ContactForm isModal initialSelectedServices={initialSelectedServices} isAiInquiry={isAiInquiry} />
-                </div>
-              </motion.div>
+              <div className="flex w-full items-center justify-center">
+                <ContactForm isModal initialSelectedServices={initialSelectedServices} isAiInquiry={isAiInquiry} isQuestionInquiry={isQuestionInquiry} />
+              </div>
             </motion.div>
           </div>
         </motion.div>

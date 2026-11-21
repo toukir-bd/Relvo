@@ -44,42 +44,6 @@ export const urbanist = localFont({
   preload: false,
 });
 
-export const denton = localFont({
-  src: [
-    {
-      path: "/Denton-100.otf",
-      weight: "100"
-    },
-    {
-      path: "/Denton-300.otf",
-      weight: "300"
-    },
-    {
-      path: "/Denton-400.otf",
-      weight: "400"
-    },
-    {
-      path: "/Denton-500.otf",
-      weight: "500"
-    },
-    {
-      path: "/Denton-700.otf",
-      weight: "700"
-    },
-    {
-      path: "/Denton-800.otf",
-      weight: "800"
-    },
-    {
-      path: "/Denton-900.otf",
-      weight: "900"
-    },
-  ],
-  variable: "--font-denton",
-  display: "swap",
-  preload: false,
-});
-
 export const momo = localFont({
   src: [
     {

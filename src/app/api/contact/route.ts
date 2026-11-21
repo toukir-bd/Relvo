@@ -10,7 +10,7 @@ type ContactSubmission = {
   services?: unknown;
   project?: unknown;
   isAiInquiry?: unknown;
-  wantedAiService?: unknown;
+  isQuestionInquiry?: unknown;
   website?: unknown;
 };
 
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
   const phone = cleanText(submission.phone, 80);
   const project = cleanText(submission.project);
   const isAiInquiry = submission.isAiInquiry === true;
-  const wantedAiService = cleanText(submission.wantedAiService, 1000);
+  const isQuestionInquiry = submission.isQuestionInquiry === true;
   const services = Array.isArray(submission.services)
     ? submission.services
         .filter((service): service is string => typeof service === "string")
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
         .slice(0, 12)
     : [];
 
-  if (!name || !email || !EMAIL_PATTERN.test(email) || !phone || !project || !services.length) {
+  if (!name || !email || !EMAIL_PATTERN.test(email) || !phone || !project || (!isQuestionInquiry && !services.length)) {
     return NextResponse.json({ error: "Please check the required fields and try again." }, { status: 400 });
   }
 
@@ -77,20 +77,20 @@ export async function POST(request: Request) {
     `Name: ${name}`,
     `Email: ${email}`,
     `Phone: ${phone}`,
-    `Interested in: ${services.join(", ")}`,
-    ...(isAiInquiry ? [`Wanted AI-powered service: ${wantedAiService || "Not specified"}`] : []),
+    ...(!isQuestionInquiry ? [`Interested in: ${services.join(", ")}`] : []),
+    ...(isAiInquiry ? ["Wanted AI powered service"] : []),
     "",
-    "About the project:",
+    isQuestionInquiry ? "Question:" : "About the project:",
     project,
   ].join("\n");
   const html = `
-    <h2>New project inquiry</h2>
+    <h2>${isQuestionInquiry ? "New question" : "New project inquiry"}</h2>
     <p><strong>Name:</strong> ${safeName}</p>
     <p><strong>Email:</strong> ${safeEmail}</p>
     <p><strong>Phone:</strong> ${safePhone}</p>
-    <p><strong>Interested in:</strong> ${safeServices.join(", ")}</p>
-    ${isAiInquiry ? `<p><strong>Wanted AI-powered service:</strong> ${escapeHtml(wantedAiService || "Not specified")}</p>` : ""}
-    <p><strong>About the project:</strong></p>
+    ${!isQuestionInquiry ? `<p><strong>Interested in:</strong> ${safeServices.join(", ")}</p>` : ""}
+    ${isAiInquiry ? "<p><strong>Wanted AI powered service</strong></p>" : ""}
+    <p><strong>${isQuestionInquiry ? "Question:" : "About the project:"}</strong></p>
     <p>${safeProject.replace(/\n/g, "<br>")}</p>
   `;
 
@@ -105,7 +105,7 @@ export async function POST(request: Request) {
         from: "Relvo Website <hello@relvodev.com>",
         to: ["hello@relvodev.com"],
         reply_to: email,
-        subject: `Project inquiry from ${subjectName}`,
+        subject: `${isQuestionInquiry ? "Question" : "Project inquiry"} from ${subjectName}`,
         text,
         html,
       }),

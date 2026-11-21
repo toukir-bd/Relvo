@@ -1,6 +1,6 @@
 import "./globals.scss";
 import type { Metadata } from "next";
-import { urbanist, denton, momo } from "./fonts/fonts";
+import { urbanist, momo } from "./fonts/fonts";
 import MainLayout from "../components/layout/MainLayout";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import DoorLoader from "@/components/props/DoorLoader";

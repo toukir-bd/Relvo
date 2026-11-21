@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, UserRound } from "lucide-react";
-import { useSmoothScroll } from "@/components/providers/SmoothScroll";
+import { UserRound } from "lucide-react";
 
 const team = [
   { name: "Toukir Rahman", role: "Founder & MD" },
@@ -23,7 +22,6 @@ export default function CoreTeam() {
   const horizontalDistanceRef = useRef(0);
   const holdDistanceRef = useRef(0);
   const [sectionHeight, setSectionHeight] = useState("100svh");
-  const { scrollTo } = useSmoothScroll();
 
   useEffect(() => {
     let frame = 0;
@@ -83,23 +81,6 @@ export default function CoreTeam() {
       if (frame) cancelAnimationFrame(frame);
     };
   }, []);
-
-  function slide(direction: -1 | 1) {
-    const section = sectionRef.current;
-    const slider = sliderRef.current;
-    const horizontalDistance = horizontalDistanceRef.current;
-    if (!section || !slider || horizontalDistance <= 0) return;
-
-    const sectionStart = section.getBoundingClientRect().top + window.scrollY;
-    const horizontalStart = sectionStart + holdDistanceRef.current;
-    const horizontalEnd = horizontalStart + horizontalDistance;
-    const target = Math.min(
-      horizontalEnd,
-      Math.max(horizontalStart, window.scrollY + direction * slider.clientWidth * 0.8),
-    );
-
-    scrollTo(target, false, 0.65);
-  }
 
   return (
     <section ref={sectionRef} aria-labelledby="core-team-title" className="relative isolate" style={{ height: sectionHeight }}>

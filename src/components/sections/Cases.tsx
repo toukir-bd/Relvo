@@ -154,9 +154,6 @@ export default function Cases() {
                           <ZoomablePreview
                             src={item.image}
                             alt={item.title}
-                            title={item.title}
-                            description={item.description}
-                            badge={item.badge}
                           />
                         </div>
                       </div>

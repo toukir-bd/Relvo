@@ -56,13 +56,9 @@ export default function Clients() {
                 key={copyIndex}
                 ref={copyIndex === 0 ? groupRef : undefined}
                 aria-hidden={copyIndex !== 0}
-                className="flex shrink-0 items-center gap-16 pr-16 md:gap-24 md:pr-24"
-              >
+                className="flex shrink-0 items-center gap-16 pr-16 md:gap-24 md:pr-24">
                 {clients.map(({ src, name }) => (
-                  <span
-                    key={src}
-                    className="flex h-8 shrink-0 items-center opacity-75 transition-opacity hover:opacity-100 sm:h-10"
-                  >
+                  <span key={src} className="flex h-8 shrink-0 items-center opacity-75 transition-opacity hover:opacity-100 sm:h-10">
                     <Image
                       src={src}
                       alt={name}

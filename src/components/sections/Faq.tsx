@@ -1,8 +1,8 @@
 
 "use client";
 import { ArrowUpRight, Plus } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
+import { openContactModal } from "@/utils/contactModal";
 
 const questions = [
   {
@@ -93,12 +93,12 @@ export default function Faq() {
           })}
         </div>
         <div className="relative z-10 mt-9 flex flex-wrap items-center justify-center gap-4">
-          <Link href="/#contact" className="btn-relvo">
+          <button type="button" onClick={() => openContactModal([], { questionInquiry: true })} className="btn-relvo">
             <span className="btnText">Ask Your Question</span>
             <span className="iconArea">
               <ArrowUpRight strokeWidth={1.5}/>
             </span>
-          </Link>
+          </button>
         </div>
       </div>
     </section>
