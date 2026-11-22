@@ -34,10 +34,6 @@ export const urbanist = localFont({
       path: "/Urbanist-800.ttf",
       weight: "800"
     },
-    {
-      path: "/Urbanist-900.ttf",
-      weight: "900"
-    },
   ],
   variable: "--font-urbanist",
   display: "swap",

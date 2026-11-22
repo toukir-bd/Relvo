@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <main className="overflow-x-clip bg-[#081111] text-white">
+    <div className="overflow-x-clip bg-[#081111] text-white">
       <ProjectsHero />
       <Projects />
       <Faq />
-    </main>
+    </div>
   );
 }

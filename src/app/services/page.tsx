@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="bg-secondary text-white">
+    <div className="bg-secondary text-white">
       <ServicesHero />
       <Services />
-    </main>
+    </div>
   );
 }
