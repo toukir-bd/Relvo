@@ -81,23 +81,25 @@ export default function Story() {
 
   return (
     <section ref={sectionRef} id="discover-us" className="story-section relative h-auto w-full md:h-[490dvh]">
-      <div className="mx-auto flex w-full flex-col gap-8 px-4 py-20 md:hidden">
-        <p className="hero-text-neon text-center text-sm font-medium uppercase tracking-[1.5px] sm:text-base">
+      <div className="mx-auto flex w-full flex-col gap-8 px-4 py-10 sm:py-15 md:hidden">
+        <p className="hero-text-neon text-center text-sm font-[500] sm:font-medium uppercase tracking-[1.5px] sm:text-base">
           Relvo is built to create a presence that performs
         </p>
         {slides.map((slide, index) => (
-          <article key={slide.number} className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.02] px-5 py-8 sm:px-8 sm:py-10">
+          <article key={slide.number} className="relative overflow-hidden rounded-[42px] bg-white/[0.02] p-7">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-30" style={{ backgroundImage: "linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)", backgroundSize: "3px 3px" }} />
-            <div className="relative z-10 -mx-5 -mt-8 mb-2 h-[210px] overflow-hidden sm:-mx-8 sm:-mt-10 sm:h-[230px]">
+            <div className="relative z-10 -mx-5 mb-2 h-[210px] overflow-hidden sm:-mx-8 sm:h-[230px]">
               <RelvoVisual activeSlide={index} />
             </div>
-            <h2 className="focus-title relative z-10 text-[clamp(1.75rem,7vw,2.75rem)] leading-[1.15] tracking-tight text-white/95">{slide.text}</h2>
+            <span className="relative z-10 text-[19px] sm:text-[27px] leading-[1.4] tracking-wide sm:tracking-tight text-white/95">{slide.text}</span>
           </article>
         ))}
-        <Link href="/about" className="group relative inline-flex min-h-12 w-fit items-center gap-3 rounded-full bg-secondary/60 p-1.5 pe-6 text-sm font-medium text-white backdrop-blur transition hover:text-primary">
-          <span className="grid size-11 place-items-center rounded-full border border-white/20 text-primary"><ArrowUpRight aria-hidden="true" size={20} /></span>
-          <span>Explore Relvo</span>
-        </Link>
+        <div className="flex items-center justify-center">
+          <Link href="/about" className="group relative inline-flex min-h-12 w-fit items-center gap-3 rounded-full bg-secondary/60 p-1.5 pe-6 text-sm font-medium text-white backdrop-blur transition hover:text-primary">
+            <span className="grid size-11 place-items-center rounded-full border border-white/20 text-primary"><ArrowUpRight aria-hidden="true" size={20} /></span>
+            <span>Explore Relvo</span>
+          </Link>
+        </div>
       </div>
       <div className="sticky top-0 hidden min-h-screen w-full overflow-hidden md:block">
         <div className="relative flex min-h-screen w-full flex-col justify-center overflow-hidden">

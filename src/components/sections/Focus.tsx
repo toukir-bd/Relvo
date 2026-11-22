@@ -81,21 +81,21 @@ export default function Focus({ lenis }: SplashProps) {
   return (
     <section aria-label="Our focus" className="relative">
       <div ref={sectionRef} className="focus-scroll-container relative h-auto overflow-visible text-white md:h-[360vh] md:overflow-clip">
-        <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-4 py-16 md:sticky md:top-0 md:h-screen md:px-[7vw] md:py-8"
+        <div className="relative flex min-h-auto w-full flex-col items-center justify-center overflow-hidden px-2 py-8 md:sticky md:top-0 md:h-screen md:px-[7vw] md:py-8"
           style={{
             backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 10%) 0.65px, transparent 1px)",
             backgroundSize: "3px 3px",
           }}
         >
-          <div className="pointer-events-none absolute inset-0 m-auto h-64 w-64 rounded-full bg-primary/10 blur-[80px] sm:h-120 sm:w-120 sm:blur-[90px]"/>
-          <p className="mb-5 text-center text-[clamp(20px,2vw,29px)] font-[300] tracking-wide">
+          <div className="pointer-events-none absolute inset-0 m-auto h-auto w-auto rounded-full bg-primary/10 blur-[80px] sm:h-120 sm:w-120 sm:blur-[90px]"/>
+          <p className="mb-5 text-center text-[16px] sm:text-[29px] font-[500] sm:font-[300] tracking-wide">
             Designed to Clarity. Effortless to Explore.
           </p>
-          <h2 className="focus-title relative mb-5 max-w-full px-3 pb-3 text-center text-[clamp(2rem,7vw,5.25rem)] font-[400] leading-[1.12] -tracking-[1.5px] text-white sm:-tracking-[2px] lg:-tracking-[4px]">
+          <h2 className="focus-title relative mb-5 max-w-full px-3 pb-3 text-center text-[1.2rem] sm:text-[5.25rem] font-[400] leading-[1.5] sm:leading-[1.12] tracking-normal sm:-tracking-[1.5px] text-white sm:-tracking-[2px] lg:-tracking-[4px]">
             <span className="hero-text-neon uppercase">we simplify complexity and<br/>bring your vision to life</span>
           </h2>
           <div className="relative z-[110] mt-8 w-[calc(100%-2rem)] sm:mt-12 sm:w-[calc(100%-4rem)] lg:mt-14">
-            <h3 className="mb-3 text-center text-[clamp(20px,2vw,23px)] font-[500] uppercase text-primary sm:mb-4 tracking-[0.12em]">
+            <h3 className="mb-3 text-center text-[14px] sm:text-[23px] font-[500] uppercase text-primary sm:mb-4 tracking-[0.12em]">
               Meet with prestigious top partners
             </h3>
             <Clients />
