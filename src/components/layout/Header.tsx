@@ -28,7 +28,7 @@ export default function Header({
         />
         </span>
       </Link>
-      <div className="fixed right-4 top-5 z-[100] flex items-center gap-2 sm:right-6 sm:top-7 lg:right-10 lg:top-9">
+      <div className="fixed right-2 top-2 z-[100] flex items-center gap-2 sm:right-6 sm:top-7 lg:right-10 lg:top-9">
         <button
           type="button"
           aria-label="Take AI Services"

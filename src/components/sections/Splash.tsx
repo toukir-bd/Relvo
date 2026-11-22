@@ -18,8 +18,6 @@ export default function Splash() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    // The decorative hero video is large; keep it off mobile connections.
-    if (window.matchMedia("(max-width: 767px)").matches) return;
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
     if (saveData) return;
 

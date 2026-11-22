@@ -24,9 +24,10 @@ export default function Focus({ lenis }: SplashProps) {
     const videoWindow = windowRef.current;
     if (!section || !video || !videoWindow) return;
 
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const allowVideo = !saveData && !prefersReducedMotion;
+    const allowVideo = !isMobile && !saveData && !prefersReducedMotion;
     const loadVideo = () => {
       if (!video.src && video.dataset.src) {
         video.src = video.dataset.src;
@@ -79,8 +80,8 @@ export default function Focus({ lenis }: SplashProps) {
 
   return (
     <section aria-label="Our focus" className="relative">
-      <div ref={sectionRef} className="relative h-[360vh] overflow-clip text-white">
-        <div className="sticky top-0 relative flex h-screen w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
+      <div ref={sectionRef} className="focus-scroll-container relative h-auto overflow-visible text-white md:h-[360vh] md:overflow-clip">
+        <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-4 py-16 md:sticky md:top-0 md:h-screen md:px-[7vw] md:py-8"
           style={{
             backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 10%) 0.65px, transparent 1px)",
             backgroundSize: "3px 3px",
@@ -99,8 +100,8 @@ export default function Focus({ lenis }: SplashProps) {
             </h3>
             <Clients />
           </div>
-          <span ref={windowRef} className="pointer-events-none absolute left-1/2 top-1/2 z-[120] block h-screen w-screen overflow-hidden rounded-[24px] border-4
-          border-secondary bg-secondary will-change-transform sm:rounded-[32px]" aria-hidden="true">
+          <span ref={windowRef} className="pointer-events-none absolute left-1/2 top-1/2 z-[120] hidden h-screen w-screen overflow-hidden rounded-[24px] border-4
+          border-secondary bg-secondary will-change-transform md:block sm:rounded-[32px]" aria-hidden="true">
             <video
               ref={videoRef}
               className="block h-full w-full object-cover"

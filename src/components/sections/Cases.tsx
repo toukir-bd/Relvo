@@ -96,8 +96,30 @@ export default function Cases() {
   );
 
   return (
-    <section id="cases" ref={sectionRef} aria-label="Selected projects" className="relative" style={{height:`calc(100svh + ${totalScrollVh * 100}svh)`}}>
-      <div className="cases-inner top-0 sticky flex min-h-screen w-full overflow-hidden flex-col items-center justify-center gap-4 px-3 py-4 sm:gap-8 sm:px-6 sm:py-6 lg:gap-12 lg:px-20 xl:px-24">
+    <section id="cases" ref={sectionRef} aria-label="Selected projects" className="cases-section relative" style={{height:`calc(100svh + ${totalScrollVh * 100}svh)`}}>
+      <div className="flex flex-col gap-8 px-4 py-20 md:hidden">
+        <h2 className="hero-text-neon text-center text-[clamp(2rem,8vw,3rem)] uppercase leading-tight tracking-tight">Work that speaks for itself</h2>
+        {featuredCases.map((item) => (
+          <article key={item.slug} className="overflow-hidden rounded-[28px] border border-white/10 bg-secondary/70">
+            <div className="relative aspect-[1.35/1] w-full overflow-hidden">
+              <Image src={item.image} alt={item.title} fill sizes="100vw" className="object-cover" />
+              <div className="absolute right-3 top-3"><ZoomablePreview src={item.image} alt={item.title} /></div>
+            </div>
+            <div className="px-5 py-6 sm:px-7">
+              <p className="mb-3 text-xs font-medium uppercase tracking-[1.5px] text-primary sm:text-sm">{item.badge}</p>
+              <h3 className="text-[clamp(1.35rem,5vw,1.8rem)] leading-tight text-white">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/75 sm:text-base">{item.description}</p>
+            </div>
+          </article>
+        ))}
+        <article className="flex min-h-[320px] flex-col items-center justify-center gap-5 rounded-[28px] border border-primary/10 bg-primary/[0.04] px-6 py-10 text-center">
+          <p className="text-sm font-medium uppercase tracking-[1.5px] text-primary">Every idea has a bigger possibility</p>
+          <h3 className="text-[clamp(2rem,8vw,3rem)] leading-tight text-white">Your Ideas, Our Touch</h3>
+          <span className="text-[clamp(2.25rem,10vw,4rem)] font-thin leading-none text-primary">More Relvo</span>
+          <Link href="/projects" className="btn-relvo mt-2"><span className="btnText">Explore Best Projects</span><span className="iconArea"><ArrowUpRight aria-hidden="true" strokeWidth={1.5} /></span></Link>
+        </article>
+      </div>
+      <div className="cases-inner top-0 sticky hidden min-h-screen w-full overflow-hidden flex-col items-center justify-center gap-4 px-3 py-4 md:flex sm:gap-8 sm:px-6 sm:py-6 lg:gap-12 lg:px-20 xl:px-24">
         <h2 className="cases-header hero-text-neon relative overflow-hidden px-2 text-center text-[clamp(2rem,7vw,3.5625rem)] uppercase leading-[1.05] -tracking-[2px] sm:-tracking-[3px]">
           work that speaks for itself
         </h2>
