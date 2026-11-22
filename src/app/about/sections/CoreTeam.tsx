@@ -107,7 +107,7 @@ export default function CoreTeam() {
                     }}
                   />
                   <div aria-hidden="true" className="pointer-events-none absolute left-0 top-1/3 -z-10 size-[25rem] rounded-full bg-primary/[0.035] blur-[110px]" />
-                  <div aria-label={`Photo placeholder for ${name}`} role="img" className="relative grid h-[350px] place-items-center overflow-hidden rounded-[20px] bg-secondary/80 text-primary/45 sm:rounded-[26px]">
+                  <div aria-label={`Photo placeholder for ${name}`} role="img" className="relative grid h-[clamp(15rem,72vw,21.875rem)] place-items-center overflow-hidden rounded-[20px] bg-secondary/80 text-primary/45 sm:h-[350px] sm:rounded-[26px]">
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-20 [background-size:14px_14px] [background-image:radial-gradient(circle,rgba(187,255,0,0.55)_0.7px,transparent_1px)]" />
                     <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 size-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.08] blur-3xl" />
                     <UserRound size={64} strokeWidth={0.8} className="relative transition-transform duration-500 group-hover:scale-105 sm:size-[76px]" />

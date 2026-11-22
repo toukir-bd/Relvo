@@ -59,7 +59,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       </div>
       <div className="p-5 sm:p-7 lg:p-8">
         <div className="mb-3 flex min-h-9 items-center justify-between gap-4">
-          <h2 className="text-[clamp(1.4rem,2.5vw,1.5rem)] leading-tight tracking-normal text-white">
+          <h2 className="min-w-0 break-words text-[clamp(1.25rem,2.5vw,1.5rem)] leading-tight tracking-normal text-white">
             {project.title}
           </h2>
           {logo ? (
@@ -68,7 +68,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               alt={`${project.title} logo`}
               width={180}
               height={48}
-              className="h-8 max-w-36 object-contain brightness-0 invert opacity-90"
+              className="h-8 max-w-28 shrink-0 object-contain brightness-0 invert opacity-90 sm:max-w-36"
             />
           ) : (
             <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-white/40">
@@ -90,15 +90,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 export default function Projects() {
   return (
     <>
-      <section id="all-projects" className="p-5 sm:p-28 lg:p-[4vw]">
-        <div className="flex w-full flex-col gap-14 md:hidden">
+      <section id="all-projects" className="px-4 py-10 sm:px-8 sm:py-16 lg:px-[4vw] lg:py-[4vw]">
+        <div className="flex w-full flex-col gap-8 sm:gap-12 md:hidden">
           {caseStudies.map((project, index) => (
             <ProjectCard key={project.slug} project={project} index={index} />
           ))}
         </div>
         <div className="hidden w-full grid-cols-2 items-start gap-x-12 md:grid xl:gap-x-16">
           {[0, 1].map((column) => (
-            <div key={column} className={`flex flex-col gap-14 xl:gap-16 ${column === 1 ? "pt-20" : ""}`}>
+            <div key={column} className={`flex flex-col gap-8 lg:gap-12 xl:gap-16 ${column === 1 ? "pt-12 lg:pt-20" : ""}`}>
               {caseStudies.map((project, index) =>
                 index % 2 === column ? (
                   <ProjectCard key={project.slug} project={project} index={index} />
@@ -108,7 +108,7 @@ export default function Projects() {
           ))}
         </div>
       </section>
-      <section className="p-5 sm:p-20 lg:p-[4vw]">
+      <section className="px-4 py-10 sm:px-8 sm:py-16 lg:px-[4vw] lg:py-[4vw]">
         <div className="w-full relative overflow-hidden rounded-[30px] p-5 sm:rounded-[38px] sm:p-9 lg:p-12">
           <div className="inset-0 z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
             style={{

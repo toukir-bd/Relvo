@@ -108,7 +108,7 @@ export default function Story() {
                     isActive ? "translate-y-0 opacity-100" : isPrevious ? "-translate-y-[100px] opacity-0" : "translate-y-[100px] opacity-0",
                     ].join(" ")}
                   >
-                    <h2 className="mx-auto w-full max-w-[1100px] px-3 break-words text-center font-normal leading-[1.4] tracking-tight text-white/95 sm:text-[55px] lg:max-w-none lg:px-0 lg:text-[73px] xl:text-[66px]">
+                    <h2 className="mx-auto w-full max-w-[1100px] px-3 break-words text-center text-[clamp(1.75rem,6vw,4.5625rem)] font-normal leading-[1.18] tracking-tight text-white/95 lg:max-w-none lg:px-0">
                       {words.map((word, wordIndex) => {
                         const wordProgress = clamp( slideProgress * words.length - wordIndex + 0.55, );
                         return (

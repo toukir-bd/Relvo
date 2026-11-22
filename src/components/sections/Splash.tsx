@@ -36,7 +36,7 @@ export default function Splash() {
       <div className="absolute inset-0 z-0 min-h-screen w-full bg-[radial-gradient(ellipse_at_center,_rgba(187,255,0,0.08),_transparent_60%)] opacity-30">
         <video ref={videoRef} aria-hidden="true" tabIndex={-1} loop muted playsInline preload="none" data-src="/videos/hero.mp4" className="h-full w-full object-cover" />
       </div>
-      <div className="absolute inset-0 z-10 flex w-full flex-col items-center justify-center px-4 py-24 text-center">
+      <div className="absolute inset-0 z-10 flex w-full flex-col items-center justify-center px-4 py-16 text-center sm:py-24">
         <p className="mb-5 text-[clamp(14px,2.1vw,29px)] font-[300] leading-relaxed tracking-wide sm:mb-7">
           <span className="text-primary">R</span>efined
           <span className="text-primary pl-2">E</span>xperiences,
@@ -50,7 +50,7 @@ export default function Splash() {
         <div className="mx-auto mb-8 w-full max-w-full rounded-[20px] bg-secondary/70 p-2 sm:mb-12 sm:w-auto sm:rounded-[24px] lg:mb-15">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {roles.map(({ label, icon: Icon, active, href }) => (
-              <Link href={href ?? "/services"} key={label} className={["group flex flex-col items-center justify-center rounded-[18px] p-5 transition-all duration-300", 
+              <Link href={href ?? "/services"} key={label} className={["group flex flex-col items-center justify-center rounded-[18px] p-4 transition-all duration-300 sm:p-5",
                   active ? "bg-primary text-secondary shadow-[0_8px_20px_rgba(124,67,238,0.25)] hover:bg-primary/90" : "bg-primary/10 hover:bg-primary/5",
                 ].join(" ")}
               >

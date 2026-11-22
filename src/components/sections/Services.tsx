@@ -111,7 +111,7 @@ export default function HomeServices() {
 
   return (
     <section ref={sectionRef} className="relative w-full" style={{ height: sectionHeight }}>
-      <div ref={viewportRef} className="sticky top-0 relative flex w-full flex-col justify-center overflow-hidden py-14 sm:py-20 lg:py-[120px]">
+      <div ref={viewportRef} className="home-services-sticky sticky top-0 relative flex w-full flex-col justify-center overflow-hidden py-6 sm:py-12 lg:py-[120px]">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40"
           style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)`,
             backgroundSize: "3px 3px",
@@ -119,7 +119,7 @@ export default function HomeServices() {
         />
         <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[min(55vh,520px)] w-[min(76vw,1000px)] -translate-x-1/2 -translate-y-1/2
         rounded-[48px] bg-primary/[0.07] blur-[110px]"/>
-        <div className="relative z-10 mb-10 px-4 sm:mb-14 sm:px-6 lg:mb-[46px] lg:px-[6vw]">
+        <div className="home-services-title relative z-10 mb-5 px-4 sm:mb-10 sm:px-6 lg:mb-[46px] lg:px-[6vw]">
           <h2 className="focus-title max-w-5xl text-[clamp(40px,7vw,67px)] font-[700] leading-[0.95] -tracking-[3px] text-white">
             <span className="hero-text-neon uppercase">clear service lifecycles</span>
           </h2>
@@ -127,8 +127,8 @@ export default function HomeServices() {
         <div className="w-full overflow-visible">
           <div ref={trackRef} className="relative z-10 flex w-max gap-5 px-10 sm:gap-7 sm:px-7 lg:gap-12 lg:pl-[6vw] lg:pr-[6vw]">
             {serviceOptions.map((service) => (
-              <article key={service.id} className="group relative h-[min(76svh,580px)] min-h-[460px] w-[min(86vw,520px)] shrink-0 overflow-hidden rounded-[34px] bg-primary/3.5
-                sm:w-[min(60vw,520px)] sm:rounded-[40px] lg:h-[610px] lg:w-[min(38vw,520px)]">
+              <article key={service.id} className="home-service-card group relative h-[min(65svh,500px)] min-h-[340px] w-[min(86vw,520px)] shrink-0 overflow-hidden rounded-[28px] bg-primary/3.5
+                sm:h-[min(70svh,580px)] sm:min-h-[420px] sm:w-[min(60vw,520px)] sm:rounded-[40px] lg:h-[610px] lg:w-[min(38vw,520px)]">
                 <div aria-hidden="true" className="pointer-events-none absolute -left-[18%] -top-[22%] z-0 aspect-square w-[105%] rounded-full bg-primary/[0.06] blur-[100px]"/>
                 <div aria-hidden="true" className="pointer-events-none absolute -right-[50%] -top-[42%] z-0 aspect-square w-[90%] rounded-full bg-secondary/[0.75] blur-[50px]"/>
                 <Link

@@ -23,10 +23,10 @@ export default function Footer() {
               <FooterConversationArtwork />
             </div>
             <div className="relative">
-              <h2 className="focus-title w-full whitespace-nowrap uppercase text-[clamp(1.4rem,4.5vw,3.4rem)] font-semibold leading-[1.05] -tracking-[3px] text-white">
+              <h2 className="focus-title w-full text-[clamp(1.8rem,5vw,3.4rem)] font-semibold uppercase leading-[1.05] -tracking-[2px] text-white sm:-tracking-[3px]">
                 make <span className="hero-text-neon">your next move count</span>
               </h2>
-              <p className="mt-7 w-full text-[24px] font-[400] tracking-[.85px] leading-normal text-white/85">
+              <p className="mt-5 w-full text-[clamp(1.125rem,2vw,1.5rem)] font-[400] leading-normal tracking-[.85px] text-white/85 sm:mt-7">
                 Bring us your idea. We’ll shape it into a clear plan and build a digital experience ready to move your business forward
               </p>
               <Link href="/#contact" className="btn-relvo mt-10">

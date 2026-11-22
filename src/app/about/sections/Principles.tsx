@@ -34,7 +34,7 @@ export default function Principles() {
                   <Icon size={36} strokeWidth={1} />
                 </h4>
                 <h4 className="relative mt-10 mb-20 text-xl font-[600] tracking-normal sm:text-[25px]">{title}</h4>
-                <p className="mt-4 font-normal text-base tracking-[.15px] leading-[1.5] text-white/85 sm:text-[33px]">{description}</p>
+              <p className="mt-4 font-normal text-base tracking-[.15px] leading-[1.5] text-white/85 md:text-[20px] lg:text-[26px] xl:text-[30px]">{description}</p>
               </article>
             ))}
           </div>

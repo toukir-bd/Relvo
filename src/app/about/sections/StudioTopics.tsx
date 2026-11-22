@@ -20,9 +20,9 @@ export default function StudioTopics() {
       <div className="grid w-full gap-8 lg:grid-cols-2">
         {studioTopics.map(({ id, title, description, icon: Icon }, index) => (
           <article id={id} key={id} className="relative rounded-[28px] bg-primary/2.5 p-8 sm:rounded-[48px] sm:p-9 lg:p-12 backdrop-blur-[.5px]">
-            <span className="absolute top-0 left-10 text-[200px] font-[800] tracking-normal text-primary/10 leading-[230px]">0{index + 1}</span>
+            <span aria-hidden="true" className="absolute left-6 top-0 text-[clamp(7rem,24vw,12.5rem)] font-[800] leading-none tracking-normal text-primary/10 sm:left-10">0{index + 1}</span>
             <div className="flex items-center justify-end text-primary">
-              <Icon size={70} strokeWidth={.5} />
+              <Icon size={48} className="sm:size-14 lg:size-[70px]" strokeWidth={.5} />
             </div>
             <h2 className="mt-0 text-[clamp(1.65rem,3vw,2.3rem)] leading-tight -tracking-[.5px] text-white">{title}</h2>
             <p className="mt-4 text-base tracking-[.85px] leading-normal text-white/85 sm:text-[20px]">{description}</p>

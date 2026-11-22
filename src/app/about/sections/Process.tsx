@@ -23,16 +23,16 @@ export default function Process() {
               <h2 className="focus-title text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] -tracking-[3px] text-white">
                 <span className="hero-text-neon">a clear path from idea to impact</span>
               </h2>
-              <p className="mt-5 text-[25px] font-medium leading-[1.4] text-white/85 tracking-[0.75px]">
+              <p className="mt-5 text-[clamp(1.125rem,2vw,1.5625rem)] font-medium leading-[1.4] text-white/85 tracking-[0.75px]">
                 A good process keeps the big picture in view while making every next step feel manageable.
               </p>
             </div>
             <ol className="divide-y divide-primary/10 border-y border-primary/10">
               {process.map(([title, description], index) => (
-                <li key={title} className="grid gap-4 py-3 sm:grid-cols-[64px_150px_1fr] sm:items-center sm:gap-6 sm:py-5">
-                  <span className="text-[50px] font-[200] tracking-wider text-primary/85">0{index + 1}</span>
-                  <h1 className="text-[33px] font-[400] text-white uppercase -tracking-[0.85px]">{title}</h1>
-                  <p className="text-sm font-[500] leading-relaxed tracking-wide text-white/75 sm:text-[21px]">{description}</p>
+                <li key={title} className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 py-4 sm:grid-cols-[64px_150px_1fr] sm:items-center sm:gap-6 sm:py-5">
+                  <span className="row-span-2 self-center text-[clamp(2rem,5vw,3.125rem)] font-[200] tracking-wider text-primary/85 sm:row-span-1">0{index + 1}</span>
+                  <h3 className="text-[clamp(1.25rem,2.5vw,2.0625rem)] font-[400] text-white uppercase -tracking-[0.85px]">{title}</h3>
+                  <p className="col-span-2 text-sm font-[500] leading-relaxed tracking-wide text-white/75 sm:col-span-1 sm:text-[21px]">{description}</p>
                 </li>
               ))}
             </ol>
