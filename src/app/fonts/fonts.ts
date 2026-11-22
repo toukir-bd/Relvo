@@ -53,5 +53,5 @@ export const momo = localFont({
   ],
   variable: "--font-momo",
   display: "swap",
-  preload: false,
+  preload: true,
 });

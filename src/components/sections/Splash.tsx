@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { UserRound, Sparkles, Blocks, Orbit } from "lucide-react";
+import { useEffect, useRef } from "react";
 import ScrollToDiscover from "../props/ScrollToDiscover";
 
 const roles = [
@@ -12,10 +13,26 @@ const roles = [
 
 
 export default function Splash() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    if (saveData) return;
+
+    const timer = window.setTimeout(() => {
+      video.src = video.dataset.src ?? "";
+      video.load();
+      void video.play().catch(() => {});
+    }, 1200);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   return (
     <section className="relative min-h-screen overflow-hidden transition-all duration-700">
       <div className="absolute inset-0 z-0 min-h-screen w-full opacity-30">
-        <video aria-hidden="true" tabIndex={-1} autoPlay loop muted playsInline preload="metadata" className="h-full w-full object-cover" src="/videos/hero.mp4" />
+        <video ref={videoRef} aria-hidden="true" tabIndex={-1} loop muted playsInline preload="none" data-src="/videos/hero.mp4" className="h-full w-full object-cover" />
       </div>
       <div className="absolute inset-0 z-10 flex w-full flex-col items-center justify-center px-4 py-24 text-center">
         <p className="mb-5 text-[clamp(14px,2.1vw,29px)] font-[300] leading-relaxed tracking-wide sm:mb-7">

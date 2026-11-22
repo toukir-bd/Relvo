@@ -41,7 +41,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           src={project.image}
           alt={project.title}
           fill
-          unoptimized
           priority={index < 2}
           sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 680px"
           className="object-cover"

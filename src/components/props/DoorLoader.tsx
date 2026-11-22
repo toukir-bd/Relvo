@@ -11,11 +11,11 @@ export default function DoorLoader() {
   useEffect(() => {
     const openDoors = window.setTimeout(() => {
       setStage("doors");
-    }, 1800);
+    }, 400);
 
     const finishLoader = window.setTimeout(() => {
       setStage("done");
-    }, 3100);
+    }, 1050);
 
     return () => {
       window.clearTimeout(openDoors);
@@ -60,7 +60,7 @@ export default function DoorLoader() {
       <div
         className={[
             "absolute inset-0 z-30 flex items-center justify-center",
-            "transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            "transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
             stage === "doors"
             ? "scale-[0.92] opacity-0"
             : "scale-100 opacity-100",

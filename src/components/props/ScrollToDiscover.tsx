@@ -11,7 +11,7 @@ export default function ScrollToDiscover() {
         scrollTo(window.scrollY + target.getBoundingClientRect().top, false, 1.1);
     };
     return (
-        <button type="button" aria-label="Scroll to Discover" onClick={scrollToDiscover} className="group inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary bg-secondary/40 backdrop-blur-[100px] p-1.5 pe-7 rounded-full">
+        <button type="button" aria-label="Scroll to Discover" onClick={scrollToDiscover} className="group hidden cursor-pointer items-center gap-3 text-sm font-medium text-white transition hover:text-primary bg-secondary/40 backdrop-blur-[100px] p-1.5 pe-7 rounded-full sm:inline-flex">
             <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 group-hover:bg-black/35 group-hover:text-primary">
                 <svg aria-hidden="true" focusable="false" className="mouse" width="20px" viewBox="0 0 247 390" xmlns="http://www.w3.org/2000/svg">
                     <path className='stroke-secondary' id="mouse" d="M236.717,123.359c0,-62.565 -50.794,-113.359 -113.358,-113.359c-62.565,0 -113.359,50.794 -113.359,113.359l0,143.237c0,62.565 50.794,113.359 113.359,113.359c62.564,0 113.358,-50.794 113.358,-113.359l0,-143.237Z" fill="#BBFF00" stroke="#051313" strokeWidth="10px" />

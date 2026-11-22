@@ -142,7 +142,6 @@ export default function Cases() {
                           src={item.image}
                           alt={item.title}
                           fill
-                          unoptimized
                           priority={index === 0}
                           loading={index === 0 ? "eager" : "lazy"}
                           sizes="(max-width: 1023px) 100vw, 65vw"

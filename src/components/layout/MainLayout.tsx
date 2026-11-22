@@ -1,14 +1,16 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import Header from "./Header";
 import Footer from "./Footer";
-import MenuOverlay from "./MenuOverlay";
-import ContactModal from "./ContactModal";
 import FloatingContactActions from "./FloatingContactActions";
 import CursorTrail from "@/components/props/CursorTrail";
 import { useSmoothScroll } from "../providers/SmoothScroll";
 import { CONTACT_MODAL_EVENT } from "@/utils/contactModal";
+
+const MenuOverlay = dynamic(() => import("./MenuOverlay"), { ssr: false });
+const ContactModal = dynamic(() => import("./ContactModal"), { ssr: false });
 
 export default function MainLayout({
   children,
@@ -17,6 +19,8 @@ export default function MainLayout({
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [menuMounted, setMenuMounted] = useState(false);
+  const [contactMounted, setContactMounted] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [isAiInquiry, setIsAiInquiry] = useState(false);
   const [isQuestionInquiry, setIsQuestionInquiry] = useState(false);
@@ -52,6 +56,7 @@ export default function MainLayout({
       setIsAiInquiry(detail?.aiServices ?? false);
       setIsQuestionInquiry(detail?.questionInquiry ?? false);
       setMenuOpen(false);
+      setContactMounted(true);
       setContactOpen(true);
     };
 
@@ -76,7 +81,10 @@ export default function MainLayout({
     window.addEventListener(CONTACT_MODAL_EVENT, handleOpenRequest);
     document.addEventListener("click", handleContactLink, true);
     const initialHashFrame = window.requestAnimationFrame(() => {
-      if (window.location.hash === "#contact") setContactOpen(true);
+      if (window.location.hash === "#contact") {
+        setContactMounted(true);
+        setContactOpen(true);
+      }
     });
 
     return () => {
@@ -89,20 +97,20 @@ export default function MainLayout({
   return (
     <>
       <CursorTrail enabled={!contactOpen} />
-      <Header isMenuOpen={menuOpen} onMenuOpen={() => setMenuOpen(true)} onMenuClose={() => setMenuOpen(false)}/>
-      <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)}/>
+      <Header isMenuOpen={menuOpen} onMenuOpen={() => { setMenuMounted(true); setMenuOpen(true); }} onMenuClose={() => setMenuOpen(false)}/>
+      {menuMounted && <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)}/>}
       <main>
         {children}
       </main>
       <FloatingContactActions />
       <Footer />
-      <ContactModal
+      {contactMounted && <ContactModal
         isOpen={contactOpen}
         onClose={closeContact}
         initialSelectedServices={selectedServices}
         isAiInquiry={isAiInquiry}
         isQuestionInquiry={isQuestionInquiry}
-      />
+      />}
     </>
   );
 }

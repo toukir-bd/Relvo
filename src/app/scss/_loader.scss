@@ -1,6 +1,6 @@
 
 .door-panel {
-  transition: transform 1.25s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.65s cubic-bezier(0.76, 0, 0.24, 1);
   will-change: transform;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .door-logo {
-  animation: door-logo-intro 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: door-logo-intro 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .door-logo-hide {

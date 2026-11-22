@@ -24,6 +24,16 @@ export default function Focus({ lenis }: SplashProps) {
     const videoWindow = windowRef.current;
     if (!section || !video || !videoWindow) return;
 
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const allowVideo = !saveData && !prefersReducedMotion;
+    const loadVideo = () => {
+      if (!video.src && video.dataset.src) {
+        video.src = video.dataset.src;
+        video.load();
+      }
+    };
+
     video.pause();
     video.currentTime = 0;
 
@@ -32,14 +42,17 @@ export default function Focus({ lenis }: SplashProps) {
       const sectionTop = scroll + rect.top;
       const travel = Math.max(1, section.offsetHeight - window.innerHeight);
       const progress = Math.max(0, Math.min(1, (scroll - sectionTop) / travel));
+      if (allowVideo && progress >= VIDEO_PLAY_START - 0.18) loadVideo();
       const zoomProgress = Math.max(
         0,
         Math.min(1, (progress - ZOOM_START) / (ZOOM_END - ZOOM_START)),
       );
-      const scale = zoomProgress * zoomProgress * (3 - 2 * zoomProgress);
+      const scale = allowVideo ? zoomProgress * zoomProgress * (3 - 2 * zoomProgress) : 0;
       videoWindow.style.transform = `translate(-50%, -50%) scale(${scale})`;
 
       if (progress >= VIDEO_PLAY_START && !playbackStartedRef.current) {
+        if (!allowVideo) return;
+        loadVideo();
         videoWindow.classList.add("is-playing");
         video.currentTime = 0;
         playbackStartedRef.current = true;
@@ -91,11 +104,11 @@ export default function Focus({ lenis }: SplashProps) {
             <video
               ref={videoRef}
               className="block h-full w-full object-cover"
-              src="/videos/main-video.mp4"
+              data-src="/videos/main-video.mp4"
               muted
               playsInline
               loop
-              preload="auto"
+              preload="none"
               aria-label="Main video"
             />
           </span>
