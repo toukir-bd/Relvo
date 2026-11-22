@@ -1,4 +1,4 @@
-export const SITE_URL = "https://relvodev.com";
+export const SITE_URL = "https://www.relvodev.com";
 export const SITE_NAME = "Relvo Dev";
 
 export const SITE_DESCRIPTION =
