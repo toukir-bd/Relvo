@@ -21,7 +21,7 @@ export default function StudioTopics() {
         {studioTopics.map(({ id, title, description, icon: Icon }, index) => (
           <article id={id} key={id} className="relative rounded-[28px] bg-primary/2.5 p-8 sm:rounded-[48px] sm:p-9 lg:p-12 backdrop-blur-[.5px]">
             <span className="absolute top-0 left-10 text-[200px] font-[800] tracking-normal text-primary/10 leading-[230px]">0{index + 1}</span>
-            <div className="flex items-center justify-end text-white">
+            <div className="flex items-center justify-end text-primary">
               <Icon size={70} strokeWidth={.5} />
             </div>
             <h2 className="mt-0 text-[clamp(1.65rem,3vw,2.3rem)] leading-tight -tracking-[.5px] text-white">{title}</h2>
