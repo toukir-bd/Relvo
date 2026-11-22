@@ -18,6 +18,8 @@ export default function Splash() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // The decorative hero video is large; keep it off mobile connections.
+    if (window.matchMedia("(max-width: 767px)").matches) return;
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
     if (saveData) return;
 
@@ -31,7 +33,7 @@ export default function Splash() {
 
   return (
     <section className="relative min-h-screen overflow-hidden transition-all duration-700">
-      <div className="absolute inset-0 z-0 min-h-screen w-full opacity-30">
+      <div className="absolute inset-0 z-0 min-h-screen w-full bg-[radial-gradient(ellipse_at_center,_rgba(187,255,0,0.08),_transparent_60%)] opacity-30">
         <video ref={videoRef} aria-hidden="true" tabIndex={-1} loop muted playsInline preload="none" data-src="/videos/hero.mp4" className="h-full w-full object-cover" />
       </div>
       <div className="absolute inset-0 z-10 flex w-full flex-col items-center justify-center px-4 py-24 text-center">
