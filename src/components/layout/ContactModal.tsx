@@ -606,10 +606,10 @@ function ContactForm({
           }}
         >
           <div role="alertdialog" aria-modal="true" aria-labelledby="contact-validation-title" aria-describedby="contact-validation-description"
-            className="w-full max-w-md rounded-3xl border border-white/10 bg-[#0d1911] p-6 text-white shadow-2xl sm:p-8 text-center"
+            className="w-full max-w-md rounded-3xl p-6 text-white shadow-2xl sm:p-8 text-center"
           >
             <div className={`mx-auto grid size-20 place-items-center rounded-full border bg-white/[0.03] ${feedbackType === "error" ? "border-red-400/20" : "border-primary/20"}`}>
-              <feedbackContent.Icon size={42} strokeWidth={1.6} className={feedbackContent.iconClass} aria-hidden="true" />
+              <feedbackContent.Icon size={42} strokeWidth={1} className={feedbackContent.iconClass} aria-hidden="true" />
             </div>
             <span id="contact-validation-title" className="mt-5 text-2xl font-semibold tracking-wide sm:text-3xl">{feedbackContent.title}</span>
             <p id="contact-validation-description" aria-live="assertive" className="mt-3 text-base font-medium leading-relaxed tracking-wide text-white/75 sm:text-lg">

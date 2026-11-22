@@ -6,23 +6,27 @@ import ZoomablePreview from "@/components/props/ZoomablePreview";
 import { caseStudies } from "@/data/cases";
 
 const partnerLogos: Record<string, string> = {
-  "getfit-gym-center": "/img/partners/p-1.webp",
-  "setwet-course-management": "/img/partners/p-2.webp",
-  "partnerfusion-investment-agency": "/img/partners/p-4.webp",
-  "brightsphere-creative-agency": "/img/partners/p-5.webp",
-  "acedeal-order-payment-management": "/img/partners/p-8.webp",
-  "accountity-accounting-management": "/img/partners/p-9.webp",
-  "safetech-tech-website": "/img/partners/p-10.webp",
-  "musen-ai-powered-solutions": "/img/partners/p-11.webp",
   "solutpro-legal-services-mobile-app": "/img/partners/p-13.webp",
-  "ticketar-online-ticket-management": "/img/partners/p-14.webp",
-  "quintessence-biologics": "/img/partners/p-15.webp",
-  "dmeet-application": "/img/partners/p-16.webp",
-  "solidworks-3dexperience": "/img/partners/p-17.webp",
   "turbienergy-wind-energy-dashboard": "/img/partners/p-18.webp",
-  "middlestump-social-investing": "/img/partners/p-19.webp",
-  "marketrics-marketing-analysis": "/img/partners/p-20.webp",
+  "musen-ai-powered-solutions": "/img/partners/p-11.webp",
+  "dmeet-application": "/img/partners/p-16.webp",
   "salesramp-sales-overview": "/img/partners/p-21.webp",
+  "getfit-gym-center": "/img/partners/p-1.webp",
+  "quintessence-biologics": "/img/partners/p-15.webp",
+  "safetech-tech-website": "/img/partners/p-10.webp",
+  "accountity-accounting-management": "/img/partners/p-9.webp",
+  "partnerfusion-investment-agency": "/img/partners/p-4.webp",
+  "solidworks-3dexperience": "/img/partners/p-17.webp",
+  "marketrics-marketing-analysis": "/img/partners/p-20.webp",
+  "brightsphere-creative-agency": "/img/partners/p-5.webp",
+  "ticketar-online-ticket-management": "/img/partners/p-14.webp",
+  "middlestump-social-investing": "/img/partners/p-19.webp",
+  "acedeal-order-payment-management": "/img/partners/p-8.webp",
+  "visuaai-artificial-intelligence": "/img/partners/p-7.webp",
+  "dupro-project-management": "/img/partners/p-12.webp",
+  "codighost-tools-frameworks": "/img/partners/p-6.webp",
+  "setwet-course-management": "/img/partners/p-2.webp",
+  "crm-cashtracker-management": "/img/partners/p-3.webp"
 };
 
 type Project = (typeof caseStudies)[number];

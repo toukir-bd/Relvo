@@ -91,9 +91,9 @@ export default function Story() {
             />
             <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-[min(850px,120vw)] -translate-x-1/2 rounded-full bg-primary/15 blur-[100px] sm:h-[420px] sm:blur-[140px]"/>
             <RelvoVisual activeSlide={activeSlide}/>
-            <h4 className="hero-text-neon relative overflow-hidden text-center text-[14px] font-[500] uppercase tracking-[1.8px] sm:text-[16px] lg:text-[23px]">
+            <p className="hero-text-neon relative overflow-hidden text-center text-[14px] font-[500] uppercase tracking-[1.8px] sm:text-[16px] lg:text-[23px]">
               Relvo is built to create a presence that performs
-            </h4>
+            </p>
             <div className="relative mx-auto my-5 min-h-[260px] w-full max-w-[1300px] overflow-hidden px-4 sm:my-7 sm:min-h-[300px] sm:px-8 lg:px-0">
               {slides.map((slide, index) => {
                 const isActive = index === activeSlide;
@@ -108,7 +108,7 @@ export default function Story() {
                     isActive ? "translate-y-0 opacity-100" : isPrevious ? "-translate-y-[100px] opacity-0" : "translate-y-[100px] opacity-0",
                     ].join(" ")}
                   >
-                    <h1 className="mx-auto w-full max-w-[1100px] px-3 break-words text-center font-normal leading-[1.4] tracking-tight text-white/95 sm:text-[55px] lg:max-w-none lg:px-0 lg:text-[73px] xl:text-[66px]">
+                    <h2 className="mx-auto w-full max-w-[1100px] px-3 break-words text-center font-normal leading-[1.4] tracking-tight text-white/95 sm:text-[55px] lg:max-w-none lg:px-0 lg:text-[73px] xl:text-[66px]">
                       {words.map((word, wordIndex) => {
                         const wordProgress = clamp( slideProgress * words.length - wordIndex + 0.55, );
                         return (
@@ -118,7 +118,7 @@ export default function Story() {
                           </span>
                         );
                       })}
-                    </h1>
+                    </h2>
                   </div>
                 );
               })}
