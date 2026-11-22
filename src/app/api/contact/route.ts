@@ -35,7 +35,7 @@ export async function POST(request: Request) {
   try {
     submission = (await request.json()) as ContactSubmission;
   } catch {
-    return NextResponse.json({ error: "Invalid form submission." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid form submission!" }, { status: 400 });
   }
 
   // Quietly accept honeypot submissions so bots don't learn whether they were filtered.
@@ -58,13 +58,13 @@ export async function POST(request: Request) {
     : [];
 
   if (!name || !email || !EMAIL_PATTERN.test(email) || !phone || !project || (!isQuestionInquiry && !services.length)) {
-    return NextResponse.json({ error: "Please check the required fields and try again." }, { status: 400 });
+    return NextResponse.json({ error: "Please check the required fields and try again!" }, { status: 400 });
   }
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("Contact form could not send: RESEND_API_KEY is not configured.");
-    return NextResponse.json({ error: "The contact form is temporarily unavailable. Please email hello@relvodev.com." }, { status: 503 });
+    return NextResponse.json({ error: "The contact form is temporarily unavailable. Please email hello@relvodev.com" }, { status: 503 });
   }
 
   const safeName = escapeHtml(name);
@@ -114,12 +114,12 @@ export async function POST(request: Request) {
     if (!response.ok) {
       const providerError = await response.text();
       console.error("Resend rejected contact form email:", response.status, providerError);
-      return NextResponse.json({ error: "We couldn’t send your message. Please try again or email hello@relvodev.com." }, { status: 502 });
+      return NextResponse.json({ error: "We couldn’t send your message. Please try again or email hello@relvodev.com" }, { status: 502 });
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Contact form email request failed:", error);
-    return NextResponse.json({ error: "We couldn’t send your message. Please try again or email hello@relvodev.com." }, { status: 502 });
+    return NextResponse.json({ error: "We couldn’t send your message. Please try again or email hello@relvodev.com" }, { status: 502 });
   }
 }

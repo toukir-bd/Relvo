@@ -114,9 +114,9 @@ function countrySearchInfo(name: string) {
 }
 
 const fieldClassName =
-  "peer h-14 w-full rounded-xl border border-primary/0 bg-secondary/60 px-4 pb-1 pt-4 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]";
+  "peer h-16 w-full rounded-xl border border-primary/0 bg-secondary/60 px-4 pb-1 pt-4 text-[18px] font-[500] tracking-[1px] text-white/85 outline-none transition-colors placeholder:text-transparent focus:border-primary/40 focus:bg-secondary";
 const floatingLabelClassName =
-  "pointer-events-none absolute left-4 top-2 z-10 text-xs font-medium leading-none tracking-wider text-primary/40 transition-all duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[16px] peer-placeholder-shown:text-primary/40 peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:text-primary";
+  "pointer-events-none absolute left-4 top-2 z-10 text-[14px] font-[600] leading-none tracking-[1px] text-primary/60 transition-all duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[16px] peer-placeholder-shown:text-primary/70 peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-[14px] peer-focus:text-primary/70";
 
 function ContactForm({
   initialSelectedServices = EMPTY_SERVICE_SELECTION,
@@ -384,7 +384,7 @@ function ContactForm({
       : { title: "Please check your details", Icon: ClipboardCheck, iconClass: "text-primary" };
 
   return (
-    <section ref={sectionRef} id="contact" className="relative isolate rounded-[52px] overflow-hidden p-4 text-white sm:p-8 md:p-10 lg:p-15 xl:p-16">
+    <section ref={sectionRef} id="contact" className="relative isolate rounded-[52px] bg-primary/5 overflow-hidden p-4 text-white sm:p-8 md:p-10 lg:p-15 xl:p-16">
       <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-5 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
       <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-5 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-seccondary"
@@ -466,7 +466,7 @@ function ContactForm({
                         }
                       }}
                       placeholder="Search"
-                      className={`h-14 w-full rounded-xl border bg-secondary/60 px-4 text-base font-medium tracking-wide text-white outline-none placeholder:text-white/45 transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/0"} focus:border-primary/70 focus:bg-[#12251a]`}
+                      className={`h-16 w-full rounded-xl border bg-secondary/60 px-4 text-[16px] font-[500] tracking-[.85px] text-white outline-none placeholder:text-white/45 transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/0"} focus:border-primary/50 focus:bg-secondary`}
                     />
                   ) : (
                     <button
@@ -480,13 +480,13 @@ function ContactForm({
                         setCountrySearch("");
                         requestAnimationFrame(() => countrySearchRef.current?.focus());
                       }}
-                      className={`relative flex h-14 w-full cursor-pointer items-center gap-2 rounded-xl border py-3 pl-4 pr-10 text-xs font-medium outline-none transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/0"} bg-secondary/60 text-white focus:border-primary/70 focus:bg-[#12251a]`}
+                      className={`relative flex h-16 w-full cursor-pointer items-center gap-2 rounded-xl border py-3 pl-4 pr-10 text-[18px] font-[500] outline-none transition-colors ${fieldErrors.country ? "border-red-400" : "border-primary/0"} bg-secondary/60 text-white focus:border-primary/40 focus:bg-secondary`}
                     >
-                      <span className={`pointer-events-none absolute left-4 right-10 z-10 truncate text-left leading-none transition-all ${selectedCountryId ? "top-2 text-xs font-medium tracking-wider text-primary/40" : "top-1/2 -translate-y-1/2 text-base font-medium tracking-wide text-primary/40"}`}>
+                      <span className={`pointer-events-none absolute left-4 right-10 z-10 truncate text-left leading-none transition-all ${selectedCountryId ? "top-2 text-[14px] font-[600] tracking-[1px] text-primary/70" : "top-1/2 -translate-y-1/2 text-[16px] font-[600] tracking-[.8px] text-primary/70"}`}>
                         Country Code
                       </span>
                       {selectedCountryId && (
-                        <span className="mt-3 truncate text-left text-base font-medium tracking-wide text-white">
+                        <span className="mt-3 truncate text-left text-[18px] font-[500] tracking-[1px] text-white">
                           {countryOptions.find((country) => country.id === selectedCountryId)?.shortName} ({countryCode})
                         </span>
                       )}
@@ -494,7 +494,7 @@ function ContactForm({
                     </button>
                   )}
                   {countryPickerOpen && (
-                    <div className="absolute left-0 top-full z-40 mt-2 w-[min(22rem,calc(100vw-3rem))] rounded-xl border border-primary/15 bg-[#08100b] p-2 shadow-xl shadow-black/40">
+                    <div className="absolute left-0 top-full z-40 mt-2 w-[min(22rem,calc(100vw-3rem))] rounded-xl border border-primary/15 bg-secondary p-2 shadow-xl shadow-black/40">
                       <div
                         ref={countryListRef}
                         id="country-code-options"
@@ -560,12 +560,12 @@ function ContactForm({
               name="project"
               placeholder=" "
               rows={2}
-              className="peer min-h-28 w-full resize-y rounded-xl border border-primary/0 bg-secondary/60 px-4 pb-3 pt-5 text-base font-medium tracking-wide text-white outline-none transition-colors placeholder:text-transparent focus:border-primary/70 focus:bg-[#12251a]"
+              className="peer min-h-28 w-full resize-y rounded-xl border border-primary/0 bg-secondary/60 px-4 pb-3 pt-5 text-[18px] font-[500] tracking-[1px] text-white/90 outline-none transition-colors placeholder:text-transparent focus:border-primary/40 focus:bg-secondary"
               aria-invalid={Boolean(fieldErrors.project)}
               style={fieldErrors.project ? { borderColor: "#f87171" } : undefined}
               onChange={(event) => clearFieldError("project", event.currentTarget.value.trim().length > 0)}
             />
-              <span className="pointer-events-none absolute left-4 top-2 z-10 text-xs font-medium leading-none tracking-wide text-primary/40 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-[16px] peer-placeholder-shown:text-primary/40 peer-focus:top-2 peer-focus:text-xs peer-focus:text-primary">
+              <span className="pointer-events-none absolute left-4 top-2 z-10 text-[14px] font-[600] leading-none tracking-[1px] text-primary/60 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-[16px] peer-placeholder-shown:text-primary/80 peer-focus:top-2 peer-focus:text-[14px] peer-focus:text-primary/60">
               {isQuestionInquiry ? "Type your question" : "About The Project"}
             </span>
             {fieldErrors.project && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.project}</span>}
@@ -606,21 +606,23 @@ function ContactForm({
           }}
         >
           <div role="alertdialog" aria-modal="true" aria-labelledby="contact-validation-title" aria-describedby="contact-validation-description"
-            className="w-full max-w-md rounded-3xl p-6 text-white shadow-2xl sm:p-8 text-center"
-          >
-            <div className={`mx-auto grid size-20 place-items-center rounded-full border bg-white/[0.03] ${feedbackType === "error" ? "border-red-400/20" : "border-primary/20"}`}>
+            className="relative max-w-full w-[550px] rounded-4xl overflow-hidden p-6 text-white shadow-2xl sm:p-10 text-center">
+            <div className="inset-0 -z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw] bg-secondary"
+              style={{
+                backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 9%) 1px, transparent 1px)",
+                backgroundSize: "3px 3px",
+              }}
+            />
+            <div className={`mx-auto grid size-20 mb-4 place-items-center rounded-full bg-white/[0.03] ${feedbackType === "error" ? "bg-red-400/20" : "bg-primary/20"}`}>
               <feedbackContent.Icon size={42} strokeWidth={1} className={feedbackContent.iconClass} aria-hidden="true" />
             </div>
-            <span id="contact-validation-title" className="mt-5 text-2xl font-semibold tracking-wide sm:text-3xl">{feedbackContent.title}</span>
-            <p id="contact-validation-description" aria-live="assertive" className="mt-3 text-base font-medium leading-relaxed tracking-wide text-white/75 sm:text-lg">
+            <span id="contact-validation-title" className="text-2xl font-[300] tracking-[.85] sm:text-3xl">{feedbackContent.title}</span>
+            <p id="contact-validation-description" aria-live="assertive" className="mt-3 text-base font-[500] leading-relaxed tracking-wide text-white/65 sm:text-lg">
               {validationMessage}
             </p>
-            <button
-              type="button"
-              autoFocus
-              onClick={closeValidation}
-              className="cursor-pointer mt-6 min-h-12 rounded-full bg-primary/70 px-10 text-sm font-semibold text-secondary transition hover:bg-primary/40
-              focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary transition sm:text-base">
+            <button type="button" autoFocus onClick={closeValidation} className="cursor-pointer mt-6 min-h-12 rounded-full bg-primary/70 px-10 text-sm font-semibold
+              text-secondary transition hover:bg-primary/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary 
+              transition sm:text-[19px]">
               Got it
             </button>
           </div>

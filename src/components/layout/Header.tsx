@@ -33,9 +33,9 @@ export default function Header({
           type="button"
           aria-label="Take AI Services"
           onClick={() => openContactModal(["Custom Software Development"], { aiServices: true })}
-          className="header-ai-button group inline-flex cursor-pointer items-center gap-3 rounded-full bg-secondary/70 p-1.5 text-sm font-medium text-white backdrop-blur-[5px] transition hover:text-primary sm:ps-4 lg:ps-7"
+          className="header-ai-button group hidden cursor-pointer items-center gap-3 rounded-full bg-secondary/70 p-1.5 text-sm font-medium text-white backdrop-blur-[5px] transition hover:text-primary sm:inline-flex sm:ps-4 lg:ps-7"
         >
-          <span className="header-ai-label hidden text-base font-normal tracking-wide md:inline lg:text-[18px]">Take AI Services</span>
+          <span className="header-ai-label text-base font-normal tracking-wide md:inline lg:text-[18px]">Take AI Services</span>
           <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/20 transition group-hover:border-primary/35 group-hover:bg-black/35 group-hover:text-primary sm:h-12 sm:w-12">
             <ArrowUpRight className="h-[18px] w-[18px]" strokeWidth={1.5} />
           </span>

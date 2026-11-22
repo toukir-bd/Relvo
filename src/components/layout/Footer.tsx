@@ -46,7 +46,7 @@ export default function Footer() {
               </p>
             </div>
             <nav aria-label="Footer navigation" className="md:w-full md:justify-self-center">
-              <h3 className="mb-4 text-sm font-[700] uppercase tracking-widest text-white sm:text-[20px]">Explore</h3>
+              <span className="mb-4 flex w-full text-sm font-[700] uppercase tracking-widest text-white sm:text-[20px]">Explore</span>
               <ul className="grid grid-cols-2 gap-x-6 gap-y-3 md:flex md:flex-wrap md:justify-start md:gap-x-6">
                 {menus.map((item) => (
                   <li key={item.href}>
@@ -59,7 +59,7 @@ export default function Footer() {
               </ul>
             </nav>
             <div>
-              <h3 className="mb-4 text-sm font-[700] uppercase tracking-widest text-white sm:text-[20px]">Say hello</h3>
+              <span className="mb-4 flex w-full text-sm font-[700] uppercase tracking-widest text-white sm:text-[20px]">Say hello</span>
               <div className="grid gap-3 lg:grid-cols-2">
                 <a href="mailto:hello@relvodev.com" className="group flex w-fit items-center gap-3 text-base font-[400] text-white/70 transition hover:text-primary sm:text-[18px] tracking-wider">
                   <span className="grid size-9 place-items-center rounded-full bg-primary/[0.06] text-white"><Mail size={16} /></span>
