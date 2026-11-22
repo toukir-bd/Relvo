@@ -267,13 +267,6 @@ export const caseStudies: CaseStudy[] = [
     image: "https://cdn.dribbble.com/userupload/18275769/file/528ec1df6d27e85ddd5156cd2b08c7fb.png",
   },
   {
-    slug: "crm-cashtracker-management",
-    title: "CRM- CashTracker Management",
-    description: "CashTracker is a digital tool used by businesses to manage, track, and automate financial transactions, ensuring smooth processing of payments. It allows businesses to handle various payment methods, monitor payment statuses, and maintain financial records. Key features include invoicing, recurring payments, fraud detection, and integration with accounting systems. This software helps streamline payment workflows, reduce errors, improve cash flow, and enhance financial transparency, making it vital for efficient financial operations.",
-    badge: "CashTracker Management System",
-    image: "https://cdn.dribbble.com/userupload/18275769/file/528ec1df6d27e85ddd5156cd2b08c7fb.png",
-  },
-  {
     slug: "adinant-tourplans-places",
     title: "aDinant - Tour Plans & Places",
     description: "aDinant Travel And Tourism Website is a comprehensive and influencing web based Online Booking Engine, designed for Travel Industry especially for travel and tourism agency.",

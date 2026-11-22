@@ -29,7 +29,7 @@ export default function ServicesHeroArtwork() {
         </div>
       </div>
 
-      <div className="absolute right-[2%] top-[37%] w-[78%] rounded-[24px] bg-[#bbff00] p-4 text-[#08120e] shadow-[0_24px_75px_rgba(187,255,0,0.12)] sm:right-[2%] sm:w-[74%] sm:rounded-[28px] sm:p-5">
+      <div className="absolute right-[2%] top-[37%] w-[78%] rounded-[24px] bg-[#bbff00]/60 p-4 text-[#08120e] shadow-[0_24px_75px_rgba(187,255,0,0.12)] sm:right-[2%] sm:w-[74%] sm:rounded-[28px] sm:p-5">
         <StepContent step={steps[1]} />
         <div className="mt-4 flex items-center gap-2 pl-[54px] sm:pl-[62px]">
           <span className="h-1.5 w-1.5 rounded-full bg-[#08120e]" />
