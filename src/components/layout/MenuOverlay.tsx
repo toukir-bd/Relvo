@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { openContactModal } from "@/utils/contactModal";
 interface MenuOverlayProps {
   isOpen: boolean;
   onClose: () => void;
@@ -48,7 +49,7 @@ export default function MenuOverlay({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
-          className="fixed inset-0 bottom-0 z-90 overflow-y-auto bg-secondary/95 text-white backdrop-blur-[10px] ">
+          className="fixed inset-0 z-90 overflow-x-hidden overflow-y-auto overscroll-contain bg-secondary/95 text-white backdrop-blur-[10px]">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-55"
@@ -58,7 +59,7 @@ export default function MenuOverlay({
               backgroundSize: "3px 3px, 100% 100%",
             }}
           />
-          <div className="relative z-10 flex min-h-full w-full flex-col lg:h-full lg:flex-row">
+          <div className="relative z-10 flex min-h-dvh w-full flex-col lg:min-h-0 lg:h-full lg:flex-row">
             <div className="flex w-full shrink-0 flex-col justify-center border-b border-primary/5 px-6 py-24 sm:px-8 lg:w-1/2 lg:border-b-0 lg:border-r lg:px-55 lg:py-10">
               {menus.map((item, index) => (
                 <motion.div key={item.href} initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.08, duration: 0.45,}}>
@@ -75,6 +76,24 @@ export default function MenuOverlay({
                   </Link>
                 </motion.div>
               ))}
+              <motion.button
+                type="button"
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: menus.length * 0.08, duration: 0.45 }}
+                onClick={() => {
+                  onClose();
+                  openContactModal(["Custom Software Development"], { aiServices: true });
+                }}
+                className="group flex min-h-14 w-full cursor-pointer items-center justify-between gap-7 border-b border-primary/8 py-2 text-left sm:py-3 lg:py-6"
+              >
+                <span className="text-2xl uppercase -tracking-[.85px] transition duration-300 group-hover:translate-x-3 group-hover:text-primary sm:text-3xl lg:text-[40px]">
+                  Take AI Services
+                </span>
+                <span aria-hidden="true" className="ml-4 rounded-full border border-primary/15 p-2 text-primary/70 transition duration-300 group-hover:border-primary/40 group-hover:text-primary sm:p-3">
+                  <ArrowUpRight size={22} strokeWidth={1.5} />
+                </span>
+              </motion.button>
             </div>
 
             {/* Right Content */}

@@ -57,6 +57,13 @@ export default function CoreTeam() {
       const slider = sliderRef.current;
       const track = trackRef.current;
       if (!slider || !track) return;
+      if (window.innerWidth < 768) {
+        horizontalDistanceRef.current = 0;
+        holdDistanceRef.current = 0;
+        setSectionHeight("auto");
+        track.style.transform = "translate3d(0, 0, 0)";
+        return;
+      }
 
       const horizontalDistance = Math.max(0, track.scrollWidth - slider.clientWidth);
       const holdDistance = window.innerHeight * 0.2;
@@ -83,8 +90,8 @@ export default function CoreTeam() {
   }, []);
 
   return (
-    <section ref={sectionRef} aria-labelledby="core-team-title" className="relative isolate" style={{ height: sectionHeight }}>
-      <div ref={stickyRef} className="sticky top-0 flex h-svh flex-col justify-center overflow-visible py-8 sm:py-10">
+    <section ref={sectionRef} aria-labelledby="core-team-title" className="core-team-section relative isolate" style={{ height: sectionHeight }}>
+      <div ref={stickyRef} className="relative flex flex-col justify-center overflow-visible py-16 md:sticky md:top-0 md:h-svh md:py-10">
         <div className="mb-6 flex items-end justify-between gap-5 px-5 sm:mb-9 sm:px-8 lg:px-20 xl:px-32">
           <div className="relative">
             <h2 id="core-team-title" className="focus-title text-[clamp(2.5rem,6vw,4.2rem)] leading-[0.98] -tracking-[3px] text-white">
@@ -97,9 +104,9 @@ export default function CoreTeam() {
         </div>
         <div className="overflow-visible ps-5 pe-5 sm:ps-8 sm:pe-8 lg:ps-20 lg:pe-20 xl:ps-32 xl:pe-32">
           <div ref={sliderRef} role="region" aria-label="Relvo team members" tabIndex={0} className="overflow-visible outline-none">
-            <div ref={trackRef} className="flex w-max gap-4 will-change-transform sm:gap-10">
+            <div ref={trackRef} className="flex w-full flex-col gap-4 md:w-max md:flex-row sm:gap-10">
               {team.map(({ name, role }) => (
-                <article key={name} className="relative overflow-hidden group w-[280px] shrink-0 rounded-[28px] p-3 transition-colors duration-300 hover:border-primary/25 sm:w-[300px] sm:rounded-[34px] sm:p-4 xl:w-[350px]">
+                <article key={name} className="group relative w-full shrink-0 overflow-hidden rounded-[28px] p-3 transition-colors duration-300 hover:border-primary/25 md:w-[300px] sm:rounded-[34px] sm:p-4 xl:w-[350px]">
                   <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-1"
                     style={{
                       backgroundImage: "linear-gradient(rgb(187 255 0 / 2.5%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 2.5%) 1px, transparent 1px)",
@@ -107,7 +114,7 @@ export default function CoreTeam() {
                     }}
                   />
                   <div aria-hidden="true" className="pointer-events-none absolute left-0 top-1/3 -z-10 size-[25rem] rounded-full bg-primary/[0.035] blur-[110px]" />
-                  <div aria-label={`Photo placeholder for ${name}`} role="img" className="relative grid h-[350px] place-items-center overflow-hidden rounded-[20px] bg-secondary/80 text-primary/45 sm:rounded-[26px]">
+                  <div aria-label={`Photo placeholder for ${name}`} role="img" className="relative grid h-[clamp(15rem,72vw,21.875rem)] place-items-center overflow-hidden rounded-[20px] bg-secondary/80 text-primary/45 sm:h-[350px] sm:rounded-[26px]">
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-20 [background-size:14px_14px] [background-image:radial-gradient(circle,rgba(187,255,0,0.55)_0.7px,transparent_1px)]" />
                     <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 size-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.08] blur-3xl" />
                     <UserRound size={64} strokeWidth={0.8} className="relative transition-transform duration-500 group-hover:scale-105 sm:size-[76px]" />

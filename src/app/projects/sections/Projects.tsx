@@ -6,23 +6,27 @@ import ZoomablePreview from "@/components/props/ZoomablePreview";
 import { caseStudies } from "@/data/cases";
 
 const partnerLogos: Record<string, string> = {
-  "getfit-gym-center": "/img/partners/p-1.webp",
-  "setwet-course-management": "/img/partners/p-2.webp",
-  "partnerfusion-investment-agency": "/img/partners/p-4.webp",
-  "brightsphere-creative-agency": "/img/partners/p-5.webp",
-  "acedeal-order-payment-management": "/img/partners/p-8.webp",
-  "accountity-accounting-management": "/img/partners/p-9.webp",
-  "safetech-tech-website": "/img/partners/p-10.webp",
-  "musen-ai-powered-solutions": "/img/partners/p-11.webp",
   "solutpro-legal-services-mobile-app": "/img/partners/p-13.webp",
-  "ticketar-online-ticket-management": "/img/partners/p-14.webp",
-  "quintessence-biologics": "/img/partners/p-15.webp",
-  "dmeet-application": "/img/partners/p-16.webp",
-  "solidworks-3dexperience": "/img/partners/p-17.webp",
   "turbienergy-wind-energy-dashboard": "/img/partners/p-18.webp",
-  "middlestump-social-investing": "/img/partners/p-19.webp",
-  "marketrics-marketing-analysis": "/img/partners/p-20.webp",
+  "musen-ai-powered-solutions": "/img/partners/p-11.webp",
+  "dmeet-application": "/img/partners/p-16.webp",
   "salesramp-sales-overview": "/img/partners/p-21.webp",
+  "getfit-gym-center": "/img/partners/p-1.webp",
+  "quintessence-biologics": "/img/partners/p-15.webp",
+  "safetech-tech-website": "/img/partners/p-10.webp",
+  "accountity-accounting-management": "/img/partners/p-9.webp",
+  "partnerfusion-investment-agency": "/img/partners/p-4.webp",
+  "solidworks-3dexperience": "/img/partners/p-17.webp",
+  "marketrics-marketing-analysis": "/img/partners/p-20.webp",
+  "brightsphere-creative-agency": "/img/partners/p-5.webp",
+  "ticketar-online-ticket-management": "/img/partners/p-14.webp",
+  "middlestump-social-investing": "/img/partners/p-19.webp",
+  "acedeal-order-payment-management": "/img/partners/p-8.webp",
+  "visuaai-artificial-intelligence": "/img/partners/p-7.webp",
+  "dupro-project-management": "/img/partners/p-12.webp",
+  "codighost-tools-frameworks": "/img/partners/p-6.webp",
+  "setwet-course-management": "/img/partners/p-2.webp",
+  "crm-cashtracker-management": "/img/partners/p-3.webp"
 };
 
 type Project = (typeof caseStudies)[number];
@@ -37,7 +41,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           src={project.image}
           alt={project.title}
           fill
-          unoptimized
           priority={index < 2}
           sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 680px"
           className="object-cover"
@@ -56,7 +59,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       </div>
       <div className="p-5 sm:p-7 lg:p-8">
         <div className="mb-3 flex min-h-9 items-center justify-between gap-4">
-          <h2 className="text-[clamp(1.4rem,2.5vw,1.5rem)] leading-tight tracking-normal text-white">
+          <h2 className="min-w-0 break-words text-[clamp(1.25rem,2.5vw,1.5rem)] leading-tight tracking-normal text-white">
             {project.title}
           </h2>
           {logo ? (
@@ -65,7 +68,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               alt={`${project.title} logo`}
               width={180}
               height={48}
-              className="h-8 max-w-36 object-contain brightness-0 invert opacity-90"
+              className="h-8 max-w-28 shrink-0 object-contain brightness-0 invert opacity-90 sm:max-w-36"
             />
           ) : (
             <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-white/40">
@@ -87,15 +90,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 export default function Projects() {
   return (
     <>
-      <section id="all-projects" className="p-5 sm:p-28 lg:p-[4vw]">
-        <div className="flex w-full flex-col gap-14 md:hidden">
+      <section id="all-projects" className="px-4 py-10 sm:px-8 sm:py-16 lg:px-[4vw] lg:py-[4vw]">
+        <div className="flex w-full flex-col gap-8 sm:gap-12 md:hidden">
           {caseStudies.map((project, index) => (
             <ProjectCard key={project.slug} project={project} index={index} />
           ))}
         </div>
         <div className="hidden w-full grid-cols-2 items-start gap-x-12 md:grid xl:gap-x-16">
           {[0, 1].map((column) => (
-            <div key={column} className={`flex flex-col gap-14 xl:gap-16 ${column === 1 ? "pt-20" : ""}`}>
+            <div key={column} className={`flex flex-col gap-8 lg:gap-12 xl:gap-16 ${column === 1 ? "pt-12 lg:pt-20" : ""}`}>
               {caseStudies.map((project, index) =>
                 index % 2 === column ? (
                   <ProjectCard key={project.slug} project={project} index={index} />
@@ -105,7 +108,7 @@ export default function Projects() {
           ))}
         </div>
       </section>
-      <section className="p-5 sm:p-20 lg:p-[4vw]">
+      <section className="px-4 py-10 sm:px-8 sm:py-16 lg:px-[4vw] lg:py-[4vw]">
         <div className="w-full relative overflow-hidden rounded-[30px] p-5 sm:rounded-[38px] sm:p-9 lg:p-12">
           <div className="inset-0 z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
             style={{

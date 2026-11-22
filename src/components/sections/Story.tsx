@@ -21,7 +21,6 @@ const slides = [
 ];
 
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
-const SCROLL_VH_PER_SLIDE = 1.3;
 const TEXT_REVEAL_FRACTION = 0.77;
 export default function Story() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -81,8 +80,26 @@ export default function Story() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="discover-us" className="relative w-full" style={{ height: `${(1 + slides.length * SCROLL_VH_PER_SLIDE) * 100}dvh`, }}>
-      <div className="sticky top-0 min-h-screen w-full overflow-hidden">
+    <section ref={sectionRef} id="discover-us" className="story-section relative h-auto w-full md:h-[490dvh]">
+      <div className="mx-auto flex w-full flex-col gap-8 px-4 py-20 md:hidden">
+        <p className="hero-text-neon text-center text-sm font-medium uppercase tracking-[1.5px] sm:text-base">
+          Relvo is built to create a presence that performs
+        </p>
+        {slides.map((slide, index) => (
+          <article key={slide.number} className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.02] px-5 py-8 sm:px-8 sm:py-10">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-30" style={{ backgroundImage: "linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)", backgroundSize: "3px 3px" }} />
+            <div className="relative z-10 -mx-5 -mt-8 mb-2 h-[210px] overflow-hidden sm:-mx-8 sm:-mt-10 sm:h-[230px]">
+              <RelvoVisual activeSlide={index} />
+            </div>
+            <h2 className="focus-title relative z-10 text-[clamp(1.75rem,7vw,2.75rem)] leading-[1.15] tracking-tight text-white/95">{slide.text}</h2>
+          </article>
+        ))}
+        <Link href="/about" className="group relative inline-flex min-h-12 w-fit items-center gap-3 rounded-full bg-secondary/60 p-1.5 pe-6 text-sm font-medium text-white backdrop-blur transition hover:text-primary">
+          <span className="grid size-11 place-items-center rounded-full border border-white/20 text-primary"><ArrowUpRight aria-hidden="true" size={20} /></span>
+          <span>Explore Relvo</span>
+        </Link>
+      </div>
+      <div className="sticky top-0 hidden min-h-screen w-full overflow-hidden md:block">
         <div className="relative flex min-h-screen w-full flex-col justify-center overflow-hidden">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-40"
               style={{backgroundImage: `linear-gradient(rgb(187 255 0 / 7%) 1px, transparent 1px), linear-gradient(90deg, rgb(187 255 0 / 7%) 1px, transparent 1px)`,
@@ -91,9 +108,9 @@ export default function Story() {
             />
             <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-[min(850px,120vw)] -translate-x-1/2 rounded-full bg-primary/15 blur-[100px] sm:h-[420px] sm:blur-[140px]"/>
             <RelvoVisual activeSlide={activeSlide}/>
-            <h4 className="hero-text-neon relative overflow-hidden text-center text-[14px] font-[500] uppercase tracking-[1.8px] sm:text-[16px] lg:text-[23px]">
+            <p className="hero-text-neon relative overflow-hidden text-center text-[14px] font-[500] uppercase tracking-[1.8px] sm:text-[16px] lg:text-[23px]">
               Relvo is built to create a presence that performs
-            </h4>
+            </p>
             <div className="relative mx-auto my-5 min-h-[260px] w-full max-w-[1300px] overflow-hidden px-4 sm:my-7 sm:min-h-[300px] sm:px-8 lg:px-0">
               {slides.map((slide, index) => {
                 const isActive = index === activeSlide;
@@ -108,7 +125,7 @@ export default function Story() {
                     isActive ? "translate-y-0 opacity-100" : isPrevious ? "-translate-y-[100px] opacity-0" : "translate-y-[100px] opacity-0",
                     ].join(" ")}
                   >
-                    <h1 className="mx-auto w-full max-w-[1100px] px-3 break-words text-center font-normal leading-[1.4] tracking-tight text-white/95 sm:text-[55px] lg:max-w-none lg:px-0 lg:text-[73px] xl:text-[66px]">
+                    <h2 className="mx-auto w-full max-w-[1100px] px-3 break-words text-center text-[clamp(1.75rem,6vw,4.5625rem)] font-normal leading-[1.18] tracking-tight text-white/95 lg:max-w-none lg:px-0">
                       {words.map((word, wordIndex) => {
                         const wordProgress = clamp( slideProgress * words.length - wordIndex + 0.55, );
                         return (
@@ -118,12 +135,12 @@ export default function Story() {
                           </span>
                         );
                       })}
-                    </h1>
+                    </h2>
                   </div>
                 );
               })}
             </div>
-            <div className="mb-5 flex items-end justify-center gap-2">
+            <div className="mb-5 hidden items-end justify-center gap-2 md:flex">
               <span key={activeSlide} className="animate-number-fade text-[24px] font-normal leading-none text-primary">
                 {String(activeSlide + 1).padStart(2, "0")}
               </span>

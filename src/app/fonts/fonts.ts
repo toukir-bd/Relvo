@@ -34,10 +34,6 @@ export const urbanist = localFont({
       path: "/Urbanist-800.ttf",
       weight: "800"
     },
-    {
-      path: "/Urbanist-900.ttf",
-      weight: "900"
-    },
   ],
   variable: "--font-urbanist",
   display: "swap",
@@ -53,5 +49,5 @@ export const momo = localFont({
   ],
   variable: "--font-momo",
   display: "swap",
-  preload: false,
+  preload: true,
 });

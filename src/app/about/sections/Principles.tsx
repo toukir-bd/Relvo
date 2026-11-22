@@ -25,18 +25,16 @@ export default function Principles() {
               <article key={number} className="relative overflow-hidden rounded-[56px] bg-primary/2.5 p-6 transition duration-300 sm:p-10">
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10"
                   style={{
-                    backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 3.5%) 1px, transparent 1px)",
+                    backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 5%) 1px, transparent 1px)",
                     backgroundSize: "3px 3px",
                   }}
                 />
                 <div aria-hidden="true" className="pointer-events-none absolute -right-10 -top-20 size-80 rounded-full bg-primary/[0.05] blur-2xl transition" />
-                <div className="relative flex items-start justify-center">
-                  <h4 className="grid size-34 place-items-center rounded-full bg-primary/[0.035] text-white">
-                    <Icon size={56} strokeWidth={.5} />
-                  </h4>
-                </div>
-                <h4 className="relative mt-8 text-xl font-[600] text-center -tracking-[.85px] sm:text-[33px]">{title}</h4>
-                <p className="mt-4 font-[500] text-base text-center tracking-[.85px] leading-normal text-white/85 sm:text-[17px]">{description}</p>
+                <h4 className="grid size-24 place-items-center rounded-full bg-primary/[0.035] text-primary">
+                  <Icon size={36} strokeWidth={1} />
+                </h4>
+                <h4 className="relative mt-10 mb-20 text-xl font-[600] tracking-normal sm:text-[25px]">{title}</h4>
+              <p className="mt-4 font-normal text-base tracking-[.15px] leading-[1.5] text-white/85 md:text-[20px] lg:text-[26px] xl:text-[30px]">{description}</p>
               </article>
             ))}
           </div>

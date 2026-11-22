@@ -1,5 +1,27 @@
 
 //Home-Cases-Responsive
+@media (max-width: 767px) {
+    // Mobile layouts should follow normal document flow without pinned sections.
+    .sticky {
+        position: static !important;
+    }
+
+    .cases-section,
+    .core-team-section {
+        height: auto !important;
+    }
+
+    .cases-inner {
+        position: static !important;
+    }
+}
+
+@media (max-width: 1023px) {
+    .home-services-section {
+        height: auto !important;
+    }
+}
+
 @media (max-height: 520px) {
     .cases-inner {
         padding-top: 2rem;
