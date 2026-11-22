@@ -9,11 +9,11 @@ const studioTopics = [
 
 export default function StudioTopics() {
   return (
-    <section aria-labelledby="studio-topics-title" className="relative isolate overflow-hidden px-5 py-16 sm:px-8 sm:py-24 lg:px-20 lg:py-32 xl:px-32">
+    <section aria-labelledby="studio-topics-title" className="relative isolate overflow-hidden px-4 py-8 sm:px-8 sm:py-24 lg:px-20 lg:py-32 xl:px-32">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-[0.1] [background-size:3px_3px] [background-image:linear-gradient(rgba(187,255,0,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(187,255,0,0.25)_1px,transparent_1px)]" />
       <div aria-hidden="true" className="pointer-events-none absolute left-0 right-0 mx-auto bottom-0 -z-10 size-[min(58vw,720px)] rounded-full bg-primary/[0.05] blur-[100px]"/>
       <header className="mb-5 sm:mb-10">
-        <h4 id="studio-topics-title" className="focus-title text-[clamp(2.5rem,6vw,4.2rem)] leading-[0.98] -tracking-[3px]">
+        <h4 id="studio-topics-title" className="focus-title text-[20px] sm:text-[clamp(2.5rem,6vw,4.2rem)] leading-[0.98] -tracking-[1px] sm:-tracking-[3px]">
           <span className="hero-text-neon uppercase pe-2">principles behind every idea</span>
         </h4>
       </header>

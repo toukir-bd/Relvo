@@ -40,7 +40,7 @@ export default function Marquee({
             key={group}
             ref={group === 0 ? groupRef : undefined}
             aria-hidden="true"
-            className="shrink-0 pe-8 text-[clamp(2rem,10vw,3rem)] font-[300] leading-none tracking-wide md:text-5xl">
+            className="shrink-0 pe-8 text-[23px] sm:text-[clamp(2rem,10vw,3rem)] font-[300] leading-none tracking-wide md:text-5xl">
             {repeatedText}
           </h4>
         ))}
