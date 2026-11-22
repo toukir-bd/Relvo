@@ -5,9 +5,9 @@ import Faq from "@/components/sections/Faq";
 import { SITE_URL } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Projects and Case Studies",
+  title: "Best Projects",
   description:
-    "Explore Relvo Dev's websites, software, apps, and digital product case studies, designed and developed for businesses worldwide.",
+    "Explore Relvo Dev's websites, software, apps, and digital product projects, designed and developed for businesses worldwide.",
   alternates: { canonical: `${SITE_URL}/projects` },
 };
 
