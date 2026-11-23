@@ -692,7 +692,7 @@ export default function ContactModal({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.24, ease: "easeOut" }}
           data-lenis-prevent
-          className="fixed inset-0 z-[120] overflow-x-hidden overflow-y-auto overscroll-contain bg-[#020807]/90 backdrop-blur-[20px]"
+          className="fixed inset-0 z-[10000] overflow-x-hidden overflow-y-auto overscroll-contain bg-[#020807]/90 backdrop-blur-[20px]"
         >
           <div aria-hidden="true" className="pointer-events-none fixed inset-0 opacity-50"
             style={{

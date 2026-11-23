@@ -113,7 +113,7 @@ export default function Story() {
             <p className="hero-text-neon relative overflow-hidden text-center text-[14px] font-[500] uppercase tracking-[1.8px] sm:text-[16px] lg:text-[23px]">
               Relvo is built to create a presence that performs
             </p>
-            <div className="relative mx-auto my-5 min-h-[260px] w-full max-w-[1300px] overflow-hidden px-4 sm:my-7 sm:min-h-[300px] sm:px-8 lg:px-0">
+            <div className="relative mx-auto my-5 min-h-[260px] w-full max-w-[1400px] overflow-hidden px-4 sm:my-7 sm:min-h-[300px] sm:px-8 lg:px-0">
               {slides.map((slide, index) => {
                 const isActive = index === activeSlide;
                 const isPrevious = index < activeSlide;
@@ -127,7 +127,7 @@ export default function Story() {
                     isActive ? "translate-y-0 opacity-100" : isPrevious ? "-translate-y-[100px] opacity-0" : "translate-y-[100px] opacity-0",
                     ].join(" ")}
                   >
-                    <h2 className="mx-auto w-full max-w-[1100px] px-3 break-words text-center text-[clamp(1.75rem,6vw,4.5625rem)] font-normal leading-[1.18] tracking-tight text-white/95 lg:max-w-none lg:px-0">
+                    <h2 className="mx-auto max-w-full px-3 break-words text-center text-[clamp(1.75rem,5.5vw,4.5625rem)] font-normal leading-[1.18] tracking-tight text-white/95 lg:px-0">
                       {words.map((word, wordIndex) => {
                         const wordProgress = clamp( slideProgress * words.length - wordIndex + 0.55, );
                         return (
