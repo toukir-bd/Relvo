@@ -1,6 +1,6 @@
 # Relvo Agency Operating System
 
-The AOS lives under this folder and is served at `/aos`. It has its own page, auth handlers, modules, and UI; it does not use the public site header, footer, cursor, door loader, or smooth-scroll behavior. Removing this folder and the small `/aos` bypasses in `src/components/layout/MainLayout.tsx`, `src/components/props/DoorLoader.tsx`, and `src/components/providers/SmoothScroll.tsx` removes the private app integration.
+The AOS lives under this folder and is served at `/aos`. It has its own page, auth handlers, modules, and UI; it does not use the public site header, footer, cursor, door loader, or smooth-scroll behavior. It is excluded from the sitemap and sends `noindex`/`nofollow` metadata to search engines. No public site navigation links to the route. Removing this folder and the small `/aos` bypasses in `src/components/layout/MainLayout.tsx`, `src/components/props/DoorLoader.tsx`, and `src/components/providers/SmoothScroll.tsx` removes the private app integration.
 
 ## Owner-only sign in
 
