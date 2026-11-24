@@ -5,7 +5,7 @@ import StudioSideSketches from "@/components/props/StudioSideSketches";
 
 export default function AboutHero() {
   return (
-    <section className="relative isolate flex min-h-screen flex-col justify-center items-center overflow-hidden px-5 pb-16 pt-15 sm:px-8 sm:pb-20 sm:pt-20 lg:px-10 xl:px-16">
+    <section className="relative isolate flex min-h-auto sm:min-h-screen flex-col justify-center items-center overflow-hidden px-5 pb-25 pt-35 sm:px-8 sm:pb-20 sm:pt-20 lg:px-10 xl:px-16">
         <div className="inset-0 -z-1 absolute flex w-full flex-col items-center justify-center overflow-hidden px-6 py-8 md:px-[7vw]"
           style={{
             backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 7%) 1px, transparent 1px)",

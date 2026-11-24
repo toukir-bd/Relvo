@@ -384,7 +384,7 @@ function ContactForm({
       : { title: "Please check your details", Icon: ClipboardCheck, iconClass: "text-primary" };
 
   return (
-    <section ref={sectionRef} id="contact" className="relative isolate rounded-[52px] bg-primary/5 overflow-hidden p-4 text-white sm:p-8 md:p-10 lg:p-15 xl:p-16">
+    <section ref={sectionRef} id="contact" className="relative isolate rounded-[30px] sm:rounded-[52px] bg-primary/5 overflow-hidden p-6 text-white sm:p-8 md:p-10 lg:p-15 xl:p-16">
       <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-5 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
       <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-5 -z-10 size-[28rem] rounded-full bg-primary/[0.13] blur-[100px]" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-seccondary"
@@ -396,7 +396,7 @@ function ContactForm({
         <div className="relative">
           <div className="mb-9">
             <div>
-              <h4 id={isModal ? "contact-modal-title" : undefined} className="w-full text-center text-[clamp(3rem,5vw,4.25rem)] font-normal leading-[1.05] tracking-normal text-white">
+              <h4 id={isModal ? "contact-modal-title" : undefined} className="w-full text-center text-[29px] sm:text-[clamp(3rem,5vw,4.25rem)] font-normal leading-[1.05] tracking-normal text-white">
                 {isQuestionInquiry ? "Ask Question" : isAiInquiry ? "Let’s do with AI" : "Let’s Start"}
               </h4>
             </div>
@@ -445,8 +445,8 @@ function ContactForm({
               {fieldErrors.email && <span role="alert" className="mt-1 block text-sm font-semibold tracking-wide text-red-400">{fieldErrors.email}</span>}
             </label>
             <div className="sm:col-span-2">
-              <div className="flex gap-2">
-                <div ref={countryPickerRef} className="relative w-[42%] min-w-28 max-w-44 shrink-0 sm:w-44">
+              <div className="flex flex-col sm:flex-row gap-2">
+                <div ref={countryPickerRef} className="relative w-full sm:w-[42%] min-w-28 max-w-full shrink-0 sm:w-44">
                   {countryPickerOpen ? (
                     <input
                       ref={countrySearchRef}
@@ -720,7 +720,7 @@ export default function ContactModal({
                 type="button"
                 onClick={onClose}
                 aria-label="Close contact form"
-                className="fixed right-4 top-4 z-[130] grid size-11 cursor-pointer place-items-center rounded-full border border-red-200 bg-[#081111]/90 text-white/80 shadow-lg backdrop-blur transition-colors hover:border-red-400 hover:text-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:right-6 sm:top-6 sm:size-[50px]"
+                className="fixed right-6 top-6 sm:right-4 sm:top-4 z-[130] grid size-11 cursor-pointer place-items-center rounded-full border border-red-200 bg-[#081111]/90 text-white/80 shadow-lg backdrop-blur transition-colors hover:border-red-400 hover:text-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:right-6 sm:top-6 sm:size-[50px]"
               >
                 <X size={21} strokeWidth={2} />
               </button>

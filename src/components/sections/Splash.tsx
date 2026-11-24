@@ -61,12 +61,12 @@ export default function Splash() {
                     ].join(" ")}
                   />
                 </div>
-                  <h4 className={["text-center text-[16px] font-[500] sm:font-[400] capitalize tracking-[.8px] sm:tracking-wide transition-all sm:text-base lg:text-[20px]",
+                  <span className={["text-center text-[16px] font-[500] sm:font-[400] capitalize tracking-[.8px] sm:tracking-wide transition-all sm:text-base lg:text-[20px]",
                     active ? "text-secondary group-hover:text-secondary" : "text-white group-hover:text-primary",
                   ].join(" ")}
                 >
                   {label}
-                </h4>
+                </span>
               </Link>
             ))}
           </div>

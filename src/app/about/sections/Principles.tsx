@@ -10,19 +10,19 @@ const principles = [
 
 export default function Principles() {
   return (
-    <section className="px-5 py-16 sm:px-8 sm:py-24 lg:px-10 lg:py-32 xl:px-32">
+    <section className="px-5 py-10 sm:px-8 sm:py-24 lg:px-10 lg:py-32 xl:px-32">
         <div className="w-full">
           <div className="mb-5 flex flex-col items-center justify-center gap-2 sm:mb-10">
-            <h4 id="studio-topics-title" className="focus-title text-[clamp(2.5rem,6vw,4.65rem)] leading-[0.98] -tracking-[3.5px] text-center">
+            <h4 id="studio-topics-title" className="focus-title text-[25px] sm:text-[clamp(2.5rem,6vw,4.65rem)] leading-[0.98] tracking-normal sm:-tracking-[3.5px] text-center">
               <span className="hero-text-neon uppercase">way with intention</span>
             </h4>
-            <p className="text-center text-[clamp(20px,2vw,29px)] font-[300] tracking-wide">
+            <p className="text-center text-[16px] sm:text-[clamp(20px,2vw,29px)] font-[500] sm:font-[300] tracking-wide">
               A few simple beliefs shape how we think, collaborate, and bring each project to life.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {principles.map(({ number, title, description, icon: Icon }) => (
-              <article key={number} className="relative overflow-hidden rounded-[56px] bg-primary/2.5 p-6 transition duration-300 sm:p-10">
+              <article key={number} className="relative overflow-hidden rounded-t-[56px] rounded-b-[26px] sm:rounded-t-[56px] sm:rounded-b-[56px] bg-primary/2.5 p-6 transition duration-300 sm:p-10">
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10"
                   style={{
                     backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 5%) 1px, transparent 1px)",
@@ -33,7 +33,7 @@ export default function Principles() {
                 <h4 className="grid size-24 place-items-center rounded-full bg-primary/[0.035] text-primary">
                   <Icon size={36} strokeWidth={1} />
                 </h4>
-                <h4 className="relative mt-10 mb-20 text-xl font-[600] tracking-normal sm:text-[25px]">{title}</h4>
+                <h4 className="relative mt-3 sm:mt-10 mb-5 sm:mb-20 text-xl font-[600] tracking-normal sm:text-[25px]">{title}</h4>
               <p className="mt-4 font-normal text-base tracking-[.15px] leading-[1.5] text-white/85 md:text-[20px] lg:text-[26px] xl:text-[30px]">{description}</p>
               </article>
             ))}

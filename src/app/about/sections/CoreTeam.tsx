@@ -91,13 +91,13 @@ export default function CoreTeam() {
 
   return (
     <section ref={sectionRef} aria-labelledby="core-team-title" className="core-team-section relative isolate" style={{ height: sectionHeight }}>
-      <div ref={stickyRef} className="relative flex flex-col justify-center overflow-visible py-16 md:sticky md:top-0 md:h-svh md:py-10">
+      <div ref={stickyRef} className="relative flex flex-col justify-center overflow-visible py-10 md:sticky md:top-0 md:h-svh md:py-10">
         <div className="mb-6 flex items-end justify-between gap-5 px-5 sm:mb-9 sm:px-8 lg:px-20 xl:px-32">
           <div className="relative">
-            <h2 id="core-team-title" className="focus-title text-[clamp(2.5rem,6vw,4.2rem)] leading-[0.98] -tracking-[3px] text-white">
+            <h2 id="core-team-title" className="focus-title text-[25px] sm:text-[clamp(2.5rem,6vw,4.2rem)] leading-[0.98] -tracking-[.5px] sm:-tracking-[3px] text-white">
               <span className="hero-text-neon uppercase">behind the products</span>
             </h2>
-            <p className="mt-3 text-sm leading-relaxed tracking-[0.85px] text-white/85 sm:text-[24px] sm:leading-8">
+            <p className="mt-3 text-[16px] font-[500] sm:font-normal leading-relaxed tracking-normal sm:tracking-[0.85px] text-white/85 sm:text-[24px] sm:leading-8">
               Meet the people bringing strategy, design, and technology together at Relvo
             </p>
           </div>

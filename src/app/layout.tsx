@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.ico", sizes: "16x16 32x32 48x48 64x64 128x128 192x192 256x256", type: "image/x-icon" }],
   },
   keywords: [
-    "Relvo", "relvo", "Revlo", "Revol", "Relov", "Realvo", "Relvon", "Reelvo",
+    "Relvo", "relvo", "RELVO", "Revlo", "Revol", "Relov", "Realvo", "Relvon", "Reelvo",
     "RelvoDev", "relvoDev", "relvodev", "Relvodev",
     "Relvo Dev", "relvo Dev", "relvo dev", "Relvo dev",
     "Relvo Design",
@@ -52,14 +52,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Relvo Dev | Web Design, Software Development & Digital Products",
+    title: "Relvo Dev | Web Design, Digital Products & Software Development",
     description: SITE_DESCRIPTION,
     siteName: SITE_NAME,
     url: SITE_URL,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Relvo Dev | Web Design, Software Development & Digital Products",
+    title: "Relvo Dev | Web Design, Digital Products & Software Development",
     description: SITE_DESCRIPTION,
   },
   category: "technology",

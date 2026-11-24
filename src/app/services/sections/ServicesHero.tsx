@@ -10,7 +10,7 @@ const steps = [
 
 export default function ServicesHero() {
   return (
-    <section className="relative isolate min-h-svh overflow-hidden px-5 pb-14 pt-28 text-white sm:px-8 sm:pb-16 sm:pt-32 lg:px-10 lg:py-20 xl:px-16">
+    <section className="relative isolate min-h-svh overflow-hidden px-5 pb-10 pt-25 text-white sm:px-8 sm:pb-16 sm:pt-32 lg:px-10 lg:py-20 xl:px-16">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-45"
         style={{
           backgroundImage: "radial-gradient(circle, rgb(187 255 0 / 7%) 0.65px, transparent 1px)",
@@ -22,10 +22,10 @@ export default function ServicesHero() {
 
       <div className="relative mx-auto grid min-h-[calc(100svh-9rem)] w-full max-w-[1680px] items-center gap-8 lg:grid-cols-[1fr_0.95fr] lg:gap-6 xl:gap-12">
         <div className="relative z-10 py-8 lg:py-12">
-          <h1 className="focus-title text-[clamp(3rem,7.3vw,5.3rem)] leading-[0.99] -tracking-[3px]">
+          <h1 className="focus-title text-[27px] sm:text-[clamp(3rem,7.3vw,5.3rem)] leading-[0.99] tracking-normal ms:-tracking-[3px]">
             services built around <span className="hero-text-neon pe-1">your next move</span>
           </h1>
-          <p className="mt-6 max-w-[640px] text-base leading-relaxed tracking-wide text-white/75 sm:mt-8 sm:text-xl lg:text-[23px]">
+          <p className="mt-6 max-w-[640px] font-[500] sm:font-normal text-base leading-relaxed tracking-wide text-white/75 sm:mt-8 sm:text-xl lg:text-[23px]">
             Choose the support you need today. We bring strategy, design, and development together to help your business move forward.
           </p>
 
@@ -54,7 +54,7 @@ export default function ServicesHero() {
 
 function ServicesHeroArtwork() {
   return (
-    <div aria-label="Relvo's service journey from discovery through design to development" role="img" className="relative mx-auto aspect-[0.94] w-full max-w-[620px] sm:aspect-[1.08] lg:aspect-[0.92]">
+    <div aria-label="Relvo's service journey from discovery through design to development" role="img" className="relative mx-auto aspect-[0.72] w-full max-w-[620px] sm:aspect-[1.08] lg:aspect-[0.92]">
       <div aria-hidden="true" className="absolute left-1/2 top-1/2 aspect-square w-[82%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.08] blur-[90px]" />
       <div aria-hidden="true" className="absolute left-1/2 top-1/2 aspect-square w-[84%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/[0.1]" />
       <div aria-hidden="true" className="absolute left-1/2 top-1/2 aspect-square w-[61%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/[0.12]" />
@@ -65,17 +65,17 @@ function ServicesHeroArtwork() {
         <circle cx="247" cy="447" r="4" fill="#BBFF00" />
       </svg>
 
-      <div className="absolute left-[5%] top-[8%] w-[72%] rounded-[24px] bg-secondary/[0.75] p-4 shadow-[0_16px_50px_rgba(187,255,0,0.035)] backdrop-blur-xl sm:left-[8%] sm:w-[68%] sm:rounded-[28px] sm:p-5">
+      <div className="absolute left-0 top-[4%] w-[84%] rounded-[18px] bg-secondary/[0.82] p-3 shadow-[0_16px_50px_rgba(187,255,0,0.035)] backdrop-blur-xl sm:left-[8%] sm:top-[8%] sm:w-[68%] sm:rounded-[28px] sm:p-5">
         <StepContent step={steps[0]} muted />
         <div className="mt-4 flex items-center gap-2 pl-[54px] sm:pl-[62px]">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           <span className="h-px w-16 bg-primary/45" />
           <span className="h-px w-8 bg-white/15" />
-          <span className="ms-auto text-[9px] uppercase tracking-[0.18em] text-white/35">Brief aligned</span>
+          <span className="ms-auto text-[10px] uppercase tracking-[0.12em] text-white/45 sm:text-[12px] sm:tracking-[0.18em]">Brief aligned</span>
         </div>
       </div>
 
-      <div className="absolute right-[2%] top-[37%] w-[78%] rounded-[24px] bg-[#bbff00]/60 p-4 text-[#08120e] shadow-[0_24px_75px_rgba(187,255,0,0.12)] sm:right-[2%] sm:w-[74%] sm:rounded-[28px] sm:p-5">
+      <div className="absolute right-0 top-[37%] w-[84%] rounded-[18px] bg-[#bbff00]/70 p-3 text-[#08120e] shadow-[0_24px_75px_rgba(187,255,0,0.12)] sm:right-[2%] sm:w-[74%] sm:rounded-[28px] sm:p-5">
         <StepContent step={steps[1]} />
         <div className="mt-4 flex items-center gap-2 pl-[54px] sm:pl-[62px]">
           <span className="h-1.5 w-1.5 rounded-full bg-[#08120e]" />
@@ -89,14 +89,14 @@ function ServicesHeroArtwork() {
         </div>
       </div>
 
-      <div className="absolute bottom-[7%] left-[13%] w-[72%] rounded-[24px] bg-secondary/[0.75] p-4 shadow-[0_16px_50px_rgba(187,255,0,0.035)] backdrop-blur-xl sm:bottom-[8%] sm:left-[15%] sm:w-[68%] sm:rounded-[28px] sm:p-5">
+      <div className="absolute bottom-[4%] left-0 w-[84%] rounded-[18px] bg-secondary/[0.82] p-3 shadow-[0_16px_50px_rgba(187,255,0,0.035)] backdrop-blur-xl sm:bottom-[8%] sm:left-[15%] sm:w-[68%] sm:rounded-[28px] sm:p-5">
         <StepContent step={steps[2]} muted />
         <div className="mt-4 flex items-center gap-1.5 pl-[54px] sm:pl-[62px]">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           <span className="h-px w-12 bg-primary/45" />
           <span className="h-px w-12 bg-primary/25" />
           <span className="h-px w-12 bg-white/15" />
-          <span className="ms-auto text-[12px] uppercase tracking-[0.18em] text-white/50">Ready to launch</span>
+          <span className="ms-auto text-[10px] uppercase tracking-[0.12em] text-white/50 sm:text-[12px] sm:tracking-[0.18em]">Ready to launch</span>
         </div>
       </div>
     </div>
@@ -112,10 +112,10 @@ function StepContent({ step, muted = false }: { step: (typeof steps)[number]; mu
         <Icon size={22} strokeWidth={1.5} />
       </span>
       <div className="min-w-0">
-        <span className={`text-[12px] font-semibold uppercase tracking-[1px] sm:text-[14px] ${muted ? "text-primary/75" : "text-[#08120e]/55"}`}>
+        <span className={`text-[10px] font-semibold uppercase tracking-[0.08em] sm:text-[14px] sm:tracking-[1px] ${muted ? "text-primary/75" : "text-[#08120e]/55"}`}>
           {step.number} / {step.label}
         </span>
-        <div className={`truncate text-base tracking-normal sm:text-[24px] ${muted ? "text-white" : "text-[#08120e]"}`}>
+        <div className={`truncate text-sm tracking-normal sm:text-[24px] ${muted ? "text-white" : "text-[#08120e]"}`}>
           {step.detail}
         </div>
       </div>

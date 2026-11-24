@@ -24,7 +24,7 @@ export default function Services() {
 
   return (
     <>
-      <div className="w-full px-4 pb-16 sm:px-8 sm:pb-20 lg:px-16 lg:py-28 xl:px-32">
+      <div className="w-full px-2 py-10 sm:py-20 lg:px-16 lg:py-28 xl:px-32">
         <div className="space-y-4 sm:space-y-12 lg:space-y-16">
           {serviceOptions.map((service) => {
             const selected = selectedServices.includes(service.name);
@@ -63,7 +63,7 @@ export default function Services() {
                     <p className="mt-4 max-w-2xl text-base font-[400] leading-relaxed tracking-wide text-white/75 sm:mt-5 sm:text-lg lg:text-[23px]">
                       {service.description}
                     </p>
-                    <ul className="mt-10 relative flex flex-wrap gap-2" aria-label={`${service.name} includes`}>
+                    <ul className="mt-10 relative flex flex-wrap gap-1 sm:gap-2" aria-label={`${service.name} includes`}>
                       {service.deliverables.map((deliverable) => (
                         <li key={deliverable} className="rounded-full bg-primary/[0.05] px-3 py-2 text-[13px] font-[500] tracking-wide capitalize text-white/90 sm:px-5 sm:py-2 sm:text-[16px] lg:px-6 lg:text-[17px]">
                           {deliverable}
