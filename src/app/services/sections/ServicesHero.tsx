@@ -39,7 +39,7 @@ export default function ServicesHero() {
             </Link>
           </div>
 
-          <AboutStudioLink targetId="service-ui-ux-product-design" className="ms-1 mt-9 inline-flex w-fit items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-white/45 transition hover:text-primary sm:mt-12 sm:text-[13px]">
+          <AboutStudioLink targetId="service-ui-ux-product-design" className="ms-1 relative z-10 mt-7 sm:mt-9 inline-flex w-fit items-center gap-2 text-[13px] sm:text-[16px] font-[600] uppercase tracking-widest text-primary/60 transition hover:text-primary">
             Discover what we do <ArrowDown size={15} />
           </AboutStudioLink>
         </div>
@@ -75,7 +75,7 @@ function ServicesHeroArtwork() {
         </div>
       </div>
 
-      <div className="absolute right-0 top-[37%] w-[84%] rounded-[18px] bg-[#bbff00]/70 p-3 text-[#08120e] shadow-[0_24px_75px_rgba(187,255,0,0.12)] sm:right-[2%] sm:w-[74%] sm:rounded-[28px] sm:p-5">
+      <div className="absolute right-0 top-[33%] w-[84%] rounded-[18px] bg-[#bbff00]/70 p-3 text-[#08120e] shadow-[0_24px_75px_rgba(187,255,0,0.12)] sm:right-[2%] sm:top-[37%] sm:w-[74%] sm:rounded-[28px] sm:p-5">
         <StepContent step={steps[1]} />
         <div className="mt-4 flex items-center gap-2 pl-[54px] sm:pl-[62px]">
           <span className="h-1.5 w-1.5 rounded-full bg-[#08120e]" />
@@ -89,7 +89,7 @@ function ServicesHeroArtwork() {
         </div>
       </div>
 
-      <div className="absolute bottom-[4%] left-0 w-[84%] rounded-[18px] bg-secondary/[0.82] p-3 shadow-[0_16px_50px_rgba(187,255,0,0.035)] backdrop-blur-xl sm:bottom-[8%] sm:left-[15%] sm:w-[68%] sm:rounded-[28px] sm:p-5">
+      <div className="absolute bottom-[13%] left-0 w-[84%] rounded-[18px] bg-secondary/[0.82] p-3 shadow-[0_16px_50px_rgba(187,255,0,0.035)] backdrop-blur-xl sm:bottom-[8%] sm:left-[15%] sm:w-[68%] sm:rounded-[28px] sm:p-5">
         <StepContent step={steps[2]} muted />
         <div className="mt-4 flex items-center gap-1.5 pl-[54px] sm:pl-[62px]">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />

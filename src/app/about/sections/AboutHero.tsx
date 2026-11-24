@@ -33,7 +33,7 @@ export default function AboutHero() {
             Explore Services <ArrowUpRight size={24} />
           </Link>
         </div>
-        <AboutStudioLink className="relative z-10 mt-8 sm:mt-14 inline-flex w-fit items-center gap-2 text-[14px] font-[600] uppercase tracking-[0.18em] text-primary/60 transition hover:text-primary">
+        <AboutStudioLink className="relative z-10 mt-7 sm:mt-10 inline-flex w-fit items-center gap-2 text-[13px] sm:text-[16px] font-[600] uppercase tracking-widest text-primary/60 transition hover:text-primary">
           Discover Relvo Dev <ArrowDown size={16} />
         </AboutStudioLink>
       </section>

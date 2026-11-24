@@ -35,7 +35,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const logo = partnerLogos[project.slug];
 
   return (
-    <article className="overflow-hidden rounded-[28px] bg-primary/5 sm:rounded-[34px]">
+    <article className="overflow-hidden rounded-[20px] sm:rounded-[28px] bg-primary/5 sm:rounded-[34px]">
       <div className="relative aspect-[1.4/1] overflow-hidden bg-[#0b120e]">
         <Image
           src={project.image}
@@ -58,7 +58,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
       </div>
       <div className="p-5 sm:p-7 lg:p-8">
-        <div className="mb-3 flex min-h-9 items-center justify-between gap-4">
+        <div className="mb-3 flex min-h-9 flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-between gap-4">
           <h2 className="min-w-0 break-words text-[clamp(1.25rem,2.5vw,1.5rem)] leading-tight tracking-normal text-white">
             {project.title}
           </h2>
@@ -76,10 +76,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </span>
           )}
         </div>
-        <p className="font-[400] text-sm leading-[1.5] tracking-wide text-white/60 sm:text-[17px]">
+        <p className="font-[400] text-[15px] font-[500] leading-[1.5] tracking-[.65px] text-white/60 sm:text-[17px]">
           {project.description}
         </p>
-        <Link href="/#contact" className="mt-3 inline-flex items-center gap-2 text-[18px] font-[500] tracking-wide text-primary">
+        <Link href="/#contact" className="relative z-10 mt-7 inline-flex w-fit items-center gap-2 text-[16px] font-[600] uppercase tracking-widest text-primary/60 transition hover:text-primary">
           Discuss a Similar Project <ArrowUpRight size={17} />
         </Link>
       </div>

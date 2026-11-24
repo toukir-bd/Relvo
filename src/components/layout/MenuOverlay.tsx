@@ -12,7 +12,7 @@ interface MenuOverlayProps {
 const menus = [
   {
     title: "Home",
-    href: "/",
+    href: "/#",
     subtitle: "Crafting Digital Experiences",
   },
   {
