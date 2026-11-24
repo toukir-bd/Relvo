@@ -1,6 +1,7 @@
 "use client";
 
 import Lenis from "lenis";
+import { usePathname } from "next/navigation";
 import {
     createContext,
     useContext,
@@ -30,6 +31,7 @@ export default function SmoothScroll({
 }: {
     children: React.ReactNode;
 }) {
+    const pathname = usePathname();
     const lenisRef = useRef<Lenis | null>(null);
 
     const controls = useMemo(
@@ -43,6 +45,7 @@ export default function SmoothScroll({
     );
 
     useEffect(() => {
+        if (pathname === "/aos" || pathname.startsWith("/aos/")) return;
         const lenis = new Lenis({
             // A low lerp gives each wheel gesture a calm, sustained glide.
             lerp: 0.075,
@@ -70,7 +73,7 @@ export default function SmoothScroll({
             lenis.destroy();
             lenisRef.current = null;
         };
-    }, []);
+    }, [pathname]);
 
     return (
         <SmoothScrollContext.Provider value={controls}>

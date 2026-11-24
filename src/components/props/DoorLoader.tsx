@@ -1,14 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type Stage = "logo" | "doors" | "done";
 
 export default function DoorLoader() {
-  const [stage, setStage] = useState<Stage>("logo");
+  const pathname = usePathname();
+  const isAosRoute = pathname === "/aos" || pathname.startsWith("/aos/");
+  const [stage, setStage] = useState<Stage>(isAosRoute ? "done" : "logo");
 
   useEffect(() => {
+    if (isAosRoute) return;
     const openDoors = window.setTimeout(() => {
       setStage("doors");
     }, 400);
@@ -21,10 +25,10 @@ export default function DoorLoader() {
       window.clearTimeout(openDoors);
       window.clearTimeout(finishLoader);
     };
-  }, []);
+  }, [isAosRoute]);
 
   useEffect(() => {
-    if (stage === "done") return;
+    if (stage === "done" || isAosRoute) return;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -32,9 +36,9 @@ export default function DoorLoader() {
     return () => {
       document.body.style.overflow = previousOverflow;
     };
-  }, [stage]);
+  }, [isAosRoute, stage]);
 
-  if (stage === "done") return null;
+  if (stage === "done" || isAosRoute) return null;
 
   return (
     <div className="fixed inset-0 z-[99999] overflow-hidden">

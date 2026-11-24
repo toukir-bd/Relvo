@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -17,6 +18,7 @@ export default function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [menuMounted, setMenuMounted] = useState(false);
@@ -35,7 +37,10 @@ export default function MainLayout({
     }
   }, []);
 
+  const isAosRoute = pathname === "/aos" || pathname.startsWith("/aos/");
+
   useEffect(() => {
+    if (isAosRoute) return;
     if (menuOpen || contactOpen) {
       lenis?.stop();
       document.body.style.overflow = "hidden";
@@ -47,9 +52,10 @@ export default function MainLayout({
       lenis?.start();
       document.body.style.overflow = "";
     };
-  }, [menuOpen, contactOpen, lenis]);
+  }, [isAosRoute, menuOpen, contactOpen, lenis]);
 
   useEffect(() => {
+    if (isAosRoute) return;
     const handleOpenRequest = (event: Event) => {
       const detail = (event as CustomEvent<{ initialSelectedServices?: string[]; aiServices?: boolean; questionInquiry?: boolean }>).detail;
       setSelectedServices(detail?.initialSelectedServices ?? []);
@@ -92,7 +98,9 @@ export default function MainLayout({
       document.removeEventListener("click", handleContactLink, true);
       window.cancelAnimationFrame(initialHashFrame);
     };
-  }, []);
+  }, [isAosRoute]);
+
+  if (isAosRoute) return <>{children}</>;
 
   return (
     <>
