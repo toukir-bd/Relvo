@@ -1,21 +1,32 @@
 # Relvo Agency Operating System
 
-The AOS lives under this folder and is served at `/aos`. It has its own page, auth handlers, modules, and UI; it does not use the public site header, footer, cursor, door loader, or smooth-scroll behavior. It is excluded from the sitemap and sends `noindex`/`nofollow` metadata to search engines. No public site navigation links to the route. Removing this folder and the small `/aos` bypasses in `src/components/layout/MainLayout.tsx`, `src/components/props/DoorLoader.tsx`, and `src/components/providers/SmoothScroll.tsx` removes the private app integration.
+The private workspace is served at `/aos`. It has a separate page and auth handlers, skips the public site chrome, and is excluded from the sitemap with `noindex`/`nofollow` metadata. No public navigation links to it. Removing `src/app/aos` and the `/aos` bypasses in `MainLayout.tsx`, `DoorLoader.tsx`, and `SmoothScroll.tsx` removes the integration.
 
-## Owner-only sign in
+## Owner sign-in
 
-Set these environment variables for local development and the Vercel project:
+Configure these values in local `.env.local` and the Vercel project environment:
 
-- `AOS_ADMIN_USERNAME`: the one owner login name
-- `AOS_ADMIN_PASSWORD`: a unique, long password
-- `AOS_SESSION_SECRET`: a random secret with at least 32 characters
+- `AOS_ADMIN_USERNAME` — the owner login
+- `AOS_ADMIN_PASSWORD` — a unique, long password
+- `AOS_SESSION_SECRET` — a random secret with at least 32 characters
 
-Example local setup: copy the values into the root `.env.local`. Do not commit actual credentials. The session is a 12-hour, HTTP-only, same-site cookie scoped to `/aos`.
+The session uses a 12-hour HTTP-only, same-site cookie scoped to `/aos`. Do not commit real credentials.
 
-## Current data storage
+## Workflow
 
-Records are stored in the signed-in browser's local storage. Use **Download workspace backup** regularly and **Import a workspace backup** to move the data to another browser. This first version does not sync records across devices and is not a replacement for accounting, tax, or contract-signing software. For multi-device access, connect a managed database before relying on it as the agency's only record system.
+1. **Clients** — create a client with contact details and an email address.
+2. **Projects** — add one or more projects for each client.
+3. **Milestones** — add delivery and payment checkpoints to projects.
+4. **Proposals** — edit scope, terms, and the manual commitment. Setting a proposal to **Approved** copies its amount to the linked milestone.
+5. **Invoices** — create an invoice from an approved proposal, review the amount, and email it to the linked client. After receiving payment, mark it paid to record the date and email a receipt.
+6. **Account** — review collected/outstanding amounts and expenses, and import or export a workspace backup.
 
-## Modules
+A project has multiple milestones and changes to **Done** once it has at least one milestone and all its milestones are marked **Done**. Reopening a milestone changes a completed project to **In progress**. Records with linked children cannot be deleted until those children are removed.
 
-Overview, clients, proposals, contracts, projects, delivery/payment milestones, invoices, team costs, operating expenses, and a cash-based profit summary.
+## Invoice email
+
+Email delivery uses Resend with `hello@relvodev.com` as the sender. Set `RESEND_API_KEY` in Vercel and verify the sender domain in Resend. The key stays server-side. Sending fails with a clear message if the key is missing or Resend rejects the request.
+
+## Data storage
+
+Records are currently saved in the signed-in browser's local storage. They do not sync between devices or browser profiles. Use **Download workspace backup** regularly and import it when moving browsers. This is an initial internal workflow tool, not accounting, tax, or contract-signing software; connect a managed database before using it as the agency's only record system.
