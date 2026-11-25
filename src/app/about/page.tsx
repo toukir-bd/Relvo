@@ -6,7 +6,7 @@ import StudioStory from "./sections/StudioStory";
 import Principles from "./sections/Principles";
 import Process from "./sections/Process";
 import StudioMethod from "./sections/StudioMethod";
-import CoreTeam from "./sections/CoreTeam";
+// import CoreTeam from "./sections/CoreTeam";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -23,7 +23,7 @@ export default function AboutPage() {
       <StudioTopics />
       <Principles />
       <Process />
-      <CoreTeam />
+      {/* <CoreTeam /> */}
       <StudioMethod />
     </div>
   );
