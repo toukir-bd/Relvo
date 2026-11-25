@@ -31,12 +31,15 @@ export type Milestone = RecordBase & {
 export type ProposalStatus = "Draft" | "Sent" | "Approved" | "Declined";
 export type Proposal = RecordBase & {
   title: string;
+  clientId: string;
+  version: number;
   projectId: string;
   milestoneId: string;
   amount: string;
   scope: string;
   terms: string;
   validUntil: string;
+  dueDate: string;
   status: ProposalStatus;
 };
 
@@ -73,14 +76,12 @@ export type AosData = {
   expenses: Expense[];
 };
 
-export type WorkflowPage = Exclude<keyof AosData, "expenses"> | "account";
+export type WorkflowPage = "clients" | "proposals" | "invoices" | "account";
 
 export const WORKFLOW_PAGES: { id: WorkflowPage; label: string; description: string }[] = [
   { id: "clients", label: "Clients", description: "Start with the people and companies you work with." },
-  { id: "projects", label: "Projects", description: "Create one or more projects under each client." },
-  { id: "milestones", label: "Milestones", description: "Break each project into delivery and payment checkpoints." },
-  { id: "proposals", label: "Proposals", description: "Set the manual commitment, then approve it to sync the milestone amount." },
-  { id: "invoices", label: "Invoices", description: "Create invoices from approved proposals, send them, then record payment." },
+  { id: "proposals", label: "Proposals", description: "Write, revise, download, and send your proposal to a client." },
+  { id: "invoices", label: "Invoices", description: "Approved proposals create invoices automatically. Track due dates and payments here." },
   { id: "account", label: "Account", description: "Review cash flow, costs, and account backups." },
 ];
 
@@ -118,10 +119,12 @@ export function normalizeAosData(input?: Partial<AosData> | Record<string, unkno
   const proposals = list<Record<string, unknown>>(raw.proposals).map((item, index) => {
     const projectId = String(item.projectId ?? projects.find((project) => project.name === item.project)?.id ?? "");
     return {
-      ...base(item, index), title: String(item.title ?? item.name ?? ""), projectId,
+      ...base(item, index), title: String(item.title ?? item.name ?? ""),
+      clientId: String(item.clientId ?? projects.find((project) => project.id === projectId)?.clientId ?? clients[0]?.id ?? ""),
+      version: Math.max(1, Number(item.version) || 1), projectId,
       milestoneId: String(item.milestoneId ?? milestones.find((milestone) => milestone.projectId === projectId && milestone.name === item.milestone)?.id ?? ""),
       amount: String(item.amount ?? item.value ?? "0"), scope: String(item.scope ?? item.description ?? ""),
-      terms: String(item.terms ?? ""), validUntil: String(item.validUntil ?? ""),
+      terms: String(item.terms ?? ""), validUntil: String(item.validUntil ?? ""), dueDate: String(item.dueDate ?? ""),
       status: (item.status === "Accepted" ? "Approved" : String(item.status ?? "Draft")) as ProposalStatus,
     };
   });

@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 import {
-  ArrowDownToLine, ArrowRight, ArrowUpRight, BriefcaseBusiness, Check, CircleDollarSign,
-  FileText, HandCoins, LogOut, Mail, Menu, Plus, ReceiptText, Trash2, Users, X,
+  ArrowDownToLine, ArrowRight, ArrowUpRight, Check, CircleDollarSign, Download,
+  FileText, LogOut, Mail, Menu, Plus, ReceiptText, Trash2, Users, X,
 } from "lucide-react";
 import {
   emptyAosData, normalizeAosData, WORKFLOW_PAGES,
@@ -17,8 +17,6 @@ type EditorState = { kind: EditorKind; id?: string; prefill?: Record<string, str
 
 const pageIcons = {
   clients: Users,
-  projects: BriefcaseBusiness,
-  milestones: HandCoins,
   proposals: FileText,
   invoices: ReceiptText,
   account: CircleDollarSign,
@@ -43,6 +41,69 @@ function recordBase(existing?: { id: string; createdAt: string }) {
 
 function total(rows: { amount: string }[]) {
   return rows.reduce((sum, row) => sum + (Number(row.amount) || 0), 0);
+}
+
+function proposalPdfLines(proposal: Proposal, client?: Client) {
+  return ["RELVO · SERVICE PROPOSAL", "", `Prepared for: ${client?.name ?? "Client"}`, `Contact: ${client?.contact || "—"}`, `Proposal: ${proposal.title}`, `Version: ${proposal.version || 1}`, `Commitment: ${currency.format(Number(proposal.amount) || 0)}`, `Invoice due date: ${proposal.dueDate || "—"}`, `Valid until: ${proposal.validUntil || "—"}`, "", "SCOPE", proposal.scope || "No scope added.", "", "PAYMENT TERMS", proposal.terms || "As agreed with the client.", "", "To accept, reply to this email. Thank you for considering Relvo."];
+}
+
+function invoicePdfLines(invoice: Invoice, client?: Client, proposalTitle?: string) {
+  return ["RELVO · INVOICE", "", `Invoice: ${invoice.number}`, `Bill to: ${client?.name ?? "Client"}`, `Contact: ${client?.contact || "—"}`, `Proposal: ${proposalTitle || "Service"}`, `Issued: ${invoice.issueDate || "—"}`, `Due: ${invoice.dueDate || "—"}`, `Status: ${invoice.status}`, "", `AMOUNT DUE: ${currency.format(Number(invoice.amount) || 0)}`, "", "Please contact hello@relvodev.com if you have any questions about this invoice."];
+}
+
+function buildPdf(contentLines: string[]) {
+  const normalized = contentLines.flatMap((line) => wrapPdfLine(line));
+  const pages: string[][] = [];
+  for (let index = 0; index < normalized.length; index += 45) pages.push(normalized.slice(index, index + 45));
+  const safe = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\x20-\x7E]/g, "?").replace(/([\\()])/g, "\\$1");
+  const objects: string[] = ["", "", "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"];
+  const pageRefs: number[] = [];
+  pages.forEach((lines) => {
+    const pageObject = objects.length + 1;
+    const streamObject = pageObject + 1;
+    pageRefs.push(pageObject);
+    const commands = ["BT", "/F1 11 Tf", "56 790 Td", "16 TL", ...lines.flatMap((line, index) => [index ? "T*" : "", `(${safe(line)}) Tj`]).filter(Boolean), "ET"].join("\n");
+    objects.push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 842] /Resources << /Font << /F1 3 0 R >> >> /Contents ${streamObject} 0 R >>`);
+    objects.push(`<< /Length ${commands.length} >>\nstream\n${commands}\nendstream`);
+  });
+  objects[0] = "<< /Type /Catalog /Pages 2 0 R >>";
+  objects[1] = `<< /Type /Pages /Kids [${pageRefs.map((ref) => `${ref} 0 R`).join(" ")}] /Count ${pageRefs.length} >>`;
+  let pdf = "%PDF-1.4\n";
+  const offsets = [0];
+  objects.forEach((object, index) => { offsets.push(pdf.length); pdf += `${index + 1} 0 obj\n${object}\nendobj\n`; });
+  const xref = pdf.length;
+  pdf += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+  offsets.slice(1).forEach((offset) => { pdf += `${String(offset).padStart(10, "0")} 00000 n \n`; });
+  pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
+  return new Blob([pdf], { type: "application/pdf" });
+}
+
+function downloadPdf(filename: string, contentLines: string[]) {
+  const url = URL.createObjectURL(buildPdf(contentLines));
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = `${filename.replace(/[^a-z0-9-_]+/gi, "-").replace(/^-|-$/g, "") || "relvo-document"}.pdf`;
+  anchor.click();
+  URL.revokeObjectURL(url);
+}
+
+async function makePdfAttachment(filename: string, contentLines: string[]) {
+  const bytes = new Uint8Array(await buildPdf(contentLines).arrayBuffer());
+  let binary = "";
+  for (let start = 0; start < bytes.length; start += 0x8000) binary += String.fromCharCode(...bytes.subarray(start, start + 0x8000));
+  return { filename: `${filename}.pdf`, content: btoa(binary) };
+}
+
+function wrapPdfLine(line: string) {
+  const words = line.split(/\s+/);
+  const wrapped: string[] = [];
+  let current = "";
+  for (const word of words) {
+    if ((current + " " + word).trim().length > 88 && current) { wrapped.push(current); current = word; }
+    else current = (current + " " + word).trim();
+  }
+  wrapped.push(current);
+  return wrapped;
 }
 
 function today() {
@@ -96,15 +157,10 @@ export default function AosApp() {
   }, [authenticated, dataReady, data]);
 
   const activeStep = WORKFLOW_PAGES.findIndex((page) => page.id === activePage);
-  const approvedProposals = data.proposals.filter((proposal) => proposal.status === "Approved");
-  const invoicedProposalIds = new Set(data.invoices.map((invoice) => invoice.proposalId));
-  const availableForInvoice = approvedProposals.filter((proposal) => !invoicedProposalIds.has(proposal.id));
   const collected = total(data.invoices.filter((invoice) => invoice.status === "Paid"));
   const outstanding = total(data.invoices.filter((invoice) => invoice.status !== "Paid"));
   const totalCosts = total(data.expenses);
-  const currentProject = (id: string) => data.projects.find((project) => project.id === id);
   const currentClient = (id: string) => data.clients.find((client) => client.id === id);
-  const currentMilestone = (id: string) => data.milestones.find((milestone) => milestone.id === id);
 
   const filteredRecords = useMemo(() => {
     const key = query.trim().toLowerCase();
@@ -175,11 +231,11 @@ export default function AosApp() {
         updated.milestones = upsert(current.milestones, milestone);
         updated.projects = syncProjectStatus(updated.projects, updated.milestones, prior?.projectId, milestone.projectId);
       } else if (kind === "proposals") {
-        const project = current.projects.find((item) => item.id === values.projectId);
-        const proposal: Proposal = { ...base, title: values.title.trim(), projectId: values.projectId, milestoneId: values.milestoneId, amount: values.amount || "0", scope: values.scope.trim(), terms: values.terms.trim(), validUntil: values.validUntil, status: (values.status || "Draft") as Proposal["status"] };
+        const prior = existing as Proposal | undefined;
+        const revise = prior?.status === "Sent";
+        const proposal: Proposal = { ...base, title: values.title.trim(), clientId: values.clientId, version: (prior?.version ?? 0) + (revise ? 1 : 0), projectId: "", milestoneId: "", amount: values.amount || "0", scope: values.scope.trim(), terms: values.terms.trim(), validUntil: values.validUntil, dueDate: values.dueDate, status: revise ? "Draft" : (values.status || "Draft") as Proposal["status"] };
         updated.proposals = upsert(current.proposals, proposal);
-        if (proposal.status === "Approved") updated.milestones = current.milestones.map((item) => item.id === proposal.milestoneId ? { ...item, amount: proposal.amount } : item);
-        if (project) updated.projects = syncProjectStatus(updated.projects, updated.milestones, project.id);
+        if (proposal.status === "Approved") updated.invoices = ensureInvoice(updated.invoices, proposal, current.invoices.length);
       } else if (kind === "invoices") {
         const proposal = current.proposals.find((item) => item.id === values.proposalId);
         const project = proposal ? current.projects.find((item) => item.id === proposal.projectId) : undefined;
@@ -200,16 +256,16 @@ export default function AosApp() {
       return updated;
     });
     setEditor(null);
-    setNotice(kind === "proposals" ? "Proposal saved. Approving it will sync its amount to the milestone." : `${kind === "expenses" ? "Expense" : singular[kind]} saved.`);
+    setNotice(kind === "proposals" ? "Proposal saved. Download it as a PDF or email this version to your client." : `${kind === "expenses" ? "Expense" : singular[kind]} saved.`);
   }
 
   function approveProposal(proposal: Proposal) {
     setData((current) => ({
       ...current,
       proposals: current.proposals.map((item) => item.id === proposal.id ? { ...item, status: "Approved" } : item),
-      milestones: current.milestones.map((item) => item.id === proposal.milestoneId ? { ...item, amount: proposal.amount } : item),
+      invoices: ensureInvoice(current.invoices, proposal, current.invoices.length),
     }));
-    setNotice(`Approved proposal; ${currency.format(Number(proposal.amount) || 0)} is now the milestone amount.`);
+    setNotice(`Approved. Invoice ${`REL-${new Date().getFullYear()}-${String(data.invoices.length + 1).padStart(4, "0")}`} is ready to send.`);
   }
 
   function updateProposalStatus(proposal: Proposal, status: Proposal["status"]) {
@@ -217,17 +273,27 @@ export default function AosApp() {
     setData((current) => ({ ...current, proposals: current.proposals.map((item) => item.id === proposal.id ? { ...item, status } : item) }));
   }
 
-  function updateMilestoneStatus(milestone: Milestone, deliveryStatus: Milestone["deliveryStatus"]) {
-    setData((current) => {
-      const milestones = current.milestones.map((item) => item.id === milestone.id ? { ...item, deliveryStatus } : item);
-      return { ...current, milestones, projects: syncProjectStatus(current.projects, milestones, milestone.projectId) };
-    });
+  async function sendProposalEmail(proposal: Proposal) {
+    const client = currentClient(proposal.clientId);
+    if (!client?.email) { setNotice("Add an email address to the client before sending this proposal."); return; }
+    setEmailBusyId(proposal.id);
+    setNotice("");
+    try {
+      const response = await fetch("/aos/api/invoices/email", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "proposal", recipient: client.email, clientName: client.contact || client.name, title: proposal.title, version: proposal.version, amount: proposal.amount, scope: proposal.scope, terms: proposal.terms, validUntil: proposal.validUntil, dueDate: proposal.dueDate, attachment: await makePdfAttachment(`Proposal-${proposal.title}`, proposalPdfLines(proposal, client)) }),
+      });
+      const result = await response.json() as { error?: string };
+      if (!response.ok) throw new Error(result.error ?? "Proposal email could not be sent.");
+      setData((current) => ({ ...current, proposals: current.proposals.map((item) => item.id === proposal.id ? { ...item, status: "Sent" } : item) }));
+      setNotice(`Proposal emailed to ${client.email}.`);
+    } catch (error) { setNotice(error instanceof Error ? error.message : "Proposal email could not be sent."); }
+    finally { setEmailBusyId(""); }
   }
 
   async function sendInvoiceEmail(invoice: Invoice, action: "invoice" | "receipt") {
     const client = currentClient(invoice.clientId);
-    const project = currentProject(invoice.projectId);
-    const milestone = currentMilestone(invoice.milestoneId);
+    const proposal = data.proposals.find((item) => item.id === invoice.proposalId);
     if (!client?.email) {
       setNotice("Add an email address to this client before sending the invoice or receipt.");
       return;
@@ -235,13 +301,15 @@ export default function AosApp() {
     setEmailBusyId(invoice.id);
     setNotice("");
     try {
+      const attachment = action === "invoice" ? await makePdfAttachment(`Invoice-${invoice.number}`, invoicePdfLines(invoice, client, proposal?.title)) : undefined;
       const response = await fetch("/aos/api/invoices/email", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           action, recipient: client.email, clientName: client.contact || client.name,
           invoiceNumber: invoice.number, amount: invoice.amount,
           issueDate: invoice.issueDate, dueDate: invoice.dueDate, paidDate: invoice.paidDate || today(),
-          projectName: project?.name ?? "Project", milestoneName: milestone?.name ?? "Milestone",
+          projectName: proposal?.title ?? "Service", milestoneName: "Agreed scope",
+          attachment,
         }),
       });
       const result = await response.json() as { error?: string };
@@ -269,7 +337,7 @@ export default function AosApp() {
   }
 
   function deleteRecord(kind: EditorKind, id: string) {
-    const protectedByChild = kind === "clients" ? data.projects.some((item) => item.clientId === id)
+    const protectedByChild = kind === "clients" ? data.projects.some((item) => item.clientId === id) || data.proposals.some((item) => item.clientId === id)
       : kind === "projects" ? data.milestones.some((item) => item.projectId === id)
         : kind === "milestones" ? data.proposals.some((item) => item.milestoneId === id) || data.invoices.some((item) => item.milestoneId === id)
           : kind === "proposals" ? data.invoices.some((item) => item.proposalId === id)
@@ -311,8 +379,6 @@ export default function AosApp() {
   if (!authenticated) return <Login configured={configured} username={username} password={password} error={loginError} busy={loginBusy} setUsername={setUsername} setPassword={setPassword} onSubmit={signIn} />;
   if (!dataReady) return <div className="grid min-h-screen place-items-center bg-[#07100d] text-sm text-white/60">Loading workspace…</div>;
 
-  const projectsByClient = (clientId: string) => data.projects.filter((project) => project.clientId === clientId);
-  const milestonesByProject = (projectId: string) => data.milestones.filter((milestone) => milestone.projectId === projectId);
   const filtered = filteredRecords;
 
   return (
@@ -338,7 +404,7 @@ export default function AosApp() {
         <div className="min-w-0 flex-1">
           <header className="sticky top-0 z-30 flex h-[72px] items-center justify-between border-b border-white/[.08] bg-[#07100d]/90 px-4 backdrop-blur-xl sm:px-7 lg:px-10">
             <div className="flex min-w-0 items-center gap-3"><button className="grid size-10 shrink-0 place-items-center rounded-xl border border-white/10 text-white/75 lg:hidden" aria-label="Open navigation" onClick={() => setMobileNavOpen(true)}><Menu size={19} /></button><div className="min-w-0"><p className="truncate text-sm font-medium sm:text-base">{WORKFLOW_PAGES.find((page) => page.id === activePage)?.label}</p><p className="mt-1 hidden truncate text-[11px] text-white/40 sm:block">Relvo · Private workspace</p></div></div>
-            <div className="flex shrink-0 items-center gap-2 sm:gap-3"><label className="hidden h-10 w-48 items-center gap-2 rounded-xl border border-white/10 px-3 text-white/35 md:flex"><Users size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search this workspace" className="w-full bg-transparent text-xs text-white outline-none placeholder:text-white/35" /></label>{activePage !== "account" && <button onClick={() => openEditor(activePage as EditorKind)} disabled={!canCreate(activePage, data, availableForInvoice)} className="flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-[#bbff00] px-3 text-xs font-semibold text-[#07100d] hover:bg-[#d2ff59] disabled:cursor-not-allowed disabled:opacity-40 sm:px-4 sm:text-sm"><Plus size={17} /><span className="hidden sm:inline">Add {singular[activePage as EditorKind]}</span><span className="sm:hidden">Add</span></button>}</div>
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3"><label className="hidden h-10 w-48 items-center gap-2 rounded-xl border border-white/10 px-3 text-white/35 md:flex"><Users size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search this workspace" className="w-full bg-transparent text-xs text-white outline-none placeholder:text-white/35" /></label>{(activePage === "clients" || activePage === "proposals") && <button onClick={() => openEditor(activePage)} disabled={!canCreate(activePage, data)} className="flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-[#bbff00] px-3 text-xs font-semibold text-[#07100d] hover:bg-[#d2ff59] disabled:cursor-not-allowed disabled:opacity-40 sm:px-4 sm:text-sm"><Plus size={17} /><span className="hidden sm:inline">Add {singular[activePage]}</span><span className="sm:hidden">Add</span></button>}</div>
           </header>
 
           <div className="mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-7 sm:py-8 lg:px-10 lg:py-10">
@@ -347,11 +413,9 @@ export default function AosApp() {
             <WorkflowStepper activePage={activePage} onSelect={(page) => setActivePage(page)} />
             {notice && <div role="status" className="mb-5 flex items-start justify-between gap-3 rounded-2xl border border-[#bbff00]/15 bg-[#bbff00]/[.04] px-4 py-3 text-sm text-white/75"><span>{notice}</span><button onClick={() => setNotice("")} aria-label="Dismiss notice" className="cursor-pointer text-white/45 hover:text-white"><X size={16} /></button></div>}
 
-            {activePage === "clients" && <ClientsPage clients={filtered?.clients ?? data.clients} projectsByClient={projectsByClient} onAddProject={(clientId) => { setActivePage("projects"); openEditor("projects", undefined, { clientId }); }} onEdit={(id) => openEditor("clients", id)} onDelete={(id) => deleteRecord("clients", id)} onNext={() => setActivePage("projects")} />}
-            {activePage === "projects" && <ProjectsPage data={data} rows={filtered?.projects ?? data.projects} clientName={(id) => currentClient(id)?.name ?? "Unknown client"} milestonesByProject={milestonesByProject} onAddProject={() => openEditor("projects")} onAddMilestone={(projectId) => { setActivePage("milestones"); openEditor("milestones", undefined, { projectId }); }} onEdit={(id) => openEditor("projects", id)} onDelete={(id) => deleteRecord("projects", id)} onNext={() => setActivePage("milestones")} />}
-            {activePage === "milestones" && <MilestonesPage data={data} rows={filtered?.milestones ?? data.milestones} projectName={(id) => currentProject(id)?.name ?? "Unknown project"} clientName={(milestone) => currentClient(currentProject(milestone.projectId)?.clientId ?? "")?.name ?? "Unknown client"} proposalFor={(id) => data.proposals.find((proposal) => proposal.milestoneId === id)} onAdd={() => openEditor("milestones")} onAddProposal={(milestone) => { setActivePage("proposals"); openEditor("proposals", undefined, { projectId: milestone.projectId, milestoneId: milestone.id }); }} onEdit={(id) => openEditor("milestones", id)} onDelete={(id) => deleteRecord("milestones", id)} onStatus={updateMilestoneStatus} />}
-            {activePage === "proposals" && <ProposalsPage data={data} rows={filtered?.proposals ?? data.proposals} clientName={(proposal) => currentClient(currentProject(proposal.projectId)?.clientId ?? "")?.name ?? "Unknown client"} projectName={(id) => currentProject(id)?.name ?? "Unknown project"} milestoneName={(id) => currentMilestone(id)?.name ?? "Unknown milestone"} invoiceFor={(id) => data.invoices.find((invoice) => invoice.proposalId === id)} onAdd={() => openEditor("proposals")} onEdit={(id) => openEditor("proposals", id)} onDelete={(id) => deleteRecord("proposals", id)} onStatus={updateProposalStatus} onInvoice={(proposal) => { setActivePage("invoices"); openEditor("invoices", undefined, { proposalId: proposal.id, amount: proposal.amount }); }} />}
-            {activePage === "invoices" && <InvoicesPage rows={filtered?.invoices ?? data.invoices} clientName={(id) => currentClient(id)?.name ?? "Unknown client"} clientEmail={(id) => currentClient(id)?.email ?? ""} projectName={(id) => currentProject(id)?.name ?? "Unknown project"} busyId={emailBusyId} canCreate={availableForInvoice.length > 0} onCreate={() => { const proposal = availableForInvoice[0]; if (proposal) openEditor("invoices", undefined, { proposalId: proposal.id, amount: proposal.amount }); }} onSend={(invoice, action) => void sendInvoiceEmail(invoice, action)} onMarkPaid={markInvoicePaid} onDelete={(id) => deleteRecord("invoices", id)} />}
+            {activePage === "clients" && <ClientsPage clients={filtered?.clients ?? data.clients} onAddProposal={(clientId) => { setActivePage("proposals"); openEditor("proposals", undefined, { clientId }); }} onEdit={(id) => openEditor("clients", id)} onDelete={(id) => deleteRecord("clients", id)} onNext={() => setActivePage("proposals")} />}
+            {activePage === "proposals" && <ProposalsPage data={data} rows={filtered?.proposals ?? data.proposals} clientName={(proposal) => currentClient(proposal.clientId)?.name ?? "Unknown client"} busyId={emailBusyId} invoiceFor={(id) => data.invoices.find((invoice) => invoice.proposalId === id)} onSend={(proposal) => void sendProposalEmail(proposal)} onDownload={(proposal) => downloadPdf(`Proposal-${proposal.title}`, proposalPdfLines(proposal, currentClient(proposal.clientId)))} onAdd={() => openEditor("proposals")} onEdit={(id) => openEditor("proposals", id)} onDelete={(id) => deleteRecord("proposals", id)} onStatus={updateProposalStatus} onInvoicePage={() => setActivePage("invoices")} />}
+            {activePage === "invoices" && <InvoicesPage rows={filtered?.invoices ?? data.invoices} clientName={(id) => currentClient(id)?.name ?? "Unknown client"} proposalTitle={(id) => data.proposals.find((proposal) => proposal.id === id)?.title ?? "Service"} busyId={emailBusyId} onSend={(invoice, action) => void sendInvoiceEmail(invoice, action)} onMarkPaid={markInvoicePaid} onDelete={(id) => deleteRecord("invoices", id)} onDownload={(invoice) => downloadPdf(`Invoice-${invoice.number}`, invoicePdfLines(invoice, currentClient(invoice.clientId), data.proposals.find((proposal) => proposal.id === invoice.proposalId)?.title))} />}
             {activePage === "account" && <AccountPage data={data} collected={collected} outstanding={outstanding} costs={totalCosts} onAddExpense={() => openEditor("expenses")} onDownload={downloadBackup} onImport={importBackup} />}
           </div>
         </div>
@@ -363,7 +427,13 @@ export default function AosApp() {
 }
 
 const singular: Record<EditorKind, string> = { clients: "Client", projects: "Project", milestones: "Milestone", proposals: "Proposal", invoices: "Invoice", expenses: "Expense" };
-const pageTitle: Record<WorkflowPage, string> = { clients: "Build your client list", projects: "Projects by client", milestones: "Delivery milestones", proposals: "Proposals & approvals", invoices: "Invoices & payments", account: "Account & cash flow" };
+const pageTitle: Record<WorkflowPage, string> = { clients: "Your clients", proposals: "Proposals & revisions", invoices: "Invoices & payments", account: "Account & cash flow" };
+
+function ensureInvoice(invoices: Invoice[], proposal: Proposal, index: number): Invoice[] {
+  if (invoices.some((invoice) => invoice.proposalId === proposal.id)) return invoices;
+  const issueDate = today();
+  return [{ id: makeId(), createdAt: new Date().toISOString(), number: `REL-${new Date().getFullYear()}-${String(index + 1).padStart(4, "0")}`, proposalId: proposal.id, projectId: "", milestoneId: "", clientId: proposal.clientId, amount: proposal.amount, issueDate, dueDate: proposal.dueDate || plusDays(14), status: "Draft", paidDate: "", invoiceSentAt: "", receiptSentAt: "" }, ...invoices];
+}
 
 function upsert<T extends { id: string }>(rows: T[], item: T): T[] {
   return rows.some((row) => row.id === item.id) ? rows.map((row) => row.id === item.id ? item : row) : [item, ...rows];
@@ -379,12 +449,9 @@ function syncProjectStatus(projects: Project[], milestones: Milestone[], ...proj
   });
 }
 
-function canCreate(page: WorkflowPage, data: AosData, invoiceChoices: Proposal[]) {
-  if (page === "projects") return data.clients.length > 0;
-  if (page === "milestones") return data.projects.length > 0;
-  if (page === "proposals") return data.milestones.length > 0;
-  if (page === "invoices") return invoiceChoices.length > 0;
-  return page !== "account";
+function canCreate(page: WorkflowPage, data: AosData) {
+  if (page === "proposals") return data.clients.length > 0;
+  return page === "clients";
 }
 
 function WorkflowStepper({ activePage, onSelect }: { activePage: WorkflowPage; onSelect: (page: WorkflowPage) => void }) {
@@ -422,37 +489,22 @@ function Tag({ children, tone = "default" }: { children: ReactNode; tone?: "defa
   return <span className={`inline-flex rounded-full px-2.5 py-1 text-[10px] font-medium ${toneClass}`}>{children}</span>;
 }
 
-function ClientsPage({ clients, projectsByClient, onAddProject, onEdit, onDelete, onNext }: { clients: Client[]; projectsByClient: (id: string) => Project[]; onAddProject: (id: string) => void; onEdit: (id: string) => void; onDelete: (id: string) => void; onNext: () => void }) {
-  return <Panel title="Clients" subtitle="Each client can have multiple projects." action={<AddButton onClick={() => onEdit("")}>Add client</AddButton>}>
-    {clients.length ? <div className="grid gap-3 lg:grid-cols-2">{clients.map((client) => <article key={client.id} className="rounded-2xl border border-white/[.07] bg-white/[.02] p-4 sm:p-5"><div className="flex items-start justify-between gap-3"><div className="min-w-0"><h3 className="truncate font-medium">{client.name}</h3><p className="mt-1 text-xs text-white/45">{client.contact || "Contact not added"}{client.country ? ` · ${client.country}` : ""}</p></div><Tag>{projectsByClient(client.id).length} {projectsByClient(client.id).length === 1 ? "project" : "projects"}</Tag></div><div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/55">{client.email && <span className="inline-flex items-center gap-1.5"><Mail size={13} />{client.email}</span>}{client.phone && <span>{client.phone}</span>}</div><RowActions><GhostAction onClick={() => onAddProject(client.id)}><Plus size={14} />New project</GhostAction><GhostAction onClick={() => onEdit(client.id)}>Edit</GhostAction><GhostAction onClick={() => onDelete(client.id)}><Trash2 size={13} />Delete</GhostAction></RowActions></article>)}</div> : <EmptyState title="Start with your first client" detail="Add a client first. You can then create as many projects as you need for that client." action={<AddButton onClick={() => onEdit("")}>Add first client</AddButton>} />}
-    {clients.length > 0 && <NextStep text="Next step: create a project for any client." onClick={onNext} />}
+function ClientsPage({ clients, onAddProposal, onEdit, onDelete, onNext }: { clients: Client[]; onAddProposal: (id: string) => void; onEdit: (id: string) => void; onDelete: (id: string) => void; onNext: () => void }) {
+  return <Panel title="Clients" subtitle="Add the client after your first conversation, then prepare a proposal for them." action={<AddButton onClick={() => onEdit("")}>Add client</AddButton>}>
+    {clients.length ? <div className="grid gap-3 lg:grid-cols-2">{clients.map((client) => <article key={client.id} className="rounded-2xl border border-white/[.07] bg-white/[.02] p-4 sm:p-5"><div className="flex items-start justify-between gap-3"><div className="min-w-0"><h3 className="truncate font-medium">{client.name}</h3><p className="mt-1 text-xs text-white/45">{client.contact || "Contact not added"}{client.country ? ` · ${client.country}` : ""}</p></div><Tag>{client.email ? "Email ready" : "Add email"}</Tag></div><div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/55">{client.email && <span className="inline-flex items-center gap-1.5"><Mail size={13} />{client.email}</span>}{client.phone && <span>{client.phone}</span>}</div><RowActions><GhostAction onClick={() => onAddProposal(client.id)}><Plus size={14} />Create proposal</GhostAction><GhostAction onClick={() => onEdit(client.id)}>Edit client</GhostAction><GhostAction onClick={() => onDelete(client.id)}><Trash2 size={13} />Delete</GhostAction></RowActions></article>)}</div> : <EmptyState title="Start with your first client" detail="Add their name and email address. Then create and send a proposal." action={<AddButton onClick={() => onEdit("")}>Add first client</AddButton>} />}
+    {clients.length > 0 && <NextStep text="Next step: prepare a proposal for a client." onClick={onNext} />}
   </Panel>;
 }
 
-function ProjectsPage({ data, rows, clientName, milestonesByProject, onAddProject, onAddMilestone, onEdit, onDelete, onNext }: { data: AosData; rows: Project[]; clientName: (id: string) => string; milestonesByProject: (id: string) => Milestone[]; onAddProject: () => void; onAddMilestone: (id: string) => void; onEdit: (id: string) => void; onDelete: (id: string) => void; onNext: () => void }) {
-  const noClients = data.clients.length === 0;
-  return <Panel title="Projects" subtitle="Projects stay grouped under their client." action={<AddButton disabled={noClients} onClick={onAddProject}>Add project</AddButton>}>
-    {noClients ? <EmptyState title="Create a client first" detail="Projects must belong to a client. Go back to Clients, add one, then return here." /> : rows.length ? <div className="grid gap-3 lg:grid-cols-2">{rows.map((project) => { const milestones = milestonesByProject(project.id); const done = milestones.filter((item) => item.deliveryStatus === "Done").length; return <article key={project.id} className="rounded-2xl border border-white/[.07] bg-white/[.02] p-4 sm:p-5"><div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="text-[10px] uppercase tracking-[.16em] text-[#bbff00]/75">{clientName(project.clientId)}</p><h3 className="mt-1 truncate font-medium">{project.name}</h3><p className="mt-1 text-xs text-white/45">{project.service || "Project"}{project.dueDate ? ` · Due ${project.dueDate}` : ""}</p></div><Tag tone={project.status === "Done" ? "green" : project.status === "On hold" ? "amber" : "lime"}>{project.status}</Tag></div><div className="mt-5"><div className="mb-2 flex justify-between text-[10px] text-white/40"><span>{done} of {milestones.length} milestones done</span><span>{milestones.length ? Math.round(done / milestones.length * 100) : 0}%</span></div><div className="h-1.5 overflow-hidden rounded-full bg-white/[.08]"><div className="h-full rounded-full bg-[#bbff00] transition-all" style={{ width: `${milestones.length ? done / milestones.length * 100 : 0}%` }} /></div></div><RowActions><GhostAction onClick={() => onAddMilestone(project.id)}><Plus size={14} />Add milestone</GhostAction><GhostAction onClick={() => onEdit(project.id)}>Edit</GhostAction><GhostAction onClick={() => onDelete(project.id)}><Trash2 size={13} />Delete</GhostAction></RowActions></article>; })}</div> : <EmptyState title="Add a project under a client" detail="Choose the client, name the project, and then add delivery milestones." action={<AddButton onClick={onAddProject}>Add project</AddButton>} />}
-    {!noClients && <NextStep text="Next step: add milestones to define delivery." onClick={onNext} />}
+function ProposalsPage({ data, rows, clientName, busyId, invoiceFor, onSend, onDownload, onAdd, onEdit, onDelete, onStatus, onInvoicePage }: { data: AosData; rows: Proposal[]; clientName: (row: Proposal) => string; busyId: string; invoiceFor: (id: string) => Invoice | undefined; onSend: (row: Proposal) => void; onDownload: (row: Proposal) => void; onAdd: () => void; onEdit: (id: string) => void; onDelete: (id: string) => void; onStatus: (row: Proposal, status: Proposal["status"]) => void; onInvoicePage: () => void }) {
+  return <Panel title="Proposals" subtitle="Prepare a proposal, revise it when the client asks, then email the latest version." action={<AddButton disabled={!data.clients.length} onClick={onAdd}>New proposal</AddButton>}>
+    {!data.clients.length ? <EmptyState title="Add a client first" detail="Create the client record after your conversation. Then you can draft a proposal for them." /> : rows.length ? <div className="space-y-3">{rows.map((proposal) => { const invoice = invoiceFor(proposal.id); return <article key={proposal.id} className="rounded-2xl border border-white/[.07] bg-white/[.02] p-4 sm:p-5"><div className="flex flex-wrap items-start justify-between gap-3"><div className="min-w-[200px] flex-1"><p className="text-[10px] uppercase tracking-[.16em] text-[#bbff00]/75">{clientName(proposal)} · Version {proposal.version || 1}</p><h3 className="mt-1 font-medium">{proposal.title}</h3><p className="mt-2 text-sm text-white/55">{currency.format(Number(proposal.amount) || 0)}{proposal.validUntil ? ` · Valid until ${proposal.validUntil}` : ""}</p></div><Tag tone={proposal.status === "Approved" ? "green" : proposal.status === "Declined" ? "amber" : proposal.status === "Sent" ? "lime" : "default"}>{proposal.status}</Tag></div>{proposal.scope && <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-white/60">{proposal.scope}</p>}{proposal.terms && <p className="mt-3 whitespace-pre-line text-xs leading-relaxed text-white/40">{proposal.terms}</p>}<RowActions><GhostAction onClick={() => onDownload(proposal)}><Download size={14} />Download PDF</GhostAction><GhostAction disabled={busyId === proposal.id || proposal.status === "Approved"} onClick={() => onSend(proposal)}><Mail size={14} />{busyId === proposal.id ? "Sending…" : proposal.status === "Sent" ? "Resend latest version" : "Email proposal"}</GhostAction><GhostAction disabled={proposal.status === "Approved"} onClick={() => onEdit(proposal.id)}>Edit proposal</GhostAction>{proposal.status === "Sent" && <GhostAction onClick={() => onStatus(proposal, "Approved")}><Check size={14} />Accepted · approve</GhostAction>}{proposal.status === "Approved" && <GhostAction onClick={onInvoicePage}><ReceiptText size={14} />Invoice created</GhostAction>}{invoice && <Tag tone={invoice.status === "Paid" ? "green" : "lime"}>{`Invoice ${invoice.number} · ${invoice.status}`}</Tag>}<GhostAction disabled={Boolean(invoice)} onClick={() => onDelete(proposal.id)}><Trash2 size={13} />Delete</GhostAction></RowActions></article>; })}</div> : <EmptyState title="Create your first proposal" detail="Choose a client, write the project scope, set your fee and due date, then email it as a PDF-ready proposal." action={<AddButton onClick={onAdd}>Create proposal</AddButton>} />}
   </Panel>;
 }
 
-function MilestonesPage({ data, rows, projectName, clientName, proposalFor, onAdd, onAddProposal, onEdit, onDelete, onStatus }: { data: AosData; rows: Milestone[]; projectName: (id: string) => string; clientName: (row: Milestone) => string; proposalFor: (id: string) => Proposal | undefined; onAdd: () => void; onAddProposal: (row: Milestone) => void; onEdit: (id: string) => void; onDelete: (id: string) => void; onStatus: (row: Milestone, status: Milestone["deliveryStatus"]) => void }) {
-  const noProjects = data.projects.length === 0;
-  return <Panel title="Milestones" subtitle="Delivery status drives project completion. Approved proposal amounts update the payment amount." action={<AddButton disabled={noProjects} onClick={onAdd}>Add milestone</AddButton>}>
-    {noProjects ? <EmptyState title="Create a project first" detail="Every milestone belongs to a project, which belongs to a client." /> : rows.length ? <div className="grid gap-3 lg:grid-cols-2">{rows.map((milestone) => { const approved = proposalFor(milestone.id)?.status === "Approved"; const paid = data.invoices.some((invoice) => invoice.milestoneId === milestone.id && invoice.status === "Paid"); return <article key={milestone.id} className="rounded-2xl border border-white/[.07] bg-white/[.02] p-4 sm:p-5"><div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="text-[10px] uppercase tracking-[.16em] text-[#bbff00]/75">{clientName(milestone)} · {projectName(milestone.projectId)}</p><h3 className="mt-1 truncate font-medium">{milestone.name}</h3><p className="mt-1 text-xs text-white/45">{milestone.dueDate ? `Due ${milestone.dueDate}` : "No due date"}</p></div><div className="text-right"><p className="text-sm font-medium">{currency.format(Number(milestone.amount) || 0)}</p><div className="mt-1 flex justify-end gap-1.5"><Tag tone={milestone.deliveryStatus === "Done" ? "green" : "default"}>{milestone.deliveryStatus}</Tag>{paid && <Tag tone="green">Paid</Tag>}</div></div></div><RowActions><GhostAction onClick={() => onStatus(milestone, milestone.deliveryStatus === "Done" ? "In progress" : "Done")}>{milestone.deliveryStatus === "Done" ? "Reopen" : "Mark delivered"}</GhostAction><GhostAction disabled={approved} onClick={() => onAddProposal(milestone)}><Plus size={14} />{approved ? "Proposal approved" : "Create proposal"}</GhostAction><GhostAction onClick={() => onEdit(milestone.id)}>Edit</GhostAction><GhostAction onClick={() => onDelete(milestone.id)}><Trash2 size={13} />Delete</GhostAction></RowActions></article>; })}</div> : <EmptyState title="Add the first project milestone" detail="Milestones describe the work and the payment checkpoint. You can add multiple milestones to each project." action={<AddButton onClick={onAdd}>Add milestone</AddButton>} />}
-  </Panel>;
-}
-
-function ProposalsPage({ data, rows, clientName, projectName, milestoneName, invoiceFor, onAdd, onEdit, onDelete, onStatus, onInvoice }: { data: AosData; rows: Proposal[]; clientName: (row: Proposal) => string; projectName: (id: string) => string; milestoneName: (id: string) => string; invoiceFor: (id: string) => Invoice | undefined; onAdd: () => void; onEdit: (id: string) => void; onDelete: (id: string) => void; onStatus: (row: Proposal, status: Proposal["status"]) => void; onInvoice: (row: Proposal) => void }) {
-  return <Panel title="Proposals" subtitle="Edit the amount and terms manually. Approving a proposal writes its amount onto the linked milestone." action={<AddButton disabled={!data.milestones.length} onClick={onAdd}>Add proposal</AddButton>}>
-    {!data.milestones.length ? <EmptyState title="Create a milestone first" detail="Each proposal must be connected to a milestone on a client's project." /> : rows.length ? <div className="space-y-3">{rows.map((proposal) => { const invoice = invoiceFor(proposal.id); return <article key={proposal.id} className="rounded-2xl border border-white/[.07] bg-white/[.02] p-4 sm:p-5"><div className="flex flex-wrap items-start justify-between gap-3"><div className="min-w-[200px] flex-1"><p className="text-[10px] uppercase tracking-[.16em] text-[#bbff00]/75">{clientName(proposal)} · {projectName(proposal.projectId)}</p><h3 className="mt-1 font-medium">{proposal.title}</h3><p className="mt-1 text-xs text-white/45">Milestone: {milestoneName(proposal.milestoneId)}{proposal.validUntil ? ` · Valid until ${proposal.validUntil}` : ""}</p></div><div className="flex items-center gap-2"><p className="text-sm font-medium">{currency.format(Number(proposal.amount) || 0)}</p><Tag tone={proposal.status === "Approved" ? "green" : proposal.status === "Declined" ? "amber" : "default"}>{proposal.status}</Tag></div></div>{proposal.scope && <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-white/60">{proposal.scope}</p>}<RowActions><GhostAction onClick={() => onEdit(proposal.id)}>Edit terms / amount</GhostAction>{proposal.status === "Draft" && <GhostAction onClick={() => onStatus(proposal, "Sent")}>Mark sent</GhostAction>}{proposal.status !== "Approved" && proposal.status !== "Declined" && <GhostAction onClick={() => onStatus(proposal, "Approved")}><Check size={14} />Approve & sync amount</GhostAction>}{proposal.status === "Approved" && !invoice && <GhostAction onClick={() => onInvoice(proposal)}><Plus size={14} />Create invoice</GhostAction>}{invoice && <Tag tone={invoice.status === "Paid" ? "green" : "lime"}>{`Invoice ${invoice.number} · ${invoice.status}`}</Tag>}{proposal.status === "Approved" && !invoice && <span className="self-center text-[10px] text-white/35">Milestone amount is now {currency.format(Number(proposal.amount) || 0)}</span>}<GhostAction onClick={() => onDelete(proposal.id)}><Trash2 size={13} />Delete</GhostAction></RowActions></article>; })}</div> : <EmptyState title="Write your first proposal" detail="Choose a client project and milestone, then record your agreed scope, amount, and terms." action={<AddButton onClick={onAdd}>Add proposal</AddButton>} />}
-  </Panel>;
-}
-
-function InvoicesPage({ rows, clientName, clientEmail, projectName, busyId, canCreate, onCreate, onSend, onMarkPaid, onDelete }: { rows: Invoice[]; clientName: (id: string) => string; clientEmail: (id: string) => string; projectName: (id: string) => string; busyId: string; canCreate: boolean; onCreate: () => void; onSend: (invoice: Invoice, action: "invoice" | "receipt") => void; onMarkPaid: (invoice: Invoice) => void; onDelete: (id: string) => void }) {
-  return <Panel title="Invoices" subtitle="Invoices can only be created from an approved proposal." action={<AddButton disabled={!canCreate} onClick={onCreate}>Create from proposal</AddButton>}>
-    {rows.length ? <div className="space-y-3">{rows.map((invoice) => <article key={invoice.id} className="rounded-2xl border border-white/[.07] bg-white/[.02] p-4 sm:p-5"><div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-[10px] uppercase tracking-[.16em] text-[#bbff00]/75">{clientName(invoice.clientId)} · {projectName(invoice.projectId)}</p><h3 className="mt-1 font-medium">{invoice.number}</h3><p className="mt-1 text-xs text-white/45">Issued {invoice.issueDate || "—"}{invoice.dueDate ? ` · Due ${invoice.dueDate}` : ""}{clientEmail(invoice.clientId) ? ` · ${clientEmail(invoice.clientId)}` : " · Client email missing"}</p></div><div className="text-right"><p className="text-base font-medium">{currency.format(Number(invoice.amount) || 0)}</p><Tag tone={invoice.status === "Paid" ? "green" : invoice.status === "Sent" ? "lime" : "default"}>{invoice.status}</Tag></div></div>{invoice.status === "Paid" && <p className="mt-3 text-xs text-emerald-200/75">Paid {invoice.paidDate}{invoice.receiptSentAt ? " · Receipt emailed" : " · Receipt not emailed"}</p>}<RowActions>{invoice.status === "Draft" && <GhostAction disabled={busyId === invoice.id} onClick={() => onSend(invoice, "invoice")}><Mail size={14} />{busyId === invoice.id ? "Sending…" : "Send invoice email"}</GhostAction>}{invoice.status === "Sent" && <GhostAction disabled={busyId === invoice.id} onClick={() => onMarkPaid(invoice)}><Check size={14} />{busyId === invoice.id ? "Sending receipt…" : "Mark paid & email receipt"}</GhostAction>}{invoice.status === "Paid" && <GhostAction disabled={busyId === invoice.id} onClick={() => onSend(invoice, "receipt")}><Mail size={14} />{busyId === invoice.id ? "Sending…" : "Resend receipt"}</GhostAction>}<GhostAction onClick={() => onDelete(invoice.id)}><Trash2 size={13} />Delete</GhostAction></RowActions></article>)}</div> : <EmptyState title="No invoices yet" detail={canCreate ? "Create an invoice from an approved proposal. The approved amount will be prefilled." : "Approve a proposal first. Then create and send its invoice from that proposal."} />}
+function InvoicesPage({ rows, clientName, proposalTitle, busyId, onSend, onMarkPaid, onDelete, onDownload }: { rows: Invoice[]; clientName: (id: string) => string; proposalTitle: (id: string) => string; busyId: string; onSend: (invoice: Invoice, action: "invoice" | "receipt") => void; onMarkPaid: (invoice: Invoice) => void; onDelete: (id: string) => void; onDownload: (invoice: Invoice) => void }) {
+  return <Panel title="Invoices" subtitle="An invoice is created automatically when you approve an accepted proposal. Due dates keep outstanding amounts easy to follow.">
+    {rows.length ? <div className="space-y-3">{rows.map((invoice) => { const late = invoice.status !== "Paid" && invoice.dueDate && invoice.dueDate < today(); return <article key={invoice.id} className="rounded-2xl border border-white/[.07] bg-white/[.02] p-4 sm:p-5"><div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-[10px] uppercase tracking-[.16em] text-[#bbff00]/75">{clientName(invoice.clientId)}</p><h3 className="mt-1 font-medium">{invoice.number}</h3><p className="mt-1 text-xs text-white/45">Issued {invoice.issueDate || "—"} · Due {invoice.dueDate || "—"}</p></div><div className="text-right"><p className="text-base font-medium">{currency.format(Number(invoice.amount) || 0)}</p><Tag tone={invoice.status === "Paid" ? "green" : late ? "amber" : invoice.status === "Sent" ? "lime" : "default"}>{late ? "Overdue" : invoice.status}</Tag></div></div><p className="mt-3 text-xs text-white/40">From approved proposal: {proposalTitle(invoice.proposalId)}</p>{invoice.status === "Paid" && <p className="mt-3 text-xs text-emerald-200/75">Paid {invoice.paidDate}{invoice.receiptSentAt ? " · Receipt emailed" : " · Receipt not emailed"}</p>}<RowActions><GhostAction onClick={() => onDownload(invoice)}><Download size={14} />Download PDF</GhostAction>{invoice.status === "Draft" && <GhostAction disabled={busyId === invoice.id} onClick={() => onSend(invoice, "invoice")}><Mail size={14} />{busyId === invoice.id ? "Sending…" : "Email invoice"}</GhostAction>}{invoice.status === "Sent" && <GhostAction disabled={busyId === invoice.id} onClick={() => onMarkPaid(invoice)}><Check size={14} />{busyId === invoice.id ? "Sending receipt…" : "Mark paid & email receipt"}</GhostAction>}{invoice.status === "Paid" && <GhostAction disabled={busyId === invoice.id} onClick={() => onSend(invoice, "receipt")}><Mail size={14} />{busyId === invoice.id ? "Sending…" : "Resend receipt"}</GhostAction>}<GhostAction onClick={() => onDelete(invoice.id)}><Trash2 size={13} />Delete</GhostAction></RowActions></article>; })}</div> : <EmptyState title="No invoices yet" detail="Approving a client's proposal will create its invoice here, ready for download and sending." />}
   </Panel>;
 }
 
@@ -472,8 +524,6 @@ function RecordEditor({ kind, id, prefill, data, onClose, onSave }: { kind: Edit
   const existing = id ? (data[kind].find((item) => item.id === id) as unknown as Record<string, string> | undefined) : undefined;
   const [values, setValues] = useState<Record<string, string>>(() => ({ ...editorDefaults(kind, data), ...existing, ...prefill }));
   const set = (key: string, value: string) => setValues((current) => ({ ...current, [key]: value }));
-  const relatedProjects = data.projects.filter((project) => project.clientId === values.clientId);
-  const relatedMilestones = data.milestones.filter((milestone) => milestone.projectId === values.projectId);
   const availableProposals = data.proposals.filter((proposal) => proposal.status === "Approved" && !data.invoices.some((invoice) => invoice.proposalId === proposal.id));
   const selectedProposal = data.proposals.find((proposal) => proposal.id === values.proposalId);
   const fields: ReactNode[] = [];
@@ -494,7 +544,7 @@ function RecordEditor({ kind, id, prefill, data, onClose, onSave }: { kind: Edit
   } else if (kind === "milestones") {
     fields.push(select("projectId", "Project · client", data.projects.map((project) => ({ value: project.id, label: `${project.name} · ${data.clients.find((client) => client.id === project.clientId)?.name ?? "Client"}` }))), input("name", "Milestone / deliverable", { required: true }), input("amount", "Expected amount (USD)", { type: "number", required: true }), input("dueDate", "Due date", { type: "date" }), select("deliveryStatus", "Delivery status", ["Planned", "In progress", "Done"].map((value) => ({ value, label: value }))));
   } else if (kind === "proposals") {
-    fields.push(select("projectId", "Project · client", data.projects.map((project) => ({ value: project.id, label: `${project.name} · ${data.clients.find((client) => client.id === project.clientId)?.name ?? "Client"}` }))), select("milestoneId", "Milestone", relatedMilestones.map((milestone) => ({ value: milestone.id, label: milestone.name })), relatedMilestones.length > 0), input("title", "Proposal title", { required: true }), input("amount", "Manual commitment (USD)", { type: "number", required: true }), area("scope", "Scope / deliverables"), area("terms", "Payment terms"), input("validUntil", "Valid until", { type: "date" }), select("status", "Status", ["Draft", "Sent", "Approved", "Declined"].map((value) => ({ value, label: value }))));
+    fields.push(select("clientId", "Client", data.clients.map((client) => ({ value: client.id, label: client.name }))), input("title", "Proposal title / project", { required: true }), input("amount", "Total commitment (USD)", { type: "number", required: true }), input("dueDate", "Invoice due date", { type: "date" }), area("scope", "Scope / what you agreed"), area("terms", "Payment terms / notes"), input("validUntil", "Proposal valid until", { type: "date" }));
   } else if (kind === "invoices") {
     fields.push(select("proposalId", "Approved proposal", availableProposals.map((proposal) => ({ value: proposal.id, label: `${proposal.title} · ${data.clients.find((client) => client.id === data.projects.find((project) => project.id === proposal.projectId)?.clientId)?.name ?? "Client"}` }))), <p key="proposal-help" className="rounded-xl border border-[#bbff00]/10 bg-[#bbff00]/[.035] p-3 text-xs leading-relaxed text-white/50 sm:col-span-2">{selectedProposal ? `Approved amount: ${currency.format(Number(selectedProposal.amount) || 0)}. You can adjust the invoice amount before sending.` : "Only approved proposals without an invoice can be selected."}</p>, input("number", "Invoice number", { required: true }), input("amount", "Invoice amount (USD)", { type: "number", required: true }), input("issueDate", "Issue date", { type: "date", required: true }), input("dueDate", "Due date", { type: "date" }));
   } else {
@@ -505,7 +555,7 @@ function RecordEditor({ kind, id, prefill, data, onClose, onSave }: { kind: Edit
     event.preventDefault();
     if (kind === "projects" && !data.clients.some((client) => client.id === values.clientId)) return;
     if (kind === "milestones" && !data.projects.some((project) => project.id === values.projectId)) return;
-    if (kind === "proposals" && (!relatedMilestones.some((milestone) => milestone.id === values.milestoneId) || !relatedProjects.some((project) => project.id === values.projectId))) return;
+    if (kind === "proposals" && !data.clients.some((client) => client.id === values.clientId)) return;
     if (kind === "invoices" && (!selectedProposal || selectedProposal.status !== "Approved")) return;
     onSave(values);
   }
@@ -516,7 +566,7 @@ function RecordEditor({ kind, id, prefill, data, onClose, onSave }: { kind: Edit
 function editorDefaults(kind: EditorKind, data: AosData): Record<string, string> {
   if (kind === "projects") return { clientId: data.clients[0]?.id ?? "", startDate: today() };
   if (kind === "milestones") return { projectId: data.projects[0]?.id ?? "", deliveryStatus: "Planned", amount: "0" };
-  if (kind === "proposals") return { projectId: data.projects[0]?.id ?? "", milestoneId: data.milestones[0]?.id ?? "", amount: "0", status: "Draft" };
+  if (kind === "proposals") return { clientId: data.clients[0]?.id ?? "", amount: "0", status: "Draft", version: "1" };
   if (kind === "invoices") return { proposalId: "", amount: "0", number: `REL-${new Date().getFullYear()}-${String(data.invoices.length + 1).padStart(4, "0")}`, issueDate: today(), dueDate: plusDays(14) };
   if (kind === "expenses") return { amount: "0", date: today() };
   return {};

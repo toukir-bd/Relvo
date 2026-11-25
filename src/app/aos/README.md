@@ -14,14 +14,12 @@ The session uses a 12-hour HTTP-only, same-site cookie scoped to `/aos`. Do not 
 
 ## Workflow
 
-1. **Clients** — create a client with contact details and an email address.
-2. **Projects** — add one or more projects for each client.
-3. **Milestones** — add delivery and payment checkpoints to projects.
-4. **Proposals** — edit scope, terms, and the manual commitment. Setting a proposal to **Approved** copies its amount to the linked milestone.
-5. **Invoices** — create an invoice from an approved proposal, review the amount, and email it to the linked client. After receiving payment, mark it paid to record the date and email a receipt.
-6. **Account** — review collected/outstanding amounts and expenses, and import or export a workspace backup.
+1. **Clients** — add the client you spoke with and their email address.
+2. **Proposals** — prepare the scope, fee, terms, and invoice due date. Download the PDF or email it with the PDF attached. If the client requests changes, edit it and resend the new version. The client accepts by replying outside the workspace; then mark the proposal **Approved**.
+3. **Invoices** — approval automatically creates a draft invoice with the proposal amount and due date. Download the invoice PDF or email it with the PDF attached. After payment arrives, mark it paid to record the date and email a receipt. Invoices past their due date appear as **Overdue**.
+4. **Account** — review collected/outstanding amounts and expenses, and import or export a workspace backup.
 
-A project has multiple milestones and changes to **Done** once it has at least one milestone and all its milestones are marked **Done**. Reopening a milestone changes a completed project to **In progress**. Records with linked children cannot be deleted until those children are removed.
+Proposal and invoice PDFs are generated in the browser and downloaded directly.
 
 ## Invoice email
 
