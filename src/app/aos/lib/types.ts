@@ -80,7 +80,7 @@ export type WorkflowPage = "clients" | "proposals" | "invoices" | "account";
 
 export const WORKFLOW_PAGES: { id: WorkflowPage; label: string; description: string }[] = [
   { id: "clients", label: "Clients", description: "Start with the people and companies you work with." },
-  { id: "proposals", label: "Proposals", description: "Write, revise, download, and send your proposal to a client." },
+  { id: "proposals", label: "Projects", description: "Manage project proposals, revisions, and client approvals." },
   { id: "invoices", label: "Invoices", description: "Approved proposals create invoices automatically. Track due dates and payments here." },
   { id: "account", label: "Account", description: "Review cash flow, costs, and account backups." },
 ];
