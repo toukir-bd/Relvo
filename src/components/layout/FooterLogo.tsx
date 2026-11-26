@@ -9,7 +9,7 @@ export default function FooterLogo() {
         <span aria-hidden="true" className="absolute left-0 top-0 h-15 w-full bg-linear-to-b from-primary/3 to-transparent"/>
         <Image src="/img/elements/logo.webp" alt="Relvo" width={4356} height={1215}
           sizes="(max-width: 1800px) calc(100vw - 3rem), 1600px"
-          className="h-auto w-[min(70vw,980px)] sm:w-[min(60vw,1280px)]"
+          className="h-auto w-[min(73vw,1030px)] sm:w-[min(63vw,1340px)]"
         />
         <span aria-hidden="true" className="absolute bottom-0 left-0 h-15 w-full bg-linear-to-t from-primary/3 to-transparent"/>
       </Link>

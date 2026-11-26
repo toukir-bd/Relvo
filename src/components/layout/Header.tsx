@@ -16,13 +16,13 @@ export default function Header({
 }: HeaderProps) {
   return (
     <header>
-      <Link href="/" className="absolute left-4 top-5 z-30 flex w-[112px] items-center sm:left-6 sm:top-7 sm:w-[140px] lg:left-10 lg:top-9 lg:w-[160px]">
+      <Link href="/" className="absolute left-4 top-5 z-30 flex w-[124px] items-center sm:left-6 sm:top-7 sm:w-[156px] lg:left-10 lg:top-9 lg:w-[176px]">
         <span className="relative block aspect-[32/9] w-full">
         <Image
           src="/img/elements/logo.webp"
           alt="Relvo Logo"
           fill
-          sizes="(max-width: 640px) 112px, (max-width: 1024px) 140px, 160px"
+          sizes="(max-width: 640px) 124px, (max-width: 1024px) 156px, 176px"
           className="object-contain transition-all duration-500"
           priority
         />
