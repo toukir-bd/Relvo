@@ -42,7 +42,7 @@ export default function Splash() {
           <span className="text-primary pl-1 sm:pl-2">V</span>ision &
           <span className="text-primary pl-1 sm:pl-2">O</span>riginality
         </p>
-        <h2 className="focus-title mb-7 max-w-[1200px] w-full mx-auto px-2 text-[clamp(16px,7.4vw,85px)] leading-[1.2] -tracking-[1.7px] sm:-tracking-[3.5px]">
+        <h2 className="focus-title mb-7 w-full text-[clamp(16px,7.4vw,85px)] leading-[1.2] -tracking-[1.7px] sm:-tracking-[3.5px] text-center">
           <span className="hero-text-neon uppercase">crafting for the shape<br/>of your vision</span>
         </h2>
         <div className="mx-auto mb-8 w-full max-w-full rounded-[20px] bg-secondary/70 p-2 sm:mb-12 sm:w-auto sm:rounded-[24px] lg:mb-15">
