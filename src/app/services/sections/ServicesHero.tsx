@@ -22,7 +22,7 @@ export default function ServicesHero() {
 
       <div className="relative mx-auto grid min-h-[calc(100svh-9rem)] w-full max-w-[1680px] items-center gap-8 lg:grid-cols-[1fr_0.95fr] lg:gap-6 xl:gap-12">
         <div className="relative z-10 py-8 lg:py-12">
-          <h1 className="focus-title text-[27px] sm:text-[clamp(3rem,7.3vw,5.3rem)] leading-[0.99] tracking-normal ms:-tracking-[3px]">
+          <h1 className="focus-title text-[27px] sm:text-[clamp(3rem,7.3vw,5.3rem)] leading-[0.99] tracking-normal sm:-tracking-[3px]">
             services built around <span className="hero-text-neon pe-1">your next move</span>
           </h1>
           <p className="mt-6 max-w-[640px] font-[500] sm:font-normal text-base leading-relaxed tracking-wide text-white/75 sm:mt-8 sm:text-xl lg:text-[23px]">
