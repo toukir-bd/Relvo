@@ -42,7 +42,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           alt={project.title}
           fill
           priority={index < 2}
-          sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 680px"
+          quality={100}
+          sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 1279px) 50vw, 46vw"
           className="object-cover"
         />
         <span className="absolute bottom-5 left-5 rounded-full bg-secondary/75 px-5 py-2 text-[13px] font-semibold uppercase tracking-[0.85px] text-white 
