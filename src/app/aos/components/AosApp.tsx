@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
 import {
   ArrowDownToLine, ArrowRight, ArrowUpRight, Check, CircleDollarSign, Download, Eye,
   FileText, LogOut, Mail, Menu, Plus, ReceiptText, Trash2, Users, X,
@@ -29,6 +29,37 @@ function readSavedData(): AosData {
   } catch {
     return emptyAosData();
   }
+}
+
+async function saveWorkspaceData(data: AosData) {
+  const response = await fetch("/aos/api/data", {
+    method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data }),
+  });
+  const result = await response.json() as { error?: string };
+  if (!response.ok) throw new Error(result.error ?? "Could not save the hosted workspace.");
+}
+
+async function loadWorkspaceData(): Promise<AosData> {
+  const response = await fetch("/aos/api/data", { cache: "no-store" });
+  const result = await response.json() as { initialized?: boolean; data?: Record<string, unknown> | null; error?: string };
+  if (!response.ok) throw new Error(result.error ?? "Could not open the hosted workspace.");
+
+  if (result.initialized && result.data) {
+    localStorage.removeItem(STORAGE_KEY);
+    return normalizeAosData(result.data);
+  }
+
+  const localData = readSavedData();
+  const hasLocalRecords = Object.values(localData).some((records) => records.length > 0);
+  if (hasLocalRecords) {
+    try {
+      await saveWorkspaceData(localData);
+    } catch {
+      throw new Error("Could not move this PC’s workspace data to secure storage.");
+    }
+  }
+  localStorage.removeItem(STORAGE_KEY);
+  return localData;
 }
 
 function makeId() {
@@ -131,6 +162,7 @@ export default function AosApp() {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [loginBusy, setLoginBusy] = useState(false);
+  const [storageError, setStorageError] = useState("");
   const [data, setData] = useState<AosData>(emptyAosData);
   const [activePage, setActivePage] = useState<WorkflowPage>("clients");
   const [editor, setEditor] = useState<EditorState>(null);
@@ -138,6 +170,7 @@ export default function AosApp() {
   const [notice, setNotice] = useState("");
   const [emailBusyId, setEmailBusyId] = useState("");
   const [query, setQuery] = useState("");
+  const saveQueue = useRef<Promise<void>>(Promise.resolve());
 
   useEffect(() => {
     let active = true;
@@ -147,10 +180,12 @@ export default function AosApp() {
         if (!active) return;
         setConfigured(Boolean(result.configured));
         if (result.authenticated) {
-          setData(readSavedData());
-          setDataReady(true);
+          setAuthenticated(true);
+          void loadWorkspaceData()
+            .then((savedData) => { if (active) { setData(savedData); setDataReady(true); setStorageError(""); } })
+            .catch((error: unknown) => { if (active) setStorageError(error instanceof Error ? error.message : "Could not open hosted storage."); });
         }
-        setAuthenticated(Boolean(result.authenticated));
+        else setAuthenticated(false);
       })
       .catch(() => { if (active) setConfigured(false); })
       .finally(() => { if (active) setCheckingSession(false); });
@@ -159,7 +194,16 @@ export default function AosApp() {
 
   useEffect(() => {
     if (!authenticated || !dataReady) return;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    const snapshot = data;
+    const timer = window.setTimeout(() => {
+      saveQueue.current = saveQueue.current.catch(() => undefined).then(async () => {
+        await saveWorkspaceData(snapshot);
+        setStorageError("");
+      }).catch((error: unknown) => {
+        setStorageError(error instanceof Error ? error.message : "Could not save the hosted workspace.");
+      });
+    }, 350);
+    return () => window.clearTimeout(timer);
   }, [authenticated, dataReady, data]);
 
   const activeStep = WORKFLOW_PAGES.findIndex((page) => page.id === activePage);
@@ -194,10 +238,16 @@ export default function AosApp() {
       });
       const result = await response.json() as { error?: string };
       if (!response.ok) throw new Error(result.error ?? "Sign in failed.");
-      setData(readSavedData());
-      setDataReady(true);
       setAuthenticated(true);
       setPassword("");
+      try {
+        const savedData = await loadWorkspaceData();
+        setData(savedData);
+        setDataReady(true);
+        setStorageError("");
+      } catch (error) {
+        setStorageError(error instanceof Error ? error.message : "Could not open hosted storage.");
+      }
     } catch (error) {
       setLoginError(error instanceof Error ? error.message : "Sign in failed.");
     } finally {
@@ -209,6 +259,7 @@ export default function AosApp() {
     await fetch("/aos/api/auth/logout", { method: "POST" });
     setAuthenticated(false);
     setDataReady(false);
+    setStorageError("");
     setData(emptyAosData());
     setActivePage("clients");
   }
@@ -383,7 +434,8 @@ export default function AosApp() {
 
   if (checkingSession) return <div className="grid min-h-screen place-items-center bg-[#07100d] text-base font-semibold text-white/60">Opening private workspace…</div>;
   if (!authenticated) return <Login configured={configured} username={username} password={password} error={loginError} busy={loginBusy} setUsername={setUsername} setPassword={setPassword} onSubmit={signIn} />;
-  if (!dataReady) return <div className="grid min-h-screen place-items-center bg-[#07100d] text-base font-semibold text-white/60">Loading workspace…</div>;
+  if (!dataReady && storageError) return <main className="grid min-h-screen place-items-center bg-[#07100d] px-5 text-white"><div className="max-w-xl rounded-3xl border border-red-400/20 bg-white/[.03] p-7"><h1 className="text-2xl font-semibold">Private storage isn’t connected</h1><p className="mt-3 text-base leading-relaxed text-white/65">AOS can’t open your hosted database yet, so it has stopped before showing or saving workspace data.</p><p role="alert" className="mt-4 text-sm text-red-300">{storageError}</p><div className="mt-6 flex gap-3"><button onClick={() => { setStorageError(""); void loadWorkspaceData().then((savedData) => { setData(savedData); setDataReady(true); }).catch((error: unknown) => setStorageError(error instanceof Error ? error.message : "Could not open hosted storage.")); }} className="cursor-pointer rounded-xl bg-[#bbff00] px-4 py-3 text-sm font-semibold text-[#07100d]">Retry connection</button><button onClick={() => void signOut()} className="cursor-pointer rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white/70">Sign out</button></div></div></main>;
+  if (!dataReady) return <div className="grid min-h-screen place-items-center bg-[#07100d] text-base font-semibold text-white/60">Loading private workspace…</div>;
 
   const filtered = filteredRecords;
 
@@ -415,6 +467,8 @@ export default function AosApp() {
 
           <div className="mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-7 sm:py-8 lg:px-10 lg:py-10">
             <div className="mb-6 flex flex-wrap items-end justify-between gap-4"><div><p className="text-sm font-semibold uppercase tracking-[.22em] text-[#bbff00]/90">Step {String(activeStep + 1).padStart(2, "0")} / 04</p><h1 className="mt-2 text-[clamp(1.8rem,4vw,2.6rem)] font-medium tracking-tight">{pageTitle[activePage]}</h1><p className="mt-2 max-w-3xl text-sm font-semibold leading-relaxed text-white/75">{WORKFLOW_PAGES.find((page) => page.id === activePage)?.description}</p></div><label className="flex h-10 min-w-[190px] items-center gap-2 rounded-xl border border-white/10 px-3 text-white/40 md:hidden"><Users size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search records" className="w-full bg-transparent text-base font-semibold text-white outline-none placeholder:text-white/35" /></label></div>
+
+            {storageError && <div role="alert" className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-red-400/20 bg-red-400/[.06] px-4 py-3 text-sm font-medium text-red-200"><span>Cloud save failed: {storageError} Your latest changes are only in this open session until they save.</span><button onClick={() => { const snapshot = data; setStorageError(""); void saveWorkspaceData(snapshot).catch((error: unknown) => setStorageError(error instanceof Error ? error.message : "Could not save the hosted workspace.")); }} className="cursor-pointer rounded-lg border border-red-200/25 px-3 py-2 text-xs font-semibold text-red-100">Retry save</button></div>}
 
             <WorkflowStepper activePage={activePage} onSelect={(page) => setActivePage(page)} />
             {notice && <div role="status" className="mb-5 flex items-start justify-between gap-3 rounded-2xl border border-[#bbff00]/15 bg-[#bbff00]/[.04] px-4 py-3 text-base font-semibold text-white/75"><span>{notice}</span><button onClick={() => setNotice("")} aria-label="Dismiss notice" className="cursor-pointer text-white/45 hover:text-white"><X size={16} /></button></div>}
